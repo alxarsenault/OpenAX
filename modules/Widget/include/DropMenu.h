@@ -1,0 +1,177 @@
+/*
+ * Copyright (c) 2016 Alexandre Arsenault.
+ *
+ * This file is part of axFrameworks.
+ *
+ * axFrameworks is free or commercial software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 or any later version of the
+ * License or use a commercial axFrameworks License.
+ *
+ * axFrameworks is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with axFrameworks. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * To release a closed-source product which uses axFrameworks, commercial
+ * licenses are available, email alx.arsenault@gmail.com for more information.
+ */
+
+#ifndef __AX_DROP_MENU_H__
+#define __AX_DROP_MENU_H__
+
+/*
+ * @file    axDropmenu.h
+ * @author  Alexandre Arsenault <alx.arsenault@gmail.com>
+ * @brief   axButton.
+ * @date    30/01/2016
+ */
+
+/// @defgroup Widgets
+/// @{
+
+/// @defgroup DropMenu
+/// @{
+
+#include "OpenAX.h"
+#include "Toggle.h"
+
+namespace ax {
+
+/*
+ * ax::DropMenu.
+ */
+class DropMenu : public ax::Window::Backbone {
+public:
+
+	/*
+	 * ax::DropMenu::Flags.
+	 */
+	class Flags {
+	public:
+		static const ax::Flag TEXT_ALIGN_CENTER;
+		static const ax::Flag TEXT_ALIGN_RIGHT;
+	};
+
+	/*
+	 * ax::Button::Msg.
+	 */
+	class Msg : public ax::Event::Msg {
+	public:
+		Msg();
+
+		Msg(DropMenu* sender, const std::string& item, int index);
+
+		DropMenu* GetSender() const;
+
+		std::string GetItem() const;
+		
+		int GetIndex() const;
+
+		ax::Event::Msg* GetCopy();
+
+	private:
+		DropMenu* _sender;
+		std::string _item;
+		int _index;
+	};
+
+	/*
+	 * axButton::Events.
+	 */
+	class Events {
+	public:
+		enum : ax::Event::Id { ITEM_CLICK };
+
+		Events()
+		{
+		}
+
+		Events(const ax::Event::Function& fct)
+		{
+			item_click = fct;
+		}
+
+		ax::Event::Function item_click;
+	};
+
+	/*
+	 * ax::DropMenu::Info.
+	 */
+	class Info : public ax::widget::Info {
+	public:
+		Info();
+		
+		ax::Color normal;
+		ax::Color hover;
+		ax::Color font_color;
+		
+		ax::Color selected;
+		ax::Color selected_hover;
+		ax::Color selected_font_color;
+
+		ax::Color contour;
+		ax::Color separation;
+		
+		ax::Color up_down_arrow;
+		ax::Color right_arrow;
+		
+		int item_height = 20;
+		int font_size = 12;
+		
+		std::string font_path;
+	};
+
+	/*
+	 * ax::DropMenu::DropMenu.
+	 */
+	
+	/// Rect.size.y is used as maximum height.
+	DropMenu(const ax::Rect& rect, const DropMenu::Events& events,
+		const DropMenu::Info& info, const ax::StringVector& items, ax::Flag flags = 0);
+	
+	const ax::StringVector& GetItems() const;
+	
+	int GetSelectedItemIndex() const;
+	
+	std::string GetSelectedItem() const;
+	
+	void SetSelectedItem(const int& index);
+	
+protected:
+	DropMenu::Events _events;
+	ax::Flag _flags;
+	ax::StringVector _items;
+	std::unique_ptr<ax::Font> _font;
+	std::unique_ptr<ax::Image> _up_img;
+	std::unique_ptr<ax::Image> _down_img;
+	std::unique_ptr<ax::Image> _right_img;
+	int _selected_item;
+	int _mouse_hover_item;
+	
+	bool _over_flow_down;
+	bool _over_flow_up;
+	bool _over_flow;
+	int _n_shown_item;
+	int _top_item_index;
+	
+	std::vector<int> _separator_index;
+	std::vector<int> _right_arrow_index;
+	
+	int MousePosToIndex(const ax::Point& pos);
+	
+	void OnPaint(ax::GC gc);
+	void OnMouseLeftDown(const ax::Point& pos);
+	void OnMouseLeftUp(const ax::Point& pos);
+	void OnMouseMotion(const ax::Point& pos);
+	void OnMouseEnter(const ax::Point& pos);
+	void OnMouseLeave(const ax::Point& pos);
+};
+}
+
+/// @}
+/// @}
+#endif //__AX_DROP_MENU_H__

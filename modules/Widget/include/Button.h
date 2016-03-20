@@ -1,0 +1,238 @@
+/*
+ * Copyright (c) 2016 Alexandre Arsenault.
+ *
+ * This file is part of axFrameworks.
+ *
+ * axFrameworks is free or commercial software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 or any later version of the
+ * License or use a commercial axFrameworks License.
+ *
+ * axFrameworks is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with axFrameworks. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * To release a closed-source product which uses axFrameworks, commercial
+ * licenses are available, email alx.arsenault@gmail.com for more information.
+ */
+
+#ifndef __AX_BUTTON__
+#define __AX_BUTTON__
+
+/*
+ * @file    axButton.h
+ * @author  Alexandre Arsenault <alx.arsenault@gmail.com>
+ * @brief   axButton.
+ * @date    19/07/2013
+ */
+
+/// @defgroup Widgets
+/// @{
+
+/// @defgroup Button
+/// @{
+
+#include "OpenAX.h"
+#include "Xml.h"
+
+namespace ax {
+
+/*
+ * ax::Buton.
+ */
+class Button : public ax::Window::Backbone {
+public:
+	typedef std::shared_ptr<Button> Ptr;
+
+	/*
+	 * ax::Button::Flags.
+	 */
+	class Flags {
+	public:
+		static const ax::Flag SINGLE_IMG;
+		static const ax::Flag IMG_RESIZE;
+		static const ax::Flag CAN_SELECTED;
+	};
+
+	/*
+	 * ax::Button::Msg.
+	 */
+	class Msg : public ax::Event::Msg {
+	public:
+		Msg();
+
+		Msg(Button* sender, const std::string& msg);
+
+		Button* GetSender() const;
+
+		std::string GetMsg() const;
+
+		ax::Event::Msg* GetCopy();
+
+	private:
+		Button* _sender;
+		std::string _msg;
+	};
+
+	/*
+	 * axButton::Events.
+	 */
+	class Events {
+	public:
+		enum : ax::Event::Id { BUTTON_CLICK };
+
+		Events()
+		{
+		}
+
+		Events(const ax::Event::Function& fct)
+		{
+			button_click = fct;
+		}
+
+		ax::Event::Function button_click;
+	};
+
+	/*
+	 * axButton::Info.
+	 */
+	class Info : public ax::widget::Info {
+	public:
+		Info(const std::string& path);
+
+		Info(const ax::StringPairVector& attributes);
+
+		Info(const ax::Color& normal_color = ax::Color(0.9f),
+			const ax::Color& hover_color = ax::Color(0.92f),
+			const ax::Color& clicked_color = ax::Color(0.95f),
+			const ax::Color& selected_color = ax::Color(0.9f),
+			const ax::Color& contour_color = ax::Color(0.5f),
+			const ax::Color& font_color = ax::Color(0.1f),
+			const int& roundCornerRadius = 0);
+
+		/// Info needed for debug editor. Derived from axInfo.
+		virtual ax::StringVector GetParamNameList() const;
+		virtual std::string GetAttributeValue(const std::string& name);
+		virtual void SetAttribute(const ax::StringPair& attribute);
+
+		ax::Color normal; /// Normal background color.
+		ax::Color hover; /// Color when mouse is over.
+		ax::Color clicking; /// Mouse clicking color.
+		ax::Color selected; /// Color once the button has been clicked.
+		ax::Color contour; /// Contour color.
+		ax::Color font_color; /// Font color.
+		int round_corner_radius = 0;
+	};
+	
+	/*
+	 * ax::Button::Component.
+	 */
+	class Component : public ax::widget::Component {
+	public:
+		Component(ax::Window* win, Info* info);
+		
+		virtual ax::Xml::Node  Save(ax::Xml& xml, ax::Xml::Node& node);
+		virtual ax::StringPairVector GetBuilderAttributes();
+	};
+
+	class Builder : public ax::widget::Builder {
+	public:
+		Builder();
+
+		virtual std::shared_ptr<ax::Window::Backbone> Create(
+			const ax::Point& pos, const std::string& file_path);
+
+		std::shared_ptr<ax::Window::Backbone> Create(ax::Xml::Node& node);
+	};
+	
+	/*
+	 * ax::Button::Button.
+	 */
+	Button(const ax::Rect& rect, const Button::Events& events,
+		const Button::Info& info, std::string img_path = "",
+		std::string label = "", ax::Flag flags = 0, std::string msg = "");
+
+	Button(const ax::Point& pos, const Button::Events& events,
+		std::string label = "", std::string img_path = "",
+		const Button::Info& info = Button::Info(), ax::Flag flags = 0,
+		std::string msg = "");
+
+	inline static std::shared_ptr<ax::Window::Backbone> Create(
+		const ax::Point& pos, const Button::Events& events,
+		std::string label = "", std::string img_path = "",
+		const Button::Info& info = Button::Info(), ax::Flag flags = 0,
+		std::string msg = "")
+	{
+		return std::shared_ptr<ax::Window::Backbone>(
+			new ax::Button(pos, events, label, img_path, info, flags, msg));
+	}
+
+	inline static std::shared_ptr<ax::Window::Backbone> Create(
+		const ax::Rect& rect, const Button::Events& events,
+		std::string label = "", std::string img_path = "",
+		const Button::Info& info = Button::Info(), ax::Flag flags = 0,
+		std::string msg = "")
+	{
+		return std::shared_ptr<ax::Window::Backbone>(
+			new ax::Button(rect, events, info, img_path, label, flags, msg));
+	}
+
+	void SetMsg(const std::string& msg);
+
+	void SetSelected(const bool& selected);
+
+	void SetLabel(const std::string& label);
+
+	const std::string& GetLabel() const
+	{
+		return _label;
+	}
+
+	const std::string& GetMsg() const
+	{
+		return _msg;
+	}
+
+	ax::Flag GetFlags() const
+	{
+		return _flags;
+	}
+
+	std::string GetImagePath() const
+	{
+		return _btnImg->GetImagePath();
+	}
+
+protected:
+	Button::Events _events;
+	ax::Image* _btnImg;
+	ax::Flag _flags;
+	std::string _label, _msg;
+	ax::Font _font;
+
+	ax::Color _currentColor;
+	bool _selected;
+	int _nCurrentImg;
+
+	enum axButtonState {
+		axBTN_NORMAL,
+		axBTN_HOVER,
+		axBTN_DOWN,
+		axBTN_SELECTED
+	};
+
+	virtual void OnPaint(ax::GC gc);
+	virtual void OnMouseLeftDown(const ax::Point& pos);
+	virtual void OnMouseLeftUp(const ax::Point& pos);
+	virtual void OnMouseEnter(const ax::Point& pos);
+	virtual void OnMouseLeave(const ax::Point& pos);
+};
+}
+
+/// @}
+/// @}
+#endif //__AX_BUTTON__
