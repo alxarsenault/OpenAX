@@ -9,11 +9,9 @@
 #ifndef __Minimal__Terminal__
 #define __Minimal__Terminal__
 
-//#include "axLib.h"
 #include <string>
 #include <vector>
 
-//#include "axUtils.h"
 
 namespace ax {
 namespace os {

@@ -2,7 +2,7 @@ UNAME := $(shell uname)
 LIB_DIR = lib
 MODULES_DIR = $(shell ls modules)
 
-LIB_NAME = axLib
+LIB_NAME = OpenAX
 
 all: create_lib_dir modules
 	ar rsc lib/lib$(LIB_NAME).a $(shell ls modules/*/build/*.o)
@@ -21,7 +21,7 @@ $(MODULES_DIR):
 
 install:
 	mkdir -p /usr/local/include/$(LIB_NAME)/
-	cp -v modules/*/include/*.{h,hpp} /usr/local/include/axLib/ 2> /dev/null
+	cp -v modules/*/include/*.{h,hpp} /usr/local/include/OpenAX/ 2> /dev/null
 	cp -v $(LIB_DIR)/*.a /usr/local/lib/ 2> /dev/null
 	cp -v $(LIB_DIR)/*.so /usr/local/lib/ 2> /dev/null
 

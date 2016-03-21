@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:OpenAX.xcodeproj">
+      location = "self:/Users/alexarse/Desktop/OpenAX/dev/mac/OpenAX/OpenAX.xcodeproj">
    </FileRef>
 </Workspace>

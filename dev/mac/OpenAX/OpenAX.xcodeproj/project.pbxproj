@@ -90,7 +90,6 @@
 		7C213A231C9C9AE80050F676 /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Window.h; path = ../../../../modules/Core/include/Window.h; sourceTree = "<group>"; };
 		7C213A241C9C9AE80050F676 /* WindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WindowManager.h; path = ../../../../modules/Core/include/WindowManager.h; sourceTree = "<group>"; };
 		7C213A251C9C9AE80050F676 /* WindowTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WindowTree.h; path = ../../../../modules/Core/include/WindowTree.h; sourceTree = "<group>"; };
-		7C213A261C9C9AE80050F676 /* OpenAX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpenAX.h; path = ../../../../modules/Core/include/OpenAX.h; sourceTree = "<group>"; };
 		7C213A271C9C9AE80050F676 /* rapidxml.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = rapidxml.hpp; path = ../../../../modules/Core/include/rapidxml.hpp; sourceTree = "<group>"; };
 		7C213A281C9C9AF10050F676 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = App.cpp; path = ../../../../modules/Core/source/App.cpp; sourceTree = "<group>"; };
 		7C213A291C9C9AF10050F676 /* Core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Core.cpp; path = ../../../../modules/Core/source/Core.cpp; sourceTree = "<group>"; };
@@ -204,6 +203,7 @@
 		7C213ACA1C9C9B720050F676 /* OSExec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OSExec.cpp; path = ../../../../modules/OS/source/OSExec.cpp; sourceTree = "<group>"; };
 		7C213ACB1C9C9B720050F676 /* OSFileSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OSFileSystem.cpp; path = ../../../../modules/OS/source/OSFileSystem.cpp; sourceTree = "<group>"; };
 		7C213ACC1C9C9B720050F676 /* OSTerminal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OSTerminal.cpp; path = ../../../../modules/OS/source/OSTerminal.cpp; sourceTree = "<group>"; };
+		7C213B0C1C9E4EC40050F676 /* OpenAX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAX.h; path = ../../../../modules/Core/include/OpenAX.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +510,7 @@
 		7C2139E01C9C98AC0050F676 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				7C213B0C1C9E4EC40050F676 /* OpenAX.h */,
 				7C213A1A1C9C9AE80050F676 /* App.h */,
 				7C213A1B1C9C9AE80050F676 /* Config.h */,
 				7C213A1C1C9C9AE80050F676 /* Core.h */,
@@ -522,7 +523,6 @@
 				7C213A231C9C9AE80050F676 /* Window.h */,
 				7C213A241C9C9AE80050F676 /* WindowManager.h */,
 				7C213A251C9C9AE80050F676 /* WindowTree.h */,
-				7C213A261C9C9AE80050F676 /* OpenAX.h */,
 				7C213A271C9C9AE80050F676 /* rapidxml.hpp */,
 			);
 			name = include;
@@ -796,7 +796,7 @@
 				INFOPLIST_FILE = OpenAX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = OpenAX.OpenAX;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OpenAX;
 			};
 			name = Debug;
 		};
@@ -808,7 +808,7 @@
 				INFOPLIST_FILE = OpenAX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = OpenAX.OpenAX;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OpenAX;
 			};
 			name = Release;
 		};
