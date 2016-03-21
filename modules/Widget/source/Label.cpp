@@ -34,7 +34,6 @@ Label::Info::Info(const ax::StringPairVector& attributes)
 	SetAttributes(attributes);
 }
 
-
 ax::StringVector Label::Info::GetParamNameList() const
 {
 	return ax::StringVector{ "normal", "contour", "font_color", "font_name",
@@ -127,7 +126,8 @@ ax::Xml::Node Label::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	ax::Rect rect = win->dimension.GetRect();
 
 	// Position.
-		widget_node.AddNode(xml.CreateNode("position", std::to_string(rect.position)));
+	widget_node.AddNode(
+		xml.CreateNode("position", std::to_string(rect.position)));
 
 	// Size.
 	widget_node.AddNode(xml.CreateNode("size", std::to_string(rect.size)));
@@ -137,22 +137,22 @@ ax::Xml::Node Label::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	info_node.AddAttribute("normal", info->normal.ToString());
 	info_node.AddAttribute("contour", info->contour.ToString());
 	info_node.AddAttribute("font_color", info->font_color.ToString());
-	
+
 	info_node.AddAttribute("font_size", std::to_string(info->font_size));
 	info_node.AddAttribute("font_name", std::to_string(info->font_name));
-	
+
 	std::string align_str;
-	
-	if(info->alignement == ax::Utils::axALIGN_LEFT) {
+
+	if (info->alignement == ax::Utils::axALIGN_LEFT) {
 		align_str = "left";
 	}
-	else if(info->alignement == ax::Utils::axALIGN_CENTER) {
+	else if (info->alignement == ax::Utils::axALIGN_CENTER) {
 		align_str = "center";
 	}
-	else if(info->alignement == ax::Utils::axALIGN_RIGHT) {
+	else if (info->alignement == ax::Utils::axALIGN_RIGHT) {
 		align_str = "right";
 	}
-	
+
 	info_node.AddAttribute("alignement", align_str);
 
 	widget_node.AddNode(xml.CreateNode("label", label->GetLabel()));
@@ -188,23 +188,43 @@ ax::StringPairVector Label::Component::GetBuilderAttributes()
 	return atts;
 }
 
- void Label::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
- {
-	 for(auto& n : attributes) {
-		 if(n.first == "position") {
-			 ax::Point pos = ax::Xml::StringToSize(n.second);
-			 GetWindow()->dimension.SetPosition(pos);
-		 }
-		 else if(n.first == "size") {
-			 ax::Size size = ax::Xml::StringToSize(n.second);
-			 GetWindow()->dimension.SetSize(size);
-		 }
-		 else if(n.first == "label") {
-			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
-			 label->SetLabel(n.second);
-		 }
-	 }
- }
+void Label::Component::SetBuilderAttributes(
+	const ax::StringPairVector& attributes)
+{
+	for (auto& n : attributes) {
+		if (n.first == "position") {
+			ax::Point pos = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetPosition(pos);
+		}
+		else if (n.first == "size") {
+			ax::Size size = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetSize(size);
+		}
+		else if (n.first == "label") {
+			ax::Label* label
+				= static_cast<ax::Label*>(GetWindow()->backbone.get());
+			label->SetLabel(n.second);
+		}
+	}
+}
+
+void Label::Component::SetInfo(const ax::StringPairVector& attributes)
+{
+	_info->SetAttributes(attributes);
+}
+
+void Label::Component::ReloadInfo()
+{
+	Label* label_obj = static_cast<Label*>(_win->backbone.get());
+	Label::Info* info = static_cast<Label::Info*>(_info);
+	
+	if(!info->font_name.empty()) {
+		label_obj->_font->SetFontType(info->font_name);
+	}
+	label_obj->_font->SetFontSize(info->font_size);
+	
+	_win->Update();
+}
 
 Label::Builder::Builder()
 {
@@ -225,19 +245,25 @@ std::shared_ptr<ax::Window::Backbone> Label::Builder::Create(
 	std::string builder_name = control.GetAttribute("builder");
 	std::string obj_name = control.GetAttribute("name");
 
-//	ax::Print(builder_name, obj_name);
+	//	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 	std::string label = control.GetChildNodeValue("label");
 
 	ax::Xml::Node info_node = control.GetNode("info");
 	ax::Label::Info l_info;
-	l_info.SetAttribute(ax::StringPair("normal", info_node.GetAttribute("normal")));
-	l_info.SetAttribute(ax::StringPair("contour", info_node.GetAttribute("contour")));
-	l_info.SetAttribute(ax::StringPair("font_color", info_node.GetAttribute("font_color")));
-	l_info.SetAttribute(ax::StringPair("font_size", info_node.GetAttribute("font_size")));
-	l_info.SetAttribute(ax::StringPair("font_name", info_node.GetAttribute("font_name")));
-	l_info.SetAttribute(ax::StringPair("alignement", info_node.GetAttribute("alignement")));
+	l_info.SetAttribute(
+		ax::StringPair("normal", info_node.GetAttribute("normal")));
+	l_info.SetAttribute(
+		ax::StringPair("contour", info_node.GetAttribute("contour")));
+	l_info.SetAttribute(
+		ax::StringPair("font_color", info_node.GetAttribute("font_color")));
+	l_info.SetAttribute(
+		ax::StringPair("font_size", info_node.GetAttribute("font_size")));
+	l_info.SetAttribute(
+		ax::StringPair("font_name", info_node.GetAttribute("font_name")));
+	l_info.SetAttribute(
+		ax::StringPair("alignement", info_node.GetAttribute("alignement")));
 
 	auto l = ax::shared<ax::Label>(ax::Rect(pos, size), l_info, label);
 	return l;
@@ -249,16 +275,22 @@ std::shared_ptr<ax::Window::Backbone> Label::Builder::Create(
 	ax::Point pos = ax::Xml::StringToSize(node.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
 	std::string label = node.GetChildNodeValue("label");
-	
+
 	ax::Xml::Node info_node = node.GetNode("info");
 	ax::Label::Info l_info;
-	l_info.SetAttribute(ax::StringPair("normal", info_node.GetAttribute("normal")));
-	l_info.SetAttribute(ax::StringPair("contour", info_node.GetAttribute("contour")));
-	l_info.SetAttribute(ax::StringPair("font_color", info_node.GetAttribute("font_color")));
-	l_info.SetAttribute(ax::StringPair("font_size", info_node.GetAttribute("font_size")));
-	l_info.SetAttribute(ax::StringPair("font_name", info_node.GetAttribute("font_name")));
-	l_info.SetAttribute(ax::StringPair("alignement", info_node.GetAttribute("alignement")));
-	
+	l_info.SetAttribute(
+		ax::StringPair("normal", info_node.GetAttribute("normal")));
+	l_info.SetAttribute(
+		ax::StringPair("contour", info_node.GetAttribute("contour")));
+	l_info.SetAttribute(
+		ax::StringPair("font_color", info_node.GetAttribute("font_color")));
+	l_info.SetAttribute(
+		ax::StringPair("font_size", info_node.GetAttribute("font_size")));
+	l_info.SetAttribute(
+		ax::StringPair("font_name", info_node.GetAttribute("font_name")));
+	l_info.SetAttribute(
+		ax::StringPair("alignement", info_node.GetAttribute("alignement")));
+
 	auto l = ax::shared<ax::Label>(ax::Rect(pos, size), l_info, label);
 	return l;
 }
@@ -276,10 +308,11 @@ Label::Label(
 	// Builtin event connection.
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &Label::OnPaint);
 
-	win->component.Add("Widget", widget::Component::Ptr(new ax::Label::Component(
-									 win, new ax::Label::Info(info))));
+	win->component.Add(
+		"Widget", widget::Component::Ptr(new ax::Label::Component(
+					  win, new ax::Label::Info(info))));
 
-//	win->property.RemoveProperty("Selectable");
+	//	win->property.RemoveProperty("Selectable");
 
 	if (!info.font_name.empty()) {
 		_font = std::unique_ptr<ax::Font>(new ax::Font(info.font_name));

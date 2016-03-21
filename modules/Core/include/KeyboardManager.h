@@ -61,6 +61,8 @@ public:
 	bool IsCmdDown() const;
 	
 	void AddGlobalGrabedWindow(ax::Window* win);
+	
+	void SetPastKeyWindow(ax::Window* win);
 
 private:
 	ax::WindowTree* _windowTree;

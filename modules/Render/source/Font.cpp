@@ -21,18 +21,10 @@
  */
 #include "Font.h"
 
-//#include <ft2build.h>
-//#include FT_FREETYPE_H
-
 #ifdef ANDROID
 #include <EGL/egl.h> // requires ndk r5 or newer
 #include <GLES/gl.h>
-//#ifdef __linux__
-//#include <X11/Xlib.h>
-//#include <X11/Xutil.h>
-//#include <GL/glx.h>
-//#include <GL/gl.h>
-//#include <GL/glu.h>
+
 #elif WAYLAND
 #include "GL/gl.h"
 

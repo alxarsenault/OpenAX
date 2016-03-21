@@ -36,6 +36,11 @@ void axKeyboardManager::SetWindowTree(ax::WindowTree* tree)
 	_windowTree = tree;
 }
 
+void axKeyboardManager::SetPastKeyWindow(ax::Window* win)
+{
+	_keyGrabbedWindow = win;
+}
+
 void axKeyboardManager::AddGlobalGrabedWindow(ax::Window* win)
 {
 	_globalKeyGrabbed.push_back(win);

@@ -59,6 +59,8 @@ public:
 		virtual ax::StringPairVector GetBuilderAttributes();
 		
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
+		virtual void SetInfo(const ax::StringPairVector& attributes);
+		virtual void ReloadInfo();
 	};
 
 	class Builder : public ax::widget::Builder {
