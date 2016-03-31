@@ -28,7 +28,7 @@
 #include "Range.h"
 #include "Interpole.h"
 #include "Clamp.h"
-#include "String.h"
+#include "axString.h"
 #include "Control.h"
 #include "Direction.h"
 #include "Var.h"

@@ -21,9 +21,9 @@ $(MODULES_DIR):
 
 install:
 	mkdir -p /usr/local/include/$(LIB_NAME)/
-	cp -v modules/*/include/*.{h,hpp} /usr/local/include/OpenAX/ 2> /dev/null
-	cp -v $(LIB_DIR)/*.a /usr/local/lib/ 2> /dev/null
-	cp -v $(LIB_DIR)/*.so /usr/local/lib/ 2> /dev/null
+	cp -f -v modules/**/include/* /usr/local/include/OpenAX/ 2> /dev/null
+	cp -f -v $(LIB_DIR)/*.a /usr/local/lib/ 2> /dev/null
+	cp -f -v $(LIB_DIR)/*.so /usr/local/lib/ 2> /dev/null
 
 clean:
 	rm -f $(LIB_DIR)/*

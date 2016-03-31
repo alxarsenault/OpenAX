@@ -55,15 +55,12 @@ CORE_SOURCE = core/X11/axCoreX11.cpp
 CORE_OBJ = build/axCoreX11.o 
 endif
 
-## Linux
-ifeq ($(UNAME),Linux)
-	#CC = g++
-	#CC_FLAGS = -std=c++0x -Wall
-STATIC_LIB_NAME = lib$(LIB_NAME).a
-DYN_LIB_NAME = lib$(LIB_NAME).so
+
+## LINUX
+ifeq ($(UNAME), Linux)
 
 ## RASPBERRY PI
-#ifeq ($(PROCESSOR_TYPE),armv7l)
+ifeq ($(PROCESSOR_TYPE), armv7l)
 CC = g++-4.9
 CC_FLAGS = -std=c++14 -Wall -pedantic -DANDROID -fpermissive -Wno-comment -Wno-variadic-macros -Wno-reorder
 
@@ -74,20 +71,23 @@ LINKER_FLAG = -lpng -laxUtils -laxGL -laxEvent -lfreetype -lEGL -lGLESv1_CM -lpt
 CORE_OBJDIR = core/Android/
 CORE_SOURCE = core/Android/axCoreAndroid.cpp
 CORE_OBJ = build/axCoreAndroid.o
-#
-#else ifeq ($(PROCESSOR_TYPE),x86_64)
-#	CC = clang++
-#	CC_FLAGS = -std=c++11 -Wall -pedantic -fPIC -DaxCoreX11 -fpermissive -Wno-comment -Wno-variadic-macros -Wno-reorder
-#
-#	INCLUDE_SRC = -Iinclude/ -I/usr/include/ -I/usr/include/freetype2/ -I../axUtils/include/ -I../axGL/include/ -I../axEvent/include/ -Icore/X11/
-#	INCLUDE_LINKER = -L../axUtils/lib/ -L../axGL/lib/ -L../axEvent/lib/ -L/usr/local/lib/
-#	LINKER_FLAG = -lpng -laxUtils -laxGL -laxEvent -lfreetype -lX11 -lpthread
-#
-#	CORE_OBJDIR = core/X11/                                                                           
-#	CORE_SOURCE = core/X11/axCoreX11.cpp                                                          
-#	CORE_OBJ = build/axCoreX11.o 
-#endif # Processor tyoe.f
-endif # Linux.
+else
+## x86 ARCHITECTURE
+CC = clang++
+CC_FLAGS = -std=c++11 -Wall -pedantic -fPIC -DaxCoreX11 -fpermissive -Wno-comment -Wno-variadic-macros -Wno-reorder
+
+INCLUDE_SRC = -Iinclude/ -I/usr/include/ -I/usr/include/freetype2/ -I../Utils/include/ -I../Render/include/ -I../Event/include/ -I../Xml/include/ -Icore/X11/
+INCLUDE_LINKER = -L../Utils/lib/ -L../Render/lib/ -L../Event/lib/ -L/usr/local/lib/
+LINKER_FLAG = -lpng -laxUtils -laxGL -laxEvent -lfreetype -lX11 -lpthread
+
+CORE_OBJDIR = core/X11/                                                                           
+CORE_SOURCE = core/X11/axCoreX11.cpp                                                          
+CORE_OBJ = build/axCoreX11.o 
+endif
+
+STATIC_LIB_NAME = lib$(LIB_NAME).a
+DYN_LIB_NAME = lib$(LIB_NAME).so
+endif
 
 OBJDIR = build
 SRC_DIR = source
