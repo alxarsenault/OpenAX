@@ -1,5 +1,6 @@
-
 LIB_NAME = axAudio
+
+## Platform name.
 UNAME := $(shell uname)
 
 ## MAC
@@ -8,23 +9,22 @@ CC = clang++
 CC_FLAGS = -std=c++11 -Wall
 STATIC_LIB_NAME = lib$(LIB_NAME).a
 DYN_LIB_NAME = lib$(LIB_NAME).dylib
+endif
+
 
 ## LINUX
-else ifeq($(UNAME), Linux)
-CC = g++
-CC_FLAGS = -std=c++0x -Wall
+ifeq ($(UNAME), Linux)
+CC = clang++
+CC_FLAGS = -std=c++11 -Wall
 STATIC_LIB_NAME = lib$(LIB_NAME).a
 DYN_LIB_NAME = lib$(LIB_NAME).so
 
-## WINDOWS
-else
-
-## RASPBERRY PI
-CC = g++-4.9
-CC_FLAGS = -std=c++14 -Wall -pedantic
+# else ## RASPBERRY PI
+# CC = g++-4.9
+# CC_FLAGS = -std=c++14 -Wall -pedantic
 endif
 
-INCLUDE_SRC = -Iinclude -I/usr/local/include/
+INCLUDE_SRC = -Iinclude -I/usr/local/include/ -I../Utils/include/
 
 OBJDIR = build
 SRC_DIR = source
