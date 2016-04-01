@@ -56,36 +56,36 @@ namespace GL {
 
 	void Draw(const ax::Size& size)
 	{
-		// Clear screen and depth buffer.
+// 		// Clear screen and depth buffer.
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//		// Set projection matrix.
-//		glMatrixMode(GL_PROJECTION);
-//
-//		ax::GL::Math::Matrix4 proj;
-//		ax::GL::Math::Ortho2D(proj.Identity().GetData(), size);
-//
-//		glMatrixMode(GL_MODELVIEW);
-//		glLoadIdentity();
-//
-//		// Draw bg rectangle.
-//		glColor4f(0.4f, 0.0f, 0.0f, 1.0f);
-//		ax::FloatRect rect(-1.0, -1.0, size.x * 2.0, size.y * 2.0);
-//		ax::Utils::RectPoints<ax::FloatPoint> points = rect.GetPoints();
-//
-//#ifdef ANDROID
-//		GLubyte indices[] = { 0, 1, 2, 2, 3 };
-//		glEnableClientState(GL_VERTEX_ARRAY);
-//		glVertexPointer(2, GL_FLOAT, 0, &points);
-//		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_BYTE, indices);
-//		glDisableClientState(GL_VERTEX_ARRAY);
-//#else
-////		GLubyte indices[] = { 0, 1, 2, 2, 3 };
-////		glEnableClientState(GL_VERTEX_ARRAY);
-////		glVertexPointer(2, GL_FLOAT, 0, &points);
-////		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_BYTE, indices);
-////		glDisableClientState(GL_VERTEX_ARRAY);
-//#endif
+// 		// Set projection matrix.
+// 		glMatrixMode(GL_PROJECTION);
+
+// 		ax::GL::Math::Matrix4 proj;
+// 		ax::GL::Math::Ortho2D(proj.Identity().GetData(), size);
+
+// 		glMatrixMode(GL_MODELVIEW);
+// 		glLoadIdentity();
+
+// 		// Draw bg rectangle.
+// 		glColor4f(0.4f, 0.0f, 0.0f, 1.0f);
+// 		ax::FloatRect rect(-1.0, -1.0, size.x * 2.0, size.y * 2.0);
+// 		ax::Utils::RectPoints<ax::FloatPoint> points = rect.GetPoints();
+
+// #ifdef ANDROID
+// 		GLubyte indices[] = { 0, 1, 2, 2, 3 };
+// 		glEnableClientState(GL_VERTEX_ARRAY);
+// 		glVertexPointer(2, GL_FLOAT, 0, &points);
+// 		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_BYTE, indices);
+// 		glDisableClientState(GL_VERTEX_ARRAY);
+// #else
+// //		GLubyte indices[] = { 0, 1, 2, 2, 3 };
+// //		glEnableClientState(GL_VERTEX_ARRAY);
+// //		glVertexPointer(2, GL_FLOAT, 0, &points);
+// //		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_BYTE, indices);
+// //		glDisableClientState(GL_VERTEX_ARRAY);
+// #endif
 	}
 
 	void BlockDrawing(const ax::Rect& abs_rect, const ax::Rect& shown_rect,

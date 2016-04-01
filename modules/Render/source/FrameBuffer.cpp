@@ -20,39 +20,40 @@
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
 
+#include "Render.h"
 #include "FrameBuffer.h"
 #include "RenderMath.h"
 #include "GC.h"
 
-#ifdef ANDROID
-#include <EGL/egl.h> // requires ndk r5 or newer
-#include <EGL/eglext.h>
-#include <GLES/gl.h>
-#include <GLES/glext.h>
-#include <GLES2/gl2.h> 
-//#ifdef __linux__
-//#include <X11/Xlib.h>
-//#include <X11/Xutil.h>
-//#include <GL/glx.h>
-//#include <GL/gl.h>
-//#include <GL/glu.h>
-#elif WAYLAND
-#include "GL/gl.h"
+// #ifdef ANDROID
+// #include <EGL/egl.h> // requires ndk r5 or newer
+// #include <EGL/eglext.h>
+// #include <GLES/gl.h>
+// #include <GLES/glext.h>
+// #include <GLES2/gl2.h> 
+// //#ifdef __linux__
+// //#include <X11/Xlib.h>
+// //#include <X11/Xutil.h>
+// //#include <GL/glx.h>
+// //#include <GL/gl.h>
+// //#include <GL/glu.h>
+// #elif WAYLAND
+// #include "GL/gl.h"
 
-#elif axCoreX11
-#include "GL/gl.h"
-#include "GL/glext.h"
+// #elif axCoreX11
+// #include "GL/gl.h"
+// #include "GL/glext.h"
 
-#elif _MSC_VER
-#include <windows.h>
-#include "GL/glew.h"
-//#include <gl\gl.h>
-#include <gl\glu.h>
+// #elif _MSC_VER
+// #include <windows.h>
+// #include "GL/glew.h"
+// //#include <gl\gl.h>
+// #include <gl\glu.h>
 
-#else //__APPLE__
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/glu.h>
-#endif // __APPLE__
+// #else //__APPLE__
+// #include <OpenGL/OpenGL.h>
+// #include <OpenGL/glu.h>
+// #endif // __APPLE__
 
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
@@ -139,7 +140,6 @@ namespace GL {
 			ax::Error("Generating frame buffer : ", status);
 		}
 #endif
-//
 
 #ifdef ANDROID
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, _frameBuffer);
@@ -148,6 +148,13 @@ namespace GL {
 		glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 #endif
+
+
+		GLenum err = GL_NO_ERROR;
+		while((err = glGetError()) != GL_NO_ERROR)
+		{
+		  ax::Error("GL :", err);
+		}
 	}
 
 	void FrameBuffer::Resize(const ax::Size& size)
@@ -169,22 +176,18 @@ namespace GL {
 			return _custom_draw_on_fb_func(*this);
 		}
 	
-		bool need_to_reactive_clip_test = false;
+		// bool need_to_reactive_clip_test = false;
 
-		if (glIsEnabled(GL_SCISSOR_TEST)) {
-			glDisable(GL_SCISSOR_TEST);
-			need_to_reactive_clip_test = true;
-		}
-
-		// Save modelView matrix.
-//		glMatrixMode(GL_MODELVIEW);
-//		ax::GL::Math::Matrix4 modelView(GL_MODELVIEW_MATRIX);
-		
+		// if (glIsEnabled(GL_SCISSOR_TEST)) {
+		// 	glDisable(GL_SCISSOR_TEST);
+		// 	need_to_reactive_clip_test = true;
+		// }
 
 #ifdef ANDROID
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, _frameBuffer);
 #else
 		glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
+		// glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, _frameBuffer);
 		glPushAttrib(GL_DEPTH_BUFFER_BIT);
 #endif
 
@@ -202,43 +205,22 @@ namespace GL {
 
 		glViewport(0, 0, size.x, size.y);
 
-//		glMatrixMode(GL_PROJECTION);
-
-//		glm::mat4 projMat = glm::ortho((float)0.0, (float)size.x, (float)0.0, (float)size.y);
-		
-		
-		// Using axMath for projection flip every upside down.
-//		ax::GL::Math::Matrix4 proj;
-
-		/// @todo Use axMath for projection.
-//		glLoadIdentity();
-
 #ifdef ANDROID
 		glOrthof(0.0f, size.x, 0.0f, size.y, 0.0f, 1.0f);
 #else
 //		glOrtho(0.0, size.x, 0.0, size.y, 0.0, 1.0);
 #endif
 		
-//		glm::mat4 View(1.0);
-		
 		glMatrixMode(GL_MODELVIEW);
 		ax::GL::Math::Matrix4 mv_matrix;
 		mv_matrix.Identity().Load();
 		
 		// Projection matrix.
-		glm::mat4 projMat = glm::ortho((float)0.0, (float)size.x,
-									   (float)0.0, (float)size.y);
-		
-		// View matrix.
-//		glm::mat4 view = glm::translate(glm::mat4(1.0f),
-//										glm::vec3(win_abs_pos.x, win_abs_pos.y, 0.0f));
-		
+		glm::mat4 projMat = glm::ortho(0.0f, (float)size.x, 0.0f, (float)size.y);
 		glm::mat4 view(1.0f);
 		glm::mat4 model(1.0f);
 		
 		ax::GC::mvp_matrix = projMat * view * model;
-		
-//		glm::mat4 model_view_proj = projMat * view * model;
 
 		if (fct) {
 			fct();
@@ -251,23 +233,15 @@ namespace GL {
 #endif
 		
 		// Reset old viewport.
-//		ax::Size gSize(globalSize);
 		glViewport(0, 0, globalSize.x, globalSize.y);
-		
-//		ax::GL::Math::Matrix4 proj; // *********
-		
-//		ax::GL::Math::Ortho2D(proj.Identity().GetData(), gSize);
-//
-//		glMatrixMode(GL_MODELVIEW);
-//		modelView.Load();
 
 #ifndef ANDROID // WHEN ANDROID IS NOT DEFINE.
 		glPopAttrib();
 #endif
 
-		if (need_to_reactive_clip_test) {
-			glEnable(GL_SCISSOR_TEST);
-		}
+		// if (need_to_reactive_clip_test) {
+		// 	glEnable(GL_SCISSOR_TEST);
+		// }
 	}
 
 	void FrameBuffer::DrawFrameBuffer(const ax::Size& shownSize,
@@ -278,6 +252,8 @@ namespace GL {
 			return;
 		}
 		
+		// ax::Print("DrawFB shownSize :", shownSize.x, shownSize.y);
+
 		ax::GC::shader_fb.Activate();
 		glEnable(GL_TEXTURE_2D);
 
@@ -309,8 +285,9 @@ namespace GL {
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 		
 		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(5);
-
+		// glDisableVertexAttribArray(5);
+		glDisableVertexAttribArray(1);
+		// glDisableVertexAttribArray(1);
 		glDisable(GL_TEXTURE_2D);
 	}
 
@@ -360,8 +337,8 @@ namespace GL {
 		glBindTexture(GL_TEXTURE_2D, _frameBufferTexture);
 		
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA,
-					 GL_UNSIGNED_BYTE, data);
-		
+			GL_UNSIGNED_BYTE, data);
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

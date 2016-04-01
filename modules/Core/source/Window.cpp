@@ -212,7 +212,6 @@ void Window::Event::GrabGlobalKey()
  
 std::vector<ax::Window::Node::BlockDrawingInfo> ax::Window::Node::_block_drawing_queue;
  
-//ax::Window::Ptr ax::Window::Node::Add(ax::Window::Ptr child)
 void ax::Window::Node::Add(ax::Window::Ptr child)
 {
 #ifdef AX_EOS_CORE
@@ -273,7 +272,8 @@ void ax::Window::Node::Add(ax::Window::Ptr child)
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(5);
+		glDisableVertexAttribArray(1);
+		// glDisableVertexAttribArray(5);
 
 		glDisable(GL_TEXTURE_2D);
 	});
@@ -281,7 +281,6 @@ void ax::Window::Node::Add(ax::Window::Ptr child)
 
 	child->node._parent = _win;
 	_children.push_back(child);
-//	return child;
 }
 
 void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
@@ -292,20 +291,15 @@ void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
 	
 	_children.push_back(ax::Window::Ptr(child));
 
-//	child->backbone = backbone;
-
 #ifdef AX_EOS_CORE
 	child->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction([child](
 		ax::GL::FrameBuffer& fb) {
 
 		ax::App& app(ax::App::GetInstance());
 		ax::CoreEOS* core = static_cast<ax::CoreEOS*>(app.GetCore());
-		//		core->DrawOnMainFBO();
+
 		ax::Size global_size = ax::App::GetInstance().GetFrameSize();
 		glViewport(0, 0, global_size.x, global_size.y);
-		//																	  glViewport(0, 0,
-		//300,
-		// 300);
 
 		// Bind main frame buffer.
 		glBindFramebuffer(GL_FRAMEBUFFER, core->GetMainFrameBufferID());
@@ -316,9 +310,6 @@ void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
 		fb.DrawingFrameBufferBlendFunction();
 
 		ax::Point win_abs_pos = child->dimension.GetAbsoluteRect().position;
-		//																	  ax::Size global_size
-		//=
-		// ax::App::GetInstance().GetFrameSize();
 
 		// Projection matrix.
 		glm::mat4 projMat = glm::ortho(
@@ -358,7 +349,8 @@ void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(5);
+		// glDisableVertexAttribArray(5);
+		glDisableVertexAttribArray(1);
 
 		glDisable(GL_TEXTURE_2D);
 	});
@@ -476,10 +468,15 @@ void Window::Node::Draw()
 
 	ax::GL::Math::Matrix4 mview_before(ax::GL::Math::GetModelViewMatrixId());
 
-	//	_win->event.OnBeforeDrawing(0);
 	BeforeDrawing(_win);
 
 	DrawWindow(_win);
+
+	GLenum err = GL_NO_ERROR;
+	while((err = glGetError()) != GL_NO_ERROR) {
+  		//Process/log the error.
+  		ax::Print("GL ERROR :", err);
+	}
 
 	// Draw all children.
 	for (Ptr it : _children) {
@@ -595,8 +592,6 @@ void Window::Hide()
 	state.Apply(Hidden, true);
 }
 
-
-
 void Window::Update()
 {
 	state[NeedUpdate] = true;
@@ -608,6 +603,9 @@ void Window::RenderWindow()
 #if _axBackBufferWindow_ == 1
 	if (property.HasProperty("BackBuffer")) {
 		if (state[NeedUpdate]) {
+
+			ax::Print("Window id :", GetId(), "render");
+			ax::Print("Frame size :", ax::App::GetInstance().GetFrameSize().x, ax::App::GetInstance().GetFrameSize().y);
 
 			// Draw on framebuffer.
 			dimension.GetFrameBuffer()->DrawOnFrameBuffer(
@@ -643,6 +641,14 @@ void Window::RenderWindow()
 
 		ax::GC::mvp_matrix = model_view_proj;
 		event.OnPaintOverFrameBuffer(ax::GC());
+
+		GLenum err = GL_NO_ERROR;
+		while((err = glGetError()) != GL_NO_ERROR)
+		{
+		  //Process/log the error.
+
+			ax::Error("GL :", err);
+		}
 	}
 	else {
 		event.OnPaint(ax::GC());

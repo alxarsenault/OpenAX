@@ -53,7 +53,9 @@ namespace GL {
 		if (!_s_vertex_path.empty()) {
 
 			// Create vertex shader.
+			ax::Print("Before create vertex shader");
 			s_vextex = glCreateShader(GL_VERTEX_SHADER);
+			ax::Print("After create vertex shader");
 
 			if (_is_content) {
 				const char* v_data = _s_vertex_path.c_str();
@@ -74,6 +76,7 @@ namespace GL {
 			}
 
 			// Compile shader.
+			ax::Print("Before compiling vertex shader");
 			glCompileShader(s_vextex);
 
 			GLint isCompiled = 0;
@@ -94,6 +97,8 @@ namespace GL {
 				}
 			}
 		}
+
+		ax::Print("Done compiling vertex shader");
 
 		// Create fragments shader.
 		if (!_s_fragments_path.empty()) {

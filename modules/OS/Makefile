@@ -18,17 +18,22 @@ STATIC_LIB_NAME = lib$(LIB_NAME).a
 DYN_LIB_NAME = lib$(LIB_NAME).so
 endif
 
+
 ## LINUX
 ifeq ($(UNAME), Linux)
+
+## RASPBERRY PI
+ifeq ($(PROCESSOR_TYPE), armv7l)
+CC = g++-4.9
+CC_FLAGS = -std=c++14  -Wall -pedantic
+else
+## x86 ARCHITECTURE
 CC = clang++
-CC_FLAGS = -DaxCoreX11 -fPIC -std=c++11 -Wall -pedantic
+CC_FLAGS = -std=c++11 -DaxCoreX11 -Wall -pedantic -fPIC
+endif
 
 STATIC_LIB_NAME = lib$(LIB_NAME).a
 DYN_LIB_NAME = lib$(LIB_NAME).so
-
-## RASPBERRY PI
-CC = g++-4.9
-CC_FLAGS = -DaxCoreAndroid -fPIC -std=c++11 -Wall -pedantic  
 endif
 
 INCLUDE_SRC = -Iinclude/ -I../Utils/include/ -I../Event/include/

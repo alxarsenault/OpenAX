@@ -34,6 +34,8 @@
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Render.h"
+
 #ifdef AX_EOS_CORE
 #include "axCoreEOS.h"
 #endif
@@ -144,7 +146,8 @@ void ax::App::AddTopLevel(ax::Window::Ptr win)
 			glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 			glDisableVertexAttribArray(0);
-			glDisableVertexAttribArray(5);
+			glDisableVertexAttribArray(1);
+			// glDisableVertexAttribArray(5);
 
 			glDisable(GL_TEXTURE_2D);
 
@@ -156,7 +159,6 @@ void ax::App::AddTopLevel(ax::Window::Ptr win)
 void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 {
 	ax::Window* win = bone->GetWindow();
-//	ax::Window::Ptr win = bone->GetWindow();
 
 	GetWindowManager()->GetWindowTree()->AddTopLevel(ax::Window::Ptr(win));
 
@@ -214,10 +216,10 @@ void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 			glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 			glDisableVertexAttribArray(0);
-			glDisableVertexAttribArray(5);
+			glDisableVertexAttribArray(1);
+			// glDisableVertexAttribArray(5);
 
 			glDisable(GL_TEXTURE_2D);
-
 		});
 
 //	return win;

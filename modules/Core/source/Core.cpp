@@ -92,7 +92,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Framebuffer vertex shader.
-	const std::string v_fb("attribute vec4 vPosition;							\
+	const std::string v_fb("attribute vec4 vPosition;		\
 		 attribute vec2 vTexCoord;							\
 		 attribute vec4 vColor;								\
 		 uniform mat4 mvp_matrix;							\
@@ -105,7 +105,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Framebuffer fragment shader.
-	const std::string f_fb("varying vec4 vColor;								\
+	const std::string f_fb("varying vec4 vColor;			\
 	 	 uniform sampler2D texture1;						\
 	  	 varying vec2 v_texCoor;							\
 						   									\
@@ -197,31 +197,32 @@ int axCore::InitGL()
 	// Color image vertex shader.
 	const std::string v_img_color(
 		"attribute vec4 vPosition;							\
-								  attribute vec2 vTexCoord;							\
-								  attribute vec4 vColor;								\
-								  varying vec4 fragColor;							\
-								  varying vec2 v_texCoor;							\
-								  uniform mat4 mvp_matrix;							\
-								  \
-								  void main()										\
-								  {													\
-								  v_texCoor = vTexCoord;							\
-								  fragColor = vColor;								\
-								  gl_Position = mvp_matrix * vPosition;			\
-								  }													");
+		 attribute vec2 vTexCoord;							\
+	     attribute vec4 vColor;								\
+	     varying vec4 fragColor;							\
+	     varying vec2 v_texCoor;							\
+	     uniform mat4 mvp_matrix;							\
+	                                                        \
+	     void main()										\
+	     {													\
+	     	v_texCoor = vTexCoord;							\
+	     	fragColor = vColor;								\
+	     	gl_Position = mvp_matrix * vPosition;			\
+	     }													");
 
 	// Color image fragment shader.
 	const std::string f_img_color(
 		"varying vec2 v_texCoor;							\
-								  varying vec4 fragColor;							\
-								  uniform sampler2D texture1;						\
-								  \
-								  void main()										\
-								  {													\
-								  vec4 txtColor = texture2D(texture1, v_texCoor);	\
-								  float cc = txtColor.a;							\
-								  gl_FragColor = vec4(fragColor.r, fragColor.g, fragColor.b, cc);			\
-								  }													");
+		 varying vec4 fragColor;							\
+		 uniform sampler2D texture1;						\
+													        \
+		 void main()										\
+		 {													\
+		 	vec4 txtColor = texture2D(texture1, v_texCoor);	\
+		 	float cc = txtColor.a;							\
+		 	gl_FragColor = vec4(fragColor.r, fragColor.g, fragColor.b, cc);			\
+		 }													");
+	
 	ax::GC::shader_normal = ax::GL::Shader(true, v_normal, f_normal);
 	ax::GC::shader_fb = ax::GL::Shader(true, v_fb, f_fb);
 	ax::GC::shader_font = ax::GL::Shader(true, v_font, f_font);
@@ -229,23 +230,16 @@ int axCore::InitGL()
 	ax::GC::shader_image_alpha = ax::GL::Shader(true, v_img_alpha, f_img_alpha);
 	ax::GC::shader_image_color = ax::GL::Shader(true, v_img_color, f_img_color);
 
-
 	ax::GC::shader_normal.CompileAndLink();
 	ax::GC::shader_fb.CompileAndLink();
 	ax::GC::shader_font.CompileAndLink();
 	ax::GC::shader_image.CompileAndLink();
 	ax::GC::shader_image_alpha.CompileAndLink();
 	ax::GC::shader_image_color.CompileAndLink();
-	
 	ax::GC::shader_fb.Activate();
 
 	return true;
 }
-
-//void axCore::SetCursor(const int& cursor_id)
-//{
-//	_cursor_id = cursor_id;
-//}
 
 ax::Core::WindowManager* axCore::GetWindowManager()
 {
