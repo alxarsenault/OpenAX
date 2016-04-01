@@ -1,7 +1,8 @@
 #ifndef __AX_AUDIO_FIRST_ORDER_FILTER__
 #define __AX_AUDIO_FIRST_ORDER_FILTER__
 
-#include "axAudioUtils.h"
+#include "AudioUtils.h"
+#include "Utils.h"
 
 namespace ax {
 namespace Audio {
@@ -135,9 +136,9 @@ namespace Audio {
 
 		void ComputeCoefficients()
 		{
-			_freq = ax::Audio::Clamp<P>(_freq, P(1.0), P(_samplingRate * 0.5));
+			_freq = ax::Utils::Clamp<P>(_freq, P(1.0), P(_samplingRate * 0.5));
 
-			P w0 = ax::Audio::TwoPi * _freq / double(_samplingRate);
+			P w0 = ax::audio::TwoPi * _freq / double(_samplingRate);
 			P cosW0 = cos(w0);
 
 			switch (_type) {

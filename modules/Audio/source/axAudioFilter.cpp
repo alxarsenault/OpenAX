@@ -1,5 +1,6 @@
 #include "axAudioFilter.h"
-#include "axAudioUtils.h"
+#include "AudioUtils.h"
+#include "Utils.h"
 
 axAudioFilter::axAudioFilter()
 {
@@ -23,20 +24,20 @@ axAudioFilter::axAudioFilter()
 }
 void axAudioFilter::SetFreq(float f)
 {
-	freq = ax::Audio::Clamp<float>(f, 20.0, 20000.0);
+	freq = ax::Utils::Clamp<float>(f, 20.0, 20000.0);
 	Compute_Variables(freq, q);
 
 	std::cout << "filter freq : " << freq << std::endl;
 }
 void axAudioFilter::SetQ(float f)
 {
-	q = ax::Audio::Clamp<float>(f, 0.01, 50.0);
+	q = ax::Utils::Clamp<float>(f, 0.01, 50.0);
 	Compute_Variables(freq, q);
 }
 
 void axAudioFilter::SetGain(float f)
 {
-	gain = ax::Audio::Clamp<float>(f, 0.0, 3.0);
+	gain = ax::Utils::Clamp<float>(f, 0.0, 3.0);
 
 	std::cout << "filter gain : " << gain << std::endl;
 }
@@ -143,7 +144,7 @@ void axAudioFilter::ProcessStereoBlock(float* out, unsigned long frameCount)
 		//        cout << "ENV FREQ" << endl;
 		float modEnvFreq = *env[0];
 		f = f + (288 * *envAmnt[0] * modEnvFreq * (f * (ST_RATIO - 1.0) + 1.0));
-		f = ax::Audio::Clamp<double>(f, 20.0, 20000.0);
+		f = ax::Utils::Clamp<double>(f, 20.0, 20000.0);
 		needComputeCoefficients = true;
 	}
 

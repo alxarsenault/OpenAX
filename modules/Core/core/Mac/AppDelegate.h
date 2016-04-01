@@ -60,6 +60,8 @@ namespace ax
 
 -(void)SetFocusAndCenter;
 
+-(void)renderTimer:(NSTimer *)timer;
+
 @property(assign) id< NSApplicationDelegate > delegate;
 @end
 

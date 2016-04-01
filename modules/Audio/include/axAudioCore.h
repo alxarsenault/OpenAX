@@ -9,8 +9,6 @@
 
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include "axAudioFrames.h"
-
 #include "portaudio.h"
 
 //-----------------------------------------------------------------------------
@@ -44,12 +42,6 @@ namespace audio {
 		//
 		//                return 0;
 		//            }
-
-		virtual int CallbackAudio(ax::Audio::Frames<const float, 1>* inputs,
-			ax::Audio::Frames<float, 1>* outputs, unsigned long frameCount)
-		{
-			return 0;
-		}
 
 		virtual int CoreCallbackAudio(const float* input, float* output, unsigned long frameCount)
 		{

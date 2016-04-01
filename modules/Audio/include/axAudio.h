@@ -7,7 +7,7 @@
 #include "axAudioEnvelope.h"
 #include "axAudioFilter.h"
 #include "axAudioFirstOrderFilter.h"
-#include "axAudioUtils.h"
+#include "AudioUtils.h"
 #include "axAudioWaveTable.h"
 
 #endif // __AX_AUDIO__

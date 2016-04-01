@@ -235,13 +235,7 @@ ax::StringPairVector Button::Component::GetBuilderAttributes()
 	ax::Window* win = GetWindow();
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Button* btn = static_cast<ax::Button*>(bbone.get());
-	
-	ax::Button::Component* widget_comp = static_cast<ax::Button::Component*>(
-		win->component.Get("Widget").get());
-	
-	ax::Button::Info* info
-		= static_cast<ax::Button::Info*>(widget_comp->GetInfo());
-	
+		
 	ax::StringPairVector atts;
 	
 	ax::Point position = win->dimension.GetRect().position;
