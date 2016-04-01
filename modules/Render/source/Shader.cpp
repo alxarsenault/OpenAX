@@ -1,22 +1,22 @@
 /*
- * Copyright (c) 2013 Alexandre Arsenault.
+ * Copyright (c) 2016 Alexandre Arsenault.
  *
- * This file is part of axLibrary.
+ * This file is part of OpenAX.
  *
- * axLibrary is free or commercial software: you can redistribute it and/or
+ * OpenAX is free or commercial software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 or any later version of the
- * License or use a commercial axLibrary License.
+ * License or use a commercial OpenAX License.
  *
- * axLibrary is distributed in the hope that it will be useful,
+ * OpenAX is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with axLibrary. If not, see <http://www.gnu.org/licenses/>.
+ * along with OpenAX. If not, see <http://www.gnu.org/licenses/>.
  *
- * To release a closed-source product which uses axLibrary, commercial
+ * To release a closed-source product which uses OpenAX, commercial
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
 
@@ -24,9 +24,6 @@
 #include "RenderMath.h"
 #include "Shader.h"
 #include "Utils.h"
-
-//#ifdef ANDROID
-//#else
 
 namespace ax {
 namespace GL {
@@ -53,9 +50,7 @@ namespace GL {
 		if (!_s_vertex_path.empty()) {
 
 			// Create vertex shader.
-			ax::Print("Before create vertex shader");
 			s_vextex = glCreateShader(GL_VERTEX_SHADER);
-			ax::Print("After create vertex shader");
 
 			if (_is_content) {
 				const char* v_data = _s_vertex_path.c_str();
@@ -76,7 +71,6 @@ namespace GL {
 			}
 
 			// Compile shader.
-			ax::Print("Before compiling vertex shader");
 			glCompileShader(s_vextex);
 
 			GLint isCompiled = 0;
@@ -97,8 +91,6 @@ namespace GL {
 				}
 			}
 		}
-
-		ax::Print("Done compiling vertex shader");
 
 		// Create fragments shader.
 		if (!_s_fragments_path.empty()) {
@@ -195,5 +187,3 @@ namespace GL {
 	}
 }
 }
-
-//#endif // ANDROID

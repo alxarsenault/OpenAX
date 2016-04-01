@@ -110,7 +110,6 @@ void ax::GC::DrawRectangle(const ax::Rect& rect)
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(2);
-	//	glDisableClientState(GL_COLOR_ARRAY);
 }
 
 void ax::GC::DrawRectangleContour(const ax::Rect& rect, float linewidth)

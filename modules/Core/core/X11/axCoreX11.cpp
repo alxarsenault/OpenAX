@@ -139,6 +139,7 @@ namespace ax {
     			XDefineCursor(_display, _win, cursor);	
 
     		GLenum err = glewInit();
+    		// ax::Print("Glew err :", err);
 
 			//XSetInputFocus(_display, _win, RevertToParent, CurrentTime);	
 			if(!InitGL()) {
@@ -362,6 +363,7 @@ namespace ax {
 					if(_refresh) {
 						_refresh = false;
 						app.Draw();
+
 						//if(DrawGLScene()) {
 							//ax::Print("Refesh.");
 							glXSwapBuffers(_display, _win);

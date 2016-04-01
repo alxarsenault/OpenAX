@@ -43,8 +43,10 @@ namespace GL {
 		// Enables Depth Testing
 		glEnable(GL_DEPTH_TEST);
 
+		// glEnable(GL_CULL_FACE);
+
 		glEnable(GL_BLEND); // Enable blending.
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// The type of depth testing to do.
 //		glDepthFunc(GL_LEQUAL);

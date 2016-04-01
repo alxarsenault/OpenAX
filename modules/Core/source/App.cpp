@@ -27,8 +27,6 @@
 #include "WindowTree.h"
 #include "ResourceStorage.h"
 
-//#include "axEditor.h"
-
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
@@ -77,7 +75,6 @@ void ax::App::CallAfterGUILoadFunction()
 	}
 }
 
-//ax::Window::Ptr ax::App::AddTopLevel(ax::Window::Ptr win)
 void ax::App::AddTopLevel(ax::Window::Ptr win)
 {
 	GetWindowManager()->GetWindowTree()->AddTopLevel(win);
@@ -202,8 +199,7 @@ void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 
 			GLuint prog_id = ax::GC::shader_fb.GetProgramId();
 			GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-			glUniformMatrix4fv(
-				MatrixID, 1, GL_FALSE, (float*)&model_view_proj[0][0]);
+			glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&model_view_proj[0][0]);
 
 			// Vertex coordinate.
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, vertices);

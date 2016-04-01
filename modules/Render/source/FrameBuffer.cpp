@@ -136,7 +136,7 @@ namespace GL {
 		// Does the GPU support current FBO configuration.
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER_EXT);
 
-		if (status != GL_FRAMEBUFFER_COMPLETE_EXT) {
+		if (status != GL_FRAMEBUFFER_COMPLETE) {
 			ax::Error("Generating frame buffer : ", status);
 		}
 #endif
@@ -176,18 +176,17 @@ namespace GL {
 			return _custom_draw_on_fb_func(*this);
 		}
 	
-		// bool need_to_reactive_clip_test = false;
+		bool need_to_reactive_clip_test = false;
 
-		// if (glIsEnabled(GL_SCISSOR_TEST)) {
-		// 	glDisable(GL_SCISSOR_TEST);
-		// 	need_to_reactive_clip_test = true;
-		// }
+		if (glIsEnabled(GL_SCISSOR_TEST)) {
+			glDisable(GL_SCISSOR_TEST);
+			need_to_reactive_clip_test = true;
+		}
 
 #ifdef ANDROID
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, _frameBuffer);
 #else
 		glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
-		// glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, _frameBuffer);
 		glPushAttrib(GL_DEPTH_BUFFER_BIT);
 #endif
 
@@ -217,10 +216,10 @@ namespace GL {
 		
 		// Projection matrix.
 		glm::mat4 projMat = glm::ortho(0.0f, (float)size.x, 0.0f, (float)size.y);
-		glm::mat4 view(1.0f);
-		glm::mat4 model(1.0f);
+		// glm::mat4 view(1.0f);
+		// glm::mat4 model(1.0f);
 		
-		ax::GC::mvp_matrix = projMat * view * model;
+		ax::GC::mvp_matrix = projMat;// * view * model;
 
 		if (fct) {
 			fct();
@@ -239,9 +238,9 @@ namespace GL {
 		glPopAttrib();
 #endif
 
-		// if (need_to_reactive_clip_test) {
-		// 	glEnable(GL_SCISSOR_TEST);
-		// }
+		if (need_to_reactive_clip_test) {
+			glEnable(GL_SCISSOR_TEST);
+		}
 	}
 
 	void FrameBuffer::DrawFrameBuffer(const ax::Size& shownSize,
@@ -272,6 +271,11 @@ namespace GL {
 		
 		GLuint prog_id = ax::GC::shader_fb.GetProgramId();
 		GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
+
+		if(MatrixID == -1) {
+			ax::Error("mvp_matrix doesn't exist in shader.");
+		}
+
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)data);
 		
 		// Vertex coordinate.

@@ -62,33 +62,14 @@ namespace Core {
 		_core = new ax::CoreWayland();
 		_core->Init(frame_size);
 		_core->SetGlobalSize(frame_size);
-//#endif //__linux__
-//            #ifdef __linux__
-//            _core = new axCoreX11(this);
-//            _core->Init(frame_size);
-//            //#endif //__linux__
-
-//#ifdef __linux__
-//_core = new axCoreX11(this);
-//_core->Init(frame_size);
-//#endif //__linux__
 #elif defined(axCoreX11)
 		_core = new ax::Core::X11();
 		_core->Init(frame_size);
 		_core->SetGlobalSize(frame_size);
 #elif defined(_MSC_VER)
-//#elsif _MSC_VER
-#if _axWxWidgetsCore_ == 1
-		_core = new axCoreWxWidgets();
-		_core->Init(frame_size);
-#else
 		_core = new axCoreWin32();
 		axCORE = _core;
 		_core->Init(frame_size);
-#endif //_axWxWidgetsCore_
-
-//#endif // _MSC_VER
-
 #else // __APPLE__
 
 #ifdef AX_EOS_CORE
