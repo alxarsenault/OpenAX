@@ -176,12 +176,12 @@ namespace GL {
 			return _custom_draw_on_fb_func(*this);
 		}
 	
-		// bool need_to_reactive_clip_test = false;
+		 bool need_to_reactive_clip_test = false;
 
-		// if (glIsEnabled(GL_SCISSOR_TEST)) {
-		// 	glDisable(GL_SCISSOR_TEST);
-		// 	need_to_reactive_clip_test = true;
-		// }
+		 if (glIsEnabled(GL_SCISSOR_TEST)) {
+		 	glDisable(GL_SCISSOR_TEST);
+		 	need_to_reactive_clip_test = true;
+		 }
 
 #ifdef ANDROID
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, _frameBuffer);
@@ -239,9 +239,9 @@ namespace GL {
 		glPopAttrib();
 #endif
 
-		// if (need_to_reactive_clip_test) {
-		// 	glEnable(GL_SCISSOR_TEST);
-		// }
+		 if (need_to_reactive_clip_test) {
+		 	glEnable(GL_SCISSOR_TEST);
+		 }
 	}
 
 	void FrameBuffer::DrawFrameBuffer(const ax::Size& shownSize,
@@ -285,7 +285,7 @@ namespace GL {
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 		
 		glDisableVertexAttribArray(0);
-		// glDisableVertexAttribArray(5);
+//		 glDisableVertexAttribArray(5);
 		glDisableVertexAttribArray(1);
 		// glDisableVertexAttribArray(1);
 		glDisable(GL_TEXTURE_2D);

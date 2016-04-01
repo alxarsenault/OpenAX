@@ -79,7 +79,6 @@
 		7C7476A31CA84101009CBE23 /* axAudioSignalBalance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476971CA84101009CBE23 /* axAudioSignalBalance.cpp */; };
 		7C7476A41CA84101009CBE23 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476981CA84101009CBE23 /* AudioUtils.cpp */; };
 		7C7476A51CA84101009CBE23 /* axAudioWaveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476991CA84101009CBE23 /* axAudioWaveTable.cpp */; };
-		7C7476DE1CA8E551009CBE23 /* ax.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476DD1CA8E551009CBE23 /* ax.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C7476E21CA8E551009CBE23 /* OpenAX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7476DB1CA8E551009CBE23 /* OpenAX.framework */; };
 		7C7476E31CA8E551009CBE23 /* OpenAX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7476DB1CA8E551009CBE23 /* OpenAX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7C7476E81CA8E5C7009CBE23 /* axAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476A61CA8410B009CBE23 /* axAudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -419,8 +418,6 @@
 		7C7476B01CA8410B009CBE23 /* AudioUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = ../../../../modules/Audio/include/AudioUtils.h; sourceTree = "<group>"; };
 		7C7476B11CA8410B009CBE23 /* axAudioWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = axAudioWaveTable.h; path = ../../../../modules/Audio/include/axAudioWaveTable.h; sourceTree = "<group>"; };
 		7C7476DB1CA8E551009CBE23 /* OpenAX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenAX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C7476DD1CA8E551009CBE23 /* ax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ax.h; sourceTree = "<group>"; };
-		7C7476DF1CA8E551009CBE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C74777E1CA9EA15009CBE23 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../../../../../usr/local/lib/libportaudio.a; sourceTree = "<group>"; };
 		7C7477951CAA0F33009CBE23 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -462,7 +459,6 @@
 				7C2139161C9C973F0050F676 /* OpenAX */,
 				7C213A161C9C99340050F676 /* main.cpp */,
 				7C21391A1C9C973F0050F676 /* Supporting Files */,
-				7C7476DC1CA8E551009CBE23 /* ax */,
 				7C2139151C9C973F0050F676 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -842,15 +838,6 @@
 			name = source;
 			sourceTree = "<group>";
 		};
-		7C7476DC1CA8E551009CBE23 /* ax */ = {
-			isa = PBXGroup;
-			children = (
-				7C7476DD1CA8E551009CBE23 /* ax.h */,
-				7C7476DF1CA8E551009CBE23 /* Info.plist */,
-			);
-			path = ax;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -892,7 +879,6 @@
 				7C74774B1CA8E5C8009CBE23 /* axString.h in Headers */,
 				7C74774C1CA8E5C8009CBE23 /* Utils.h in Headers */,
 				7C74774D1CA8E5C8009CBE23 /* Var.h in Headers */,
-				7C7476DE1CA8E551009CBE23 /* ax.h in Headers */,
 				7C74775A1CA8E5C9009CBE23 /* Button.h in Headers */,
 				7C74775B1CA8E5C9009CBE23 /* DropMenu.h in Headers */,
 				7C74775C1CA8E5C9009CBE23 /* Knob.h in Headers */,

@@ -45,8 +45,8 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 		[self wantsBestResolutionOpenGLSurface];
 		
-		NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 / 30.0 target:self selector:@selector(renderTimer:) userInfo:nil repeats:YES];
-		[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+//		NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 / 30.0 target:self selector:@selector(renderTimer:) userInfo:nil repeats:YES];
+//		[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 	}
 
 	return self;
@@ -105,7 +105,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (id)MemberTestFunc
 {
-//	[GlobalAppDelegate setNeedsDisplay:YES];
+	[GlobalAppDelegate setNeedsDisplay:YES];
 	return self;
 }
 
