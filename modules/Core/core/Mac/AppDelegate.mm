@@ -44,9 +44,21 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	if (self) {
 
 		[self wantsBestResolutionOpenGLSurface];
+		
+//		NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 / 30.0 target:self selector:@selector(renderTimer:) userInfo:nil repeats:YES];
+//		[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 	}
 
 	return self;
+}
+
+-(void)renderTimer:(NSTimer *)timer
+{
+	if(![[NSApplication sharedApplication] isHidden]) {
+//		ax::Print("Timer");
+//		[self setNeedsDisplay:YES];
+		[GlobalAppDelegate setNeedsDisplay:YES];
+	}
 }
 
 - (void)viewDidMoveToWindow

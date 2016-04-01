@@ -9,7 +9,7 @@
 #ifndef __MidiSequencer__axBufferPlayer__
 #define __MidiSequencer__axBufferPlayer__
 
-#include "axAudioUtils.h"
+#include "AudioUtils.h"
 
 namespace ax {
 namespace audio {

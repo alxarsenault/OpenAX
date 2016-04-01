@@ -9,6 +9,7 @@ namespace audio {
 
 	Core::~Core()
 	{
+		StopAudio();
 		Pa_Terminate();
 		delete[] _output_buffer[0];
 		delete[] _output_buffer[1];

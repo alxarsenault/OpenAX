@@ -8,6 +8,7 @@
 
 #include "axAudioBufferPlayer.h"
 #include "axAudioBuffer.h"
+#include "Utils.h"
 #include <cmath>
 
 namespace ax {
@@ -330,9 +331,9 @@ void BufferPlayer::ProcessSpeedChangeStereoBlock(float* out, unsigned long frame
 				//                *out++ += v;
 				//                *out++ += v;
 
-				*out++ += ax::Audio::LineairInterpole<double>(
+				*out++ += ax::Utils::Interpole::Lineair<double>(
 					buf[index_left], buf[index_right], frac);
-				*out++ += ax::Audio::LineairInterpole<double>(
+				*out++ += ax::Utils::Interpole::Lineair<double>(
 					buf[index_left + 1], buf[index_right + 1], frac);
 			}
 		}

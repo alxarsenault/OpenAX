@@ -20,8 +20,8 @@
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
 #include "axCocoaInterfaceMac.h"
-#import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //#import <AppKit/AppKit.h>
 
@@ -37,14 +37,13 @@
 
 //#include "NSOpenGLView+axPopupWindowCocoaView.h"
 
-
-//AppDelegate * delegate = [[AppDelegate alloc] init];
+// AppDelegate * delegate = [[AppDelegate alloc] init];
 //[[NSApplication sharedApplication] setDelegate:delegate];
 //[NSApp run];
-//void MainEntryPointCocoa(int argc, const char * argv[])
+// void MainEntryPointCocoa(int argc, const char * argv[])
 //{
 ////    NSApplicationMain(argc, argv);
-//    
+//
 //    axAppDelegate* delegate = [[axAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, 300, 300)];
 //
 //    //[[NSApplication sharedApplication] setDelegate:delegate];
@@ -53,125 +52,118 @@
 
 void axCallNSApplicationMain()
 {
-//    std::cout << "axCallNSApplicationMain" << std::endl;
-	
-    [NSApplication sharedApplication];
-    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
-    [NSApp run];
-    
-    
-//    [NSApplication sharedApplication];
-//    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
-//    NSArray** topLevelObjects;
-//    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
-    
-    
-//    int argc = 1;
-//    const char** argv;
-//    
-//    NSApplicationMain(argc, argv);
-//    NSApplicationMain(argc, argv, @"UIApplication", @"MyAppDelegate");
-//topLevelObjects:(NSArray **)topLevelObjects
-//    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"MainMenu"];
-//    [NSApp run];
-    
+	//    std::cout << "axCallNSApplicationMain" << std::endl;
 
+	[NSApplication sharedApplication];
+	[NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
+	[NSApp run];
 
-//    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"MainMenu"];
-//    [ctrlWindow showWindow:ctrlWindow];
-    
-//    int argc = 0;
-//    const char* argv[] = {""};
-//    
-//    NSApplicationMain(argc, argv);
-    
-//    [NSApplication sharedApplication];
-//    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"MainMenu"];
-//    [ctrlWindow showWindow:ctrlWindow];
+	//    [NSApplication sharedApplication];
+	//    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
+	//    NSArray** topLevelObjects;
+	//    [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
 
-//    axAppDelegate* delegate = [[axAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, 300, 300)];
-//    [[NSApplication sharedApplication] setDelegate:delegate];
-//    [NSApp run];
-    
-//    [NSAutoreleasePool new];
-//    [NSApplication sharedApplication];
-//    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
-//
-//    //id menubar = [[NSMenu new] autorelease];
-//    //id appMenuItem = [[NSMenuItem new] autorelease];
-//    //[menubar addItem:appMenuItem];
-//    //[NSApp setMainMenu:menubar];
-//    //id appMenu = [[NSMenu new] autorelease];
-//    id appName = [[NSProcessInfo processInfo] processName];
-//    //id quitTitle = [@"Quit " stringByAppendingString:appName];
-//    //id quitMenuItem = [[[NSMenuItem alloc] initWithTitle:quitTitle
-////                                                  action:@selector(terminate:) keyEquivalent:@"q"] autorelease];
-//    //[appMenu addItem:quitMenuItem];
-//    //[appMenuItem setSubmenu:appMenu];
-//    id window = [[[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 200, 200)
-//                                             styleMask:NSTitledWindowMask backing:NSBackingStoreBuffered defer:NO]
-//                 autorelease];
-//    
-//    //id window = [[axAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, 300, 300)];
-//    [window cascadeTopLeftFromPoint:NSMakePoint(20,20)];
-//    [window setTitle:appName];
-//    [window makeKeyAndOrderFront:nil];
-//    [NSApp activateIgnoringOtherApps:YES];
-//    [NSApp run];
+	//    int argc = 1;
+	//    const char** argv;
+	//
+	//    NSApplicationMain(argc, argv);
+	//    NSApplicationMain(argc, argv, @"UIApplication", @"MyAppDelegate");
+	// topLevelObjects:(NSArray **)topLevelObjects
+	//    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"MainMenu"];
+	//    [NSApp run];
+
+	//    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"MainMenu"];
+	//    [ctrlWindow showWindow:ctrlWindow];
+
+	//    int argc = 0;
+	//    const char* argv[] = {""};
+	//
+	//    NSApplicationMain(argc, argv);
+
+	//    [NSApplication sharedApplication];
+	//    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"MainMenu"];
+	//    [ctrlWindow showWindow:ctrlWindow];
+
+	//    axAppDelegate* delegate = [[axAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, 300, 300)];
+	//    [[NSApplication sharedApplication] setDelegate:delegate];
+	//    [NSApp run];
+
+	//    [NSAutoreleasePool new];
+	//    [NSApplication sharedApplication];
+	//    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+	//
+	//    //id menubar = [[NSMenu new] autorelease];
+	//    //id appMenuItem = [[NSMenuItem new] autorelease];
+	//    //[menubar addItem:appMenuItem];
+	//    //[NSApp setMainMenu:menubar];
+	//    //id appMenu = [[NSMenu new] autorelease];
+	//    id appName = [[NSProcessInfo processInfo] processName];
+	//    //id quitTitle = [@"Quit " stringByAppendingString:appName];
+	//    //id quitMenuItem = [[[NSMenuItem alloc] initWithTitle:quitTitle
+	////                                                  action:@selector(terminate:) keyEquivalent:@"q"]
+	///autorelease];
+	//    //[appMenu addItem:quitMenuItem];
+	//    //[appMenuItem setSubmenu:appMenu];
+	//    id window = [[[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 200, 200)
+	//                                             styleMask:NSTitledWindowMask backing:NSBackingStoreBuffered
+	//                                             defer:NO]
+	//                 autorelease];
+	//
+	//    //id window = [[axAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, 300, 300)];
+	//    [window cascadeTopLeftFromPoint:NSMakePoint(20,20)];
+	//    [window setTitle:appName];
+	//    [window makeKeyAndOrderFront:nil];
+	//    [NSApp activateIgnoringOtherApps:YES];
+	//    [NSApp run];
 }
 
 std::string axOpenFileDialog()
 {
-    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-    [openDlg setCanChooseFiles:YES];
-    [openDlg setCanChooseDirectories:YES];
-    [openDlg setPrompt:@"Select"];
-    
-    std::string file_path;
-    
-    if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton )
-    {
-        //NSArray* files = [openDlg filenames];
-        for(NSString* filePath in [openDlg filenames])
-        {
-            file_path = std::string([filePath UTF8String]);
-        }
-    }
-    
-    return file_path;
+	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+	[openDlg setCanChooseFiles:YES];
+	[openDlg setCanChooseDirectories:YES];
+	[openDlg setPrompt:@"Select"];
+
+	std::string file_path;
+
+	if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
+		// NSArray* files = [openDlg filenames];
+		for (NSString* filePath in [openDlg filenames]) {
+			file_path = std::string([filePath UTF8String]);
+		}
+	}
+
+	return file_path;
 }
 
 void TestFunctionInterface()
 {
 //    axAppDelegate* appDelegate = (axAppDelegate*)[[NSApplication sharedApplication] delegate];
 //    [appDelegate MemberTestFunc];
-    
+
 //    std::cout << "TestFunctionInterface" << std::endl;
-    
-    
+
 #ifdef _AX_VST_APP_
-    axApp* app = axApp::CreateApp();
-    axVstCoreMac* vstCoreMac = static_cast<axVstCoreMac*>(app->GetCore());
-    axVstAppDelegate* delegate = (__bridge axVstAppDelegate*)
-                                 vstCoreMac->GetCurrentAppDelegate();
-    
-    
-//    std::vector<axVstCoreData>* data = vstCoreMac->GetManagerVector();
-//    for(auto& n : *data)
-//    {
-//        if(n.appDelegate != nullptr)
-//        {
-//            axAppDelegate* d = (__bridge axAppDelegate*)n.appDelegate;
-//            [d MemberTestFunc];
-//        }
-//    }
-    
-    [delegate MemberTestFunc];
+	axApp* app = axApp::CreateApp();
+	axVstCoreMac* vstCoreMac = static_cast<axVstCoreMac*>(app->GetCore());
+	axVstAppDelegate* delegate = (__bridge axVstAppDelegate*)vstCoreMac->GetCurrentAppDelegate();
+
+	//    std::vector<axVstCoreData>* data = vstCoreMac->GetManagerVector();
+	//    for(auto& n : *data)
+	//    {
+	//        if(n.appDelegate != nullptr)
+	//        {
+	//            axAppDelegate* d = (__bridge axAppDelegate*)n.appDelegate;
+	//            [d MemberTestFunc];
+	//        }
+	//    }
+
+	[delegate MemberTestFunc];
 
 #else
-    
-    [GlobalAppDelegate MemberTestFunc];
-    //[global_popup_view MemberTestFunc];
+
+	[GlobalAppDelegate MemberTestFunc];
+//[global_popup_view MemberTestFunc];
 #endif // _AX_VST_APP_
 }
 
@@ -182,18 +174,20 @@ void axCocoaSetFocusAndCenter()
 
 void axCocoaSetResizable(bool resizable)
 {
-	if(resizable) {
-	 	[GlobalAppDelegate SetResizable];
-	} else {
+	if (resizable) {
+		[GlobalAppDelegate SetResizable];
+	}
+	else {
 		[GlobalAppDelegate SetNotResizable];
 	}
 }
 
 void axCocoaSetTitleBar(bool title_bar)
 {
-	if(title_bar) {
+	if (title_bar) {
 		[GlobalAppDelegate SetTitleBar];
-	} else {
+	}
+	else {
 		[GlobalAppDelegate SetNoTitleBar];
 	}
 }
@@ -201,89 +195,85 @@ void axCocoaSetTitleBar(bool title_bar)
 void axCocoaChangeMouseCursor(int cursor_id)
 {
 	ax::Print("Mouse cursor cocoa interface.");
-	[GlobalAppDelegate ChangeMouseCursor : cursor_id];
+	[GlobalAppDelegate ChangeMouseCursor:cursor_id];
 }
 
 std::string CocoaGetAppPath()
 {
-    NSString *curDir = [[NSBundle mainBundle] executablePath];
-    return std::string([curDir UTF8String]);
+	NSString* curDir = [[NSBundle mainBundle] executablePath];
+	return std::string([curDir UTF8String]);
 }
 
 std::string CocoaGetAppDirectory()
 {
 #ifdef DEBUG
-    NSString *curDir = [[NSFileManager defaultManager] currentDirectoryPath];
-    //NSString *curDir = [[NSBundle mainBundle] executablePath];
-    return std::string([curDir UTF8String]);
+	NSString* curDir = [[NSFileManager defaultManager] currentDirectoryPath];
+	// NSString *curDir = [[NSBundle mainBundle] executablePath];
+	return std::string([curDir UTF8String]);
 #else // RELEASE.
-    
-    NSString *path = [[NSBundle mainBundle] executablePath];
-    std::string app_path([path UTF8String]);
-    app_path = app_path.substr(0, app_path.find_last_of("/"));
-    app_path = app_path.substr(0, app_path.find_last_of("/"));
-    return app_path + std::string("/Resources");
-    
+
+	NSString* path = [[NSBundle mainBundle] executablePath];
+	std::string app_path([path UTF8String]);
+	app_path = app_path.substr(0, app_path.find_last_of("/"));
+	app_path = app_path.substr(0, app_path.find_last_of("/"));
+	return app_path + std::string("/Resources");
+
 #endif // DEBUG.
 }
 
 void AddEventToDispatchQueue()
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    dispatch_async(queue, ^{
-        // Perform async operation
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            // Update UI
-        });
-    });
+	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+	dispatch_async(queue, ^{
+		// Perform async operation
+		dispatch_sync(dispatch_get_main_queue(), ^{
+						  // Update UI
+					  });
+	});
 }
 
 void axCocoaResizeFrame(const ax::Size& size)
 {
 #ifdef _AX_VST_APP_
 #else
-    axAppDelegate* appDelegate =
-    (axAppDelegate*)[[NSApplication sharedApplication] delegate];
-	
-    NSSize nSize = {static_cast<CGFloat>(size.x), static_cast<CGFloat>(size.y)};
-    [appDelegate SetFrameSize:nSize];
+	axAppDelegate* appDelegate = (axAppDelegate*)[[NSApplication sharedApplication] delegate];
+
+	NSSize nSize = { static_cast<CGFloat>(size.x), static_cast<CGFloat>(size.y) };
+	[appDelegate SetFrameSize:nSize];
 	[[appDelegate window] center];
 #endif
-
 }
 
 static ax::Point hide_mouse_position;
 
 void axCocoaHideMouse()
 {
-    [NSCursor hide];
-    NSPoint mPos = [NSEvent mouseLocation];
-    hide_mouse_position.x = mPos.x;
-    hide_mouse_position.y = mPos.y;
+	[NSCursor hide];
+	NSPoint mPos = [NSEvent mouseLocation];
+	hide_mouse_position.x = mPos.x;
+	hide_mouse_position.y = mPos.y;
 }
 
 void axCocoaShowMouse()
 {
-//    ax::Print("Show mouse.");
-    NSRect e = [[NSScreen mainScreen] frame];
-    
-    CGPoint pt = CGPointMake(hide_mouse_position.x,
-                             e.size.height - hide_mouse_position.y);
-    CGDisplayErr err;
-    if ((err = CGWarpMouseCursorPosition(pt)) != CGEventNoErr)
-    {
-        NSLog(@"CGWarpMouseCursorPosition returned: \"%d\"", err);
-    }
-    
-    [NSCursor unhide];
+	//    ax::Print("Show mouse.");
+	NSRect e = [[NSScreen mainScreen] frame];
+
+	CGPoint pt = CGPointMake(hide_mouse_position.x, e.size.height - hide_mouse_position.y);
+	CGDisplayErr err;
+	if ((err = CGWarpMouseCursorPosition(pt)) != CGEventNoErr) {
+		NSLog(@"CGWarpMouseCursorPosition returned: \"%d\"", err);
+	}
+
+	[NSCursor unhide];
 }
 
 //------------------------------------------------------------------------------
 // Use for vst interface from host given parent.
-//void* CreateNSWindow(void* ptr, void*& child)
+// void* CreateNSWindow(void* ptr, void*& child)
 //{
 //    std::cout << "CreateNSWindow(void* ptr, void*& child) in TestWindow.mm" << std::endl;
-    
+
 //#ifdef _AX_VST_APP_
 //    NSView* parentView = (__bridge NSView*)ptr;
 //
@@ -293,7 +283,7 @@ void axCocoaShowMouse()
 //        axVstAppDelegate* app = [[axVstAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, 200, 200)];
 //        GlobalAppDelegate = app;
 //        [parentView addSubview: app];
-//        
+//
 //        return (__bridge void*)app;
 //    }
 //    else
@@ -303,7 +293,7 @@ void axCocoaShowMouse()
 //        [parentView addSubview: GlobalAppDelegate];
 //
 //    }
-//    
+//
 //    //    return (__bridge void*)parentView;
 //    return (__bridge void*)GlobalAppDelegate;
 //
@@ -314,88 +304,76 @@ void axCocoaShowMouse()
 
 void* CreateNSWindowFromApp(void* parent, void*& child, void*& appDelegate)
 {
-    
+
 #ifdef _AX_VST_APP_
-    NSView* parentView = (__bridge NSView*)parent;
-    
-    if(appDelegate == nullptr)
-    {
-//        std::cout << "CREATE axVstAppDelegate WINDOW" << std::endl;
-        axSize size = axApp::GetInstance()->GetCore()->GetGlobalSize();
-        axVstAppDelegate* app = [[axVstAppDelegate alloc] initWithFrame: NSMakeRect(0, 0, size.x, size.y)];
-        appDelegate = (__bridge void*)app;
-        //[appDelegate retain];
-        [parentView addSubview: app];
-    }
-    else
-    {
-//        std::cout << "ATTACH WINDOW" << std::endl;
-        [parentView addSubview: (__bridge axVstAppDelegate*)appDelegate];
-    }
-    
-    return (__bridge void*)parentView;
-    
+	NSView* parentView = (__bridge NSView*)parent;
+
+	if (appDelegate == nullptr) {
+		//        std::cout << "CREATE axVstAppDelegate WINDOW" << std::endl;
+		axSize size = axApp::GetInstance()->GetCore()->GetGlobalSize();
+		axVstAppDelegate* app = [[axVstAppDelegate alloc] initWithFrame:NSMakeRect(0, 0, size.x, size.y)];
+		appDelegate = (__bridge void*)app;
+		//[appDelegate retain];
+		[parentView addSubview:app];
+	}
+	else {
+		//        std::cout << "ATTACH WINDOW" << std::endl;
+		[parentView addSubview:(__bridge axVstAppDelegate*)appDelegate];
+	}
+
+	return (__bridge void*)parentView;
+
 #else
-    return nullptr;
+	return nullptr;
 #endif // _AX_VST_APP_
 }
-
 
 void axReInitApp(void* appDelegate)
 {
 #ifdef _AX_VST_APP_
-    axVstAppDelegate* app = (__bridge axVstAppDelegate*)appDelegate;
-    [app ReInit];
+	axVstAppDelegate* app = (__bridge axVstAppDelegate*)appDelegate;
+	[app ReInit];
 #endif
 }
 
-
 ax::Size axCocoaGetScreenSize()
 {
-    NSRect screenRect;
-    NSArray *screenArray = [NSScreen screens];
-    unsigned long screenCount = [screenArray count];
-    
-    for (unsigned int index = 0; index < screenCount; index++)
-    {
-        NSScreen *screen = [screenArray objectAtIndex: index];
-        screenRect = [screen visibleFrame];
-    }
-    
-    return ax::Size(screenRect.size.width, screenRect.size.height);
+	NSRect screenRect;
+	NSArray* screenArray = [NSScreen screens];
+	unsigned long screenCount = [screenArray count];
+
+	for (unsigned int index = 0; index < screenCount; index++) {
+		NSScreen* screen = [screenArray objectAtIndex:index];
+		screenRect = [screen visibleFrame];
+	}
+
+	return ax::Size(screenRect.size.width, screenRect.size.height);
 }
-
-
-
-
-
-
 
 void CreateNewPopupWindow()
 {
-//    initWithFrame:(NSRect)frame
-    
-    //axPopupWindowCocoaView* ggg = [[axPopupWindowCocoaView alloc] initWithFrame: NSMakeRect(0, 0, 300, 300)];
+	//    initWithFrame:(NSRect)frame
 
-    //axPopupWindowCocoaView* ggg = [[axPopupWindowCocoaView alloc] initWithNibName: @"axPopupWindow"];
+	// axPopupWindowCocoaView* ggg = [[axPopupWindowCocoaView alloc] initWithFrame: NSMakeRect(0, 0, 300,
+	// 300)];
 
-    
-    // Working.
-    NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"axPopupWindow"];
-    [ctrlWindow showWindow:ctrlWindow];
-    
+	// axPopupWindowCocoaView* ggg = [[axPopupWindowCocoaView alloc] initWithNibName: @"axPopupWindow"];
 
+	// Working.
+	NSWindowController* ctrlWindow = [[NSWindowController alloc] initWithWindowNibName:@"axPopupWindow"];
+	[ctrlWindow showWindow:ctrlWindow];
 }
 
 void SetCurrentOpenGLContext()
 {
-    //axPopupWindowCocoaView* global_popup_view
-    //axPopupWindowCocoaView* delegate = (__bridge axPopupWindowCocoaView*)
-    //global_popup_view;
-    
-    //        std::cout << "(void)ReInit currentIndex : " << vstCoreMac->GetCurrentManagerIndex() << std::endl;
-    
-    //[[delegate openGLContext] makeCurrentContext];
-    //[delegate setNeedsDisplay:YES];
-    //[[delegate window] update];
+	// axPopupWindowCocoaView* global_popup_view
+	// axPopupWindowCocoaView* delegate = (__bridge axPopupWindowCocoaView*)
+	// global_popup_view;
+
+	//        std::cout << "(void)ReInit currentIndex : " << vstCoreMac->GetCurrentManagerIndex() <<
+	//        std::endl;
+
+	//[[delegate openGLContext] makeCurrentContext];
+	//[delegate setNeedsDisplay:YES];
+	//[[delegate window] update];
 }

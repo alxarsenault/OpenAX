@@ -1,7 +1,8 @@
 #ifndef __AX_AUDIO_BIQUAD_FILTER__
 #define __AX_AUDIO_BIQUAD_FILTER__
 
-#include "axAudioUtils.h"
+#include "AudioUtils.h"
+#include "Utils.h"
 
 namespace ax {
 namespace Audio {
@@ -236,12 +237,12 @@ namespace Audio {
 
 		void ComputeCoefficients()
 		{
-			_freq = ax::Audio::Clamp<P>(_freq, P(1.0), P(_samplingRate * 0.5));
+			_freq = ax::Utils::Clamp<P>(_freq, P(1.0), P(_samplingRate * 0.5));
 
-			_q = ax::Audio::Clamp<P>(_q, P(0.1), P(100.0));
-			_gain = ax::Audio::Clamp<P>(_gain, P(0.0), P(2.0));
+			_q = ax::Utils::Clamp<P>(_q, P(0.1), P(100.0));
+			_gain = ax::Utils::Clamp<P>(_gain, P(0.0), P(2.0));
 
-			P w0 = ax::Audio::TwoPi * _freq / double(_samplingRate);
+			P w0 = ax::audio::TwoPi * _freq / double(_samplingRate);
 			P c = cos(w0);
 			P alpha = sin(w0) / (2.0 * _q);
 

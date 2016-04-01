@@ -165,12 +165,6 @@ ax::StringPairVector Label::Component::GetBuilderAttributes()
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Label* btn = static_cast<ax::Label*>(bbone.get());
 
-	ax::Label::Component* widget_comp = static_cast<ax::Label::Component*>(
-		win->component.Get("Widget").get());
-
-	ax::Label::Info* info
-		= static_cast<ax::Label::Info*>(widget_comp->GetInfo());
-
 	ax::StringPairVector atts;
 
 	ax::Point position = win->dimension.GetRect().position;

@@ -9,7 +9,7 @@
 #ifndef __AX_AUDIO_WAVE_TABLE__
 #define __AX_AUDIO_WAVE_TABLE__
 
-#include "axAudioUtils.h"
+#include "AudioUtils.h"
 
 #define axBUFFER_SIZE 2048
 
