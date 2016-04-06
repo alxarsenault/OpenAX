@@ -83,14 +83,13 @@ ColorPicker::ColorPicker(const ax::Rect& rect, const ax::Color& color)
 	btn_info.selected = btn_info.normal;
 	btn_info.contour = ax::Color(0.88);
 	btn_info.font_color = ax::Color(0.0);
-	btn_info.round_corner_radius = 0;
+	btn_info.corner_radius = 0;
 	
 	ax::Point btn_pos(10, rect.size.y - 32);
 	const ax::Size btn_size(88, 25);
 	auto ok_btn = ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), ax::Button::Events(), btn_info, "", "Select");
 	win->node.Add(ok_btn);
 	
-//	btn_pos = ok_btn->GetWindow()->dimension.GetRect().GetNextPosRight(20);
 	btn_pos.x = rect.size.x - btn_size.x - 10;
 	auto cancel_btn = ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), ax::Button::Events(), btn_info, "", "Cancel");
 	win->node.Add(cancel_btn);
