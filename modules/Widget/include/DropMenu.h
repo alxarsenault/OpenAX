@@ -46,7 +46,6 @@ namespace ax {
  */
 class DropMenu : public ax::Window::Backbone {
 public:
-
 	/*
 	 * ax::DropMenu::Flags.
 	 */
@@ -68,7 +67,7 @@ public:
 		DropMenu* GetSender() const;
 
 		std::string GetItem() const;
-		
+
 		int GetIndex() const;
 
 		ax::Event::Msg* GetCopy();
@@ -104,43 +103,43 @@ public:
 	class Info : public ax::widget::Info {
 	public:
 		Info();
-		
+
 		ax::Color normal;
 		ax::Color hover;
 		ax::Color font_color;
-		
+
 		ax::Color selected;
 		ax::Color selected_hover;
 		ax::Color selected_font_color;
 
 		ax::Color contour;
 		ax::Color separation;
-		
+
 		ax::Color up_down_arrow;
 		ax::Color right_arrow;
-		
+
 		int item_height = 20;
 		int font_size = 12;
-		
+
 		std::string font_path;
 	};
 
 	/*
 	 * ax::DropMenu::DropMenu.
 	 */
-	
+
 	/// Rect.size.y is used as maximum height.
-	DropMenu(const ax::Rect& rect, const DropMenu::Events& events,
-		const DropMenu::Info& info, const ax::StringVector& items, ax::Flag flags = 0);
-	
+	DropMenu(const ax::Rect& rect, const DropMenu::Events& events, const DropMenu::Info& info,
+		const ax::StringVector& items, ax::Flag flags = 0);
+
 	const ax::StringVector& GetItems() const;
-	
+
 	int GetSelectedItemIndex() const;
-	
+
 	std::string GetSelectedItem() const;
-	
+
 	void SetSelectedItem(const int& index);
-	
+
 protected:
 	DropMenu::Events _events;
 	ax::Flag _flags;
@@ -151,18 +150,18 @@ protected:
 	std::unique_ptr<ax::Image> _right_img;
 	int _selected_item;
 	int _mouse_hover_item;
-	
+
 	bool _over_flow_down;
 	bool _over_flow_up;
 	bool _over_flow;
 	int _n_shown_item;
 	int _top_item_index;
-	
+
 	std::vector<int> _separator_index;
 	std::vector<int> _right_arrow_index;
-	
+
 	int MousePosToIndex(const ax::Point& pos);
-	
+
 	void OnPaint(ax::GC gc);
 	void OnMouseLeftDown(const ax::Point& pos);
 	void OnMouseLeftUp(const ax::Point& pos);

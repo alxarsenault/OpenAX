@@ -67,8 +67,7 @@ public:
 		ax::Color bg_bottom;
 	};
 
-	ScrollBar(const ax::Rect& rect, const ScrollBar::Events& events,
-		const ScrollBar::Info& info);
+	ScrollBar(const ax::Rect& rect, const ScrollBar::Events& events, const ScrollBar::Info& info);
 
 	void SetWindowHandle(ax::Window* win);
 

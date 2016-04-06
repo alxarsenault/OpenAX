@@ -86,7 +86,7 @@ public:
 	class Info : public ax::widget::Info {
 	public:
 		Info();
-		
+
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
@@ -105,8 +105,8 @@ public:
 	public:
 		Component(ax::Window* win, Info* info);
 
-		virtual ax::Xml::Node  Save(ax::Xml& xml, ax::Xml::Node& node);
-		
+		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
+
 		virtual ax::StringPairVector GetBuilderAttributes();
 	};
 
@@ -123,9 +123,8 @@ public:
 	/*
 	 * axKnob::axKnob.
 	 */
-	Knob(const ax::Rect& rect, const ax::Knob::Events& events,
-		const ax::Knob::Info& info, ax::Flag flags = 0, double value = 0.0,
-		const std::string& msg = "");
+	Knob(const ax::Rect& rect, const ax::Knob::Events& events, const ax::Knob::Info& info, ax::Flag flags = 0,
+		double value = 0.0, const std::string& msg = "");
 
 	double GetValue()
 	{

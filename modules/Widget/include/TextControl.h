@@ -19,7 +19,7 @@
  * To release a closed-source product which uses OpenAX, commercial
  * licenses are available, email ax.frameworks@gmail.com for more information.
  */
- 
+
 #ifndef __AX_TEXT_CONTROL__
 #define __AX_TEXT_CONTROL__
 
@@ -38,53 +38,53 @@
 //#define axTEXT_CTRL_CONTOUR_HIGHLIGHT    ax::FlagValue::FLAG_2
 //#define axTEXT_CTRL_CONOUR_NO_FADE       ax::FlagValue::FLAG_3
 //
-//class axTextControl;
+// class axTextControl;
 //
-//class axTextControlMsg : public ax::Event::Msg
+// class axTextControlMsg : public ax::Event::Msg
 //{
-//public:
+// public:
 //    axTextControlMsg()
 //    {
 //        _sender = nullptr;
 //    }
-//    
+//
 //    axTextControlMsg(axTextControl* sender, const std::string& msg)
 //    {
 //        _sender = sender;
 //        _msg = msg;
 //    }
-//    
+//
 //    axTextControl* GetSender() const
 //    {
 //        return _sender;
 //    }
-//    
+//
 //    std::string GetMsg() const
 //    {
 //        return _msg;
 //    }
-//    
+//
 //    ax::Event::Msg* GetCopy()
 //    {
 //        return new axTextControlMsg(*this);
 //    }
-//    
-//private:
+//
+// private:
 //    axTextControl* _sender;
 //    std::string _msg;
 //};
 //
-//struct axTextControlEvents
+// struct axTextControlEvents
 //{
 //    enum : ax::Event::Id { BUTTON_CLICK };
-//    
+//
 //	axTextControlEvents(){}
 //    axTextControlEvents(ax::Event::Function& fct){ button_click = fct; }
-//    
+//
 //    ax::Event::Function button_click;
 //};
 //
-//struct axTextControlInfo
+// struct axTextControlInfo
 //{
 //	ax::Color normal;
 //	ax::Color hover;
@@ -113,9 +113,9 @@
 //    contour(contour_color),
 //    font_color(font_color_)
 //    {
-//        
+//
 //    }
-//    
+//
 //    axTextControlInfo(const std::string& path)
 //    {
 //        SerializeInput(path);
@@ -141,12 +141,12 @@
 //        }
 //
 //    }
-//    
+//
 //    void SerializeInput(const std::string& path)
 //    {
 //        std::fstream file;
 //        file.open(path, std::fstream::in | std::fstream::binary);
-//        
+//
 //        if (file.fail())
 //        {
 //            std::cerr << "Problem opening file " << path << std::endl;
@@ -163,9 +163,9 @@
 //    }
 //};
 //
-//class axTextControl : public axPanel
+// class axTextControl : public axPanel
 //{
-//public:
+// public:
 //	axTextControl(ax::Window* parent,
 //                  const ax::Rect& rect,
 //                  const axTextControlEvents& events,
@@ -176,26 +176,26 @@
 //
 //    void SetLabel(const std::string& label);
 //
-//    
+//
 //    axEVENT_ACCESSOR(ax::Event::Timer::Msg, OnFlashingCursorTimer);
-//    
-//protected:
+//
+// protected:
 //    axTextControlEvents _events;
 //    axTextControlInfo _info;
 //    std::string _label;
 //    ax::Image* _btnImg;
 //    ax::Flag _flags;
 //    ax::Font* _font;
-//        
+//
 //    ax::Color* _currentColor;
 //    int _nCurrentImg;
 //    int _cursorIndex;
 //    bool _isHightlight;
 //    bool _findClickCursorIndex;
 //    ax::Point _clickPosition;
-//    
+//
 //    int _cursorBarXPosition, _lastCharXPosition;
-//    
+//
 //    enum axTextControlState
 //    {
 //        axBTN_NORMAL,
@@ -203,9 +203,9 @@
 //        axBTN_DOWN,
 //        axBTN_SELECTED
 //    };
-//    
+//
 //    ax::Event::Timer* _flashingCursor;
-//    
+//
 //	virtual void OnPaint();
 //	virtual void OnMouseLeftDown(const ax::Point& pos);
 //    virtual void OnMouseLeftDragging(const ax::Point& pos);
@@ -215,18 +215,18 @@
 //    virtual void OnMouseLeftDoubleClick(const ax::Point& pos);
 //    virtual void OnKeyDown(const char& key);
 //    virtual void OnBackSpaceDown();
-//    
+//
 //    virtual void OnLeftArrowDown();
 //    virtual void OnRightArrowDown();
 //    virtual void OnWasKeyUnGrabbed();
 //    virtual void OnWasKeyGrabbed();
 //    virtual void OnKeyDeleteDown();
-//    
+//
 //    //
 //    virtual void DrawContourRectangle(ax::GC* gc);
-//    
+//
 //    void OnFlashingCursorTimer(const ax::Event::Timer::Msg& msg);
-//    
+//
 //    bool _cursorFlashActive;
 //};
 

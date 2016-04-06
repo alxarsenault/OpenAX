@@ -19,7 +19,7 @@
  * To release a closed-source product which uses OpenAX, commercial
  * licenses are available, email ax.frameworks@gmail.com for more information.
  */
- 
+
 #ifndef __AX_LABEL__
 #define __AX_LABEL__
 
@@ -43,7 +43,7 @@ public:
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
-		
+
 		ax::Color normal;
 		ax::Color contour;
 		ax::Color font_color;
@@ -58,7 +58,7 @@ public:
 
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
-		
+
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 		virtual void ReloadInfo();
@@ -74,11 +74,10 @@ public:
 		std::shared_ptr<ax::Window::Backbone> Create(ax::Xml::Node& node);
 	};
 
-	Label(const ax::Rect& rect, const Label::Info& info,
-		const std::string& label);
+	Label(const ax::Rect& rect, const Label::Info& info, const std::string& label);
 
 	void SetLabel(const std::string& label);
-	
+
 	std::string GetLabel() const
 	{
 		return _label;

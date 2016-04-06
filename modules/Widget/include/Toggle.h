@@ -124,68 +124,65 @@ public:
 
 		std::string img;
 		bool single_img;
-		
+
 		/// Info needed for debug editor. Derived from axInfo.
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
 	};
-	
+
 	class Component : public ax::widget::Component {
 	public:
 		Component(ax::Window* win, Info* info);
-		
+
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
 	};
-	
+
 	class Builder : public ax::widget::Builder {
 	public:
 		Builder();
-		
+
 		virtual std::shared_ptr<ax::Window::Backbone> Create(
 			const ax::Point& pos, const std::string& file_path);
-		
+
 		std::shared_ptr<ax::Window::Backbone> Create(ax::Xml::Node& node);
 	};
 
 	/*
 	 * ax::Toggle::axToggle.
 	 */
-	Toggle(const ax::Rect& rect, const Events& events, const Info& info,
-		std::string img_path = "", std::string label = "", ax::Flag flags = 0,
-		std::string msg = "");
+	Toggle(const ax::Rect& rect, const Events& events, const Info& info, std::string img_path = "",
+		std::string label = "", ax::Flag flags = 0, std::string msg = "");
 
 	void SetMsg(const std::string& msg);
 
 	void SetSelected(const bool& selected);
-	
+
 	bool IsSelected() const
 	{
 		return _selected;
 	}
-	
+
 	std::string GetLabel() const
 	{
 		return _label;
 	}
-	
+
 	std::string GetMsg() const
 	{
 		return _msg;
 	}
-	
+
 	ax::Flag GetFlags() const
 	{
 		return _flags;
 	}
-	
+
 	std::string GetImagePath() const
 	{
 		return _bgImg->GetImagePath();
 	}
-	
-	
 
 protected:
 	enum ToggleState {

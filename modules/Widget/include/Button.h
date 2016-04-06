@@ -106,12 +106,10 @@ public:
 
 		Info(const ax::StringPairVector& attributes);
 
-		Info(const ax::Color& normal_color = ax::Color(0.9f),
-			const ax::Color& hover_color = ax::Color(0.92f),
+		Info(const ax::Color& normal_color = ax::Color(0.9f), const ax::Color& hover_color = ax::Color(0.92f),
 			const ax::Color& clicked_color = ax::Color(0.95f),
 			const ax::Color& selected_color = ax::Color(0.9f),
-			const ax::Color& contour_color = ax::Color(0.5f),
-			const ax::Color& font_color = ax::Color(0.1f),
+			const ax::Color& contour_color = ax::Color(0.5f), const ax::Color& font_color = ax::Color(0.1f),
 			const int& roundCornerRadius = 0);
 
 		/// Info needed for debug editor. Derived from axInfo.
@@ -127,15 +125,15 @@ public:
 		ax::Color font_color; /// Font color.
 		int round_corner_radius = 0;
 	};
-	
+
 	/*
 	 * ax::Button::Component.
 	 */
 	class Component : public ax::widget::Component {
 	public:
 		Component(ax::Window* win, Info* info);
-		
-		virtual ax::Xml::Node  Save(ax::Xml& xml, ax::Xml::Node& node);
+
+		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
 	};
 
@@ -148,34 +146,28 @@ public:
 
 		std::shared_ptr<ax::Window::Backbone> Create(ax::Xml::Node& node);
 	};
-	
+
 	/*
 	 * ax::Button::Button.
 	 */
-	Button(const ax::Rect& rect, const Button::Events& events,
-		const Button::Info& info, std::string img_path = "",
-		std::string label = "", ax::Flag flags = 0, std::string msg = "");
+	Button(const ax::Rect& rect, const Button::Events& events, const Button::Info& info,
+		std::string img_path = "", std::string label = "", ax::Flag flags = 0, std::string msg = "");
 
-	Button(const ax::Point& pos, const Button::Events& events,
-		std::string label = "", std::string img_path = "",
-		const Button::Info& info = Button::Info(), ax::Flag flags = 0,
+	Button(const ax::Point& pos, const Button::Events& events, std::string label = "",
+		std::string img_path = "", const Button::Info& info = Button::Info(), ax::Flag flags = 0,
 		std::string msg = "");
 
-	inline static std::shared_ptr<ax::Window::Backbone> Create(
-		const ax::Point& pos, const Button::Events& events,
-		std::string label = "", std::string img_path = "",
-		const Button::Info& info = Button::Info(), ax::Flag flags = 0,
-		std::string msg = "")
+	inline static std::shared_ptr<ax::Window::Backbone> Create(const ax::Point& pos,
+		const Button::Events& events, std::string label = "", std::string img_path = "",
+		const Button::Info& info = Button::Info(), ax::Flag flags = 0, std::string msg = "")
 	{
 		return std::shared_ptr<ax::Window::Backbone>(
 			new ax::Button(pos, events, label, img_path, info, flags, msg));
 	}
 
-	inline static std::shared_ptr<ax::Window::Backbone> Create(
-		const ax::Rect& rect, const Button::Events& events,
-		std::string label = "", std::string img_path = "",
-		const Button::Info& info = Button::Info(), ax::Flag flags = 0,
-		std::string msg = "")
+	inline static std::shared_ptr<ax::Window::Backbone> Create(const ax::Rect& rect,
+		const Button::Events& events, std::string label = "", std::string img_path = "",
+		const Button::Info& info = Button::Info(), ax::Flag flags = 0, std::string msg = "")
 	{
 		return std::shared_ptr<ax::Window::Backbone>(
 			new ax::Button(rect, events, info, img_path, label, flags, msg));
@@ -218,12 +210,7 @@ protected:
 	bool _selected;
 	int _nCurrentImg;
 
-	enum axButtonState {
-		axBTN_NORMAL,
-		axBTN_HOVER,
-		axBTN_DOWN,
-		axBTN_SELECTED
-	};
+	enum axButtonState { axBTN_NORMAL, axBTN_HOVER, axBTN_DOWN, axBTN_SELECTED };
 
 	virtual void OnPaint(ax::GC gc);
 	virtual void OnMouseLeftDown(const ax::Point& pos);

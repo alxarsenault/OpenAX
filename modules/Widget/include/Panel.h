@@ -86,19 +86,17 @@ public:
 
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 
-		virtual void SetSaveChildCallback(
-			std::function<void(ax::Xml&, ax::Xml::Node&, ax::Window*)> fct)
+		virtual void SetSaveChildCallback(std::function<void(ax::Xml&, ax::Xml::Node&, ax::Window*)> fct)
 		{
 			_save_child_callback = fct;
 		}
-		
+
 		ax::StringPairVector GetBuilderAttributes();
-		
+
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
 
 	private:
-		std::function<void(ax::Xml&, ax::Xml::Node&, ax::Window*)>
-			_save_child_callback;
+		std::function<void(ax::Xml&, ax::Xml::Node&, ax::Window*)> _save_child_callback;
 	};
 
 	/*
@@ -113,8 +111,7 @@ public:
 
 		std::shared_ptr<ax::Window::Backbone> Create(ax::Xml::Node& node);
 
-		virtual void SetCreateCallback(
-			std::function<void(ax::Window*, ax::Xml::Node&)> fct)
+		virtual void SetCreateCallback(std::function<void(ax::Window*, ax::Xml::Node&)> fct)
 		{
 			_create_callback = fct;
 		}
@@ -135,17 +132,17 @@ public:
 	{
 		return _flags;
 	}
-	
+
 	std::string GetName() const
 	{
 		return _name;
 	}
-	
+
 	void SetName(const std::string& name)
 	{
 		_name = name;
 	}
-	
+
 	std::string GetBackgroundImagePath() const
 	{
 		return _bg_img_path;
