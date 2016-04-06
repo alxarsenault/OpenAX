@@ -19,7 +19,7 @@
  * To release a closed-source product which uses OpenAX, commercial
  * licenses are available, email ax.frameworks@gmail.com for more information.
  */
- 
+
 #include "Slider.h"
 
 namespace ax {
@@ -63,11 +63,9 @@ Slider::Info::Info()
 /// Info needed for debug editor. Derived from axInfo.
 ax::StringVector Slider::Info::GetParamNameList() const
 {
-	return StringVector{ "img_path", "btn_size", "bgColorNormal",
-		"bgColorHover", "bgColorClicked", "sliderColorNormal",
-		"sliderColorHover", "sliderColorClicked", "sliderContourColor",
-		"contourColor", "backSliderColor", "backSliderContourColor",
-		"slider_width", "contour_round_radius" };
+	return StringVector{ "img_path", "btn_size", "bgColorNormal", "bgColorHover", "bgColorClicked",
+		"sliderColorNormal", "sliderColorHover", "sliderColorClicked", "sliderContourColor", "contourColor",
+		"backSliderColor", "backSliderContourColor", "slider_width", "contour_round_radius" };
 }
 
 std::string Slider::Info::GetAttributeValue(const std::string& name)
@@ -175,19 +173,17 @@ ax::Xml::Node Slider::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Slider* sld = static_cast<ax::Slider*>(bbone.get());
 
-	ax::Slider::Component* widget_comp = static_cast<ax::Slider::Component*>(
-		win->component.Get("Widget").get());
+	ax::Slider::Component* widget_comp
+		= static_cast<ax::Slider::Component*>(win->component.Get("Widget").get());
 
-	ax::Slider::Info* info
-		= static_cast<ax::Slider::Info*>(widget_comp->GetInfo());
+	ax::Slider::Info* info = static_cast<ax::Slider::Info*>(widget_comp->GetInfo());
 
 	ax::Xml::Node widget_node = xml.CreateNode("Widget");
 	node.AddNode(widget_node);
 	widget_node.AddAttribute("builder", "Slider");
 
 	ax::Rect rect = win->dimension.GetRect();
-	widget_node.AddNode(
-		xml.CreateNode("position", std::to_string(rect.position)));
+	widget_node.AddNode(xml.CreateNode("position", std::to_string(rect.position)));
 	widget_node.AddNode(xml.CreateNode("size", std::to_string(rect.size)));
 
 	ax::Xml::Node info_node = xml.CreateNode("info");
@@ -195,32 +191,22 @@ ax::Xml::Node Slider::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	info_node.AddAttribute("img_path", info->img_path);
 	info_node.AddAttribute("btn_size", std::to_string(info->btn_size));
 	info_node.AddAttribute("slider_width", std::to_string(info->slider_width));
-	info_node.AddAttribute(
-		"contour_round_radius", std::to_string(info->contour_round_radius));
+	info_node.AddAttribute("contour_round_radius", std::to_string(info->contour_round_radius));
 
-	info_node.AddAttribute(
-		"bgColorNormal", std::to_string(info->bgColorNormal));
+	info_node.AddAttribute("bgColorNormal", std::to_string(info->bgColorNormal));
 	info_node.AddAttribute("bgColorHover", std::to_string(info->bgColorHover));
-	info_node.AddAttribute(
-		"bgColorClicked", std::to_string(info->bgColorClicked));
+	info_node.AddAttribute("bgColorClicked", std::to_string(info->bgColorClicked));
 
-	info_node.AddAttribute(
-		"sliderColorNormal", std::to_string(info->sliderColorNormal));
-	info_node.AddAttribute(
-		"sliderColorHover", std::to_string(info->sliderColorHover));
-	info_node.AddAttribute(
-		"sliderColorClicked", std::to_string(info->sliderColorClicked));
+	info_node.AddAttribute("sliderColorNormal", std::to_string(info->sliderColorNormal));
+	info_node.AddAttribute("sliderColorHover", std::to_string(info->sliderColorHover));
+	info_node.AddAttribute("sliderColorClicked", std::to_string(info->sliderColorClicked));
 
-	info_node.AddAttribute(
-		"sliderContourColor", std::to_string(info->sliderContourColor));
+	info_node.AddAttribute("sliderContourColor", std::to_string(info->sliderContourColor));
 	info_node.AddAttribute("contourColor", std::to_string(info->contourColor));
-	info_node.AddAttribute(
-		"backSliderColor", std::to_string(info->backSliderColor));
-	info_node.AddAttribute(
-		"backSliderContourColor", std::to_string(info->backSliderContourColor));
+	info_node.AddAttribute("backSliderColor", std::to_string(info->backSliderColor));
+	info_node.AddAttribute("backSliderContourColor", std::to_string(info->backSliderContourColor));
 
-	widget_node.AddNode(
-		xml.CreateNode("value", std::to_string(sld->GetValue())));
+	widget_node.AddNode(xml.CreateNode("value", std::to_string(sld->GetValue())));
 
 	ax::Flag flags = sld->GetFlags();
 	ax::StringVector atts;
@@ -278,11 +264,9 @@ ax::StringPairVector Slider::Component::GetBuilderAttributes()
 	ax::StringPairVector atts;
 
 	//	ax::Point position = ;
-	atts.push_back(ax::StringPair(
-		"position", std::to_string(win->dimension.GetRect().position)));
+	atts.push_back(ax::StringPair("position", std::to_string(win->dimension.GetRect().position)));
 
-	atts.push_back(
-		ax::StringPair("size", std::to_string(win->dimension.GetSize())));
+	atts.push_back(ax::StringPair("size", std::to_string(win->dimension.GetSize())));
 
 	atts.push_back(ax::StringPair("flags", std::to_string(sld->GetFlags())));
 
@@ -308,8 +292,7 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -349,24 +332,21 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
 		sld_info.SetAttribute(ax::StringPair(n, info_node.GetAttribute(n)));
 	}
 
-	auto sld = ax::shared<ax::Slider>(
-		ax::Rect(pos, size), ax::Slider::Events(), sld_info, flags);
+	auto sld = ax::shared<ax::Slider>(ax::Rect(pos, size), ax::Slider::Events(), sld_info, flags);
 
 	return sld;
 }
 
-std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
-	ax::Xml::Node& control)
+std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(ax::Xml::Node& control)
 {
 
 	ax::Size pos = ax::Xml::StringToSize(control.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
-	
-	ax::StringVector flags_strs
-	= ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
-	
+
+	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+
 	ax::Flag flags = 0;
-	
+
 	for (auto& n : flags_strs) {
 		ax::Print("OPT : ", n);
 		if (n == "VERTICAL") {
@@ -394,18 +374,17 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
 			flags |= Flags::NO_SLIDER_LINE;
 		}
 	}
-	
+
 	ax::Slider::Info sld_info;
 	ax::Xml::Node info_node = control.GetNode("info");
 	auto param_list = sld_info.GetParamNameList();
-	
+
 	for (auto& n : param_list) {
 		sld_info.SetAttribute(ax::StringPair(n, info_node.GetAttribute(n)));
 	}
-	
-	auto sld = ax::shared<ax::Slider>(
-									  ax::Rect(pos, size), ax::Slider::Events(), sld_info, flags);
-	
+
+	auto sld = ax::shared<ax::Slider>(ax::Rect(pos, size), ax::Slider::Events(), sld_info, flags);
+
 	return sld;
 
 	//		std::string builder_name = node.GetAttribute("builder");
@@ -468,8 +447,8 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
 }
 }
 
-ax::Slider::Slider(const ax::Rect& rect, const ax::Slider::Events& events,
-	const ax::Slider::Info& info, ax::Flag flags)
+ax::Slider::Slider(
+	const ax::Rect& rect, const ax::Slider::Events& events, const ax::Slider::Info& info, ax::Flag flags)
 	// Members.
 	: _events(events),
 	  _info(info),
@@ -485,29 +464,22 @@ ax::Slider::Slider(const ax::Rect& rect, const ax::Slider::Events& events,
 
 	win = ax::Window::Create(rect);
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &Slider::OnPaint);
-	win->event.OnMouseLeftDown
-		= ax::WBind<ax::Point>(this, &Slider::OnMouseLeftDown);
-	win->event.OnMouseLeftUp
-		= ax::WBind<ax::Point>(this, &Slider::OnMouseLeftUp);
+	win->event.OnMouseLeftDown = ax::WBind<ax::Point>(this, &Slider::OnMouseLeftDown);
+	win->event.OnMouseLeftUp = ax::WBind<ax::Point>(this, &Slider::OnMouseLeftUp);
 
-	win->event.OnMouseLeftDragging
-		= ax::WBind<ax::Point>(this, &Slider::OnMouseLeftDragging);
-	win->event.OnMouseMotion
-		= ax::WBind<ax::Point>(this, &Slider::OnMouseMotion);
+	win->event.OnMouseLeftDragging = ax::WBind<ax::Point>(this, &Slider::OnMouseLeftDragging);
+	win->event.OnMouseMotion = ax::WBind<ax::Point>(this, &Slider::OnMouseMotion);
 	win->event.OnMouseEnter = ax::WBind<ax::Point>(this, &Slider::OnMouseEnter);
 	win->event.OnMouseLeave = ax::WBind<ax::Point>(this, &Slider::OnMouseLeave);
 
 	win->event.OnResize = ax::WBind<ax::Size>(this, &Slider::OnResize);
 
 	_sliderPosition = 0;
-	
-	win->component.Add("Widget", widget::Component::Ptr(new Slider::Component(
-		win, new Slider::Info(info))));
 
+	win->component.Add("Widget", widget::Component::Ptr(new Slider::Component(win, new Slider::Info(info))));
 
 	if (_events.slider_value_change) {
-		win->AddConnection(
-			ax::Slider::Events::VALUE_CHANGE, _events.slider_value_change);
+		win->AddConnection(ax::Slider::Events::VALUE_CHANGE, _events.slider_value_change);
 	}
 
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
@@ -560,20 +532,14 @@ void ax::Slider::SetValue(const double& value)
 
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
 		if (ax::IsFlag(Flags::RIGHT_ALIGN, _flags)) {
-			_sliderPosition
-				= double(win->dimension.GetSize().y - _info.btn_size.y)
-				* (_sliderValue);
+			_sliderPosition = double(win->dimension.GetSize().y - _info.btn_size.y) * (_sliderValue);
 		}
 		else {
-			_sliderPosition
-				= double(win->dimension.GetSize().y - _info.btn_size.y)
-				* (1.0 - _sliderValue);
+			_sliderPosition = double(win->dimension.GetSize().y - _info.btn_size.y) * (1.0 - _sliderValue);
 		}
 	}
 	else {
-		_sliderPosition
-			= double(win->dimension.GetSize().x - _info.btn_size.x - 2)
-			* (_sliderValue);
+		_sliderPosition = double(win->dimension.GetSize().x - _info.btn_size.x - 2) * (_sliderValue);
 		//	 	_sliderValue = (_sliderPosition - 1) /
 		//	 		double(GetSize().x - _info.btn_size.x - 2);
 	}
@@ -586,12 +552,10 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 
 	ax::Rect sliderBtnRect;
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
-		sliderBtnRect
-			= ax::Rect(ax::Point(_btnYPos, _sliderPosition), _info.btn_size);
+		sliderBtnRect = ax::Rect(ax::Point(_btnYPos, _sliderPosition), _info.btn_size);
 	}
 	else {
-		sliderBtnRect
-			= ax::Rect(ax::Point(_sliderPosition, _btnYPos), _info.btn_size);
+		sliderBtnRect = ax::Rect(ax::Point(_sliderPosition, _btnYPos), _info.btn_size);
 	}
 
 	if (ax::IsFlag(Flags::CLICK_ANYWHERE, _flags)) {
@@ -608,8 +572,7 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 		blockSliderPosition(pos);
 		win->event.GrabMouse();
 
-		win->PushEvent(ax::Slider::Events::VALUE_CHANGE,
-			new ax::Slider::Msg(this, _sliderValue));
+		win->PushEvent(ax::Slider::Events::VALUE_CHANGE, new ax::Slider::Msg(this, _sliderValue));
 		win->Update();
 	}
 	// Click on boutton to move.
@@ -638,8 +601,7 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 			//			{
 			//				_events.slider_value_change(axSliderMsg(_sliderValue));
 			//			}
-			win->PushEvent(ax::Slider::Events::VALUE_CHANGE,
-				new ax::Slider::Msg(this, _sliderValue));
+			win->PushEvent(ax::Slider::Events::VALUE_CHANGE, new ax::Slider::Msg(this, _sliderValue));
 			win->Update();
 		}
 	}
@@ -673,8 +635,7 @@ void ax::Slider::OnMouseLeftDragging(const ax::Point& p)
 	//		_events.slider_value_change(axSliderMsg(_sliderValue));
 	//	}
 
-	win->PushEvent(
-		ax::Slider::Events::VALUE_CHANGE, new ax::Slider::Msg(this, _sliderValue));
+	win->PushEvent(ax::Slider::Events::VALUE_CHANGE, new ax::Slider::Msg(this, _sliderValue));
 
 	win->Update();
 }
@@ -686,8 +647,7 @@ void ax::Slider::blockSliderPosition(const ax::Point& pos)
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
 		int pos_y = pos.y + _delta_click;
 
-		pos_y = ax::Utils::Clamp<double>(
-			pos_y, 1, win->dimension.GetSize().y - _info.btn_size.y - 1);
+		pos_y = ax::Utils::Clamp<double>(pos_y, 1, win->dimension.GetSize().y - _info.btn_size.y - 1);
 		// axCLIP(pos_y, 1, GetSize().y - _info.btn_size.y - 1);
 
 		_sliderPosition = pos_y;
@@ -696,8 +656,7 @@ void ax::Slider::blockSliderPosition(const ax::Point& pos)
 		int pos_x = pos.x + _delta_click;
 
 		//		axCLIP(pos_x, 1, GetSize().x - _info.btn_size.x - 1);
-		pos_x = ax::Utils::Clamp<double>(
-			pos_x, 1, win->dimension.GetSize().x - _info.btn_size.x - 1);
+		pos_x = ax::Utils::Clamp<double>(pos_x, 1, win->dimension.GetSize().x - _info.btn_size.x - 1);
 
 		_sliderPosition = pos_x;
 	}
@@ -708,12 +667,10 @@ void ax::Slider::blockSliderPosition(const ax::Point& pos)
 void ax::Slider::updateSliderValue()
 {
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
-		_sliderValue = (_sliderPosition - 1)
-			/ double(win->dimension.GetSize().y - _info.btn_size.y - 2);
+		_sliderValue = (_sliderPosition - 1) / double(win->dimension.GetSize().y - _info.btn_size.y - 2);
 	}
 	else {
-		_sliderValue = (_sliderPosition - 1)
-			/ double(win->dimension.GetSize().x - _info.btn_size.x - 2);
+		_sliderValue = (_sliderPosition - 1) / double(win->dimension.GetSize().x - _info.btn_size.x - 2);
 	}
 }
 
@@ -723,12 +680,10 @@ void ax::Slider::OnMouseMotion(const ax::Point& p)
 
 	ax::Rect sliderBtnRect;
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
-		sliderBtnRect
-			= ax::Rect(ax::Point(_btnYPos, _sliderPosition), _info.btn_size);
+		sliderBtnRect = ax::Rect(ax::Point(_btnYPos, _sliderPosition), _info.btn_size);
 	}
 	else {
-		sliderBtnRect
-			= ax::Rect(ax::Point(_sliderPosition, _btnYPos), _info.btn_size);
+		sliderBtnRect = ax::Rect(ax::Point(_sliderPosition, _btnYPos), _info.btn_size);
 	}
 
 	if (sliderBtnRect.IsPointInside(pos)) {
@@ -754,8 +709,7 @@ void ax::Slider::OnMouseEnter(const ax::Point& p)
 	if (ax::IsFlag(Flags::LEFT_CLICK_ENTER, _flags)) {
 		// if (GetParent()->LeftIsDown())
 		//{
-		ax::Rect sliderBtnRect(
-			ax::Point(_sliderPosition, _btnYPos), _info.btn_size);
+		ax::Rect sliderBtnRect(ax::Point(_sliderPosition, _btnYPos), _info.btn_size);
 
 		_nCurrentImg = axBTN_DOWN;
 		_currentSliderColor = _info.sliderColorClicked;
@@ -788,8 +742,7 @@ void ax::Slider::OnMouseLeave(const ax::Point& p)
 	}
 }
 
-void ax::Slider::DrawLineBehindSlider_Vertical(
-	ax::GC* gc, const ax::Rect& rect0)
+void ax::Slider::DrawLineBehindSlider_Vertical(ax::GC* gc, const ax::Rect& rect0)
 {
 	int half_btn_size = _info.btn_size.y * 0.5;
 
@@ -799,13 +752,11 @@ void ax::Slider::DrawLineBehindSlider_Vertical(
 		// 					 12,// _info.slider_width,
 		// 					 GetSize().y - _sliderPosition - half_btn_size);
 
-		slider_rect = ax::Rect(_sliderYPos, _sliderPosition + half_btn_size,
-			_info.slider_width,
+		slider_rect = ax::Rect(_sliderYPos, _sliderPosition + half_btn_size, _info.slider_width,
 			win->dimension.GetSize().y - _sliderPosition - half_btn_size);
 	}
 	else {
-		slider_rect = ax::Rect(_sliderYPos, 0, _info.slider_width,
-			_sliderPosition + half_btn_size);
+		slider_rect = ax::Rect(_sliderYPos, 0, _info.slider_width, _sliderPosition + half_btn_size);
 	}
 
 	gc->SetColor(_currentSliderColor);
@@ -820,17 +771,16 @@ void ax::Slider::DrawVerticalSlider(ax::GC* gc, const ax::Rect& rect0)
 	//	ax::Size size(rect0.size);
 	//	int half_btn_size = _info.btn_size.y * 0.5;
 
-	 if (ax::IsFlag(Flags::BACK_SLIDER, _flags))
-	 {
-	 	// Back slider.
-	 	ax::Rect back_slider(_sliderYPos, 0, _info.slider_width, rect0.size.y);
+	if (ax::IsFlag(Flags::BACK_SLIDER, _flags)) {
+		// Back slider.
+		ax::Rect back_slider(_sliderYPos, 0, _info.slider_width, rect0.size.y);
 
-	 	gc->SetColor(_info.backSliderColor);
-	 	gc->DrawRectangle(back_slider);
+		gc->SetColor(_info.backSliderColor);
+		gc->DrawRectangle(back_slider);
 
-	 	gc->SetColor(_info.backSliderContourColor);
-	 	gc->DrawRectangleContour(back_slider);
-	 }
+		gc->SetColor(_info.backSliderContourColor);
+		gc->DrawRectangleContour(back_slider);
+	}
 
 	// Draw line behind the slider.
 	if (!ax::IsFlag(Flags::NO_SLIDER_LINE, _flags)) {
@@ -841,8 +791,7 @@ void ax::Slider::DrawVerticalSlider(ax::GC* gc, const ax::Rect& rect0)
 	gc->DrawRectangleContour(rect0);
 
 	if (_btnImg.IsImageReady()) {
-		gc->DrawPartOfImage(&_btnImg,
-			ax::Point(0, _nCurrentImg * _info.btn_size.y), _info.btn_size,
+		gc->DrawPartOfImage(&_btnImg, ax::Point(0, _nCurrentImg * _info.btn_size.y), _info.btn_size,
 			ax::Point(_btnYPos, _sliderPosition));
 	}
 }
@@ -885,18 +834,14 @@ void ax::Slider::OnPaint(ax::GC gc)
 		int half_btn_size = _info.btn_size.x * 0.5;
 
 		if (!ax::IsFlag(Flags::NO_SLIDER_LINE, _flags)) {
-			ax::Rect slider_rect(0, _sliderYPos,
-				_sliderPosition + half_btn_size, _info.slider_width);
+			ax::Rect slider_rect(0, _sliderYPos, _sliderPosition + half_btn_size, _info.slider_width);
 
 			if (ax::IsFlag(Flags::RIGHT_ALIGN, _flags)) {
 				slider_rect = ax::Rect(_sliderPosition, _sliderYPos,
-					win->dimension.GetSize().x - _sliderPosition
-						+ half_btn_size,
-					_info.slider_width);
+					win->dimension.GetSize().x - _sliderPosition + half_btn_size, _info.slider_width);
 			}
 			else {
-				slider_rect = ax::Rect(0, _sliderYPos,
-					_sliderPosition + half_btn_size, _info.slider_width);
+				slider_rect = ax::Rect(0, _sliderYPos, _sliderPosition + half_btn_size, _info.slider_width);
 			}
 
 			if (radius > 1) {
@@ -925,8 +870,7 @@ void ax::Slider::OnPaint(ax::GC gc)
 		}
 
 		if (_btnImg.IsImageReady()) {
-			gc.DrawPartOfImage(&_btnImg,
-				ax::Point(0, _nCurrentImg * _info.btn_size.y), _info.btn_size,
+			gc.DrawPartOfImage(&_btnImg, ax::Point(0, _nCurrentImg * _info.btn_size.y), _info.btn_size,
 				ax::Point(_sliderPosition, _btnYPos));
 		}
 	}

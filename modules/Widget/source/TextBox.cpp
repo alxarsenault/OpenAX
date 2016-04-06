@@ -69,9 +69,8 @@ TextBox::Info::Info()
 }
 
 TextBox::Info::Info(const ax::Color& normalColor, const ax::Color& hoverColor,
-	const ax::Color& highlightColor, const ax::Color& selectedColor,
-	const ax::Color& selected_shadowColor, const ax::Color& cursorColor,
-	const ax::Color& contourColor, const ax::Color& font_colorColor)
+	const ax::Color& highlightColor, const ax::Color& selectedColor, const ax::Color& selected_shadowColor,
+	const ax::Color& cursorColor, const ax::Color& contourColor, const ax::Color& font_colorColor)
 	: ax::widget::Info()
 	, normal(normalColor)
 	, hover(hoverColor)
@@ -96,8 +95,8 @@ TextBox::Info::Info(const ax::StringPairVector& attributes)
 
 ax::StringVector TextBox::Info::GetParamNameList() const
 {
-	return ax::StringVector{ "normal", "hover", "highlight", "selected",
-		"selected_shadow", "cursor", "contour", "font_color" };
+	return ax::StringVector{ "normal", "hover", "highlight", "selected", "selected_shadow", "cursor",
+		"contour", "font_color" };
 }
 
 std::string TextBox::Info::GetAttributeValue(const std::string& name)
@@ -161,9 +160,8 @@ void TextBox::Info::SetAttribute(const ax::StringPair& attribute)
 /*
  * TextBox::Info.
  */
-TextBox::TextBox(const ax::Rect& rect, const TextBox::Events& events,
-	const TextBox::Info& info, std::string img_path, std::string label,
-	ax::Flag flags)
+TextBox::TextBox(const ax::Rect& rect, const TextBox::Events& events, const TextBox::Info& info,
+	std::string img_path, std::string label, ax::Flag flags)
 	: _events(events)
 	, _label(label)
 	, _flags(flags)
@@ -181,39 +179,25 @@ TextBox::TextBox(const ax::Rect& rect, const TextBox::Events& events,
 
 	// Builtin event connection.
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &TextBox::OnPaint);
-	win->event.OnMouseLeftDown
-		= ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftDown);
-	win->event.OnMouseLeftDragging
-		= ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftDragging);
-	win->event.OnMouseLeftUp
-		= ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftUp);
-	win->event.OnMouseEnter
-		= ax::WBind<ax::Point>(this, &TextBox::OnMouseEnter);
-	win->event.OnMouseLeave
-		= ax::WBind<ax::Point>(this, &TextBox::OnMouseLeave);
-	win->event.OnMouseLeftDoubleClick
-		= ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftDoubleClick);
+	win->event.OnMouseLeftDown = ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftDown);
+	win->event.OnMouseLeftDragging = ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftDragging);
+	win->event.OnMouseLeftUp = ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftUp);
+	win->event.OnMouseEnter = ax::WBind<ax::Point>(this, &TextBox::OnMouseEnter);
+	win->event.OnMouseLeave = ax::WBind<ax::Point>(this, &TextBox::OnMouseLeave);
+	win->event.OnMouseLeftDoubleClick = ax::WBind<ax::Point>(this, &TextBox::OnMouseLeftDoubleClick);
 
 	win->event.OnKeyDown = ax::WBind<char>(this, &TextBox::OnKeyDown);
-	win->event.OnBackSpaceDown
-		= ax::WBind<char>(this, &TextBox::OnBackSpaceDown);
+	win->event.OnBackSpaceDown = ax::WBind<char>(this, &TextBox::OnBackSpaceDown);
 	win->event.OnEnterDown = ax::WBind<char>(this, &TextBox::OnEnterDown);
-	win->event.OnLeftArrowDown
-		= ax::WBind<char>(this, &TextBox::OnLeftArrowDown);
-	win->event.OnRightArrowDown
-		= ax::WBind<char>(this, &TextBox::OnRightArrowDown);
-	win->event.OnKeyDeleteDown
-		= ax::WBind<char>(this, &TextBox::OnKeyDeleteDown);
-	win->event.OnWasKeyGrabbed
-		= ax::WBind<char>(this, &TextBox::OnWasKeyGrabbed);
-	win->event.OnWasKeyUnGrabbed
-		= ax::WBind<char>(this, &TextBox::OnWasKeyUnGrabbed);
+	win->event.OnLeftArrowDown = ax::WBind<char>(this, &TextBox::OnLeftArrowDown);
+	win->event.OnRightArrowDown = ax::WBind<char>(this, &TextBox::OnRightArrowDown);
+	win->event.OnKeyDeleteDown = ax::WBind<char>(this, &TextBox::OnKeyDeleteDown);
+	win->event.OnWasKeyGrabbed = ax::WBind<char>(this, &TextBox::OnWasKeyGrabbed);
+	win->event.OnWasKeyUnGrabbed = ax::WBind<char>(this, &TextBox::OnWasKeyUnGrabbed);
 
-	win->event.OnPaintOverFrameBuffer
-		= ax::WBind<ax::GC>(this, &TextBox::DrawContourRectangle);
+	win->event.OnPaintOverFrameBuffer = ax::WBind<ax::GC>(this, &TextBox::DrawContourRectangle);
 
-	win->component.Add("Widget", widget::Component::Ptr(new widget::Component(
-									 win, new TextBox::Info(info))));
+	win->component.Add("Widget", widget::Component::Ptr(new widget::Component(win, new TextBox::Info(info))));
 	_currentColor = info.normal;
 
 	_btnImg = new ax::Image(img_path);
@@ -227,8 +211,7 @@ TextBox::TextBox(const ax::Rect& rect, const TextBox::Events& events,
 	}
 
 	if (ax::IsFlag(Flags::FLASHING_CURSOR, _flags)) {
-		_flashingCursor
-			= new ax::Event::Timer(ax::App::GetInstance().GetEventManager());
+		_flashingCursor = new ax::Event::Timer(ax::App::GetInstance().GetEventManager());
 		_flashingCursor->AddConnection(0, GetOnFlashingCursorTimer());
 	}
 
@@ -312,8 +295,7 @@ void TextBox::OnWasKeyUnGrabbed(const char& key)
 		_flashingCursor->StopTimer();
 	}
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	TextBox::Info& info = *static_cast<TextBox::Info*>(widget->GetInfo());
 	_currentColor = info.normal;
 
@@ -322,8 +304,7 @@ void TextBox::OnWasKeyUnGrabbed(const char& key)
 
 void TextBox::OnWasKeyGrabbed(const char& key)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	TextBox::Info& info = *static_cast<TextBox::Info*>(widget->GetInfo());
 	_currentColor = info.selected;
 
@@ -438,16 +419,13 @@ void TextBox::DrawContourRectangle(ax::GC gc)
 		if (win->event.IsKeyGrab()) {
 			ax::Rect rect(win->dimension.GetRect());
 
-			widget::Component::Ptr widget
-				= win->component.Get<widget::Component>("Widget");
-			TextBox::Info& info
-				= *static_cast<TextBox::Info*>(widget->GetInfo());
+			widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+			TextBox::Info& info = *static_cast<TextBox::Info*>(widget->GetInfo());
 
 			if (ax::IsFlag(Flags::CONTOUR_NO_FADE, _flags)) // Shadow fade.
 			{
 				gc.SetColor(info.selected_shadow);
-				gc.DrawRectangle(ax::Rect(
-					ax::Point(-5, -5), ax::Size(rect.size + ax::Size(9, 9))));
+				gc.DrawRectangle(ax::Rect(ax::Point(-5, -5), ax::Size(rect.size + ax::Size(9, 9))));
 			}
 			else {
 				ax::Color col(info.selected_shadow);
@@ -455,8 +433,8 @@ void TextBox::DrawContourRectangle(ax::GC gc)
 
 				int nRect = 5;
 				for (int i = 0; i < nRect; i++) {
-					gc.DrawRectangleContour(ax::Rect(ax::Point(-i, -i),
-						ax::Size(rect.size + ax::Size(2 * i, 2 * i))));
+					gc.DrawRectangleContour(
+						ax::Rect(ax::Point(-i, -i), ax::Size(rect.size + ax::Size(2 * i, 2 * i))));
 
 					double alpha = info.selected_shadow.GetAlpha();
 					double mu = double(i) / double(nRect);
@@ -477,8 +455,7 @@ void TextBox::OnPaint(ax::GC gc)
 	gc.DrawRectangle(rect);
 
 	ax::Point next_pos(5, 5);
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	TextBox::Info& info = *static_cast<TextBox::Info*>(widget->GetInfo());
 
 	if (!_label.empty()) {
@@ -504,21 +481,19 @@ void TextBox::OnPaint(ax::GC gc)
 				int x_past_pos = next_pos.x;
 				next_pos = gc.DrawChar(*_font, _label[i], next_pos);
 
-//				if (_isHightlight) // hightlight on.
-//				{
-//					gc.SetColor(info.highlight);
-//					gc.DrawRectangle(ax::Rect(x_past_pos, 5,
-//						next_pos.x - x_past_pos, rect.size.y - 10));
-//				}
+				//				if (_isHightlight) // hightlight on.
+				//				{
+				//					gc.SetColor(info.highlight);
+				//					gc.DrawRectangle(ax::Rect(x_past_pos, 5,
+				//						next_pos.x - x_past_pos, rect.size.y - 10));
+				//				}
 
 				if (_findClickCursorIndex) {
-					if (_clickPosition.x >= x_past_pos
-						&& _clickPosition.x < next_pos.x) {
+					if (_clickPosition.x >= x_past_pos && _clickPosition.x < next_pos.x) {
 						_cursorIndex = i;
 						_cursorBarXPosition = x_past_pos;
 					}
-					else if (i == _label.size() - 1
-						&& _clickPosition.x > next_pos.x) {
+					else if (i == _label.size() - 1 && _clickPosition.x > next_pos.x) {
 						_cursorIndex = i + 1;
 						_cursorBarXPosition = next_pos.x;
 					}
@@ -542,14 +517,12 @@ void TextBox::OnPaint(ax::GC gc)
 	if (_isHightlight) // hightlight on.
 	{
 		gc.SetColor(info.highlight);
-		gc.DrawRectangle(ax::Rect(5, 5,
-			_lastCharXPosition - 5, rect.size.y - 10));
+		gc.DrawRectangle(ax::Rect(5, 5, _lastCharXPosition - 5, rect.size.y - 10));
 	}
 
 	if (win->event.IsKeyGrab() && _cursorFlashActive) {
 		gc.SetColor(info.cursor);
-		gc.DrawLine(ax::Point(_cursorBarXPosition, 5),
-			ax::Point(_cursorBarXPosition, rect.size.y - 5));
+		gc.DrawLine(ax::Point(_cursorBarXPosition, 5), ax::Point(_cursorBarXPosition, rect.size.y - 5));
 	}
 
 	gc.SetColor(info.contour);

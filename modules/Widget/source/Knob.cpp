@@ -21,7 +21,7 @@
  */
 
 #include "Knob.h"
-//#include "axObjectLoader.h"
+
 namespace ax {
 /*
  * axKnob::Msg.
@@ -61,8 +61,7 @@ Knob::Info::Info()
 
 StringVector Knob::Info::GetParamNameList() const
 {
-	return StringVector{ "knob_size", "n_knob", "bgColorNormal", "bgColorHover",
-		"bgColorClicked" };
+	return StringVector{ "knob_size", "n_knob", "bgColorNormal", "bgColorHover", "bgColorClicked" };
 }
 
 std::string Knob::Info::GetAttributeValue(const std::string& name)
@@ -115,17 +114,15 @@ ax::Xml::Node Knob::Component::Save(Xml& xml, Xml::Node& node)
 	ax::Window* win = GetWindow();
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Knob* knob = static_cast<ax::Knob*>(bbone.get());
-	
-	ax::Knob::Component* widget_comp = static_cast<ax::Knob::Component*>(
-		win->component.Get("Widget").get());
-	
+
+	ax::Knob::Component* widget_comp = static_cast<ax::Knob::Component*>(win->component.Get("Widget").get());
+
 	ax::Knob::Info* info = static_cast<ax::Knob::Info*>(widget_comp->GetInfo());
-	
-	
+
 	ax::Xml::Node widget_node = xml.CreateNode("Widget");
 	node.AddNode(widget_node);
 	widget_node.AddAttribute("builder", "Knob");
-	
+
 	ax::Rect rect = win->dimension.GetRect();
 
 	widget_node.AddNode(xml.CreateNode("position", std::to_string(rect.position)));
@@ -138,13 +135,12 @@ ax::Xml::Node Knob::Component::Save(Xml& xml, Xml::Node& node)
 	info_node.AddAttribute("bgColorClicked", info->bgColorClicked.ToString());
 	info_node.AddAttribute("img_path", info->img_path);
 	info_node.AddAttribute("selected_img_path", info->selected_img_path);
-	info_node.AddAttribute("knob_size", std::to_string(info->knob_size.x) + ", " + std::to_string(info->knob_size.y));
+	info_node.AddAttribute(
+		"knob_size", std::to_string(info->knob_size.x) + ", " + std::to_string(info->knob_size.y));
 	info_node.AddAttribute("n_knob", std::to_string(info->n_knob));
-	
-	
+
 	widget_node.AddNode(xml.CreateNode("msg", knob->GetMsg()));
 	widget_node.AddNode(xml.CreateNode("flags", std::to_string(knob->GetFlags())));
-
 
 	return widget_node;
 }
@@ -155,22 +151,14 @@ ax::StringPairVector Knob::Component::GetBuilderAttributes()
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Knob* knob = static_cast<ax::Knob*>(bbone.get());
 
-	//	ax::Knob::Component* widget_comp = static_cast<ax::Knob::Component*>(
-	//		win->component.Get("Widget").get());
-
-	//	ax::Knob::Info* info
-	//	= static_cast<ax::Button::Info*>(widget_comp->GetInfo());
-
 	ax::StringPairVector atts;
 	ax::Point position = win->dimension.GetRect().position;
-	
-	std::string pos_str(
-		std::to_string(position.x) + ", " + std::to_string(position.y));
+
+	std::string pos_str(std::to_string(position.x) + ", " + std::to_string(position.y));
 	atts.push_back(ax::StringPair("position", pos_str));
 
 	ax::Size size = win->dimension.GetSize();
-	std::string size_str(
-		std::to_string(size.x) + ", " + std::to_string(size.y));
+	std::string size_str(std::to_string(size.x) + ", " + std::to_string(size.y));
 	atts.push_back(ax::StringPair("size", size_str));
 
 	atts.push_back(ax::StringPair("flags", std::to_string(knob->GetFlags())));
@@ -183,8 +171,7 @@ Knob::Builder::Builder()
 {
 }
 
-std::shared_ptr<Window::Backbone> Knob::Builder::Create(
-	const Point& pos, const std::string& file_path)
+std::shared_ptr<Window::Backbone> Knob::Builder::Create(const Point& pos, const std::string& file_path)
 {
 	ax::Xml xml(file_path);
 
@@ -200,28 +187,22 @@ std::shared_ptr<Window::Backbone> Knob::Builder::Create(
 	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
-//	double value = std::stod(control.GetChildNodeValue("value"));
 	ax::Flag flags = std::stoi(control.GetChildNodeValue("flags"));
 	std::string msg = control.GetChildNodeValue("msg");
 
 	ax::Xml::Node info_node = control.GetNode("info");
 
 	ax::Knob::Info k_info;
-	k_info.bgColorNormal
-		= ax::Xml::StringToColor(info_node.GetAttribute("bgColorNormal"));
-	k_info.bgColorHover
-		= ax::Xml::StringToColor(info_node.GetAttribute("bgColorHover"));
-	k_info.bgColorClicked
-		= ax::Xml::StringToColor(info_node.GetAttribute("bgColorClicked"));
+	k_info.bgColorNormal = ax::Xml::StringToColor(info_node.GetAttribute("bgColorNormal"));
+	k_info.bgColorHover = ax::Xml::StringToColor(info_node.GetAttribute("bgColorHover"));
+	k_info.bgColorClicked = ax::Xml::StringToColor(info_node.GetAttribute("bgColorClicked"));
 
 	k_info.img_path = info_node.GetAttribute("img_path");
 	k_info.selected_img_path = info_node.GetAttribute("selected_img_path");
-	k_info.knob_size
-		= ax::Xml::StringToSize(info_node.GetAttribute("knob_size"));
+	k_info.knob_size = ax::Xml::StringToSize(info_node.GetAttribute("knob_size"));
 	k_info.n_knob = std::stoi(info_node.GetAttribute("n_knob"));
 
-	auto knob = ax::shared<ax::Knob>(
-		ax::Rect(pos, size), ax::Knob::Events(), k_info, flags, 0.0, msg);
+	auto knob = ax::shared<ax::Knob>(ax::Rect(pos, size), ax::Knob::Events(), k_info, flags, 0.0, msg);
 
 	return knob;
 }
@@ -235,28 +216,23 @@ std::shared_ptr<Window::Backbone> Knob::Builder::Create(Xml::Node& node)
 
 	ax::Size pos = ax::Xml::StringToSize(control.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
-//	double value = std::stod(control.GetChildNodeValue("value"));
+
 	ax::Flag flags = std::stoi(control.GetChildNodeValue("flags"));
 	std::string msg = control.GetChildNodeValue("msg");
 
 	ax::Xml::Node info_node = control.GetNode("info");
 
 	ax::Knob::Info k_info;
-	k_info.bgColorNormal
-		= ax::Xml::StringToColor(info_node.GetAttribute("bgColorNormal"));
-	k_info.bgColorHover
-		= ax::Xml::StringToColor(info_node.GetAttribute("bgColorHover"));
-	k_info.bgColorClicked
-		= ax::Xml::StringToColor(info_node.GetAttribute("bgColorClicked"));
+	k_info.bgColorNormal = ax::Xml::StringToColor(info_node.GetAttribute("bgColorNormal"));
+	k_info.bgColorHover = ax::Xml::StringToColor(info_node.GetAttribute("bgColorHover"));
+	k_info.bgColorClicked = ax::Xml::StringToColor(info_node.GetAttribute("bgColorClicked"));
 
 	k_info.img_path = info_node.GetAttribute("img_path");
 	k_info.selected_img_path = info_node.GetAttribute("selected_img_path");
-	k_info.knob_size
-		= ax::Xml::StringToSize(info_node.GetAttribute("knob_size"));
+	k_info.knob_size = ax::Xml::StringToSize(info_node.GetAttribute("knob_size"));
 	k_info.n_knob = std::stoi(info_node.GetAttribute("n_knob"));
 
-	auto knob = ax::shared<ax::Knob>(
-		ax::Rect(pos, size), ax::Knob::Events(), k_info, flags, 0.0, msg);
+	auto knob = ax::shared<ax::Knob>(ax::Rect(pos, size), ax::Knob::Events(), k_info, flags, 0.0, msg);
 
 	return knob;
 }
@@ -264,8 +240,8 @@ std::shared_ptr<Window::Backbone> Knob::Builder::Create(Xml::Node& node)
 /*
  * axKnob.
  */
-Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info,
-	Flag flags, double value, const std::string& msg)
+Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info, Flag flags, double value,
+	const std::string& msg)
 	: _events(events)
 	, _knobValue(value)
 	, _zeroToOneValue(value)
@@ -277,11 +253,9 @@ Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info,
 	win->event.OnPaint = WBind<GC>(this, &Knob::OnPaint);
 	win->event.OnMouseLeftDown = WBind<Point>(this, &Knob::OnMouseLeftDown);
 	win->event.OnMouseLeftUp = WBind<Point>(this, &Knob::OnMouseLeftUp);
-	win->event.OnMouseLeftDragging
-		= WBind<Point>(this, &Knob::OnMouseLeftDragging);
+	win->event.OnMouseLeftDragging = WBind<Point>(this, &Knob::OnMouseLeftDragging);
 
-	win->component.Add("Widget",
-		widget::Component::Ptr(new Knob::Component(win, new Knob::Info(info))));
+	win->component.Add("Widget", widget::Component::Ptr(new Knob::Component(win, new Knob::Info(info))));
 
 	// Check for share Image first.
 	if (info.img) {
@@ -331,8 +305,7 @@ void Knob::OnMouseLeftUp(const Point& pos)
 
 void Knob::OnMouseLeftDragging(const Point& position)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 
 	Knob::Info& info = *static_cast<Knob::Info*>(widget->GetInfo());
 
@@ -361,8 +334,7 @@ void Knob::OnMouseLeftDragging(const Point& position)
 
 void Knob::SetValue(const double& value, bool callValueChangeEvent)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 
 	Knob::Info& info = *static_cast<Knob::Info*>(widget->GetInfo());
 
@@ -384,8 +356,7 @@ void Knob::OnPaint(GC gc)
 {
 	Rect rect(Point(0, 0), win->dimension.GetSize());
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 
 	Knob::Info& info = *static_cast<Knob::Info*>(widget->GetInfo());
 
@@ -393,79 +364,8 @@ void Knob::OnPaint(GC gc)
 	gc.DrawRectangle(rect);
 
 	if (_knobImg) {
-		gc.DrawPartOfImage(_knobImg.get(),
-			Point(_nCurrentImg * info.knob_size.x, 0), info.knob_size,
-			Point(0, 0));
+		gc.DrawPartOfImage(
+			_knobImg.get(), Point(_nCurrentImg * info.knob_size.x, 0), info.knob_size, Point(0, 0));
 	}
 }
 }
-
-///*
-// * axKnobControl.
-// */
-// axKnobControl::axKnobControl(Window* parent,
-//                             const Rect& rect,
-//                             const axKnob::Events& events,
-//                             const axKnob::Info& info,
-//                             const std::string& label,
-//                             Flag flags,
-//                             double value):
-// axPanel(parent, rect), // Heritage.
-//_label(label), // Members.
-//_value("0.00")
-//{
-//    axKnob::Events evts;
-//    evts.value_change = GetOnKnobValueChange();
-//
-//    Point knobPos((rect.size.x - info.knob_size.x) * 0.5,
-//                    20 + (rect.size.y - 40 - info.knob_size.y) * 0.5);
-//
-//    _knob = new axKnob(this, Rect(knobPos, info.knob_size),
-//                       evts, info, flags, value);
-//
-//    if(events.value_change)
-//    {
-//        _knob->AddConnection(0, events.value_change);
-//    }
-//}
-//
-// void axKnobControl::SetValue(const double& value)
-//{
-//    _knob->SetValue(value);
-//}
-//
-// void axKnobControl::OnKnobValueChange(const axKnob::Msg& msg)
-//{
-//    std::string v = std::to_string(msg.GetValue());
-//    v.resize(4);
-//    _value = v;
-//    Update();
-//}
-//
-// void axKnobControl::OnPaint()
-//{
-//    GC gcs = GC();
-//    GC* gc = &gcs;
-//    Rect rect0(Point(0, 0), GetRect().size);
-//
-//    gc->SetColor(Color(0.5, 0.5, 0.5, 0.3));
-//    gc->DrawRectangle(rect0);
-//
-//    Rect labelRect(0, 0, rect0.size.x - 1, 20);
-//    gc->SetColor(Color(0.6, 0.6, 0.6, 0.3));
-//    gc->DrawRectangle(labelRect);
-//
-//    Font font("FreeSans.ttf");
-////    gc->SetFontSize(12);
-//    gc->SetColor(Color(0.0, 0.0, 0.0));
-//    gc->DrawStringAlignedCenter(font, _label, labelRect);
-//
-////    gc->SetFontSize(10);
-//    font.SetFontSize(10);
-//    gc->DrawStringAlignedCenter(font, _value, Rect(0, rect0.size.y - 20,
-//                                               rect0.size.x, 20));
-//
-//    gc->SetColor(Color(0.0, 0.0, 0.0, 0.3));
-//    gc->DrawRectangleContour(rect0);
-//
-//}

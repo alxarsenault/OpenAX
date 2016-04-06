@@ -62,9 +62,8 @@ Event::Msg* Button::Msg::GetCopy()
 /*
  * ax::Button::Info.
  */
-Button::Info::Info(const Color& normal_color, const Color& hover_color,
-	const Color& clicked_color, const Color& selected_color,
-	const Color& contour_color, const Color& font_color_,
+Button::Info::Info(const Color& normal_color, const Color& hover_color, const Color& clicked_color,
+	const Color& selected_color, const Color& contour_color, const Color& font_color_,
 	const int& roundCornerRadius)
 	: widget::Info() // Heritage.
 	, normal(normal_color) // Members.
@@ -78,7 +77,7 @@ Button::Info::Info(const Color& normal_color, const Color& hover_color,
 }
 
 Button::Info::Info(const std::string& path)
-	: widget::Info(path) // Heritage.
+	: widget::Info(path)
 {
 }
 
@@ -89,8 +88,8 @@ Button::Info::Info(const StringPairVector& attributes)
 
 StringVector Button::Info::GetParamNameList() const
 {
-	return StringVector{ "normal", "hover", "clicking", "selected", "contour",
-		"font_color", "corner_radius" };
+	return StringVector{ "normal", "hover", "clicking", "selected", "contour", "font_color",
+		"corner_radius" };
 }
 
 std::string Button::Info::GetAttributeValue(const std::string& name)
@@ -156,29 +155,26 @@ ax::Xml::Node Button::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Button* btn = static_cast<ax::Button*>(bbone.get());
 
-	ax::Button::Component* widget_comp = static_cast<ax::Button::Component*>(
-		win->component.Get("Widget").get());
+	ax::Button::Component* widget_comp
+		= static_cast<ax::Button::Component*>(win->component.Get("Widget").get());
 
-	ax::Button::Info* info
-		= static_cast<ax::Button::Info*>(widget_comp->GetInfo());
+	ax::Button::Info* info = static_cast<ax::Button::Info*>(widget_comp->GetInfo());
 
 	ax::Xml::Node widget_node = xml.CreateNode("Widget");
 	node.AddNode(widget_node);
 	widget_node.AddAttribute("builder", "Button");
-	
+
 	ax::Rect rect = win->dimension.GetRect();
 
 	// Position.
 	{
-		std::string value_str(std::to_string(rect.position.x) + ", "
-			+ std::to_string(rect.position.y));
+		std::string value_str(std::to_string(rect.position.x) + ", " + std::to_string(rect.position.y));
 		widget_node.AddNode(xml.CreateNode("position", value_str));
 	}
 
 	// Size.
 	{
-		std::string value_str(
-			std::to_string(rect.size.x) + ", " + std::to_string(rect.size.y));
+		std::string value_str(std::to_string(rect.size.x) + ", " + std::to_string(rect.size.y));
 
 		widget_node.AddNode(xml.CreateNode("size", value_str));
 	}
@@ -191,8 +187,7 @@ ax::Xml::Node Button::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	info_node.AddAttribute("selected", info->selected.ToString());
 	info_node.AddAttribute("contour", info->contour.ToString());
 	info_node.AddAttribute("font_color", info->font_color.ToString());
-	info_node.AddAttribute(
-		"round_corner_radius", std::to_string(info->round_corner_radius));
+	info_node.AddAttribute("round_corner_radius", std::to_string(info->round_corner_radius));
 
 	widget_node.AddNode(xml.CreateNode("img_path", btn->GetImagePath()));
 	widget_node.AddNode(xml.CreateNode("label", btn->GetLabel()));
@@ -226,7 +221,7 @@ ax::Xml::Node Button::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 
 	widget_node.AddNode(xml.CreateNode("flags", value_str));
 	widget_node.AddNode(xml.CreateNode("msg", btn->GetMsg()));
-	
+
 	return widget_node;
 }
 
@@ -235,21 +230,21 @@ ax::StringPairVector Button::Component::GetBuilderAttributes()
 	ax::Window* win = GetWindow();
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Button* btn = static_cast<ax::Button*>(bbone.get());
-		
+
 	ax::StringPairVector atts;
-	
+
 	ax::Point position = win->dimension.GetRect().position;
 	std::string pos_str(std::to_string(position.x) + ", " + std::to_string(position.y));
 	atts.push_back(ax::StringPair("position", pos_str));
-	
+
 	ax::Size size = win->dimension.GetSize();
 	std::string size_str(std::to_string(size.x) + ", " + std::to_string(size.y));
 	atts.push_back(ax::StringPair("size", size_str));
-	
+
 	atts.push_back(ax::StringPair("img_path", btn->GetImagePath()));
 	atts.push_back(ax::StringPair("label", btn->GetLabel()));
 	atts.push_back(ax::StringPair("msg", btn->GetMsg()));
-	
+
 	return atts;
 }
 
@@ -278,8 +273,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	std::string img_path = control.GetChildNodeValue("img_path");
 	std::string label = control.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -306,25 +300,19 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	ax::Button::Info btn_info;
 	btn_info.normal = ax::Xml::StringToColor(info_node.GetAttribute("normal"));
 	btn_info.hover = ax::Xml::StringToColor(info_node.GetAttribute("hover"));
-	btn_info.clicking
-		= ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
-	btn_info.selected
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected"));
-	btn_info.contour
-		= ax::Xml::StringToColor(info_node.GetAttribute("contour"));
-	btn_info.font_color
-		= ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
-	btn_info.round_corner_radius
-		= std::stoi(info_node.GetAttribute("round_corner_radius"));
+	btn_info.clicking = ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
+	btn_info.selected = ax::Xml::StringToColor(info_node.GetAttribute("selected"));
+	btn_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
+	btn_info.font_color = ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
+	btn_info.round_corner_radius = std::stoi(info_node.GetAttribute("round_corner_radius"));
 
-	auto btn = ax::shared<ax::Button>(ax::Rect(pos, size), ax::Button::Events(),
-		btn_info, img_path, label, flags, msg);
+	auto btn = ax::shared<ax::Button>(
+		ax::Rect(pos, size), ax::Button::Events(), btn_info, img_path, label, flags, msg);
 
 	return btn;
 }
 
-std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
-	ax::Xml::Node& node)
+std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& node)
 {
 	std::string builder_name = node.GetAttribute("builder");
 
@@ -335,8 +323,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	std::string img_path = node.GetChildNodeValue("img_path");
 	std::string label = node.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -361,28 +348,22 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	ax::Button::Info btn_info;
 	btn_info.normal = ax::Xml::StringToColor(info_node.GetAttribute("normal"));
 	btn_info.hover = ax::Xml::StringToColor(info_node.GetAttribute("hover"));
-	btn_info.clicking
-		= ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
-	btn_info.selected
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected"));
-	btn_info.contour
-		= ax::Xml::StringToColor(info_node.GetAttribute("contour"));
-	btn_info.font_color
-		= ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
-	btn_info.round_corner_radius
-		= std::stoi(info_node.GetAttribute("round_corner_radius"));
+	btn_info.clicking = ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
+	btn_info.selected = ax::Xml::StringToColor(info_node.GetAttribute("selected"));
+	btn_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
+	btn_info.font_color = ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
+	btn_info.round_corner_radius = std::stoi(info_node.GetAttribute("round_corner_radius"));
 
-	auto btn = ax::shared<ax::Button>(ax::Rect(pos, size), ax::Button::Events(),
-		btn_info, img_path, label, flags, msg);
+	auto btn = ax::shared<ax::Button>(
+		ax::Rect(pos, size), ax::Button::Events(), btn_info, img_path, label, flags, msg);
 	return btn;
 }
 
 /*
  * ax::Buton::Button.
  */
-Button::Button(const Rect& rect, const Button::Events& events,
-	const Button::Info& info, std::string img_path, std::string label,
-	Flag flags, std::string msg)
+Button::Button(const Rect& rect, const Button::Events& events, const Button::Info& info, std::string img_path,
+	std::string label, Flag flags, std::string msg)
 	: _events(events)
 	, _flags(flags)
 	, _label(label)
@@ -400,8 +381,7 @@ Button::Button(const Rect& rect, const Button::Events& events,
 	win->event.OnMouseEnter = WBind<Point>(this, &Button::OnMouseEnter);
 	win->event.OnMouseLeave = WBind<Point>(this, &Button::OnMouseLeave);
 
-	win->component.Add("Widget", widget::Component::Ptr(new Button::Component(
-									 win, new Button::Info(info))));
+	win->component.Add("Widget", widget::Component::Ptr(new Button::Component(win, new Button::Info(info))));
 
 	win->property.AddProperty("Editable");
 
@@ -414,9 +394,8 @@ Button::Button(const Rect& rect, const Button::Events& events,
 	}
 }
 
-Button::Button(const Point& pos, const Button::Events& events,
-	std::string label, std::string img_path, const Button::Info& info,
-	Flag flags,
+Button::Button(const Point& pos, const Button::Events& events, std::string label, std::string img_path,
+	const Button::Info& info, Flag flags,
 	std::string msg)
 	: _events(events) // Members.
 	, _flags(flags)
@@ -435,8 +414,7 @@ Button::Button(const Point& pos, const Button::Events& events,
 	win->event.OnMouseEnter = WBind<Point>(this, &Button::OnMouseEnter);
 	win->event.OnMouseLeave = WBind<Point>(this, &Button::OnMouseLeave);
 
-	win->component.Add("Widget", widget::Component::Ptr(new Button::Component(
-									 win, new Button::Info(info))));
+	win->component.Add("Widget", widget::Component::Ptr(new Button::Component(win, new Button::Info(info))));
 
 	win->property.AddProperty("Editable");
 
@@ -456,8 +434,7 @@ void Button::SetMsg(const std::string& msg)
 
 void Button::SetSelected(const bool& selected)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 
 	Button::Info& info = *static_cast<Button::Info*>(widget->GetInfo());
 
@@ -486,8 +463,7 @@ void Button::SetLabel(const std::string& label)
 
 void Button::OnMouseLeftDown(const Point& pos)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	Button::Info& info = *static_cast<Button::Info*>(widget->GetInfo());
 
 	_currentColor = info.clicking;
@@ -509,8 +485,7 @@ void Button::OnMouseLeftUp(const Point& pos)
 
 	win->event.UnGrabMouse();
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	Button::Info& info = *static_cast<Button::Info*>(widget->GetInfo());
 
 	if (win->event.IsMouseHoverWindow()) {
@@ -539,8 +514,7 @@ void Button::OnMouseEnter(const Point& pos)
 		return;
 	}
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	Button::Info& info = *static_cast<Button::Info*>(widget->GetInfo());
 
 	_currentColor = info.hover;
@@ -554,8 +528,7 @@ void Button::OnMouseLeave(const Point& pos)
 		return;
 	}
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	Button::Info& info = *static_cast<Button::Info*>(widget->GetInfo());
 
 	if (_selected) {
@@ -575,8 +548,7 @@ void Button::OnPaint(GC gc)
 	Rect rect(win->dimension.GetRect());
 	Rect rect0(win->dimension.GetDrawingRect());
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	Button::Info* info = static_cast<Button::Info*>(widget->GetInfo());
 
 	gc.SetColor(_currentColor);
@@ -595,8 +567,7 @@ void Button::OnPaint(GC gc)
 			gc.DrawImageResize(_btnImg, rect0.position, rect0.size - ax::Size(1, 1), 1.0);
 		}
 		else {
-			gc.DrawPartOfImage(_btnImg, Point(0, _nCurrentImg * rect.size.y),
-				rect.size, Point(0, 0));
+			gc.DrawPartOfImage(_btnImg, Point(0, _nCurrentImg * rect.size.y), rect.size, Point(0, 0));
 		}
 	}
 

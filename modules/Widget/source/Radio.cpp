@@ -25,7 +25,7 @@
 ///*
 // * axToggle::axToggle.
 // */
-//axRadio::axRadio(ax::Window* parent,
+// axRadio::axRadio(ax::Window* parent,
 //                 const ax::Rect& rect,
 //                 const axRadio::Events& events,
 //                 const axRadio::Info& info,
@@ -34,12 +34,12 @@
 //                 ax::Flag flags,
 //                 std::string msg) :
 //// Heritage.
-//axToggle(parent, rect, events, info, img_path, label, flags, msg)
+// axToggle(parent, rect, events, info, img_path, label, flags, msg)
 //{
 //
 //}
 //
-//void axRadio::OnPaint()
+// void axRadio::OnPaint()
 //{
 //    ax::GC gcs = ax::GC();
 //    ax::GC* gc = &gcs;
@@ -96,7 +96,7 @@
 //////        {
 //////            gc->SetColor(static_cast<Info*>(_info)->font_color);
 //////        }
-//////		
+//////
 //////		gc->DrawStringAlignedCenter(*_font, _label, rect0);
 //////	}
 ////

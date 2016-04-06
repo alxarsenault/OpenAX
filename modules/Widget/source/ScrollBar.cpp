@@ -73,7 +73,7 @@ void ScrollBar::UpdateWindowSize(const ax::Size& size)
 	_panelSize = size;
 	ax::Size win_size(win->dimension.GetSize());
 	_sliderMaxHeight = win_size.y;
-	
+
 	if (_panelSize.y <= win_size.y) {
 		_sliderPos = 0;
 		win->Update();

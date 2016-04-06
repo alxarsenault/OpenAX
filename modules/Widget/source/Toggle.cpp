@@ -19,7 +19,7 @@
  * To release a closed-source product which uses OpenAX, commercial
  * licenses are available, email ax.frameworks@gmail.com for more information.
  */
- 
+
 #include "Toggle.h"
 
 /*
@@ -28,8 +28,7 @@
 const ax::Flag ax::Toggle::Flags::SINGLE_IMG = ax::FlagValue::FLAG_1;
 const ax::Flag ax::Toggle::Flags::IMG_RESIZE = ax::FlagValue::FLAG_2;
 const ax::Flag ax::Toggle::Flags::CLICK_ON_LEFT_DOWN = ax::FlagValue::FLAG_3;
-const ax::Flag ax::Toggle::Flags::CANT_UNSELECT_WITH_MOUSE
-	= ax::FlagValue::FLAG_4;
+const ax::Flag ax::Toggle::Flags::CANT_UNSELECT_WITH_MOUSE = ax::FlagValue::FLAG_4;
 
 /*
  * axToggle::Msg.
@@ -46,8 +45,7 @@ ax::Toggle::Msg::Msg(ax::Toggle* sender, const bool& selected)
 	_msg = std::string("");
 }
 
-ax::Toggle::Msg::Msg(
-	ax::Toggle* sender, const bool& selected, const std::string& msg)
+ax::Toggle::Msg::Msg(ax::Toggle* sender, const bool& selected, const std::string& msg)
 {
 	_sender = sender;
 	_selected = selected;
@@ -94,9 +92,8 @@ ax::Toggle::Info::Info()
 
 ax::StringVector ax::Toggle::Info::GetParamNameList() const
 {
-	return StringVector{ "normal", "hover", "clicking", "selected",
-		"selected_hover", "selected_clicking", "contour", "font_color", "img",
-		"single_img" };
+	return StringVector{ "normal", "hover", "clicking", "selected", "selected_hover", "selected_clicking",
+		"contour", "font_color", "img", "single_img" };
 }
 
 std::string ax::Toggle::Info::GetAttributeValue(const std::string& name)
@@ -180,11 +177,10 @@ ax::Xml::Node ax::Toggle::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Toggle* tog = static_cast<ax::Toggle*>(bbone.get());
 
-	ax::Toggle::Component* widget_comp = static_cast<ax::Toggle::Component*>(
-		win->component.Get("Widget").get());
+	ax::Toggle::Component* widget_comp
+		= static_cast<ax::Toggle::Component*>(win->component.Get("Widget").get());
 
-	ax::Toggle::Info* info
-		= static_cast<ax::Toggle::Info*>(widget_comp->GetInfo());
+	ax::Toggle::Info* info = static_cast<ax::Toggle::Info*>(widget_comp->GetInfo());
 
 	ax::Xml::Node widget_node = xml.CreateNode("Widget");
 	node.AddNode(widget_node);
@@ -194,15 +190,13 @@ ax::Xml::Node ax::Toggle::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 
 	// Position.
 	{
-		std::string value_str(std::to_string(rect.position.x) + ", "
-			+ std::to_string(rect.position.y));
+		std::string value_str(std::to_string(rect.position.x) + ", " + std::to_string(rect.position.y));
 		widget_node.AddNode(xml.CreateNode("position", value_str));
 	}
 
 	// Size.
 	{
-		std::string value_str(
-			std::to_string(rect.size.x) + ", " + std::to_string(rect.size.y));
+		std::string value_str(std::to_string(rect.size.x) + ", " + std::to_string(rect.size.y));
 
 		widget_node.AddNode(xml.CreateNode("size", value_str));
 	}
@@ -212,24 +206,22 @@ ax::Xml::Node ax::Toggle::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	info_node.AddAttribute("normal", info->normal.ToString());
 	info_node.AddAttribute("hover", info->hover.ToString());
 	info_node.AddAttribute("clicking", info->clicking.ToString());
-	
+
 	info_node.AddAttribute("selected", info->selected.ToString());
 	info_node.AddAttribute("selected_hover", info->selected_hover.ToString());
 	info_node.AddAttribute("selected_clicking", info->selected_clicking.ToString());
 	info_node.AddAttribute("selected_font_color", info->selected_font_color.ToString());
 	info_node.AddAttribute("selected", info->selected.ToString());
-	
+
 	info_node.AddAttribute("contour", info->contour.ToString());
 	info_node.AddAttribute("font_color", info->font_color.ToString());
-	
-	info_node.AddAttribute(
-		"font_size", std::to_string(info->font_size));
-	
+
+	info_node.AddAttribute("font_size", std::to_string(info->font_size));
+
 	info_node.AddAttribute("img", info->img);
 	info_node.AddAttribute("single_img", std::to_string((int)info->single_img));
 
-
-//	widget_node.AddNode(xml.CreateNode("img_path", tog->GetImagePath()));
+	//	widget_node.AddNode(xml.CreateNode("img_path", tog->GetImagePath()));
 	widget_node.AddNode(xml.CreateNode("label", tog->GetLabel()));
 
 	ax::Flag flags = tog->GetFlags();
@@ -246,7 +238,7 @@ ax::Xml::Node ax::Toggle::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	if (ax::IsFlag(ax::Toggle::Flags::CLICK_ON_LEFT_DOWN, flags)) {
 		atts.push_back("CLICK_ON_LEFT_DOWN");
 	}
-	
+
 	if (ax::IsFlag(ax::Toggle::Flags::CANT_UNSELECT_WITH_MOUSE, flags)) {
 		atts.push_back("CANT_UNSELECT_WITH_MOUSE");
 	}
@@ -275,26 +267,15 @@ ax::StringPairVector ax::Toggle::Component::GetBuilderAttributes()
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Toggle* btn = static_cast<ax::Toggle*>(bbone.get());
 
-	//	ax::Toggle::Component* widget_comp =
-	//static_cast<ax::Toggle::Component*>(
-	//																			 win->component.Get("Widget").get());
-	//
-	//	ax::Button::Info* info
-	//	= static_cast<ax::Button::Info*>(widget_comp->GetInfo());
-
 	ax::StringPairVector atts;
 
 	ax::Point position = win->dimension.GetRect().position;
-	std::string pos_str(
-		std::to_string(position.x) + ", " + std::to_string(position.y));
+	std::string pos_str(std::to_string(position.x) + ", " + std::to_string(position.y));
 	atts.push_back(ax::StringPair("position", pos_str));
 
 	ax::Size size = win->dimension.GetSize();
-	std::string size_str(
-		std::to_string(size.x) + ", " + std::to_string(size.y));
+	std::string size_str(std::to_string(size.x) + ", " + std::to_string(size.y));
 	atts.push_back(ax::StringPair("size", size_str));
-
-//	atts.push_back(ax::StringPair("img_path", btn->GetImagePath()));
 	atts.push_back(ax::StringPair("label", btn->GetLabel()));
 	atts.push_back(ax::StringPair("msg", btn->GetMsg()));
 	atts.push_back(ax::StringPair("flags", std::to_string(btn->GetFlags())));
@@ -324,11 +305,10 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
-//	std::string img_path = control.GetChildNodeValue("img_path");
+	//	std::string img_path = control.GetChildNodeValue("img_path");
 	std::string label = control.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 	for (auto& n : flags_strs) {
@@ -353,32 +333,24 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 	ax::Toggle::Info tog_info;
 	tog_info.normal = ax::Xml::StringToColor(info_node.GetAttribute("normal"));
 	tog_info.hover = ax::Xml::StringToColor(info_node.GetAttribute("hover"));
-	tog_info.clicking
-		= ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
-	tog_info.selected
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected"));
-	tog_info.selected_hover
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected_hover"));
-	tog_info.selected_clicking
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected_clicking"));
-	tog_info.selected_font_color
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected_font_color"));
-	tog_info.contour
-		= ax::Xml::StringToColor(info_node.GetAttribute("contour"));
-	tog_info.font_color
-		= ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
+	tog_info.clicking = ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
+	tog_info.selected = ax::Xml::StringToColor(info_node.GetAttribute("selected"));
+	tog_info.selected_hover = ax::Xml::StringToColor(info_node.GetAttribute("selected_hover"));
+	tog_info.selected_clicking = ax::Xml::StringToColor(info_node.GetAttribute("selected_clicking"));
+	tog_info.selected_font_color = ax::Xml::StringToColor(info_node.GetAttribute("selected_font_color"));
+	tog_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
+	tog_info.font_color = ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
 	tog_info.font_size = std::stoi(info_node.GetAttribute("font_size"));
 	tog_info.img = info_node.GetAttribute("img");
 	tog_info.single_img = std::stoi(info_node.GetAttribute("single_img"));
 
-	auto tog = ax::shared<ax::Toggle>(ax::Rect(pos, size), ax::Toggle::Events(),
-		tog_info, "", label, flags, msg);
+	auto tog
+		= ax::shared<ax::Toggle>(ax::Rect(pos, size), ax::Toggle::Events(), tog_info, "", label, flags, msg);
 
 	return tog;
 }
 
-std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
-	ax::Xml::Node& node)
+std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(ax::Xml::Node& node)
 {
 	std::string builder_name = node.GetAttribute("builder");
 
@@ -386,11 +358,9 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 
 	ax::Point pos = ax::Xml::StringToSize(node.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
-//	std::string img_path = node.GetChildNodeValue("img_path");
 	std::string label = node.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 	for (auto& n : flags_strs) {
@@ -415,26 +385,19 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 	ax::Toggle::Info tog_info;
 	tog_info.normal = ax::Xml::StringToColor(info_node.GetAttribute("normal"));
 	tog_info.hover = ax::Xml::StringToColor(info_node.GetAttribute("hover"));
-	tog_info.clicking
-		= ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
-	tog_info.selected
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected"));
-	tog_info.selected_hover
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected_hover"));
-	tog_info.selected_clicking
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected_clicking"));
-	tog_info.selected_font_color
-		= ax::Xml::StringToColor(info_node.GetAttribute("selected_font_color"));
-	tog_info.contour
-		= ax::Xml::StringToColor(info_node.GetAttribute("contour"));
-	tog_info.font_color
-		= ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
+	tog_info.clicking = ax::Xml::StringToColor(info_node.GetAttribute("clicking"));
+	tog_info.selected = ax::Xml::StringToColor(info_node.GetAttribute("selected"));
+	tog_info.selected_hover = ax::Xml::StringToColor(info_node.GetAttribute("selected_hover"));
+	tog_info.selected_clicking = ax::Xml::StringToColor(info_node.GetAttribute("selected_clicking"));
+	tog_info.selected_font_color = ax::Xml::StringToColor(info_node.GetAttribute("selected_font_color"));
+	tog_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
+	tog_info.font_color = ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
 	tog_info.font_size = std::stoi(info_node.GetAttribute("font_size"));
 	tog_info.img = info_node.GetAttribute("img");
 	tog_info.single_img = std::stoi(info_node.GetAttribute("single_img"));
 
-	auto tog = ax::shared<ax::Toggle>(ax::Rect(pos, size), ax::Toggle::Events(),
-		tog_info, "", label, flags, msg);
+	auto tog
+		= ax::shared<ax::Toggle>(ax::Rect(pos, size), ax::Toggle::Events(), tog_info, "", label, flags, msg);
 
 	return tog;
 }
@@ -442,9 +405,8 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 /*
  * axToggle::axToggle.
  */
-ax::Toggle::Toggle(const ax::Rect& rect, const ax::Toggle::Events& events,
-	const ax::Toggle::Info& info, std::string img_path, std::string label,
-	ax::Flag flags, std::string msg)
+ax::Toggle::Toggle(const ax::Rect& rect, const ax::Toggle::Events& events, const ax::Toggle::Info& info,
+	std::string img_path, std::string label, ax::Flag flags, std::string msg)
 	: _events(events)
 	, _label(label)
 	, _flags(flags)
@@ -455,21 +417,17 @@ ax::Toggle::Toggle(const ax::Rect& rect, const ax::Toggle::Events& events,
 {
 	win = ax::Window::Create(rect);
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &Toggle::OnPaint);
-	win->event.OnMouseLeftDown
-		= ax::WBind<ax::Point>(this, &Toggle::OnMouseLeftDown);
-	win->event.OnMouseLeftUp
-		= ax::WBind<ax::Point>(this, &Toggle::OnMouseLeftUp);
+	win->event.OnMouseLeftDown = ax::WBind<ax::Point>(this, &Toggle::OnMouseLeftDown);
+	win->event.OnMouseLeftUp = ax::WBind<ax::Point>(this, &Toggle::OnMouseLeftUp);
 	win->event.OnMouseEnter = ax::WBind<ax::Point>(this, &Toggle::OnMouseEnter);
 	win->event.OnMouseLeave = ax::WBind<ax::Point>(this, &Toggle::OnMouseLeave);
 
 	// Add info component.
 	win->component.Add(
-		"Widget", widget::Component::Ptr(new ax::Toggle::Component(
-					  win, new ax::Toggle::Info(info))));
+		"Widget", widget::Component::Ptr(new ax::Toggle::Component(win, new ax::Toggle::Info(info))));
 
 	// Local info pointer.
-	_info = static_cast<ax::Toggle::Info*>(
-		win->component.Get<widget::Component>("Widget")->GetInfo());
+	_info = static_cast<ax::Toggle::Info*>(win->component.Get<widget::Component>("Widget")->GetInfo());
 
 	_currentColor = info.normal;
 	_bgImg = std::shared_ptr<ax::Image>(new ax::Image(_info->img));
@@ -492,10 +450,8 @@ void ax::Toggle::SetSelected(const bool& selected)
 	if (_selected != selected) {
 		_selected = selected;
 
-		widget::Component::Ptr widget
-			= win->component.Get<widget::Component>("Widget");
-		ax::Toggle::Info& info
-			= *static_cast<ax::Toggle::Info*>(widget->GetInfo());
+		widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+		ax::Toggle::Info& info = *static_cast<ax::Toggle::Info*>(widget->GetInfo());
 
 		if (_selected) {
 			_nCurrentImg = axTOG_SEL_NORMAL;
@@ -537,8 +493,7 @@ void ax::Toggle::OnMouseLeftDown(const ax::Point& pos)
 		win->event.GrabMouse();
 
 		if (ax::IsFlag(Flags::CLICK_ON_LEFT_DOWN, _flags)) {
-			win->PushEvent(
-				Events::BUTTON_CLICK, new Msg(this, _selected, _msg));
+			win->PushEvent(Events::BUTTON_CLICK, new Msg(this, _selected, _msg));
 		}
 
 		win->Update();
@@ -568,8 +523,7 @@ void ax::Toggle::OnMouseLeftUp(const ax::Point& pos)
 
 			// If toggle on left up.
 			if (!ax::IsFlag(Flags::CLICK_ON_LEFT_DOWN, _flags)) {
-				win->PushEvent(
-					Events::BUTTON_CLICK, new Msg(this, _selected, _msg));
+				win->PushEvent(Events::BUTTON_CLICK, new Msg(this, _selected, _msg));
 			}
 		}
 		else {
@@ -635,8 +589,7 @@ void ax::Toggle::OnPaint(ax::GC gc)
 			ax::Point pos(0, _nCurrentImg * _bgImg->GetSize().y / 6);
 			ax::Size size(_bgImg->GetSize().x, _bgImg->GetSize().y / 6);
 
-			gc.DrawPartOfImageResize(
-				_bgImg.get(), pos, size, ax::Rect(ax::Point(0, 0), rect.size));
+			gc.DrawPartOfImageResize(_bgImg.get(), pos, size, ax::Rect(ax::Point(0, 0), rect.size));
 		}
 	}
 

@@ -93,15 +93,15 @@ ax::StringPairVector Panel::Component::GetBuilderAttributes()
 	ax::Window* win = GetWindow();
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Panel* panel = static_cast<ax::Panel*>(bbone.get());
-	
+
 	ax::StringPairVector atts;
-	
+
 	ax::Rect rect = win->dimension.GetRect();
 	atts.push_back(ax::StringPair("position", std::to_string(rect.position)));
 	atts.push_back(ax::StringPair("size", std::to_string(rect.size)));
 	atts.push_back(ax::StringPair("name", panel->GetName()));
 	atts.push_back(ax::StringPair("bg_img", panel->GetBackgroundImagePath()));
-	
+
 	return atts;
 }
 
@@ -111,11 +111,10 @@ ax::Xml::Node Panel::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	std::shared_ptr<ax::Window::Backbone> bbone = win->backbone;
 	ax::Panel* btn = static_cast<ax::Panel*>(bbone.get());
 
-	ax::Panel::Component* widget_comp = static_cast<ax::Panel::Component*>(
-		win->component.Get("Widget").get());
+	ax::Panel::Component* widget_comp
+		= static_cast<ax::Panel::Component*>(win->component.Get("Widget").get());
 
-	ax::Panel::Info* info
-		= static_cast<ax::Panel::Info*>(widget_comp->GetInfo());
+	ax::Panel::Info* info = static_cast<ax::Panel::Info*>(widget_comp->GetInfo());
 
 	ax::Xml::Node widget_node = xml.CreateNode("Widget");
 	node.AddNode(widget_node);
@@ -123,8 +122,7 @@ ax::Xml::Node Panel::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	widget_node.AddAttribute("name", btn->GetName());
 	ax::Rect rect = win->dimension.GetRect();
 
-	widget_node.AddNode(
-		xml.CreateNode("position", std::to_string(rect.position)));
+	widget_node.AddNode(xml.CreateNode("position", std::to_string(rect.position)));
 
 	widget_node.AddNode(xml.CreateNode("size", std::to_string(rect.size)));
 	widget_node.AddNode(xml.CreateNode("bg_img", btn->GetBackgroundImagePath()));
@@ -134,9 +132,7 @@ ax::Xml::Node Panel::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 
 	info_node.AddAttribute("background", info->background.ToString());
 	info_node.AddAttribute("contour", info->contour.ToString());
-	info_node.AddAttribute(
-		"round_corner_radius", std::to_string(info->round_corner_radius));
-	
+	info_node.AddAttribute("round_corner_radius", std::to_string(info->round_corner_radius));
 
 	ax::Flag flags = btn->GetFlags();
 	widget_node.AddNode(xml.CreateNode("flags", std::to_string(flags)));
@@ -149,61 +145,58 @@ ax::Xml::Node Panel::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 		widget_node.AddNode(children_node);
 
 		for (auto& n : children) {
-			if(_save_child_callback) {
+			if (_save_child_callback) {
 				_save_child_callback(xml, children_node, n.get());
 			}
-			
-			
 
-			
-//			ax::widget::Component::Ptr opt
-//				= n->component.Get<ax::widget::Component>("Widget");
-//
-//			if (opt) {
-//				
-//				// Save ax::Object.
-//				ax::Xml::Node node = opt->Save(xml, children_node);
-//
-//				//				if(n->component.Has("pyo")) {
-//				//					ax::Print("HAS PYO");
-//				//					pyo::Component::Ptr comp =
-//				// n->component.Get<pyo::Component>("pyo");
-//				//					std::string fct_name =
-//				// comp->GetFunctionName();
-//				//					ax::Xml::Node pyo_node =
-//				// xml.CreateNode("pyo",
-//				// fct_name);
-//				//					node.AddNode(pyo_node);
-//				//				}
-//			}
+			//			ax::widget::Component::Ptr opt
+			//				= n->component.Get<ax::widget::Component>("Widget");
+			//
+			//			if (opt) {
+			//
+			//				// Save ax::Object.
+			//				ax::Xml::Node node = opt->Save(xml, children_node);
+			//
+			//				//				if(n->component.Has("pyo")) {
+			//				//					ax::Print("HAS PYO");
+			//				//					pyo::Component::Ptr comp =
+			//				// n->component.Get<pyo::Component>("pyo");
+			//				//					std::string fct_name =
+			//				// comp->GetFunctionName();
+			//				//					ax::Xml::Node pyo_node =
+			//				// xml.CreateNode("pyo",
+			//				// fct_name);
+			//				//					node.AddNode(pyo_node);
+			//				//				}
+			//			}
 		}
 	}
 
 	return widget_node;
 }
 
- void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
- {
-	 for(auto& n : attributes) {
-		 if(n.first == "position") {
-			 ax::Point pos = ax::Xml::StringToSize(n.second);
-			 GetWindow()->dimension.SetPosition(pos);
-		 }
-		 else if(n.first == "size") {
-			 ax::Size size = ax::Xml::StringToSize(n.second);
-			 GetWindow()->dimension.SetSize(size);
-		 }
-//		 else if(n.first == "label") {
-//			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
-//			 label->SetLabel(n.second);
-//		 }
-		 else if(n.first == "bg_img") {
-		 	ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
-//			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
-//			 label->SetLabel(n.second);
-		 }
-	 }
- }
+void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
+{
+	for (auto& n : attributes) {
+		if (n.first == "position") {
+			ax::Point pos = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetPosition(pos);
+		}
+		else if (n.first == "size") {
+			ax::Size size = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetSize(size);
+		}
+		//		 else if(n.first == "label") {
+		//			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
+		//			 label->SetLabel(n.second);
+		//		 }
+		else if (n.first == "bg_img") {
+			ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
+			//			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
+			//			 label->SetLabel(n.second);
+		}
+	}
+}
 
 Panel::Builder::Builder()
 {
@@ -227,23 +220,19 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(
 	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
-	
+
 	std::string bg_img_path = control.GetChildNodeValue("bg_img");
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
 	ax::Xml::Node info_node = control.GetNode("info");
 
 	ax::Panel::Info panel_info;
-	panel_info.background
-		= ax::Xml::StringToColor(info_node.GetAttribute("background"));
-	panel_info.contour
-		= ax::Xml::StringToColor(info_node.GetAttribute("contour"));
-	panel_info.round_corner_radius
-		= std::stoi(info_node.GetAttribute("round_corner_radius"));
+	panel_info.background = ax::Xml::StringToColor(info_node.GetAttribute("background"));
+	panel_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
+	panel_info.round_corner_radius = std::stoi(info_node.GetAttribute("round_corner_radius"));
 
 	auto panel = ax::shared<ax::Panel>(ax::Rect(pos, size), panel_info, bg_img_path, obj_name, flags);
 
@@ -252,11 +241,10 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(
 	return panel;
 }
 
-std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(
-	ax::Xml::Node& node)
+std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(ax::Xml::Node& node)
 {
 	std::string builder_name = node.GetAttribute("builder");
-//	ax::Print("Attribute name");
+	//	ax::Print("Attribute name");
 	std::string name = node.GetAttribute("name");
 	ax::Print(builder_name, name);
 
@@ -264,19 +252,15 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
 	std::string bg_img_path = node.GetChildNodeValue("bg_img");
 
-	ax::StringVector flags_strs
-		= ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
+	ax::StringVector flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
 	ax::Xml::Node info_node = node.GetNode("info");
 	ax::Panel::Info btn_info;
-	btn_info.background
-		= ax::Xml::StringToColor(info_node.GetAttribute("background"));
-	btn_info.contour
-		= ax::Xml::StringToColor(info_node.GetAttribute("contour"));
-	btn_info.round_corner_radius
-		= std::stoi(info_node.GetAttribute("round_corner_radius"));
+	btn_info.background = ax::Xml::StringToColor(info_node.GetAttribute("background"));
+	btn_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
+	btn_info.round_corner_radius = std::stoi(info_node.GetAttribute("round_corner_radius"));
 
 	auto panel = ax::shared<ax::Panel>(ax::Rect(pos, size), btn_info, bg_img_path, name, flags);
 
@@ -300,8 +284,7 @@ void Panel::Builder::CreateChildren(ax::Xml::Node& node, ax::Panel* panel)
 
 			if (child_node_name == "Widget") {
 				std::string buider_name = child.GetAttribute("builder");
-//				std::string name = child.GetAttribute("name");
-
+				//				std::string name = child.GetAttribute("name");
 
 				ax::widget::Builder* builder = loader->GetBuilder(buider_name);
 				if (builder == nullptr) {
@@ -311,13 +294,12 @@ void Panel::Builder::CreateChildren(ax::Xml::Node& node, ax::Panel* panel)
 				}
 
 				auto obj = builder->Create(child);
-				
+
 				panel->GetWindow()->node.Add(obj);
-				
-				if(_create_callback) {
+
+				if (_create_callback) {
 					_create_callback(obj->GetWindow(), child);
 				}
-				
 			}
 			child = child.GetNextSibling();
 		}
@@ -327,26 +309,27 @@ void Panel::Builder::CreateChildren(ax::Xml::Node& node, ax::Panel* panel)
 /*
  * ax::Panel.
  */
-Panel::Panel(const Rect& rect, const Panel::Info& info, const std::string& bg_img, const std::string& name, Flag flags)
+Panel::Panel(
+	const Rect& rect, const Panel::Info& info, const std::string& bg_img, const std::string& name, Flag flags)
 	: _bg_img_path(bg_img)
 	, _name(name)
 	, _flags(flags)
-	
+
 {
 	win = Window::Create(rect);
 
 	// Builtin event connection.
 	win->event.OnPaint = WBind<GC>(this, &Panel::OnPaint);
 
-	win->component.Add("Widget", widget::Component::Ptr(new Panel::Component(
-									 win, new Panel::Info(info))));
+	win->component.Add("Widget", widget::Component::Ptr(new Panel::Component(win, new Panel::Info(info))));
 
 	win->property.AddProperty("Editable");
 	win->property.AddProperty("AcceptWidget");
-	
-	if(!_bg_img_path.empty()) {
+
+	if (!_bg_img_path.empty()) {
 		_bg_img = ax::shared<ax::Image>(_bg_img_path);
-	} else {
+	}
+	else {
 		_bg_img = nullptr;
 	}
 	//	win->property.AddProperty("BlockDrawing");
@@ -356,8 +339,7 @@ void Panel::OnPaint(GC gc)
 {
 	Rect rect(win->dimension.GetDrawingRect());
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	Panel::Info* info = static_cast<Panel::Info*>(widget->GetInfo());
 
 	const int radius = info->round_corner_radius;
@@ -371,13 +353,13 @@ void Panel::OnPaint(GC gc)
 	else {
 		gc.SetColor(info->background);
 		gc.DrawRectangle(rect);
-		
-		if(_bg_img.get() != nullptr) {
-			if(_bg_img->IsImageReady()) {
+
+		if (_bg_img.get() != nullptr) {
+			if (_bg_img->IsImageReady()) {
 				gc.DrawImage(_bg_img.get(), ax::Point(0, 0));
 			}
 		}
-		
+
 		gc.SetColor(info->contour);
 		gc.DrawRectangleContour(rect);
 	}

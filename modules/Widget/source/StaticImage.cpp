@@ -25,14 +25,14 @@
 ///*
 // * axStaticImageBuilder.
 // */
-//axStaticImage::axStaticImageBuilder::axStaticImageBuilder(ax::Window* win):
+// axStaticImage::axStaticImageBuilder::axStaticImageBuilder(ax::Window* win):
 //_parent(win)
 //{
-//    
+//
 //}
 //
-//axStaticImage* axStaticImage::axStaticImageBuilder::
-//Create(ax::StringPairVector attributes)
+// axStaticImage* axStaticImage::axStaticImageBuilder::
+// Create(ax::StringPairVector attributes)
 //{
 //    std::string name;
 //    ax::Point pos;
@@ -47,7 +47,7 @@
 //            ax::StringVector strVec;
 //            strVec = ax::Utils::String::Split(s.second, ",");
 ////            strVec = GetVectorFromStringDelimiter(s.second, ",");
-//            
+//
 //            pos = ax::Point(stoi(strVec[0]),
 //                          stoi(strVec[1]));
 //        }
@@ -57,10 +57,10 @@
 //            _size = _img->GetSize();
 //        }
 //    }
-//    
+//
 //    axStaticImage* img = new axStaticImage(_parent, ax::Rect(pos, _size),
 //                                           _img);
-//    
+//
 //    _parent->GetResourceManager()->Add(name, img);
 //    return img;
 //}
@@ -69,20 +69,20 @@
 ///*
 // * axStaticImage.
 // */
-//axStaticImage::axStaticImage(ax::Window* parent,
+// axStaticImage::axStaticImage(ax::Window* parent,
 //                             const ax::Rect& rect,
 //                             const std::string& path):
-//axPanel(parent, rect)
+// axPanel(parent, rect)
 //{
 //    _img = new ax::Image(path);
 ////    SetSelectable(false);
 //    RemoveProperty("Selectable");
 //}
 //
-//axStaticImage::axStaticImage(ax::Window* parent,
+// axStaticImage::axStaticImage(ax::Window* parent,
 //                             const ax::Rect& rect,
 //                             ax::Image* img):
-//axPanel(parent, rect),
+// axPanel(parent, rect),
 //_img(img)
 //
 //{
@@ -90,7 +90,7 @@
 //    RemoveProperty("Selectable");
 //}
 //
-//void axStaticImage::OnPaint()
+// void axStaticImage::OnPaint()
 //{
 ////    axGC* gc = GetGC();
 //    ax::GC gc = ax::GC();

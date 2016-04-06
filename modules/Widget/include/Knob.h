@@ -171,34 +171,6 @@ protected:
 };
 }
 
-/*
- * axKnobControl.
- */
-// class axKnobControl: public axPanel
-// {
-// public:
-//     axKnobControl(ax::Window* parent,
-//                   const ax::Rect& rect,
-//                   const axKnob::Events& events,
-//                   const axKnob::Info& info,
-//                   const std::string& label,
-//                   ax::Flag flags = 0,
-//                   double value = 0.0);
-//
-//     axEVENT_ACCESSOR(axKnob::Msg, OnKnobValueChange);
-//
-//     void SetValue(const double& value);
-//
-// private:
-//     axKnob* _knob;
-//     std::string _label;
-//     std::string _value;
-//
-//     void OnKnobValueChange(const axKnob::Msg& msg);
-//
-//     void OnPaint();
-// };
-
 /// @}
 /// @}
 #endif // __AX_KNOB_H__.

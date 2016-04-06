@@ -21,7 +21,7 @@
 // */
 //#include "axTextControl.h"
 //
-//axTextControl::axTextControl(ax::Window* parent,
+// axTextControl::axTextControl(ax::Window* parent,
 //                             const ax::Rect& rect,
 //                             const axTextControlEvents& events,
 //                             const axTextControlInfo& info,
@@ -29,7 +29,7 @@
 //                             std::string label,
 //                             ax::Flag flags) :
 //// Heritage.
-//axPanel(parent, rect),
+// axPanel(parent, rect),
 //// Members.
 //_events(events),
 //_info(info),
@@ -46,56 +46,56 @@
 //	_currentColor = &_info.normal;
 //
 //    _btnImg = new ax::Image(img_path);
-//    
+//
 //    if(_events.button_click)
 //    {
 //        AddConnection(axTextControlEvents::BUTTON_CLICK, _events.button_click);
 //    }
-//    
+//
 //    if(ax::IsFlag(axTEXT_CTRL_FLASHING_CURSOR, _flags))
 //    {
 //        _flashingCursor = new ax::Event::Timer(ax::App::GetMainApp()->GetEventManager());
 //        _flashingCursor->AddConnection(0, GetOnFlashingCursorTimer());
 //    }
-//    
+//
 //    _cursorIndex = (int)_label.size();
-//    
+//
 //    _font = new ax::Font(0);
-//    
+//
 //    SetShownRect(ax::Rect(-5,
 //                        -5,
 //                        rect.size.x + 10,
 //                        rect.size.y + 10));
 //}
 //
-//void axTextControl::SetLabel(const std::string& label)
+// void axTextControl::SetLabel(const std::string& label)
 //{
 //    _label = label;
 //    Update();
 //}
 //
-//void axTextControl::OnMouseLeftDown(const ax::Point& pos)
+// void axTextControl::OnMouseLeftDown(const ax::Point& pos)
 //{
 //    _findClickCursorIndex = true;
 //    _clickPosition = pos - GetAbsoluteRect().position;
-//    
+//
 //    if(_isHightlight)
 //    {
 //        _isHightlight = false;
 //    }
-//    
+//
 //    GrabMouse();
 //    GrabKey();
 //    Update();
 //}
 //
-//void axTextControl::OnFlashingCursorTimer(const ax::Event::Timer::Msg& msg)
+// void axTextControl::OnFlashingCursorTimer(const ax::Event::Timer::Msg& msg)
 //{
 //    _cursorFlashActive = !_cursorFlashActive;
 //    Update();
 //}
 //
-//void axTextControl::OnMouseLeftUp(const ax::Point& pos)
+// void axTextControl::OnMouseLeftUp(const ax::Point& pos)
 //{
 //    if(IsGrabbed())
 //    {
@@ -103,54 +103,54 @@
 //    }
 //}
 //
-//void axTextControl::OnMouseEnter()
+// void axTextControl::OnMouseEnter()
 //{
 //
 //}
 //
-//void axTextControl::OnMouseLeave()
+// void axTextControl::OnMouseLeave()
 //{
 //
 //}
 //
-//void axTextControl::OnMouseLeftDragging(const ax::Point& pos)
+// void axTextControl::OnMouseLeftDragging(const ax::Point& pos)
 //{
 //    _clickPosition = pos - GetAbsoluteRect().position;
 //    Update();
-//    
+//
 //}
 //
-//void axTextControl::OnMouseLeftDoubleClick(const ax::Point& pos)
+// void axTextControl::OnMouseLeftDoubleClick(const ax::Point& pos)
 //{
 //    _isHightlight = true;
 //    Update();
 //}
 //
-//void axTextControl::OnWasKeyUnGrabbed()
+// void axTextControl::OnWasKeyUnGrabbed()
 //{
 //    if(ax::IsFlag(axTEXT_CTRL_FLASHING_CURSOR, _flags))
 //    {
 //        _flashingCursor->StopTimer();
 //    }
-//    
+//
 //    _currentColor = &_info.normal;
-//    
+//
 //    Update();
 //}
 //
-//void axTextControl::OnWasKeyGrabbed()
+// void axTextControl::OnWasKeyGrabbed()
 //{
 //    _currentColor = &_info.selected;
-//    
+//
 //    if(ax::IsFlag(axTEXT_CTRL_FLASHING_CURSOR, _flags))
 //    {
 //        _flashingCursor->StartTimer(ax::Event::Timer::TimeMs(500));
 //    }
-//    
+//
 //    Update();
 //}
 //
-//void axTextControl::OnKeyDown(const char& key)
+// void axTextControl::OnKeyDown(const char& key)
 //{
 //    if(_isHightlight)
 //    {
@@ -171,7 +171,7 @@
 //    }
 //}
 //
-//void axTextControl::OnBackSpaceDown()
+// void axTextControl::OnBackSpaceDown()
 //{
 //    if(_isHightlight)
 //    {
@@ -184,17 +184,17 @@
 //    {
 //        _label.erase(_cursorIndex-1, 1);
 //        --_cursorIndex;
-//        
+//
 //        if(_cursorIndex < 0)
 //        {
 //            _cursorIndex = 0;
 //        }
 //        Update();
 //    }
-//    
+//
 //}
 //
-//void axTextControl::OnKeyDeleteDown()
+// void axTextControl::OnKeyDeleteDown()
 //{
 //    if(_isHightlight)
 //    {
@@ -207,7 +207,7 @@
 //    {
 //        _label.erase(_cursorIndex, 1);
 //        --_cursorIndex;
-//        
+//
 //        if(_cursorIndex < 0)
 //        {
 //            _cursorIndex = 0;
@@ -216,46 +216,46 @@
 //    }
 //}
 //
-//void axTextControl::OnLeftArrowDown()
+// void axTextControl::OnLeftArrowDown()
 //{
 //    --_cursorIndex;
-//    
+//
 //    if(_cursorIndex < 0)
 //    {
 //        _cursorIndex = 0;
 //    }
-//    
+//
 //    if(_isHightlight)
 //    {
 //        _isHightlight = false;
 //    }
 //
-//    
+//
 //    Update();
 //}
 //
-//void axTextControl::OnRightArrowDown()
+// void axTextControl::OnRightArrowDown()
 //{
 //    ++_cursorIndex;
-//    
+//
 //    if(_cursorIndex > _label.size())
 //    {
 //        _cursorIndex = (int)_label.size();
 //    }
-//    
+//
 //    if(_isHightlight)
 //    {
 //        _isHightlight = false;
 //    }
 //
-//    
+//
 //    Update();
 //}
 //
-//void axTextControl::DrawContourRectangle(ax::GC* gc)
+// void axTextControl::DrawContourRectangle(ax::GC* gc)
 //{
 //    ax::Rect rect(GetRect());
-//    
+//
 //    if(ax::IsFlag(axTEXT_CTRL_CONTOUR_HIGHLIGHT, _flags))
 //    {
 //        if(IsKeyGrab())
@@ -270,16 +270,16 @@
 //            {
 //                ax::Color col(_info.selected_shadow);
 //                gc->SetColor(col);
-//                
+//
 //                int nRect = 5;
 //                for(int i = 0; i < nRect; i++)
 //                {
 //                    gc->DrawRectangleContour(ax::Rect(ax::Point(-i, -i),
 //                                                    ax::Size(rect.size + ax::Size(2*i, 2*i))));
-//                    
+//
 //                    double alpha = _info.selected_shadow.GetAlpha();
 //                    double mu = double(i) / double(nRect);
-//                    
+//
 //                    col.SetAlpha(alpha - alpha * mu);
 //                    gc->SetColor(col);
 //                }
@@ -288,38 +288,38 @@
 //    }
 //}
 //
-//void axTextControl::OnPaint()
+// void axTextControl::OnPaint()
 //{
 //    ax::GC gcs = ax::GC();
 //    ax::GC* gc = &gcs;
 //	ax::Rect rect(GetRect());
 //	ax::Rect rect0(ax::Point(0, 0), rect.size);
-//    
+//
 //    DrawContourRectangle(gc);
 //
 //	gc->SetColor(*_currentColor);
 //	gc->DrawRectangle(rect0);
-//    
+//
 //    ax::Point next_pos(5, 5);
-//    
+//
 //    if_not_empty(_label)
 //    {
 //        _cursorBarXPosition = 5;
-//        
+//
 //        for(int i = 0; i < _label.size(); i++)
 //        {
 //            int x_past_pos = next_pos.x;
-//            
+//
 //            gc->SetColor(_info.font_color);
 //            next_pos = gc->DrawChar(*_font, _label[i], next_pos);
-//            
+//
 //            if(_isHightlight) // hightlight on.
 //            {
 //                gc->SetColor(_info.hightlight);
 //                gc->DrawRectangle(ax::Rect(x_past_pos, 5,
 //                                         next_pos.x - x_past_pos, rect0.size.y - 10));
 //            }
-//            
+//
 //            if(_findClickCursorIndex)
 //            {
 //                if(_clickPosition.x >= x_past_pos &&
@@ -339,12 +339,12 @@
 //                _cursorBarXPosition = next_pos.x;
 //            }
 //        }
-//        
+//
 //        if(_findClickCursorIndex)
 //        {
 //            _findClickCursorIndex = false;
 //        }
-//        
+//
 //        _lastCharXPosition = next_pos.x;
 //    }
 //    else
@@ -355,7 +355,7 @@
 //    if(IsKeyGrab() && _cursorFlashActive)
 //    {
 //        gc->SetColor(_info.cursor);
-//  
+//
 //        gc->DrawLine(ax::Point(_cursorBarXPosition, 5),
 //                     ax::Point(_cursorBarXPosition, rect0.size.y - 5));
 //    }

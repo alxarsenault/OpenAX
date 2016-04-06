@@ -19,7 +19,7 @@
  * To release a closed-source product which uses OpenAX, commercial
  * licenses are available, email ax.frameworks@gmail.com for more information.
  */
- 
+
 #include "NumberBox.h"
 
 /*
@@ -52,11 +52,9 @@ ax::Event::Msg* ax::NumberBox::Msg::GetCopy()
 /*
  * ax::NumberBox::Info.
  */
-ax::NumberBox::Info::Info(const ax::Color& normal_color,
-	const ax::Color& hover_color, const ax::Color& clicked_color,
-	const ax::Color& selected_color, const ax::Color& contour_color,
-	const ax::Color& font_color_, const std::string& imgPath,
-	const bool& singleImg)
+ax::NumberBox::Info::Info(const ax::Color& normal_color, const ax::Color& hover_color,
+	const ax::Color& clicked_color, const ax::Color& selected_color, const ax::Color& contour_color,
+	const ax::Color& font_color_, const std::string& imgPath, const bool& singleImg)
 	: normal(normal_color)
 	, hover(hover_color)
 	, clicking(clicked_color)
@@ -80,8 +78,8 @@ ax::NumberBox::Info::Info(const ax::StringPairVector& attributes)
 
 ax::StringVector ax::NumberBox::Info::GetParamNameList() const
 {
-	return ax::StringVector{ "normal", "hover", "clicking", "selected",
-		"contour", "font_color", "img", "single_img" };
+	return ax::StringVector{ "normal", "hover", "clicking", "selected", "contour", "font_color", "img",
+		"single_img" };
 }
 
 std::string ax::NumberBox::Info::GetAttributeValue(const std::string& name)
@@ -145,9 +143,8 @@ void ax::NumberBox::Info::SetAttribute(const ax::StringPair& attribute)
 /*
  * axNumberBox::axNumberBox.
  */
-ax::NumberBox::NumberBox(const ax::Rect& rect,
-	const ax::NumberBox::Events& events, const ax::NumberBox::Info& info,
-	ax::Flag flags, double value, ax::FloatRange range,
+ax::NumberBox::NumberBox(const ax::Rect& rect, const ax::NumberBox::Events& events,
+	const ax::NumberBox::Info& info, ax::Flag flags, double value, ax::FloatRange range,
 	ax::Utils::Control::Type type, ax::Utils::Control::Unit unit,
 	ax::Utils::Control::Interpolation interpolation, std::string label)
 	: _events(events)
@@ -161,8 +158,8 @@ ax::NumberBox::NumberBox(const ax::Rect& rect,
 {
 	win = ax::Window::Create(rect);
 
-	win->component.Add("Widget", widget::Component::Ptr(new widget::Component(
-									 win, new ax::NumberBox::Info(info))));
+	win->component.Add(
+		"Widget", widget::Component::Ptr(new widget::Component(win, new ax::NumberBox::Info(info))));
 
 	win->property.AddProperty("Editable");
 
@@ -170,16 +167,11 @@ ax::NumberBox::NumberBox(const ax::Rect& rect,
 
 	// Builtin event connection.
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &NumberBox::OnPaint);
-	win->event.OnMouseLeftDown
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDown);
-	win->event.OnMouseLeftUp
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftUp);
-	win->event.OnMouseLeftDragging
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDragging);
-	win->event.OnMouseEnter
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseEnter);
-	win->event.OnMouseLeave
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeave);
+	win->event.OnMouseLeftDown = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDown);
+	win->event.OnMouseLeftUp = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftUp);
+	win->event.OnMouseLeftDragging = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDragging);
+	win->event.OnMouseEnter = ax::WBind<ax::Point>(this, &NumberBox::OnMouseEnter);
+	win->event.OnMouseLeave = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeave);
 
 	_bgImg = new ax::Image(info.img);
 
@@ -195,9 +187,8 @@ ax::NumberBox::NumberBox(const ax::Rect& rect,
 	}
 }
 
-ax::NumberBox::NumberBox(const ax::Point& pos,
-	const ax::NumberBox::Events& events, const ax::NumberBox::Info& info,
-	ax::Flag flags, double value, ax::FloatRange range,
+ax::NumberBox::NumberBox(const ax::Point& pos, const ax::NumberBox::Events& events,
+	const ax::NumberBox::Info& info, ax::Flag flags, double value, ax::FloatRange range,
 	ax::Utils::Control::Type type, ax::Utils::Control::Unit unit,
 	ax::Utils::Control::Interpolation interpolation, std::string label)
 	: _events(events)
@@ -211,8 +202,8 @@ ax::NumberBox::NumberBox(const ax::Point& pos,
 {
 	win = ax::Window::Create(ax::Rect(pos, ax::Size(50, 20)));
 
-	win->component.Add("Widget", widget::Component::Ptr(new widget::Component(
-									 win, new ax::NumberBox::Info(info))));
+	win->component.Add(
+		"Widget", widget::Component::Ptr(new widget::Component(win, new ax::NumberBox::Info(info))));
 
 	win->property.AddProperty("Editable");
 
@@ -220,16 +211,11 @@ ax::NumberBox::NumberBox(const ax::Point& pos,
 
 	// Builtin event connection.
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &NumberBox::OnPaint);
-	win->event.OnMouseLeftDown
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDown);
-	win->event.OnMouseLeftUp
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftUp);
-	win->event.OnMouseLeftDragging
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDragging);
-	win->event.OnMouseEnter
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseEnter);
-	win->event.OnMouseLeave
-		= ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeave);
+	win->event.OnMouseLeftDown = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDown);
+	win->event.OnMouseLeftUp = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftUp);
+	win->event.OnMouseLeftDragging = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeftDragging);
+	win->event.OnMouseEnter = ax::WBind<ax::Point>(this, &NumberBox::OnMouseEnter);
+	win->event.OnMouseLeave = ax::WBind<ax::Point>(this, &NumberBox::OnMouseLeave);
 
 	_bgImg = new ax::Image(info.img);
 
@@ -252,10 +238,8 @@ double ax::NumberBox::GetValue()
 
 void ax::NumberBox::OnMouseEnter(const ax::Point& pos)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
-	ax::NumberBox::Info& info
-		= *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+	ax::NumberBox::Info& info = *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
 
 	_currentColor = info.hover;
 	_nCurrentImg = axNUM_BOX_HOVER;
@@ -268,10 +252,8 @@ void ax::NumberBox::OnMouseLeave(const ax::Point& pos)
 		return;
 	}
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
-	ax::NumberBox::Info& info
-		= *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+	ax::NumberBox::Info& info = *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
 	_currentColor = info.normal;
 	_nCurrentImg = axNUM_BOX_NORMAL;
 	win->Update();
@@ -279,10 +261,8 @@ void ax::NumberBox::OnMouseLeave(const ax::Point& pos)
 
 void ax::NumberBox::OnMouseLeftDown(const ax::Point& pos)
 {
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
-	ax::NumberBox::Info& info
-		= *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+	ax::NumberBox::Info& info = *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
 
 	_clickPosY = (pos - win->dimension.GetAbsoluteRect().position).y;
 	_nCurrentImg = axNUM_BOX_DOWN;
@@ -299,10 +279,8 @@ void ax::NumberBox::OnMouseLeftUp(const ax::Point& pos)
 	}
 
 	win->event.UnGrabMouse();
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
-	ax::NumberBox::Info& info
-		= *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+	ax::NumberBox::Info& info = *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
 
 	if (win->event.IsMouseHoverWindow()) {
 		_currentColor = info.hover;
@@ -346,10 +324,8 @@ void ax::NumberBox::OnPaint(ax::GC gcs)
 	gc->SetColor(_currentColor);
 	gc->DrawRectangle(rect0);
 
-	widget::Component::Ptr widget
-		= win->component.Get<widget::Component>("Widget");
-	ax::NumberBox::Info& info
-		= *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
+	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
+	ax::NumberBox::Info& info = *static_cast<ax::NumberBox::Info*>(widget->GetInfo());
 
 	if (_bgImg->IsImageReady()) {
 		if (info.single_img) {
@@ -361,9 +337,7 @@ void ax::NumberBox::OnPaint(ax::GC gcs)
 			}
 		}
 		else {
-			gc->DrawPartOfImage(_bgImg,
-				ax::Point(0, _nCurrentImg * rect.size.y), rect.size,
-				ax::Point(0, 0));
+			gc->DrawPartOfImage(_bgImg, ax::Point(0, _nCurrentImg * rect.size.y), rect.size, ax::Point(0, 0));
 		}
 	}
 
