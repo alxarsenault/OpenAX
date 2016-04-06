@@ -64,7 +64,7 @@ Event::Msg* Button::Msg::GetCopy()
  */
 Button::Info::Info(const Color& normal_color, const Color& hover_color, const Color& clicked_color,
 	const Color& selected_color, const Color& contour_color, const Color& font_color_,
-	const int& roundCornerRadius)
+	const int& corner_radius_)
 	: widget::Info() // Heritage.
 	, normal(normal_color) // Members.
 	, hover(hover_color)
@@ -72,7 +72,7 @@ Button::Info::Info(const Color& normal_color, const Color& hover_color, const Co
 	, selected(selected_color)
 	, contour(contour_color)
 	, font_color(font_color_)
-	, round_corner_radius(roundCornerRadius)
+	, corner_radius(corner_radius_)
 {
 }
 
@@ -113,7 +113,7 @@ std::string Button::Info::GetAttributeValue(const std::string& name)
 		return font_color.ToString();
 	}
 	else if (name == "corner_radius") {
-		return std::to_string(round_corner_radius);
+		return std::to_string(corner_radius);
 	}
 
 	return "";
@@ -140,8 +140,19 @@ void Button::Info::SetAttribute(const StringPair& attribute)
 		font_color.LoadFromString(attribute.second);
 	}
 	else if (attribute.first == "corner_radius") {
-		round_corner_radius = std::stoi(attribute.second);
+		corner_radius = std::stoi(attribute.second);
 	}
+}
+
+std::vector<widget::ParamInfo> Button::Info::GetParametersInfo() const
+{
+	return { widget::ParamInfo(widget::ParamType::COLOR, "normal"),
+		widget::ParamInfo(widget::ParamType::COLOR, "hover"),
+		widget::ParamInfo(widget::ParamType::COLOR, "clicking"),
+		widget::ParamInfo(widget::ParamType::COLOR, "selected"),
+		widget::ParamInfo(widget::ParamType::COLOR, "contour"),
+		widget::ParamInfo(widget::ParamType::COLOR, "font_color"),
+		widget::ParamInfo(widget::ParamType::INTEGER, "corner_radius") };
 }
 
 Button::Component::Component(ax::Window* win, Info* info)
@@ -187,7 +198,7 @@ ax::Xml::Node Button::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	info_node.AddAttribute("selected", info->selected.ToString());
 	info_node.AddAttribute("contour", info->contour.ToString());
 	info_node.AddAttribute("font_color", info->font_color.ToString());
-	info_node.AddAttribute("round_corner_radius", std::to_string(info->round_corner_radius));
+	info_node.AddAttribute("corner_radius", std::to_string(info->corner_radius));
 
 	widget_node.AddNode(xml.CreateNode("img_path", btn->GetImagePath()));
 	widget_node.AddNode(xml.CreateNode("label", btn->GetLabel()));
@@ -304,7 +315,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	btn_info.selected = ax::Xml::StringToColor(info_node.GetAttribute("selected"));
 	btn_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
 	btn_info.font_color = ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
-	btn_info.round_corner_radius = std::stoi(info_node.GetAttribute("round_corner_radius"));
+	btn_info.corner_radius = std::stoi(info_node.GetAttribute("corner_radius"));
 
 	auto btn = ax::shared<ax::Button>(
 		ax::Rect(pos, size), ax::Button::Events(), btn_info, img_path, label, flags, msg);
@@ -352,7 +363,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& nod
 	btn_info.selected = ax::Xml::StringToColor(info_node.GetAttribute("selected"));
 	btn_info.contour = ax::Xml::StringToColor(info_node.GetAttribute("contour"));
 	btn_info.font_color = ax::Xml::StringToColor(info_node.GetAttribute("font_color"));
-	btn_info.round_corner_radius = std::stoi(info_node.GetAttribute("round_corner_radius"));
+	btn_info.corner_radius = std::stoi(info_node.GetAttribute("corner_radius"));
 
 	auto btn = ax::shared<ax::Button>(
 		ax::Rect(pos, size), ax::Button::Events(), btn_info, img_path, label, flags, msg);
@@ -553,7 +564,7 @@ void Button::OnPaint(GC gc)
 
 	gc.SetColor(_currentColor);
 
-	int radius = info->round_corner_radius;
+	int radius = info->corner_radius;
 
 	if (radius > 1) {
 		gc.DrawRoundedRectangle(rect0, radius);

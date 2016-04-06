@@ -110,12 +110,16 @@ public:
 			const ax::Color& clicked_color = ax::Color(0.95f),
 			const ax::Color& selected_color = ax::Color(0.9f),
 			const ax::Color& contour_color = ax::Color(0.5f), const ax::Color& font_color = ax::Color(0.1f),
-			const int& roundCornerRadius = 0);
+			const int& corner_radius = 0);
 
 		/// Info needed for debug editor. Derived from axInfo.
 		virtual ax::StringVector GetParamNameList() const;
+
 		virtual std::string GetAttributeValue(const std::string& name);
+
 		virtual void SetAttribute(const ax::StringPair& attribute);
+
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const;
 
 		ax::Color normal; /// Normal background color.
 		ax::Color hover; /// Color when mouse is over.
@@ -123,7 +127,7 @@ public:
 		ax::Color selected; /// Color once the button has been clicked.
 		ax::Color contour; /// Contour color.
 		ax::Color font_color; /// Font color.
-		int round_corner_radius = 0;
+		int corner_radius = 0;
 	};
 
 	/*

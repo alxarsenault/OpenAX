@@ -29,22 +29,41 @@
 
 namespace ax {
 namespace widget {
+	enum class ParamType {
+		INTEGER,
+		REAL,
+		TEXT,
+		COLOR,
+		ALIGNEMENT,
+		RANGE,
+		POINT,
+		SIZE,
+		CUSTOM
+	};
+	
+	typedef std::pair<ParamType, std::string> ParamInfo;
+	
 	/*
 	 * ax::Info.
 	 */
 	class Info {
 	public:
 		Info();
-
+		
 		Info(const std::string& path);
 
 		virtual ~Info();
-
+		
 		std::string GetPath() const;
 
 		bool IsEditable() const;
 
 		virtual ax::StringVector GetParamNameList() const;
+		
+		virtual std::vector<ParamInfo> GetParametersInfo() const
+		{
+			return std::vector<ParamInfo>();
+		}
 
 		virtual void SetAttribute(const ax::StringPair& attribute);
 
@@ -85,7 +104,6 @@ namespace widget {
 		
 		virtual void ReloadInfo()
 		{
-			
 		}
 
 		ax::Window* GetWindow()
@@ -100,7 +118,6 @@ namespace widget {
 		
 		virtual void SetSaveChildCallback(std::function<void(ax::Xml&, ax::Xml::Node&, ax::Window*)> fct)
 		{
-			
 		}
 
 	protected:
