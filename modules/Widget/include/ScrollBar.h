@@ -6,7 +6,7 @@
  * OpenAX is free or commercial software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 or any later version of the
- * License or use a commercial OpenAX License.
+ * license or use a commercial OpenAX License.
  *
  * OpenAX is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,7 +17,7 @@
  * along with OpenAX. If not, see <http://www.gnu.org/licenses/>.
  *
  * To release a closed-source product which uses OpenAX, commercial
- * licenses are available, email alx.arsenault@gmail.com for more information.
+ * licenses are available, email ax.frameworks@gmail.com for more information.
  */
 
 #ifndef __AX_SCROLL_BAR_H__
