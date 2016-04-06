@@ -160,6 +160,11 @@ public:
 
 	void SetSelected(const bool& selected);
 	
+	bool IsSelected() const
+	{
+		return _selected;
+	}
+	
 	std::string GetLabel() const
 	{
 		return _label;

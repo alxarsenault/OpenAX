@@ -608,7 +608,7 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 		win->event.GrabMouse();
 
 		win->PushEvent(ax::Slider::Events::VALUE_CHANGE,
-			new ax::Slider::Msg(_sliderValue));
+			new ax::Slider::Msg(this, _sliderValue));
 		win->Update();
 	}
 	// Click on boutton to move.
@@ -638,7 +638,7 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 			//				_events.slider_value_change(axSliderMsg(_sliderValue));
 			//			}
 			win->PushEvent(ax::Slider::Events::VALUE_CHANGE,
-				new ax::Slider::Msg(_sliderValue));
+				new ax::Slider::Msg(this, _sliderValue));
 			win->Update();
 		}
 	}
@@ -673,7 +673,7 @@ void ax::Slider::OnMouseLeftDragging(const ax::Point& p)
 	//	}
 
 	win->PushEvent(
-		ax::Slider::Events::VALUE_CHANGE, new ax::Slider::Msg(_sliderValue));
+		ax::Slider::Events::VALUE_CHANGE, new ax::Slider::Msg(this, _sliderValue));
 
 	win->Update();
 }

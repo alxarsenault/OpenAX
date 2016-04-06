@@ -604,8 +604,8 @@ void Window::RenderWindow()
 	if (property.HasProperty("BackBuffer")) {
 		if (state[NeedUpdate]) {
 
-			ax::Print("Window id :", GetId(), "render");
-			ax::Print("Frame size :", ax::App::GetInstance().GetFrameSize().x, ax::App::GetInstance().GetFrameSize().y);
+//			ax::Print("Window id :", GetId(), "render");
+//			ax::Print("Frame size :", ax::App::GetInstance().GetFrameSize().x, ax::App::GetInstance().GetFrameSize().y);
 
 			// Draw on framebuffer.
 			dimension.GetFrameBuffer()->DrawOnFrameBuffer(

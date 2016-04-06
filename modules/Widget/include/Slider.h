@@ -69,14 +69,20 @@ public:
 	 */
 	class Msg : public Event::Msg {
 	public:
-		Msg(const double& value)
-			: _value(value)
+		Msg(Slider* slider, const double& value)
+			: _slider(slider)
+			, _value(value)
 		{
 		}
 
 		double GetValue() const
 		{
 			return _value;
+		}
+		
+		Slider* GetSender() const
+		{
+			return _slider;
 		}
 
 		Event::Msg* GetCopy()
@@ -86,6 +92,7 @@ public:
 
 	private:
 		double _value;
+		ax::Slider* _slider;
 	};
 
 	/*

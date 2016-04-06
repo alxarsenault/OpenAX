@@ -275,6 +275,7 @@ public:
 //		inline Ptr GetWindow();
 		
 		inline ax::Window* GetWindow();
+		inline const ax::Window* GetWindow() const;
 
 	protected:
 //		Ptr win;
@@ -506,6 +507,11 @@ inline void Window::Backbone::AssignWindow(Ptr window)
 }
 
 inline ax::Window* Window::Backbone::GetWindow()
+{
+	return win;
+}
+
+inline const ax::Window* Window::Backbone::GetWindow() const
 {
 	return win;
 }

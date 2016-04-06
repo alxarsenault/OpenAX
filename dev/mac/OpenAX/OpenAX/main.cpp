@@ -1,5 +1,6 @@
 #include "OpenAX.h"
 #include "Slider.h"
+#include "TextBox.h"
 
 int main()
 {
@@ -37,6 +38,26 @@ int main()
 		= ax::shared<ax::Slider>(ax::Rect(ax::Point(100, 100), ax::Size(300, 20)),
 								 ax::Slider::Events(), sld_info, ax::Slider::Flags::CLICK_ANYWHERE);
 		win->node.Add(constrate_sld);
+		
+		
+		ax::TextBox::Info txtInfo;
+		txtInfo.normal = ax::Color(0.97);
+		txtInfo.hover = txtInfo.normal;
+		txtInfo.selected = txtInfo.normal;
+		txtInfo.highlight = ax::Color(0.4f, 0.4f, 0.6f, 0.2f);
+		txtInfo.contour = ax::Color(0.88);
+		txtInfo.cursor = ax::Color(1.0f, 0.0f, 0.0f);
+		txtInfo.selected_shadow = ax::Color(0.8f, 0.8f, 0.8f);
+		txtInfo.font_color = ax::Color(0.0);
+		
+		ax::TextBox::Events txt_evts;
+		auto txt_box(ax::shared<ax::TextBox>(ax::Rect(ax::Point(10, 10), ax::Size(200, 25)), txt_evts, txtInfo, "",
+											 "Banana"));
+		
+		win->node.Add(txt_box);
+		
+		
+
 	});
 
 	app.AddAfterGUILoadFunction(

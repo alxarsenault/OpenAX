@@ -1,5 +1,9 @@
 #include <OpenAX/Button.h>
 #include <OpenAX/OpenAX.h>
+#include <OpenAX/Slider.h>
+#include <OpenAX/TextBox.h>
+
+#include "ColorPicker.h"
 
 int main()
 {
@@ -17,12 +21,14 @@ int main()
 
 		app.AddTopLevel(ax::Window::Ptr(win));
 
-		win->node.Add(ax::shared<ax::Button>(ax::Rect(0, 0, 50, 50), ax::Button::Events(), ax::Button::Info()));
+		win->node.Add(
+			ax::shared<ax::Button>(ax::Rect(0, 0, 50, 50), ax::Button::Events(), ax::Button::Info()));
+
+		win->node.Add(ax::shared<ax::ColorPicker>(ax::Rect(100, 100, 205, 272), ax::Color(255, 0, 0)));
 
 	});
 
-	app.AddAfterGUILoadFunction(
-		[&app]() { app.SetFrameSize(ax::Size(500, 500)); });
+	app.AddAfterGUILoadFunction([&app]() { app.SetFrameSize(ax::Size(500, 500)); });
 
 	app.MainLoop();
 

@@ -79,173 +79,9 @@
 		7C7476A31CA84101009CBE23 /* axAudioSignalBalance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476971CA84101009CBE23 /* axAudioSignalBalance.cpp */; };
 		7C7476A41CA84101009CBE23 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476981CA84101009CBE23 /* AudioUtils.cpp */; };
 		7C7476A51CA84101009CBE23 /* axAudioWaveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476991CA84101009CBE23 /* axAudioWaveTable.cpp */; };
-		7C7476E21CA8E551009CBE23 /* OpenAX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7476DB1CA8E551009CBE23 /* OpenAX.framework */; };
-		7C7476E31CA8E551009CBE23 /* OpenAX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7476DB1CA8E551009CBE23 /* OpenAX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7C7476E81CA8E5C7009CBE23 /* axAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476A61CA8410B009CBE23 /* axAudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476E91CA8E5C7009CBE23 /* AudioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476B01CA8410B009CBE23 /* AudioUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476EA1CA8E5C7009CBE23 /* axAudioBiquadFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476A71CA8410B009CBE23 /* axAudioBiquadFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476EB1CA8E5C7009CBE23 /* axAudioBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476A81CA8410B009CBE23 /* axAudioBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476EC1CA8E5C7009CBE23 /* axAudioBufferPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476A91CA8410B009CBE23 /* axAudioBufferPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476ED1CA8E5C7009CBE23 /* axAudioCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476AA1CA8410B009CBE23 /* axAudioCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476EE1CA8E5C7009CBE23 /* axAudioEnvelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476AB1CA8410B009CBE23 /* axAudioEnvelope.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476EF1CA8E5C7009CBE23 /* axAudioFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476AC1CA8410B009CBE23 /* axAudioFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476F01CA8E5C7009CBE23 /* axAudioFirstOrderFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476AD1CA8410B009CBE23 /* axAudioFirstOrderFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476F11CA8E5C7009CBE23 /* axAudioSignalBalance.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476AF1CA8410B009CBE23 /* axAudioSignalBalance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476F21CA8E5C7009CBE23 /* axAudioWaveTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7476B11CA8410B009CBE23 /* axAudioWaveTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476F31CA8E5C7009CBE23 /* axAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C74768E1CA84101009CBE23 /* axAudio.cpp */; };
-		7C7476F41CA8E5C7009CBE23 /* AudioUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476981CA84101009CBE23 /* AudioUtils.cpp */; };
-		7C7476F51CA8E5C7009CBE23 /* axAudioBiquadFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C74768F1CA84101009CBE23 /* axAudioBiquadFilter.cpp */; };
-		7C7476F61CA8E5C7009CBE23 /* axAudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476901CA84101009CBE23 /* axAudioBuffer.cpp */; };
-		7C7476F71CA8E5C7009CBE23 /* axAudioBufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476911CA84101009CBE23 /* axAudioBufferPlayer.cpp */; };
-		7C7476F81CA8E5C7009CBE23 /* axAudioCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476921CA84101009CBE23 /* axAudioCore.cpp */; };
-		7C7476F91CA8E5C7009CBE23 /* axAudioEnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476931CA84101009CBE23 /* axAudioEnvelope.cpp */; };
-		7C7476FA1CA8E5C7009CBE23 /* axAudioFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476941CA84101009CBE23 /* axAudioFilter.cpp */; };
-		7C7476FB1CA8E5C7009CBE23 /* axAudioFirstOrderFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476951CA84101009CBE23 /* axAudioFirstOrderFilter.cpp */; };
-		7C7476FC1CA8E5C7009CBE23 /* axAudioSignalBalance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476971CA84101009CBE23 /* axAudioSignalBalance.cpp */; };
-		7C7476FD1CA8E5C7009CBE23 /* axAudioWaveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476991CA84101009CBE23 /* axAudioWaveTable.cpp */; };
-		7C7476FE1CA8E5C7009CBE23 /* AppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A3E1C9C9AFC0050F676 /* AppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7476FF1CA8E5C7009CBE23 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A3F1C9C9AFC0050F676 /* AppDelegate.mm */; };
-		7C7477001CA8E5C7009CBE23 /* axCocoaInterfaceMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A401C9C9AFC0050F676 /* axCocoaInterfaceMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477011CA8E5C7009CBE23 /* axCocoaInterfaceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A411C9C9AFC0050F676 /* axCocoaInterfaceMac.mm */; };
-		7C7477021CA8E5C7009CBE23 /* axCoreMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A421C9C9AFC0050F676 /* axCoreMac.cpp */; };
-		7C7477031CA8E5C7009CBE23 /* axCoreMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A431C9C9AFC0050F676 /* axCoreMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477041CA8E5C7009CBE23 /* OpenAX.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213B0C1C9E4EC40050F676 /* OpenAX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477051CA8E5C7009CBE23 /* App.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A1A1C9C9AE80050F676 /* App.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477061CA8E5C7009CBE23 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A1B1C9C9AE80050F676 /* Config.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477071CA8E5C7009CBE23 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A1C1C9C9AE80050F676 /* Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477081CA8E5C7009CBE23 /* CoreFacade.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A1D1C9C9AE80050F676 /* CoreFacade.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477091CA8E5C7009CBE23 /* KeyboardManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A1E1C9C9AE80050F676 /* KeyboardManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74770A1CA8E5C7009CBE23 /* MouseManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A1F1C9C9AE80050F676 /* MouseManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74770B1CA8E5C7009CBE23 /* Panel3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A201C9C9AE80050F676 /* Panel3D.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74770C1CA8E5C7009CBE23 /* Widget.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A211C9C9AE80050F676 /* Widget.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74770D1CA8E5C7009CBE23 /* WidgetLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A221C9C9AE80050F676 /* WidgetLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74770E1CA8E5C7009CBE23 /* Window.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A231C9C9AE80050F676 /* Window.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74770F1CA8E5C7009CBE23 /* WindowManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A241C9C9AE80050F676 /* WindowManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477101CA8E5C7009CBE23 /* WindowTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A251C9C9AE80050F676 /* WindowTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477111CA8E5C7009CBE23 /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A271C9C9AE80050F676 /* rapidxml.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477121CA8E5C7009CBE23 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A281C9C9AF10050F676 /* App.cpp */; };
-		7C7477131CA8E5C7009CBE23 /* Core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A291C9C9AF10050F676 /* Core.cpp */; };
-		7C7477141CA8E5C7009CBE23 /* CoreFacade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A2A1C9C9AF10050F676 /* CoreFacade.cpp */; };
-		7C7477151CA8E5C7009CBE23 /* KeyboardManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A2B1C9C9AF10050F676 /* KeyboardManager.cpp */; };
-		7C7477161CA8E5C7009CBE23 /* MouseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A2C1C9C9AF10050F676 /* MouseManager.cpp */; };
-		7C7477171CA8E5C7009CBE23 /* Panel3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A2D1C9C9AF10050F676 /* Panel3D.cpp */; };
-		7C7477181CA8E5C7009CBE23 /* Widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A2E1C9C9AF10050F676 /* Widget.cpp */; };
-		7C7477191CA8E5C7009CBE23 /* WidgetLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A2F1C9C9AF10050F676 /* WidgetLoader.cpp */; };
-		7C74771A1CA8E5C7009CBE23 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A301C9C9AF10050F676 /* Window.cpp */; };
-		7C74771B1CA8E5C7009CBE23 /* WindowManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A311C9C9AF10050F676 /* WindowManager.cpp */; };
-		7C74771C1CA8E5C7009CBE23 /* WindowTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A321C9C9AF10050F676 /* WindowTree.cpp */; };
-		7C74771D1CA8E5C7009CBE23 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A701C9C9B1D0050F676 /* Event.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74771E1CA8E5C7009CBE23 /* EventManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A711C9C9B1D0050F676 /* EventManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74771F1CA8E5C7009CBE23 /* Msg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A721C9C9B1D0050F676 /* Msg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477201CA8E5C7009CBE23 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A731C9C9B1D0050F676 /* Object.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477211CA8E5C7009CBE23 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A741C9C9B1D0050F676 /* Timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477221CA8E5C7009CBE23 /* EventManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A751C9C9B230050F676 /* EventManager.cpp */; };
-		7C7477231CA8E5C7009CBE23 /* Msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A761C9C9B230050F676 /* Msg.cpp */; };
-		7C7477241CA8E5C7009CBE23 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A771C9C9B230050F676 /* Object.cpp */; };
-		7C7477251CA8E5C7009CBE23 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A781C9C9B230050F676 /* Timer.cpp */; };
-		7C7477261CA8E5C7009CBE23 /* OSExec.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AC61C9C9B6B0050F676 /* OSExec.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477271CA8E5C7009CBE23 /* OSDynamic.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AC71C9C9B6B0050F676 /* OSDynamic.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477281CA8E5C7009CBE23 /* OSFileSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AC81C9C9B6B0050F676 /* OSFileSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477291CA8E5C7009CBE23 /* OSTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AC91C9C9B6B0050F676 /* OSTerminal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74772A1CA8E5C7009CBE23 /* OSExec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ACA1C9C9B720050F676 /* OSExec.cpp */; };
-		7C74772B1CA8E5C7009CBE23 /* OSFileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ACB1C9C9B720050F676 /* OSFileSystem.cpp */; };
-		7C74772C1CA8E5C7009CBE23 /* OSTerminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ACC1C9C9B720050F676 /* OSTerminal.cpp */; };
-		7C74772D1CA8E5C7009CBE23 /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AAE1C9C9B5C0050F676 /* Font.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74772E1CA8E5C7009CBE23 /* FrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AAF1C9C9B5C0050F676 /* FrameBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74772F1CA8E5C7009CBE23 /* GC.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AB01C9C9B5C0050F676 /* GC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477301CA8E5C7009CBE23 /* Render.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AB11C9C9B5C0050F676 /* Render.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477311CA8E5C7009CBE23 /* RenderMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AB21C9C9B5C0050F676 /* RenderMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477321CA8E5C7009CBE23 /* Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AB31C9C9B5C0050F676 /* Shader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477331CA8E5C7009CBE23 /* GraphicInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AB41C9C9B5C0050F676 /* GraphicInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477341CA8E5C7009CBE23 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AB51C9C9B5C0050F676 /* Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477351CA8E5C7009CBE23 /* DefaultFontBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213AB61C9C9B630050F676 /* DefaultFontBuffer.cpp */; };
-		7C7477361CA8E5C8009CBE23 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213AB71C9C9B630050F676 /* Font.cpp */; };
-		7C7477371CA8E5C8009CBE23 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213AB81C9C9B630050F676 /* FrameBuffer.cpp */; };
-		7C7477381CA8E5C8009CBE23 /* GC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213AB91C9C9B630050F676 /* GC.cpp */; };
-		7C7477391CA8E5C8009CBE23 /* RenderMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ABA1C9C9B630050F676 /* RenderMath.cpp */; };
-		7C74773A1CA8E5C8009CBE23 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ABB1C9C9B630050F676 /* Shader.cpp */; };
-		7C74773B1CA8E5C8009CBE23 /* GraphicInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ABC1C9C9B630050F676 /* GraphicInterface.cpp */; };
-		7C74773C1CA8E5C8009CBE23 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213ABD1C9C9B630050F676 /* Image.cpp */; };
-		7C74773D1CA8E5C8009CBE23 /* Clamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A471C9C9B0A0050F676 /* Clamp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74773E1CA8E5C8009CBE23 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A481C9C9B0A0050F676 /* Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74773F1CA8E5C8009CBE23 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A491C9C9B0A0050F676 /* Component.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477401CA8E5C8009CBE23 /* Control.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A4A1C9C9B0A0050F676 /* Control.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477411CA8E5C8009CBE23 /* Direction.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A4B1C9C9B0A0050F676 /* Direction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477421CA8E5C8009CBE23 /* Flag.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A4C1C9C9B0A0050F676 /* Flag.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477431CA8E5C8009CBE23 /* Interpole.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A4D1C9C9B0A0050F676 /* Interpole.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477441CA8E5C8009CBE23 /* Memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A4E1C9C9B0A0050F676 /* Memory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477451CA8E5C8009CBE23 /* Point2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A4F1C9C9B0A0050F676 /* Point2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477461CA8E5C8009CBE23 /* Print.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A501C9C9B0A0050F676 /* Print.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477471CA8E5C8009CBE23 /* Property.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A511C9C9B0A0050F676 /* Property.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477481CA8E5C8009CBE23 /* Range.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A521C9C9B0A0050F676 /* Range.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477491CA8E5C8009CBE23 /* Rect2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A531C9C9B0A0050F676 /* Rect2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74774A1CA8E5C8009CBE23 /* ResourceStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A541C9C9B0A0050F676 /* ResourceStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74774B1CA8E5C8009CBE23 /* axString.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A551C9C9B0A0050F676 /* axString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74774C1CA8E5C8009CBE23 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A561C9C9B0A0050F676 /* Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74774D1CA8E5C8009CBE23 /* Var.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A571C9C9B0A0050F676 /* Var.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74774E1CA8E5C8009CBE23 /* Clamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A581C9C9B120050F676 /* Clamp.cpp */; };
-		7C74774F1CA8E5C8009CBE23 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A591C9C9B120050F676 /* Color.cpp */; };
-		7C7477501CA8E5C8009CBE23 /* Flag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A5A1C9C9B120050F676 /* Flag.cpp */; };
-		7C7477511CA8E5C8009CBE23 /* Interpole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A5B1C9C9B120050F676 /* Interpole.cpp */; };
-		7C7477521CA8E5C8009CBE23 /* Point2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A5C1C9C9B120050F676 /* Point2D.cpp */; };
-		7C7477531CA8E5C8009CBE23 /* Print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A5D1C9C9B120050F676 /* Print.cpp */; };
-		7C7477541CA8E5C8009CBE23 /* Property.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A5E1C9C9B120050F676 /* Property.cpp */; };
-		7C7477551CA8E5C8009CBE23 /* Range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A5F1C9C9B120050F676 /* Range.cpp */; };
-		7C7477561CA8E5C8009CBE23 /* Rect2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A601C9C9B120050F676 /* Rect2D.cpp */; };
-		7C7477571CA8E5C8009CBE23 /* ResourceStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A611C9C9B120050F676 /* ResourceStorage.cpp */; };
-		7C7477581CA8E5C8009CBE23 /* axString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A621C9C9B120050F676 /* axString.cpp */; };
-		7C7477591CA8E5C9009CBE23 /* Var.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A631C9C9B120050F676 /* Var.cpp */; };
-		7C74775A1CA8E5C9009CBE23 /* Button.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA01C9C9B510050F676 /* Button.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74775B1CA8E5C9009CBE23 /* DropMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA11C9C9B510050F676 /* DropMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74775C1CA8E5C9009CBE23 /* Knob.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA21C9C9B510050F676 /* Knob.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74775D1CA8E5C9009CBE23 /* Label.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA31C9C9B510050F676 /* Label.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74775E1CA8E5C9009CBE23 /* NumberBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA41C9C9B510050F676 /* NumberBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74775F1CA8E5C9009CBE23 /* Panel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA51C9C9B510050F676 /* Panel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477601CA8E5C9009CBE23 /* Radio.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA61C9C9B510050F676 /* Radio.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477611CA8E5C9009CBE23 /* ScrollBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA71C9C9B510050F676 /* ScrollBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477621CA8E5C9009CBE23 /* Slider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA81C9C9B510050F676 /* Slider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477631CA8E5C9009CBE23 /* StaticImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AA91C9C9B510050F676 /* StaticImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477641CA8E5C9009CBE23 /* TextBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AAA1C9C9B510050F676 /* TextBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477651CA8E5C9009CBE23 /* TextControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AAB1C9C9B510050F676 /* TextControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477661CA8E5C9009CBE23 /* Toggle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AAC1C9C9B510050F676 /* Toggle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477671CA8E5C9009CBE23 /* WidgetSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213AAD1C9C9B510050F676 /* WidgetSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477681CA8E5C9009CBE23 /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A841C9C9B460050F676 /* Button.cpp */; };
-		7C7477691CA8E5C9009CBE23 /* DropMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A851C9C9B460050F676 /* DropMenu.cpp */; };
-		7C74776A1CA8E5C9009CBE23 /* Knob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A861C9C9B460050F676 /* Knob.cpp */; };
-		7C74776B1CA8E5C9009CBE23 /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A871C9C9B460050F676 /* Label.cpp */; };
-		7C74776C1CA8E5C9009CBE23 /* NumberBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A881C9C9B460050F676 /* NumberBox.cpp */; };
-		7C74776D1CA8E5C9009CBE23 /* Panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A891C9C9B460050F676 /* Panel.cpp */; };
-		7C74776E1CA8E5C9009CBE23 /* Radio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A8A1C9C9B460050F676 /* Radio.cpp */; };
-		7C74776F1CA8E5C9009CBE23 /* ScrollBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A8B1C9C9B460050F676 /* ScrollBar.cpp */; };
-		7C7477701CA8E5C9009CBE23 /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A8C1C9C9B460050F676 /* Slider.cpp */; };
-		7C7477711CA8E5C9009CBE23 /* StaticImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A8D1C9C9B460050F676 /* StaticImage.cpp */; };
-		7C7477721CA8E5CA009CBE23 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A8E1C9C9B460050F676 /* TextBox.cpp */; };
-		7C7477731CA8E5CA009CBE23 /* TextControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A8F1C9C9B460050F676 /* TextControl.cpp */; };
-		7C7477741CA8E5CA009CBE23 /* Toggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A901C9C9B460050F676 /* Toggle.cpp */; };
-		7C7477751CA8E5CA009CBE23 /* WidgetSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A911C9C9B460050F676 /* WidgetSelector.cpp */; };
-		7C7477761CA8E5CA009CBE23 /* Xml.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A7D1C9C9B2F0050F676 /* Xml.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477771CA8E5CA009CBE23 /* rapidxml_iterators.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A7E1C9C9B2F0050F676 /* rapidxml_iterators.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477781CA8E5CA009CBE23 /* rapidxml_print.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A7F1C9C9B2F0050F676 /* rapidxml_print.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7477791CA8E5CA009CBE23 /* rapidxml_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A801C9C9B2F0050F676 /* rapidxml_utils.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74777A1CA8E5CA009CBE23 /* rapidxml.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7C213A811C9C9B2F0050F676 /* rapidxml.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C74777B1CA8E5CA009CBE23 /* Xml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A821C9C9B370050F676 /* Xml.cpp */; };
-		7C74777C1CA8E6B7009CBE23 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C213A121C9C98F40050F676 /* Cocoa.framework */; };
-		7C74777D1CA8E6BE009CBE23 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C213A141C9C98F90050F676 /* OpenGL.framework */; };
 		7C74777F1CA9EA15009CBE23 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C74777E1CA9EA15009CBE23 /* libportaudio.a */; };
-		7C7477941CAA0EFE009CBE23 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C74777E1CA9EA15009CBE23 /* libportaudio.a */; };
 		7C7477961CAA0F33009CBE23 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7477951CAA0F33009CBE23 /* libsndfile.a */; };
-		7C7477971CAA0F47009CBE23 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7477951CAA0F33009CBE23 /* libsndfile.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7C7476E01CA8E551009CBE23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7C21390C1C9C973F0050F676 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7C7476DA1CA8E551009CBE23;
-			remoteInfo = ax;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7C7476E71CA8E551009CBE23 /* Embed Frameworks */ = {
@@ -254,7 +90,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7C7476E31CA8E551009CBE23 /* OpenAX.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +116,6 @@
 		7C213A231C9C9AE80050F676 /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Window.h; path = ../../../../modules/Core/include/Window.h; sourceTree = "<group>"; };
 		7C213A241C9C9AE80050F676 /* WindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WindowManager.h; path = ../../../../modules/Core/include/WindowManager.h; sourceTree = "<group>"; };
 		7C213A251C9C9AE80050F676 /* WindowTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WindowTree.h; path = ../../../../modules/Core/include/WindowTree.h; sourceTree = "<group>"; };
-		7C213A271C9C9AE80050F676 /* rapidxml.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = rapidxml.hpp; path = ../../../../modules/Core/include/rapidxml.hpp; sourceTree = "<group>"; };
 		7C213A281C9C9AF10050F676 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = App.cpp; path = ../../../../modules/Core/source/App.cpp; sourceTree = "<group>"; };
 		7C213A291C9C9AF10050F676 /* Core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Core.cpp; path = ../../../../modules/Core/source/Core.cpp; sourceTree = "<group>"; };
 		7C213A2A1C9C9AF10050F676 /* CoreFacade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CoreFacade.cpp; path = ../../../../modules/Core/source/CoreFacade.cpp; sourceTree = "<group>"; };
@@ -417,7 +251,6 @@
 		7C7476AF1CA8410B009CBE23 /* axAudioSignalBalance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = axAudioSignalBalance.h; path = ../../../../modules/Audio/include/axAudioSignalBalance.h; sourceTree = "<group>"; };
 		7C7476B01CA8410B009CBE23 /* AudioUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AudioUtils.h; path = ../../../../modules/Audio/include/AudioUtils.h; sourceTree = "<group>"; };
 		7C7476B11CA8410B009CBE23 /* axAudioWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = axAudioWaveTable.h; path = ../../../../modules/Audio/include/axAudioWaveTable.h; sourceTree = "<group>"; };
-		7C7476DB1CA8E551009CBE23 /* OpenAX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenAX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C74777E1CA9EA15009CBE23 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../../../../../usr/local/lib/libportaudio.a; sourceTree = "<group>"; };
 		7C7477951CAA0F33009CBE23 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -429,20 +262,8 @@
 			files = (
 				7C213A151C9C98F90050F676 /* OpenGL.framework in Frameworks */,
 				7C213A131C9C98F40050F676 /* Cocoa.framework in Frameworks */,
-				7C7476E21CA8E551009CBE23 /* OpenAX.framework in Frameworks */,
 				7C74777F1CA9EA15009CBE23 /* libportaudio.a in Frameworks */,
 				7C7477961CAA0F33009CBE23 /* libsndfile.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C7476D71CA8E551009CBE23 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C7477971CAA0F47009CBE23 /* libsndfile.a in Frameworks */,
-				7C74777D1CA8E6BE009CBE23 /* OpenGL.framework in Frameworks */,
-				7C74777C1CA8E6B7009CBE23 /* Cocoa.framework in Frameworks */,
-				7C7477941CAA0EFE009CBE23 /* libportaudio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				7C2139141C9C973F0050F676 /* OpenAX.app */,
-				7C7476DB1CA8E551009CBE23 /* OpenAX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -757,7 +577,6 @@
 				7C213A231C9C9AE80050F676 /* Window.h */,
 				7C213A241C9C9AE80050F676 /* WindowManager.h */,
 				7C213A251C9C9AE80050F676 /* WindowTree.h */,
-				7C213A271C9C9AE80050F676 /* rapidxml.hpp */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -840,97 +659,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		7C7476D81CA8E551009CBE23 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C74771D1CA8E5C7009CBE23 /* Event.h in Headers */,
-				7C74771E1CA8E5C7009CBE23 /* EventManager.h in Headers */,
-				7C74771F1CA8E5C7009CBE23 /* Msg.h in Headers */,
-				7C7477201CA8E5C7009CBE23 /* Object.h in Headers */,
-				7C7477211CA8E5C7009CBE23 /* Timer.h in Headers */,
-				7C7477261CA8E5C7009CBE23 /* OSExec.h in Headers */,
-				7C7477271CA8E5C7009CBE23 /* OSDynamic.h in Headers */,
-				7C7477281CA8E5C7009CBE23 /* OSFileSystem.h in Headers */,
-				7C7477291CA8E5C7009CBE23 /* OSTerminal.h in Headers */,
-				7C74772D1CA8E5C7009CBE23 /* Font.h in Headers */,
-				7C74772E1CA8E5C7009CBE23 /* FrameBuffer.h in Headers */,
-				7C74772F1CA8E5C7009CBE23 /* GC.h in Headers */,
-				7C7477301CA8E5C7009CBE23 /* Render.h in Headers */,
-				7C7477311CA8E5C7009CBE23 /* RenderMath.h in Headers */,
-				7C7477321CA8E5C7009CBE23 /* Shader.h in Headers */,
-				7C7477331CA8E5C7009CBE23 /* GraphicInterface.h in Headers */,
-				7C7477341CA8E5C7009CBE23 /* Image.h in Headers */,
-				7C74773D1CA8E5C8009CBE23 /* Clamp.h in Headers */,
-				7C74773E1CA8E5C8009CBE23 /* Color.h in Headers */,
-				7C74773F1CA8E5C8009CBE23 /* Component.h in Headers */,
-				7C7477401CA8E5C8009CBE23 /* Control.h in Headers */,
-				7C7477411CA8E5C8009CBE23 /* Direction.h in Headers */,
-				7C7477421CA8E5C8009CBE23 /* Flag.h in Headers */,
-				7C7477431CA8E5C8009CBE23 /* Interpole.h in Headers */,
-				7C7477441CA8E5C8009CBE23 /* Memory.h in Headers */,
-				7C7477451CA8E5C8009CBE23 /* Point2D.h in Headers */,
-				7C7477461CA8E5C8009CBE23 /* Print.h in Headers */,
-				7C7477471CA8E5C8009CBE23 /* Property.h in Headers */,
-				7C7477481CA8E5C8009CBE23 /* Range.h in Headers */,
-				7C7477491CA8E5C8009CBE23 /* Rect2D.h in Headers */,
-				7C74774A1CA8E5C8009CBE23 /* ResourceStorage.h in Headers */,
-				7C74774B1CA8E5C8009CBE23 /* axString.h in Headers */,
-				7C74774C1CA8E5C8009CBE23 /* Utils.h in Headers */,
-				7C74774D1CA8E5C8009CBE23 /* Var.h in Headers */,
-				7C74775A1CA8E5C9009CBE23 /* Button.h in Headers */,
-				7C74775B1CA8E5C9009CBE23 /* DropMenu.h in Headers */,
-				7C74775C1CA8E5C9009CBE23 /* Knob.h in Headers */,
-				7C74775D1CA8E5C9009CBE23 /* Label.h in Headers */,
-				7C74775E1CA8E5C9009CBE23 /* NumberBox.h in Headers */,
-				7C74775F1CA8E5C9009CBE23 /* Panel.h in Headers */,
-				7C7477601CA8E5C9009CBE23 /* Radio.h in Headers */,
-				7C7477611CA8E5C9009CBE23 /* ScrollBar.h in Headers */,
-				7C7477621CA8E5C9009CBE23 /* Slider.h in Headers */,
-				7C7477631CA8E5C9009CBE23 /* StaticImage.h in Headers */,
-				7C7477641CA8E5C9009CBE23 /* TextBox.h in Headers */,
-				7C7477651CA8E5C9009CBE23 /* TextControl.h in Headers */,
-				7C7477661CA8E5C9009CBE23 /* Toggle.h in Headers */,
-				7C7477671CA8E5C9009CBE23 /* WidgetSelector.h in Headers */,
-				7C7476E81CA8E5C7009CBE23 /* axAudio.h in Headers */,
-				7C7476E91CA8E5C7009CBE23 /* AudioUtils.h in Headers */,
-				7C7476EA1CA8E5C7009CBE23 /* axAudioBiquadFilter.h in Headers */,
-				7C7476EB1CA8E5C7009CBE23 /* axAudioBuffer.h in Headers */,
-				7C7476EC1CA8E5C7009CBE23 /* axAudioBufferPlayer.h in Headers */,
-				7C7476ED1CA8E5C7009CBE23 /* axAudioCore.h in Headers */,
-				7C7476EE1CA8E5C7009CBE23 /* axAudioEnvelope.h in Headers */,
-				7C7476EF1CA8E5C7009CBE23 /* axAudioFilter.h in Headers */,
-				7C7476F01CA8E5C7009CBE23 /* axAudioFirstOrderFilter.h in Headers */,
-				7C7476F11CA8E5C7009CBE23 /* axAudioSignalBalance.h in Headers */,
-				7C7476F21CA8E5C7009CBE23 /* axAudioWaveTable.h in Headers */,
-				7C7476FE1CA8E5C7009CBE23 /* AppDelegate.h in Headers */,
-				7C7477001CA8E5C7009CBE23 /* axCocoaInterfaceMac.h in Headers */,
-				7C7477031CA8E5C7009CBE23 /* axCoreMac.h in Headers */,
-				7C7477041CA8E5C7009CBE23 /* OpenAX.h in Headers */,
-				7C7477051CA8E5C7009CBE23 /* App.h in Headers */,
-				7C7477061CA8E5C7009CBE23 /* Config.h in Headers */,
-				7C7477071CA8E5C7009CBE23 /* Core.h in Headers */,
-				7C7477081CA8E5C7009CBE23 /* CoreFacade.h in Headers */,
-				7C7477091CA8E5C7009CBE23 /* KeyboardManager.h in Headers */,
-				7C74770A1CA8E5C7009CBE23 /* MouseManager.h in Headers */,
-				7C74770B1CA8E5C7009CBE23 /* Panel3D.h in Headers */,
-				7C74770C1CA8E5C7009CBE23 /* Widget.h in Headers */,
-				7C74770D1CA8E5C7009CBE23 /* WidgetLoader.h in Headers */,
-				7C74770E1CA8E5C7009CBE23 /* Window.h in Headers */,
-				7C74770F1CA8E5C7009CBE23 /* WindowManager.h in Headers */,
-				7C7477101CA8E5C7009CBE23 /* WindowTree.h in Headers */,
-				7C7477111CA8E5C7009CBE23 /* rapidxml.hpp in Headers */,
-				7C7477761CA8E5CA009CBE23 /* Xml.h in Headers */,
-				7C7477771CA8E5CA009CBE23 /* rapidxml_iterators.hpp in Headers */,
-				7C7477781CA8E5CA009CBE23 /* rapidxml_print.hpp in Headers */,
-				7C7477791CA8E5CA009CBE23 /* rapidxml_utils.hpp in Headers */,
-				7C74777A1CA8E5CA009CBE23 /* rapidxml.hpp in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		7C2139131C9C973F0050F676 /* OpenAXApp */ = {
 			isa = PBXNativeTarget;
@@ -944,30 +672,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				7C7476E11CA8E551009CBE23 /* PBXTargetDependency */,
 			);
 			name = OpenAXApp;
 			productName = OpenAX;
 			productReference = 7C2139141C9C973F0050F676 /* OpenAX.app */;
 			productType = "com.apple.product-type.application";
-		};
-		7C7476DA1CA8E551009CBE23 /* OpenAX */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7C7476E61CA8E551009CBE23 /* Build configuration list for PBXNativeTarget "OpenAX" */;
-			buildPhases = (
-				7C7476D61CA8E551009CBE23 /* Sources */,
-				7C7476D71CA8E551009CBE23 /* Frameworks */,
-				7C7476D81CA8E551009CBE23 /* Headers */,
-				7C7476D91CA8E551009CBE23 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OpenAX;
-			productName = ax;
-			productReference = 7C7476DB1CA8E551009CBE23 /* OpenAX.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -979,9 +688,6 @@
 				ORGANIZATIONNAME = "Alexandre Arsenault";
 				TargetAttributes = {
 					7C2139131C9C973F0050F676 = {
-						CreatedOnToolsVersion = 7.2.1;
-					};
-					7C7476DA1CA8E551009CBE23 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
@@ -1000,7 +706,6 @@
 			projectRoot = "";
 			targets = (
 				7C2139131C9C973F0050F676 /* OpenAXApp */,
-				7C7476DA1CA8E551009CBE23 /* OpenAX */,
 			);
 		};
 /* End PBXProject section */
@@ -1012,13 +717,6 @@
 			files = (
 				7C21391E1C9C973F0050F676 /* Assets.xcassets in Resources */,
 				7C213A191C9C9AD90050F676 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C7476D91CA8E551009CBE23 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,89 +798,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7C7476D61CA8E551009CBE23 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C7476F31CA8E5C7009CBE23 /* axAudio.cpp in Sources */,
-				7C7476F41CA8E5C7009CBE23 /* AudioUtils.cpp in Sources */,
-				7C7476F51CA8E5C7009CBE23 /* axAudioBiquadFilter.cpp in Sources */,
-				7C7476F61CA8E5C7009CBE23 /* axAudioBuffer.cpp in Sources */,
-				7C7476F71CA8E5C7009CBE23 /* axAudioBufferPlayer.cpp in Sources */,
-				7C7476F81CA8E5C7009CBE23 /* axAudioCore.cpp in Sources */,
-				7C7476F91CA8E5C7009CBE23 /* axAudioEnvelope.cpp in Sources */,
-				7C7476FA1CA8E5C7009CBE23 /* axAudioFilter.cpp in Sources */,
-				7C7476FB1CA8E5C7009CBE23 /* axAudioFirstOrderFilter.cpp in Sources */,
-				7C7476FC1CA8E5C7009CBE23 /* axAudioSignalBalance.cpp in Sources */,
-				7C7476FD1CA8E5C7009CBE23 /* axAudioWaveTable.cpp in Sources */,
-				7C7476FF1CA8E5C7009CBE23 /* AppDelegate.mm in Sources */,
-				7C7477011CA8E5C7009CBE23 /* axCocoaInterfaceMac.mm in Sources */,
-				7C7477021CA8E5C7009CBE23 /* axCoreMac.cpp in Sources */,
-				7C7477121CA8E5C7009CBE23 /* App.cpp in Sources */,
-				7C7477131CA8E5C7009CBE23 /* Core.cpp in Sources */,
-				7C7477141CA8E5C7009CBE23 /* CoreFacade.cpp in Sources */,
-				7C7477151CA8E5C7009CBE23 /* KeyboardManager.cpp in Sources */,
-				7C7477161CA8E5C7009CBE23 /* MouseManager.cpp in Sources */,
-				7C7477171CA8E5C7009CBE23 /* Panel3D.cpp in Sources */,
-				7C7477181CA8E5C7009CBE23 /* Widget.cpp in Sources */,
-				7C7477191CA8E5C7009CBE23 /* WidgetLoader.cpp in Sources */,
-				7C74771A1CA8E5C7009CBE23 /* Window.cpp in Sources */,
-				7C74771B1CA8E5C7009CBE23 /* WindowManager.cpp in Sources */,
-				7C74771C1CA8E5C7009CBE23 /* WindowTree.cpp in Sources */,
-				7C7477221CA8E5C7009CBE23 /* EventManager.cpp in Sources */,
-				7C7477231CA8E5C7009CBE23 /* Msg.cpp in Sources */,
-				7C7477241CA8E5C7009CBE23 /* Object.cpp in Sources */,
-				7C7477251CA8E5C7009CBE23 /* Timer.cpp in Sources */,
-				7C74772A1CA8E5C7009CBE23 /* OSExec.cpp in Sources */,
-				7C74772B1CA8E5C7009CBE23 /* OSFileSystem.cpp in Sources */,
-				7C74772C1CA8E5C7009CBE23 /* OSTerminal.cpp in Sources */,
-				7C7477351CA8E5C7009CBE23 /* DefaultFontBuffer.cpp in Sources */,
-				7C7477361CA8E5C8009CBE23 /* Font.cpp in Sources */,
-				7C7477371CA8E5C8009CBE23 /* FrameBuffer.cpp in Sources */,
-				7C7477381CA8E5C8009CBE23 /* GC.cpp in Sources */,
-				7C7477391CA8E5C8009CBE23 /* RenderMath.cpp in Sources */,
-				7C74773A1CA8E5C8009CBE23 /* Shader.cpp in Sources */,
-				7C74773B1CA8E5C8009CBE23 /* GraphicInterface.cpp in Sources */,
-				7C74773C1CA8E5C8009CBE23 /* Image.cpp in Sources */,
-				7C74774E1CA8E5C8009CBE23 /* Clamp.cpp in Sources */,
-				7C74774F1CA8E5C8009CBE23 /* Color.cpp in Sources */,
-				7C7477501CA8E5C8009CBE23 /* Flag.cpp in Sources */,
-				7C7477511CA8E5C8009CBE23 /* Interpole.cpp in Sources */,
-				7C7477521CA8E5C8009CBE23 /* Point2D.cpp in Sources */,
-				7C7477531CA8E5C8009CBE23 /* Print.cpp in Sources */,
-				7C7477541CA8E5C8009CBE23 /* Property.cpp in Sources */,
-				7C7477551CA8E5C8009CBE23 /* Range.cpp in Sources */,
-				7C7477561CA8E5C8009CBE23 /* Rect2D.cpp in Sources */,
-				7C7477571CA8E5C8009CBE23 /* ResourceStorage.cpp in Sources */,
-				7C7477581CA8E5C8009CBE23 /* axString.cpp in Sources */,
-				7C7477591CA8E5C9009CBE23 /* Var.cpp in Sources */,
-				7C7477681CA8E5C9009CBE23 /* Button.cpp in Sources */,
-				7C7477691CA8E5C9009CBE23 /* DropMenu.cpp in Sources */,
-				7C74776A1CA8E5C9009CBE23 /* Knob.cpp in Sources */,
-				7C74776B1CA8E5C9009CBE23 /* Label.cpp in Sources */,
-				7C74776C1CA8E5C9009CBE23 /* NumberBox.cpp in Sources */,
-				7C74776D1CA8E5C9009CBE23 /* Panel.cpp in Sources */,
-				7C74776E1CA8E5C9009CBE23 /* Radio.cpp in Sources */,
-				7C74776F1CA8E5C9009CBE23 /* ScrollBar.cpp in Sources */,
-				7C7477701CA8E5C9009CBE23 /* Slider.cpp in Sources */,
-				7C7477711CA8E5C9009CBE23 /* StaticImage.cpp in Sources */,
-				7C7477721CA8E5CA009CBE23 /* TextBox.cpp in Sources */,
-				7C7477731CA8E5CA009CBE23 /* TextControl.cpp in Sources */,
-				7C7477741CA8E5CA009CBE23 /* Toggle.cpp in Sources */,
-				7C7477751CA8E5CA009CBE23 /* WidgetSelector.cpp in Sources */,
-				7C74777B1CA8E5CA009CBE23 /* Xml.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7C7476E11CA8E551009CBE23 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7C7476DA1CA8E551009CBE23 /* OpenAX */;
-			targetProxy = 7C7476E01CA8E551009CBE23 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7C2139231C9C973F0050F676 /* Debug */ = {
@@ -1306,48 +922,6 @@
 			};
 			name = Release;
 		};
-		7C7476E41CA8E551009CBE23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = ax/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = OpenAX.ax;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		7C7476E51CA8E551009CBE23 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = ax/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = OpenAX.ax;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1365,15 +939,6 @@
 			buildConfigurations = (
 				7C2139261C9C973F0050F676 /* Debug */,
 				7C2139271C9C973F0050F676 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7C7476E61CA8E551009CBE23 /* Build configuration list for PBXNativeTarget "OpenAX" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7C7476E41CA8E551009CBE23 /* Debug */,
-				7C7476E51CA8E551009CBE23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

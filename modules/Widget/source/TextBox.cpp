@@ -504,12 +504,12 @@ void TextBox::OnPaint(ax::GC gc)
 				int x_past_pos = next_pos.x;
 				next_pos = gc.DrawChar(*_font, _label[i], next_pos);
 
-				if (_isHightlight) // hightlight on.
-				{
-					gc.SetColor(info.highlight);
-					gc.DrawRectangle(ax::Rect(x_past_pos, 5,
-						next_pos.x - x_past_pos, rect.size.y - 10));
-				}
+//				if (_isHightlight) // hightlight on.
+//				{
+//					gc.SetColor(info.highlight);
+//					gc.DrawRectangle(ax::Rect(x_past_pos, 5,
+//						next_pos.x - x_past_pos, rect.size.y - 10));
+//				}
 
 				if (_findClickCursorIndex) {
 					if (_clickPosition.x >= x_past_pos
@@ -537,6 +537,13 @@ void TextBox::OnPaint(ax::GC gc)
 	}
 	else {
 		_cursorBarXPosition = 5;
+	}
+
+	if (_isHightlight) // hightlight on.
+	{
+		gc.SetColor(info.highlight);
+		gc.DrawRectangle(ax::Rect(5, 5,
+			_lastCharXPosition - 5, rect.size.y - 10));
 	}
 
 	if (win->event.IsKeyGrab() && _cursorFlashActive) {

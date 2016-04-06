@@ -40,9 +40,6 @@ public:
 
 	virtual std::string GetAppPath();
 
-	//    virtual bool CreatePopupWindow(const char* title, int width, int
-	//    height);
-
 	virtual ax::Rect GetScreenRect();
 
 	virtual ax::Size GetScreenSize();

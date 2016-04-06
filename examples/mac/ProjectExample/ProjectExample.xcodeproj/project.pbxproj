@@ -12,6 +12,7 @@
 		7C2139061C9C95460050F676 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2139051C9C95460050F676 /* MainMenu.xib */; };
 		7C2139081C9C955B0050F676 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2139071C9C955B0050F676 /* Cocoa.framework */; };
 		7C21390A1C9C95610050F676 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2139091C9C95610050F676 /* OpenGL.framework */; };
+		7C3705271CB563400082E99C /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C3705251CB563400082E99C /* ColorPicker.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,8 @@
 		7C2139051C9C95460050F676 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		7C2139071C9C955B0050F676 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7C2139091C9C95610050F676 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7C3705251CB563400082E99C /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorPicker.cpp; sourceTree = "<group>"; };
+		7C3705261CB563400082E99C /* ColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPicker.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				7C2138EC1C9C94B00050F676 /* Info.plist */,
 				7C2138E41C9C94AF0050F676 /* Supporting Files */,
 				7C2139031C9C95290050F676 /* main.cpp */,
+				7C3705251CB563400082E99C /* ColorPicker.cpp */,
+				7C3705261CB563400082E99C /* ColorPicker.h */,
 			);
 			path = ProjectExample;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C2139041C9C95290050F676 /* main.cpp in Sources */,
+				7C3705271CB563400082E99C /* ColorPicker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +298,7 @@
 				7C2138F11C9C94B00050F676 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
