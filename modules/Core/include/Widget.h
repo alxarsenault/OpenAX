@@ -33,13 +33,14 @@ namespace widget {
 		INTEGER,
 		REAL,
 		TEXT,
+		FILEPATH,
 		COLOR,
 		ALIGNEMENT,
 		RANGE,
 		POINT,
 		SIZE,
 		BOOLEAN,
-		CUSTOM
+		CUSTOM,
 	};
 	
 	typedef std::pair<ParamType, std::string> ParamInfo;

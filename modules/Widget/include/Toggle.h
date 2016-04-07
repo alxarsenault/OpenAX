@@ -146,7 +146,7 @@ public:
 				widget::ParamInfo(widget::ParamType::COLOR, "contour"),
 				
 				widget::ParamInfo(widget::ParamType::INTEGER, "font_size"),
-				widget::ParamInfo(widget::ParamType::TEXT, "img"),
+				widget::ParamInfo(widget::ParamType::FILEPATH, "img"),
 				widget::ParamInfo(widget::ParamType::BOOLEAN, "single_img")  };
 		}
 	};

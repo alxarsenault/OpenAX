@@ -133,7 +133,7 @@ public:
 				widget::ParamInfo(widget::ParamType::COLOR, "backSliderColor"),
 				widget::ParamInfo(widget::ParamType::COLOR, "backSliderContourColor"),
 				
-				widget::ParamInfo(widget::ParamType::TEXT, "img_path"),
+				widget::ParamInfo(widget::ParamType::FILEPATH, "img_path"),
 				widget::ParamInfo(widget::ParamType::SIZE, "btn_size"),
 				widget::ParamInfo(widget::ParamType::INTEGER, "slider_width"),
 				widget::ParamInfo(widget::ParamType::INTEGER, "contour_round_radius")  };

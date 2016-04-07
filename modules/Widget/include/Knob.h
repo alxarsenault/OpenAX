@@ -98,8 +98,8 @@ public:
 				widget::ParamInfo(widget::ParamType::COLOR, "bgColorHover"),
 				widget::ParamInfo(widget::ParamType::COLOR, "bgColorClicked"),
 				
-				widget::ParamInfo(widget::ParamType::TEXT, "img_path"),
-				widget::ParamInfo(widget::ParamType::TEXT, "selected_img_path"),
+				widget::ParamInfo(widget::ParamType::FILEPATH, "img_path"),
+				widget::ParamInfo(widget::ParamType::FILEPATH, "selected_img_path"),
 				
 				widget::ParamInfo(widget::ParamType::SIZE, "knob_size"),
 				widget::ParamInfo(widget::ParamType::INTEGER, "n_knob") };
