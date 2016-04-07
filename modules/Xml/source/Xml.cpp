@@ -77,6 +77,24 @@ bool Xml::Parse()
 	return true;
 }
 
+	bool Xml::Parse(const std::string& content)
+	{		
+		_xml_buffer = std::vector<char>(content.begin(), content.end());
+		_xml_buffer.push_back('\0');
+		
+		_xml_doc.clear();
+		
+		try {
+			_xml_doc.parse<0>(&_xml_buffer[0]);
+		}
+		catch (rapidxml::parse_error& e) {
+			ax::Error("Xml parsing", e.what());
+			return false;
+		}
+		
+		return true;
+	}
+
 Xml::Node Xml::GetNode(const std::string& name)
 {
 	return Xml::Node(_xml_doc.first_node(name.c_str()));

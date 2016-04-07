@@ -82,7 +82,7 @@
 		7C74777F1CA9EA15009CBE23 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C74777E1CA9EA15009CBE23 /* libportaudio.a */; };
 		7C7477961CAA0F33009CBE23 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7477951CAA0F33009CBE23 /* libsndfile.a */; };
 		7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */; };
-		7CBD41671CB6AB01000A22C5 /* axNumberScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD41661CB6AB01000A22C5 /* axNumberScroll.cpp */; };
+		7CBD41671CB6AB01000A22C5 /* NumberScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -257,8 +257,8 @@
 		7C7477951CAA0F33009CBE23 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
 		7CBD41591CB60E74000A22C5 /* ColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColorPicker.h; path = ../../../../modules/Widget/include/ColorPicker.h; sourceTree = "<group>"; };
 		7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorPicker.cpp; path = ../../../../modules/Widget/source/ColorPicker.cpp; sourceTree = "<group>"; };
-		7CBD41651CB6AADA000A22C5 /* axNumberScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = axNumberScroll.h; path = ../../../../modules/Widget/include/axNumberScroll.h; sourceTree = "<group>"; };
-		7CBD41661CB6AB01000A22C5 /* axNumberScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = axNumberScroll.cpp; path = ../../../../modules/Widget/source/axNumberScroll.cpp; sourceTree = "<group>"; };
+		7CBD41651CB6AADA000A22C5 /* NumberScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberScroll.h; path = ../../../../modules/Widget/include/NumberScroll.h; sourceTree = "<group>"; };
+		7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NumberScroll.cpp; path = ../../../../modules/Widget/source/NumberScroll.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -528,7 +528,7 @@
 		7C2139B01C9C98820050F676 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				7CBD41651CB6AADA000A22C5 /* axNumberScroll.h */,
+				7CBD41651CB6AADA000A22C5 /* NumberScroll.h */,
 				7CBD41591CB60E74000A22C5 /* ColorPicker.h */,
 				7C213AA01C9C9B510050F676 /* Button.h */,
 				7C213AA11C9C9B510050F676 /* DropMenu.h */,
@@ -551,7 +551,7 @@
 		7C2139B11C9C98860050F676 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				7CBD41661CB6AB01000A22C5 /* axNumberScroll.cpp */,
+				7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */,
 				7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */,
 				7C213A841C9C9B460050F676 /* Button.cpp */,
 				7C213A851C9C9B460050F676 /* DropMenu.cpp */,
@@ -761,7 +761,7 @@
 				7C213A7A1C9C9B230050F676 /* Msg.cpp in Sources */,
 				7C213A931C9C9B460050F676 /* DropMenu.cpp in Sources */,
 				7C213A681C9C9B120050F676 /* Point2D.cpp in Sources */,
-				7CBD41671CB6AB01000A22C5 /* axNumberScroll.cpp in Sources */,
+				7CBD41671CB6AB01000A22C5 /* NumberScroll.cpp in Sources */,
 				7C74769D1CA84101009CBE23 /* axAudioBufferPlayer.cpp in Sources */,
 				7C213A9C1C9C9B460050F676 /* TextBox.cpp in Sources */,
 				7C213A451C9C9AFC0050F676 /* axCocoaInterfaceMac.mm in Sources */,

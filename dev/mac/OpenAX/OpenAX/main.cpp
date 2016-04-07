@@ -1,6 +1,7 @@
 #include "OpenAX.h"
 #include "Slider.h"
 #include "TextBox.h"
+#include "NumberScroll.h"
 
 int main()
 {
@@ -51,11 +52,13 @@ int main()
 		txtInfo.font_color = ax::Color(0.0);
 		
 		ax::TextBox::Events txt_evts;
-		auto txt_box(ax::shared<ax::TextBox>(ax::Rect(ax::Point(10, 10), ax::Size(200, 25)), txt_evts, txtInfo, "",
+		auto txt_box(ax::shared<ax::TextBox>(ax::Rect(ax::Point(10, 10), ax::Size(120, 24)), txt_evts, txtInfo, "",
 											 "Banana"));
 		
 		win->node.Add(txt_box);
 		
+		
+		win->node.Add(ax::shared<ax::NumberScroll>(ax::Rect(300, 300, 70, 25), 2.5));
 		
 
 	});

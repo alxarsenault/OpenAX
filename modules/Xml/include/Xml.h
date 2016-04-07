@@ -104,16 +104,25 @@ public:
 	
 	void Save(const std::string& path)
 	{
-			std::ofstream file_stored(path);
+		std::ofstream file_stored(path);
 		
-			file_stored << _xml_doc;
-			file_stored.close();
-			_xml_doc.clear();
+		file_stored << _xml_doc;
+		file_stored.close();
+		_xml_doc.clear();
+	}
+	
+	std::string GetString()
+	{
+		std::stringstream str;
+		str << _xml_doc;
+		return str.str();
 	}
 	
 	Node GetNode(const std::string& name);
 
 	bool Parse();
+	
+	bool Parse(const std::string&  content);
 	
 	Node CreateNode(const std::string& name)
 	{
