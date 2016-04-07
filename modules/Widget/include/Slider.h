@@ -116,22 +116,46 @@ public:
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
-
-		std::string img_path;
-		ax::Size btn_size;
-		unsigned int slider_width;
-		int contour_round_radius = 0;
+		
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
+		{
+			return {
+				widget::ParamInfo(widget::ParamType::COLOR, "bgColorNormal"),
+				widget::ParamInfo(widget::ParamType::COLOR, "bgColorHover"),
+				widget::ParamInfo(widget::ParamType::COLOR, "bgColorClicked"),
+				
+				widget::ParamInfo(widget::ParamType::COLOR, "sliderColorNormal"),
+				widget::ParamInfo(widget::ParamType::COLOR, "sliderColorHover"),
+				widget::ParamInfo(widget::ParamType::COLOR, "sliderColorClicked"),
+				widget::ParamInfo(widget::ParamType::COLOR, "sliderContourColor"),
+				
+				widget::ParamInfo(widget::ParamType::COLOR, "contourColor"),
+				widget::ParamInfo(widget::ParamType::COLOR, "backSliderColor"),
+				widget::ParamInfo(widget::ParamType::COLOR, "backSliderContourColor"),
+				
+				widget::ParamInfo(widget::ParamType::TEXT, "img_path"),
+				widget::ParamInfo(widget::ParamType::SIZE, "btn_size"),
+				widget::ParamInfo(widget::ParamType::INTEGER, "slider_width"),
+				widget::ParamInfo(widget::ParamType::INTEGER, "contour_round_radius")  };
+		}
 
 		ax::Color bgColorNormal;
 		ax::Color bgColorHover;
 		ax::Color bgColorClicked;
+		
 		ax::Color sliderColorNormal;
 		ax::Color sliderColorHover;
 		ax::Color sliderColorClicked;
 		ax::Color sliderContourColor;
+		
 		ax::Color contourColor;
 		ax::Color backSliderColor;
 		ax::Color backSliderContourColor;
+		
+		std::string img_path;
+		ax::Size btn_size;
+		unsigned int slider_width;
+		int contour_round_radius = 0;
 	};
 
 	class Component : public ax::widget::Component {

@@ -116,6 +116,9 @@ std::string ax::Toggle::Info::GetAttributeValue(const std::string& name)
 	else if (name == "selected_clicking") {
 		return selected_clicking.ToString();
 	}
+	else if(name == "selected_font_color") {
+		return selected_font_color.ToString();
+	}
 	else if (name == "contour") {
 		return contour.ToString();
 	}
@@ -151,6 +154,9 @@ void ax::Toggle::Info::SetAttribute(const ax::StringPair& attribute)
 	}
 	else if (attribute.first == "selected_clicking") {
 		selected.LoadFromString(attribute.second);
+	}
+	else if (attribute.first == "selected_font_color") {
+		selected_font_color.LoadFromString(attribute.second);
 	}
 	else if (attribute.first == "contour") {
 		contour.LoadFromString(attribute.second);

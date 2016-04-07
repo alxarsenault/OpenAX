@@ -26,6 +26,8 @@
 /// @defgroup Utils
 /// @{
 
+#include <memory>
+
 namespace ax {
 template <typename T, typename... P> std::shared_ptr<T> shared(P... p)
 {

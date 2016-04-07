@@ -90,11 +90,26 @@ public:
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
+		
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
+		{
+			return {
+				widget::ParamInfo(widget::ParamType::COLOR, "bgColorNormal"),
+				widget::ParamInfo(widget::ParamType::COLOR, "bgColorHover"),
+				widget::ParamInfo(widget::ParamType::COLOR, "bgColorClicked"),
+				
+				widget::ParamInfo(widget::ParamType::TEXT, "img_path"),
+				widget::ParamInfo(widget::ParamType::TEXT, "selected_img_path"),
+				
+				widget::ParamInfo(widget::ParamType::SIZE, "knob_size"),
+				widget::ParamInfo(widget::ParamType::INTEGER, "n_knob") };
+		}
 
+		ax::Color bgColorNormal, bgColorHover, bgColorClicked;
 		std::string img_path, selected_img_path;
 		ax::Size knob_size;
 		unsigned int n_knob;
-		ax::Color bgColorNormal, bgColorHover, bgColorClicked;
+		
 		std::shared_ptr<ax::Image> img;
 	};
 

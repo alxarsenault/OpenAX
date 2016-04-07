@@ -38,6 +38,7 @@ namespace widget {
 		RANGE,
 		POINT,
 		SIZE,
+		BOOLEAN,
 		CUSTOM
 	};
 	

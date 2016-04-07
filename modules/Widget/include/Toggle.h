@@ -24,7 +24,7 @@
 #define __AX_TOGGLE__
 
 /*
- * @file    axToggle
+ * @file    axToggle.h
  * @author  Alexandre Arsenault <alx.arsenault@gmail.com>
  * @brief   axToggle.
  * @date    19/07/2013
@@ -110,16 +110,16 @@ public:
 		ax::Color normal;
 		ax::Color hover;
 		ax::Color clicking;
-
+		ax::Color font_color;
+		
 		ax::Color selected;
 		ax::Color selected_hover;
 		ax::Color selected_clicking;
-
 		/// @todo Add select font color to axToggle.
 		ax::Color selected_font_color;
 
 		ax::Color contour;
-		ax::Color font_color;
+		
 		int font_size = 12;
 
 		std::string img;
@@ -129,6 +129,26 @@ public:
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
+		
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
+		{
+			return {
+				widget::ParamInfo(widget::ParamType::COLOR, "normal"),
+				widget::ParamInfo(widget::ParamType::COLOR, "hover"),
+				widget::ParamInfo(widget::ParamType::COLOR, "clicking"),
+				widget::ParamInfo(widget::ParamType::COLOR, "font_color"),
+				
+				widget::ParamInfo(widget::ParamType::COLOR, "selected"),
+				widget::ParamInfo(widget::ParamType::COLOR, "selected_hover"),
+				widget::ParamInfo(widget::ParamType::COLOR, "selected_clicking"),
+				widget::ParamInfo(widget::ParamType::COLOR, "selected_font_color"),
+				
+				widget::ParamInfo(widget::ParamType::COLOR, "contour"),
+				
+				widget::ParamInfo(widget::ParamType::INTEGER, "font_size"),
+				widget::ParamInfo(widget::ParamType::TEXT, "img"),
+				widget::ParamInfo(widget::ParamType::BOOLEAN, "single_img")  };
+		}
 	};
 
 	class Component : public ax::widget::Component {

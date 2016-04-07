@@ -81,6 +81,7 @@
 		7C7476A51CA84101009CBE23 /* axAudioWaveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476991CA84101009CBE23 /* axAudioWaveTable.cpp */; };
 		7C74777F1CA9EA15009CBE23 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C74777E1CA9EA15009CBE23 /* libportaudio.a */; };
 		7C7477961CAA0F33009CBE23 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7477951CAA0F33009CBE23 /* libsndfile.a */; };
+		7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -253,6 +254,8 @@
 		7C7476B11CA8410B009CBE23 /* axAudioWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = axAudioWaveTable.h; path = ../../../../modules/Audio/include/axAudioWaveTable.h; sourceTree = "<group>"; };
 		7C74777E1CA9EA15009CBE23 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../../../../../usr/local/lib/libportaudio.a; sourceTree = "<group>"; };
 		7C7477951CAA0F33009CBE23 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
+		7CBD41591CB60E74000A22C5 /* ColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColorPicker.h; path = ../../../../modules/Widget/include/ColorPicker.h; sourceTree = "<group>"; };
+		7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorPicker.cpp; path = ../../../../modules/Widget/source/ColorPicker.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,6 +525,7 @@
 		7C2139B01C9C98820050F676 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				7CBD41591CB60E74000A22C5 /* ColorPicker.h */,
 				7C213AA01C9C9B510050F676 /* Button.h */,
 				7C213AA11C9C9B510050F676 /* DropMenu.h */,
 				7C213AA21C9C9B510050F676 /* Knob.h */,
@@ -543,6 +547,7 @@
 		7C2139B11C9C98860050F676 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */,
 				7C213A841C9C9B460050F676 /* Button.cpp */,
 				7C213A851C9C9B460050F676 /* DropMenu.cpp */,
 				7C213A861C9C9B460050F676 /* Knob.cpp */,
@@ -764,6 +769,7 @@
 				7C213ACD1C9C9B720050F676 /* OSExec.cpp in Sources */,
 				7C213A171C9C99340050F676 /* main.cpp in Sources */,
 				7C213AC31C9C9B630050F676 /* Shader.cpp in Sources */,
+				7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */,
 				7C213A441C9C9AFC0050F676 /* AppDelegate.mm in Sources */,
 				7C213A341C9C9AF10050F676 /* Core.cpp in Sources */,
 				7C213A691C9C9B120050F676 /* Print.cpp in Sources */,

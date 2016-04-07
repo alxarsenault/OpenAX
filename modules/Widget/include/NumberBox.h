@@ -112,6 +112,21 @@ public:
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
+		
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
+		{
+			return {
+				widget::ParamInfo(widget::ParamType::COLOR, "normal"),
+				widget::ParamInfo(widget::ParamType::COLOR, "hover"),
+				widget::ParamInfo(widget::ParamType::COLOR, "clicking"),
+				widget::ParamInfo(widget::ParamType::COLOR, "selected"),
+				widget::ParamInfo(widget::ParamType::COLOR, "contour"),
+				widget::ParamInfo(widget::ParamType::COLOR, "font_color"),
+				
+				widget::ParamInfo(widget::ParamType::TEXT, "img"),
+				widget::ParamInfo(widget::ParamType::BOOLEAN, "single_img")
+				};
+		}
 
 		ax::Color normal;
 		ax::Color hover;
