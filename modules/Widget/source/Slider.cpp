@@ -280,6 +280,45 @@ std::vector<ax::widget::ParamInfo> ax::Slider::Component::GetBuilderAttributesIn
 		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "flags") };
 }
 
+void Slider::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
+{
+	ax::Slider* sld = static_cast<ax::Slider*>(GetWindow()->backbone.get());
+
+	//		for (auto& n : attributes) {
+	//			if (n.first == "position") {
+	//				ax::Point pos = ax::Xml::StringToSize(n.second);
+	//				GetWindow()->dimension.SetPosition(pos);
+	//			}
+	//			else if (n.first == "size") {
+	//				ax::Size size = ax::Xml::StringToSize(n.second);
+	//				GetWindow()->dimension.SetSize(size);
+	//			}
+	//			else if (n.first == "msg") {
+	//				knob->SetMsg(n.second);
+	//			}
+	//		}
+}
+
+void Slider::Component::SetInfo(const ax::StringPairVector& attributes)
+{
+	_info->SetAttributes(attributes);
+}
+
+void Slider::Component::ReloadInfo()
+{
+	//			Knob* knob_obj = static_cast<Knob*>(_win->backbone.get());
+	//		Knob::Info* info = static_cast<Knob::Info*>(_info);
+	//
+	//		if (knob_obj->_knobImg->GetImagePath() != info->img_path) {
+	//			knob_obj->_knobImg.reset(new Image(info->img_path));
+	//		}
+	//
+	//		knob_obj->_currentBgColor = info->bgColorNormal;
+	//		knob_obj->_nCurrentImg = knob_obj->_knobValue * (info->n_knob - 1);
+	//
+	//		_win->Update();
+}
+
 Slider::Builder::Builder()
 {
 }
@@ -511,8 +550,6 @@ ax::Slider::Slider(
 
 void ax::Slider::OnResize(const ax::Size& size)
 {
-	ax::Print("ax::Slider::OnResize");
-
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {
 		_sliderYPos = (size.x - _info.slider_width) * 0.5;
 		_btnYPos = (size.x - _info.btn_size.x) * 0.5;
