@@ -125,21 +125,26 @@ void axMouseManager::OnMouseMotion(const ax::Point& pos)
 
 void axMouseManager::OnMouseLeftDoubleClick(const ax::Point& pos)
 {
-	ax::Print("TODO FIX THIS : axMouseManager.cpp Line 122");
 	_mousePosition = pos;
 
+//	ax::Print("OnMouseLeftDoubleClick");
+
 	if (_mouseCaptureWindow != nullptr) {
-		//_mouseCaptureWindow->OnMouseLeftDown(pos);
-		//_evtHasReachWindow = true;
+//		ax::Print("Captured");
+//		_mouseCaptureWindow->event.OnMouseLeftDoubleClick(pos);
+//		_evtHasReachWindow = true;
 	}
 	else {
+//		ax::Print("Not Captured");
 		ax::Window* win = _windowTree->FindMousePosition(pos);
 
 		_currentWindow = win;
 
 		if (win != nullptr) {
+			ax::Print("Win id :", win->GetId());
 			win->event.OnMouseLeftDoubleClick(pos);
 			_evtHasReachWindow = true;
+//			ax::Print("Win not null");
 		}
 		else {
 			_evtHasReachWindow = false;

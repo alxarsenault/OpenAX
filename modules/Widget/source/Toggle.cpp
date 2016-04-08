@@ -427,6 +427,8 @@ ax::Toggle::Toggle(const ax::Rect& rect, const ax::Toggle::Events& events, const
 	win->event.OnMouseLeftUp = ax::WBind<ax::Point>(this, &Toggle::OnMouseLeftUp);
 	win->event.OnMouseEnter = ax::WBind<ax::Point>(this, &Toggle::OnMouseEnter);
 	win->event.OnMouseLeave = ax::WBind<ax::Point>(this, &Toggle::OnMouseLeave);
+	win->event.OnMouseLeftDoubleClick = ax::WBind<ax::Point>(this, &Toggle::OnMouseLeftDoubleClick);
+	
 
 	// Add info component.
 	win->component.Add(
@@ -549,6 +551,8 @@ void ax::Toggle::OnMouseLeftUp(const ax::Point& pos)
 
 void ax::Toggle::OnMouseEnter(const ax::Point& pos)
 {
+	ax::Print("Toggle id", win->GetId());
+	
 	if (!win->event.IsGrabbed()) {
 		if (_selected) {
 			_currentColor = _info->selected_hover;
@@ -577,6 +581,11 @@ void ax::Toggle::OnMouseLeave(const ax::Point& pos)
 	}
 
 	win->Update();
+}
+
+void ax::Toggle::OnMouseLeftDoubleClick(const ax::Point& pos)
+{
+	OnMouseLeftDown(pos);
 }
 
 void ax::Toggle::OnPaint(ax::GC gc)

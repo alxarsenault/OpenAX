@@ -236,6 +236,7 @@ protected:
 	virtual void OnMouseLeftUp(const ax::Point& pos);
 	virtual void OnMouseEnter(const ax::Point& pos);
 	virtual void OnMouseLeave(const ax::Point& pos);
+	virtual void OnMouseLeftDoubleClick(const ax::Point& pos);
 };
 }
 /// @}

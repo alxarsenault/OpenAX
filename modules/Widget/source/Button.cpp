@@ -391,6 +391,7 @@ Button::Button(const Rect& rect, const Button::Events& events, const Button::Inf
 	win->event.OnMouseLeftUp = WBind<Point>(this, &Button::OnMouseLeftUp);
 	win->event.OnMouseEnter = WBind<Point>(this, &Button::OnMouseEnter);
 	win->event.OnMouseLeave = WBind<Point>(this, &Button::OnMouseLeave);
+	win->event.OnMouseLeftDoubleClick = WBind<Point>(this, &Button::OnMouseLeftDoubleClick);
 
 	win->component.Add("Widget", widget::Component::Ptr(new Button::Component(win, new Button::Info(info))));
 
@@ -424,6 +425,7 @@ Button::Button(const Point& pos, const Button::Events& events, std::string label
 	win->event.OnMouseLeftUp = WBind<Point>(this, &Button::OnMouseLeftUp);
 	win->event.OnMouseEnter = WBind<Point>(this, &Button::OnMouseEnter);
 	win->event.OnMouseLeave = WBind<Point>(this, &Button::OnMouseLeave);
+	win->event.OnMouseLeftDoubleClick = WBind<Point>(this, &Button::OnMouseLeftDoubleClick);
 
 	win->component.Add("Widget", widget::Component::Ptr(new Button::Component(win, new Button::Info(info))));
 
@@ -485,6 +487,12 @@ void Button::OnMouseLeftDown(const Point& pos)
 	win->PushEvent(Events::BUTTON_CLICK, new Msg(this, _msg));
 
 	win->Update();
+}
+
+void Button::OnMouseLeftDoubleClick(const ax::Point& pos)
+{
+	ax::Print("Button double click");
+	OnMouseLeftDown(pos);
 }
 
 void Button::OnMouseLeftUp(const Point& pos)
