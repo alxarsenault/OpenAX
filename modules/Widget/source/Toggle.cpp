@@ -354,7 +354,9 @@ void ax::Toggle::Component::ReloadInfo()
 			break;
 	}
 	
-	tog->_bgImg.reset(new ax::Image(info->img));
+	if(tog->_bgImg->GetImagePath() != info->img) {
+		tog->_bgImg.reset(new ax::Image(info->img));
+	}
 	
 	_win->Update();
 }
@@ -626,8 +628,6 @@ void ax::Toggle::OnMouseLeftUp(const ax::Point& pos)
 
 void ax::Toggle::OnMouseEnter(const ax::Point& pos)
 {
-	ax::Print("Toggle id", win->GetId());
-	
 	if (!win->event.IsGrabbed()) {
 		if (_selected) {
 			_currentColor = _info->selected_hover;
