@@ -52,7 +52,7 @@ Panel::Info::Info(const StringPairVector& attributes)
 
 StringVector Panel::Info::GetParamNameList() const
 {
-	return StringVector{ "background", "contour", "corner_radius" };
+	return StringVector{ "background", "contour", "round_corner_radius" };
 }
 
 std::string Panel::Info::GetAttributeValue(const std::string& name)
@@ -63,7 +63,7 @@ std::string Panel::Info::GetAttributeValue(const std::string& name)
 	else if (name == "contour") {
 		return contour.ToString();
 	}
-	else if (name == "corner_radius") {
+	else if (name == "round_corner_radius") {
 		return std::to_string(round_corner_radius);
 	}
 
@@ -78,7 +78,7 @@ void Panel::Info::SetAttribute(const StringPair& attribute)
 	else if (attribute.first == "contour") {
 		contour = ax::Xml::StringToColor(attribute.second);
 	}
-	else if (attribute.first == "corner_radius") {
+	else if (attribute.first == "round_corner_radius") {
 		round_corner_radius = std::stoi(attribute.second);
 	}
 }
