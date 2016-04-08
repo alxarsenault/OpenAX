@@ -210,7 +210,6 @@ public:
 
 protected:
 	Button::Events _events;
-//	ax::Image* _btnImg;
 	std::unique_ptr<ax::Image> _btnImg;
 	ax::Flag _flags;
 	std::string _label, _msg;

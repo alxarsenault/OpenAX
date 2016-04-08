@@ -269,14 +269,28 @@ void Button::Component::ReloadInfo()
 	Button* btn = static_cast<Button*>(_win->backbone.get());
 	Button::Info* info = static_cast<Button::Info*>(_info);
 
-	btn->_currentColor = info->normal;
+	switch (btn->_nCurrentImg) {
+	case axBTN_NORMAL:
+		btn->_currentColor = info->normal;
+		break;
+	case axBTN_HOVER:
+		btn->_currentColor = info->hover;
+		break;
+	case axBTN_DOWN:
+		btn->_currentColor = info->clicking;
+		break;
+	case axBTN_SELECTED:
+		btn->_currentColor = info->selected;
+		break;
+	}
+
 	_win->Update();
 }
 
 void Button::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
 {
 	ax::Button* btn = static_cast<ax::Button*>(GetWindow()->backbone.get());
-	
+
 	for (auto& n : attributes) {
 		if (n.first == "position") {
 			ax::Point pos = ax::Xml::StringToSize(n.second);
@@ -296,7 +310,7 @@ void Button::Component::SetBuilderAttributes(const ax::StringPairVector& attribu
 			btn->SetMsg(n.second);
 		}
 	}
-	
+
 	GetWindow()->Update();
 }
 
@@ -440,7 +454,6 @@ Button::Button(const Rect& rect, const Button::Events& events, const Button::Inf
 
 	_currentColor = info.normal;
 
-//	_btnImg = new Image(img_path);
 	_btnImg = std::unique_ptr<ax::Image>(new Image(img_path));
 
 	if (_events.button_click) {
@@ -475,7 +488,6 @@ Button::Button(const Point& pos, const Button::Events& events, std::string label
 
 	_currentColor = info.normal;
 
-//	_btnImg = new Image(img_path);
 	_btnImg = std::unique_ptr<ax::Image>(new Image(img_path));
 
 	if (_events.button_click) {
@@ -534,7 +546,6 @@ void Button::OnMouseLeftDown(const Point& pos)
 
 void Button::OnMouseLeftDoubleClick(const ax::Point& pos)
 {
-	ax::Print("Button double click");
 	OnMouseLeftDown(pos);
 }
 
