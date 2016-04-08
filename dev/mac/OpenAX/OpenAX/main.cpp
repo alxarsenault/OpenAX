@@ -54,9 +54,31 @@ int main()
 			ax::Rect(ax::Point(10, 10), ax::Size(120, 24)), txt_evts, txtInfo, "", "Banana"));
 
 		win->node.Add(txt_box);
-
-		win->node.Add(ax::shared<ax::NumberScroll>(ax::Rect(300, 300, 70, 25), ax::NumberScroll::Events(),
-			ax::NumberScroll::Info(), 12, ax::Utils::Control::Type::INTEGER,
+		
+		ax::NumberScroll::Info scroll_info;
+		scroll_info.up_btn = "drop_up.png";
+		scroll_info.down_btn = "drop_down.png";
+		
+		// Txt box.
+		scroll_info.txt_info.normal = ax::Color(1.0);
+		scroll_info.txt_info.hover = ax::Color(1.0);
+		scroll_info.txt_info.selected = ax::Color(1.0);
+		scroll_info.txt_info.highlight = ax::Color(0.4f, 0.4f, 0.6f, 0.2f);
+		scroll_info.txt_info.contour = ax::Color(0.7);
+		scroll_info.txt_info.cursor = ax::Color(1.0f, 0.0f, 0.0f);
+		scroll_info.txt_info.selected_shadow = ax::Color(0.8f, 0.8f, 0.8f);
+		scroll_info.txt_info.font_color = ax::Color(0.0);
+		
+		// Button.
+		scroll_info.btn_info.normal = ax::Color(0.85);
+		scroll_info.btn_info.hover = ax::Color(0.86);
+		scroll_info.btn_info.clicking = ax::Color(0.83);
+		scroll_info.btn_info.selected = scroll_info.btn_info.normal;
+		scroll_info.btn_info.contour = ax::Color(0.7);
+		scroll_info.btn_info.font_color = ax::Color(0.0, 0.0);
+		
+		win->node.Add(ax::shared<ax::NumberScroll>(ax::Rect(300, 300, 70, 20), ax::NumberScroll::Events(),
+			scroll_info, 12, ax::Utils::Control::Type::INTEGER,
 			ax::Utils::Range<double>(1.0, 10000.0), 1.0));
 
 	});

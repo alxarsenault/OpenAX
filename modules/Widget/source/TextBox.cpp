@@ -454,7 +454,7 @@ void TextBox::OnPaint(ax::GC gc)
 	gc.SetColor(_currentColor);
 	gc.DrawRectangle(rect);
 
-	ax::Point next_pos(5, 5);
+	ax::Point next_pos(5, (rect.size.y - _font->GetFontSize()) / 2 - 1);
 	widget::Component::Ptr widget = win->component.Get<widget::Component>("Widget");
 	TextBox::Info& info = *static_cast<TextBox::Info*>(widget->GetInfo());
 
@@ -517,12 +517,12 @@ void TextBox::OnPaint(ax::GC gc)
 	if (_isHightlight) // hightlight on.
 	{
 		gc.SetColor(info.highlight);
-		gc.DrawRectangle(ax::Rect(5, 5, _lastCharXPosition - 5, rect.size.y - 10));
+		gc.DrawRectangle(ax::Rect(3, 3, _lastCharXPosition - 2, rect.size.y - 5));
 	}
 
 	if (win->event.IsKeyGrab() && _cursorFlashActive) {
 		gc.SetColor(info.cursor);
-		gc.DrawLine(ax::Point(_cursorBarXPosition, 5), ax::Point(_cursorBarXPosition, rect.size.y - 5));
+		gc.DrawLine(ax::Point(_cursorBarXPosition, 3), ax::Point(_cursorBarXPosition, rect.size.y - 2));
 	}
 
 	gc.SetColor(info.contour);
