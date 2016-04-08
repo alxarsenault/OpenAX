@@ -141,31 +141,31 @@ std::string ax::Toggle::Info::GetAttributeValue(const std::string& name)
 void ax::Toggle::Info::SetAttribute(const ax::StringPair& attribute)
 {
 	if (attribute.first == "normal") {
-		normal.LoadFromString(attribute.second);
+		normal = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "hover") {
-		hover.LoadFromString(attribute.second);
+		hover = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "clicking") {
-		clicking.LoadFromString(attribute.second);
+		clicking = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected") {
-		selected.LoadFromString(attribute.second);
+		selected = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected_hover") {
-		selected.LoadFromString(attribute.second);
+		selected_hover = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected_clicking") {
-		selected.LoadFromString(attribute.second);
+		selected_clicking = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected_font_color") {
-		selected_font_color.LoadFromString(attribute.second);
+		selected_font_color = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "contour") {
-		contour.LoadFromString(attribute.second);
+		contour = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "font_color") {
-		font_color.LoadFromString(attribute.second);
+		font_color = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "font_size") {
 		font_size = std::stoi(attribute.second);
