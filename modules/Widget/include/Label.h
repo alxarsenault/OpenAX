@@ -48,7 +48,6 @@ public:
 		{
 			return { widget::ParamInfo(widget::ParamType::COLOR, "normal"),
 					 widget::ParamInfo(widget::ParamType::COLOR, "contour"),
-					 widget::ParamInfo(widget::ParamType::COLOR, "normal"),
 					 widget::ParamInfo(widget::ParamType::COLOR, "font_color"),
 					 widget::ParamInfo(widget::ParamType::INTEGER, "font_size"),
 					 widget::ParamInfo(widget::ParamType::TEXT, "font_name"),
