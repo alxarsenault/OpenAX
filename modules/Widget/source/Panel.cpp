@@ -73,10 +73,10 @@ std::string Panel::Info::GetAttributeValue(const std::string& name)
 void Panel::Info::SetAttribute(const StringPair& attribute)
 {
 	if (attribute.first == "background") {
-		background.LoadFromString(attribute.second);
+		background = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "contour") {
-		contour.LoadFromString(attribute.second);
+		contour = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "corner_radius") {
 		round_corner_radius = std::stoi(attribute.second);
@@ -190,6 +190,8 @@ void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attribut
 			ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
 		}
 	}
+	
+	GetWindow()->Update();
 }
 
 std::vector<ax::widget::ParamInfo> Panel::Component::GetBuilderAttributesInfo() const
@@ -197,6 +199,16 @@ std::vector<ax::widget::ParamInfo> Panel::Component::GetBuilderAttributesInfo() 
 	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
 		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
 		ax::widget::ParamInfo(ax::widget::ParamType::FILEPATH, "bg_img") };
+}
+
+void Panel::Component::ReloadInfo()
+{
+	_win->Update();
+}
+
+void Panel::Component::SetInfo(const ax::StringPairVector& attributes)
+{
+	_info->SetAttributes(attributes);
 }
 
 Panel::Builder::Builder()
@@ -344,6 +356,7 @@ void Panel::OnPaint(GC gc)
 	Panel::Info* info = static_cast<Panel::Info*>(widget->GetInfo());
 
 	const int radius = info->round_corner_radius;
+	
 	if (radius > 0.0) {
 		gc.SetColor(info->background);
 		gc.DrawRoundedRectangle(rect, radius);

@@ -103,6 +103,9 @@ public:
 		std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
 
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
+		
+		virtual void SetInfo(const ax::StringPairVector& attributes);
+		virtual void ReloadInfo();
 
 	private:
 		std::function<void(ax::Xml&, ax::Xml::Node&, ax::Window*)> _save_child_callback;
