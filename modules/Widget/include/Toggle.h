@@ -157,7 +157,13 @@ public:
 
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
+		
+		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
+		
 		virtual std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
+		
+		virtual void ReloadInfo();
+		virtual void SetInfo(const ax::StringPairVector& attributes);
 	};
 
 	class Builder : public ax::widget::Builder {
@@ -189,12 +195,18 @@ public:
 	{
 		return _label;
 	}
+	
+	void SetLabel(const std::string& label)
+	{
+		_label = label;
+		win->Update();
+	}
 
 	std::string GetMsg() const
 	{
 		return _msg;
 	}
-
+	
 	ax::Flag GetFlags() const
 	{
 		return _flags;

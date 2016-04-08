@@ -304,6 +304,66 @@ std::vector<ax::widget::ParamInfo> ax::Toggle::Component::GetBuilderAttributesIn
 		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "flags") };
 }
 
+void ax::Toggle::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
+{
+	ax::Toggle* tog = static_cast<ax::Toggle*>(GetWindow()->backbone.get());
+	
+	for (auto& n : attributes) {
+		if (n.first == "position") {
+			ax::Point pos = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetPosition(pos);
+		}
+		else if (n.first == "size") {
+			ax::Size size = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetSize(size);
+		}
+		else if (n.first == "label") {
+			tog->SetLabel(n.second);
+		}
+		else if (n.first == "msg") {
+			tog->SetMsg(n.second);
+		}
+	}
+	
+	GetWindow()->Update();
+}
+
+void ax::Toggle::Component::ReloadInfo()
+{
+	Toggle* tog = static_cast<Toggle*>(_win->backbone.get());
+	Toggle::Info* info = static_cast<Toggle::Info*>(_info);
+
+	switch (tog->_nCurrentImg) {
+		case axTOG_NORMAL:
+			tog->_currentColor = info->normal;
+			break;
+		case axTOG_HOVER:
+			tog->_currentColor = info->hover;
+			break;
+		case axTOG_CLICK:
+			tog->_currentColor = info->clicking;
+			break;
+		case axTOG_SEL_NORMAL:
+			tog->_currentColor = info->selected;
+			break;
+		case axTOG_SEL_HOVER:
+			tog->_currentColor = info->selected_hover;
+			break;
+		case axTOG_SEL_CLICK:
+			tog->_currentColor = info->selected_clicking;
+			break;
+	}
+	
+	tog->_bgImg.reset(new ax::Image(info->img));
+	
+	_win->Update();
+}
+
+void ax::Toggle::Component::SetInfo(const ax::StringPairVector& attributes)
+{
+	_info->SetAttributes(attributes);
+}
+
 ax::Toggle::Builder::Builder()
 {
 }
