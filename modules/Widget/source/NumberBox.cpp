@@ -343,7 +343,7 @@ void ax::NumberBox::OnPaint(ax::GC gcs)
 
 	gc->SetColor(info.font_color);
 
-	if (_type == ax::Utils::Control::Type::axCTRL_FLOAT) {
+	if (_type == ax::Utils::Control::Type::REAL) {
 		std::string v = std::to_string(_value);
 		if (_value < 0) {
 			v.resize(5);
@@ -354,7 +354,7 @@ void ax::NumberBox::OnPaint(ax::GC gcs)
 
 		gc->DrawStringAlignedCenter(*_font, v, rect0);
 	}
-	else if (_type == ax::Utils::Control::Type::axCTRL_INT) {
+	else if (_type == ax::Utils::Control::Type::INTEGER) {
 		std::string v = std::to_string((int)_value);
 		gc->DrawStringAlignedCenter(*_font, v, rect0);
 	}

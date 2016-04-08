@@ -32,7 +32,7 @@ namespace Utils {
 		/*
 		 * ax::Utils::Control::Type.
 		 */
-		enum Type { axCTRL_NO_TYPE, axCTRL_FLOAT, axCTRL_INT, axCTRL_PAN };
+		enum class Type { INTEGER, REAL, BOOLEAN };
 
 		/*
 		 * ax::Utils::Control::Unit.

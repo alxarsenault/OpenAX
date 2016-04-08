@@ -144,7 +144,7 @@ public:
 	 */
 	NumberBox(const ax::Rect& rect, const ax::NumberBox::Events& events, const ax::NumberBox::Info& info,
 		ax::Flag flags = 0, double value = 0.0, ax::FloatRange range = ax::FloatRange(0.0, 1.0),
-		ax::Utils::Control::Type type = ax::Utils::Control::axCTRL_FLOAT,
+		ax::Utils::Control::Type type = ax::Utils::Control::Type::REAL,
 		ax::Utils::Control::Unit m_unit = ax::Utils::Control::axCTRL_NO_UNIT,
 		ax::Utils::Control::Interpolation interpolation = ax::Utils::Control::axCTRL_LINEAR,
 		std::string label = "");
@@ -152,7 +152,7 @@ public:
 	NumberBox(const ax::Point& pos, const ax::NumberBox::Events& events = ax::NumberBox::Events(),
 		const ax::NumberBox::Info& info = ax::NumberBox::Info(), ax::Flag flags = 0, double value = 0.0,
 		ax::FloatRange range = ax::FloatRange(0.0, 1.0),
-		ax::Utils::Control::Type type = ax::Utils::Control::axCTRL_FLOAT,
+		ax::Utils::Control::Type type = ax::Utils::Control::Type::REAL,
 		ax::Utils::Control::Unit m_unit = ax::Utils::Control::axCTRL_NO_UNIT,
 		ax::Utils::Control::Interpolation interpolation = ax::Utils::Control::axCTRL_LINEAR,
 		std::string label = "");
@@ -161,7 +161,7 @@ public:
 		const ax::NumberBox::Events& events = ax::NumberBox::Events(),
 		const ax::NumberBox::Info& info = ax::NumberBox::Info(), ax::Flag flags = 0, double value = 0.0,
 		ax::FloatRange range = ax::FloatRange(0.0, 1.0),
-		ax::Utils::Control::Type type = ax::Utils::Control::axCTRL_FLOAT,
+		ax::Utils::Control::Type type = ax::Utils::Control::Type::REAL,
 		ax::Utils::Control::Unit m_unit = ax::Utils::Control::axCTRL_NO_UNIT,
 		ax::Utils::Control::Interpolation interpolation = ax::Utils::Control::axCTRL_LINEAR,
 		std::string label = "")
