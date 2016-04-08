@@ -190,7 +190,7 @@ std::vector<ax::widget::ParamInfo> Knob::Component::GetBuilderAttributesInfo() c
 void Knob::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
 {
 	ax::Knob* knob = static_cast<ax::Knob*>(GetWindow()->backbone.get());
-	
+
 	for (auto& n : attributes) {
 		if (n.first == "position") {
 			ax::Point pos = ax::Xml::StringToSize(n.second);
@@ -215,8 +215,8 @@ void Knob::Component::ReloadInfo()
 {
 	Knob* knob_obj = static_cast<Knob*>(_win->backbone.get());
 	Knob::Info* info = static_cast<Knob::Info*>(_info);
-	
-	if(knob_obj->_knobImg->GetImagePath() != info->img_path) {
+
+	if (knob_obj->_knobImg->GetImagePath() != info->img_path) {
 		knob_obj->_knobImg.reset(new Image(info->img_path));
 	}
 
@@ -423,8 +423,8 @@ void Knob::OnPaint(GC gc)
 	gc.DrawRectangle(rect);
 
 	if (_knobImg) {
-		gc.DrawPartOfImage(
-			_knobImg.get(), Point(_nCurrentImg * info.knob_size.x, 0), info.knob_size, Point(0, 0));
+		gc.DrawPartOfImageResize(_knobImg.get(), Point(_nCurrentImg * info.knob_size.x, 0), info.knob_size,
+			ax::Rect(ax::Point(0, 0), rect.size));
 	}
 }
 }
