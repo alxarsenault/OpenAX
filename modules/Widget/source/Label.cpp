@@ -40,6 +40,16 @@ ax::StringVector Label::Info::GetParamNameList() const
 	return ax::StringVector{ "normal", "contour", "font_color", "font_name", "font_size", "alignement" };
 }
 
+std::vector<widget::ParamInfo> Label::Info::GetParametersInfo() const
+{
+	return { widget::ParamInfo(widget::ParamType::COLOR, "normal"),
+		widget::ParamInfo(widget::ParamType::COLOR, "contour"),
+		widget::ParamInfo(widget::ParamType::COLOR, "font_color"),
+		widget::ParamInfo(widget::ParamType::INTEGER, "font_size"),
+		widget::ParamInfo(widget::ParamType::TEXT, "font_name"),
+		widget::ParamInfo(widget::ParamType::ALIGNEMENT, "alignement") };
+}
+
 std::string Label::Info::GetAttributeValue(const std::string& name)
 {
 	if (name == "normal") {

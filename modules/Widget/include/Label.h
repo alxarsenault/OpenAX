@@ -44,15 +44,7 @@ public:
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
 		
-		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
-		{
-			return { widget::ParamInfo(widget::ParamType::COLOR, "normal"),
-					 widget::ParamInfo(widget::ParamType::COLOR, "contour"),
-					 widget::ParamInfo(widget::ParamType::COLOR, "font_color"),
-					 widget::ParamInfo(widget::ParamType::INTEGER, "font_size"),
-					 widget::ParamInfo(widget::ParamType::TEXT, "font_name"),
-					 widget::ParamInfo(widget::ParamType::ALIGNEMENT, "alignement")  };
-		}
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const;
 
 		ax::Color normal;
 		ax::Color contour;
