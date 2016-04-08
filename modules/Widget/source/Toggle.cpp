@@ -125,6 +125,9 @@ std::string ax::Toggle::Info::GetAttributeValue(const std::string& name)
 	else if (name == "font_color") {
 		return font_color.ToString();
 	}
+	else if (name == "font_size") {
+		return std::to_string((int)font_size);
+	}
 	else if (name == "img") {
 		return img;
 	}
@@ -163,6 +166,9 @@ void ax::Toggle::Info::SetAttribute(const ax::StringPair& attribute)
 	}
 	else if (attribute.first == "font_color") {
 		font_color.LoadFromString(attribute.second);
+	}
+	else if (attribute.first == "font_size") {
+		font_size = std::stoi(attribute.second);
 	}
 	else if (attribute.first == "img") {
 		img = attribute.second;
