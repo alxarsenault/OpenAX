@@ -81,6 +81,12 @@ std::string Knob::Info::GetAttributeValue(const std::string& name)
 	else if (name == "bgColorClicked") {
 		return bgColorClicked.ToString();
 	}
+	else if (name == "img_path") {
+		return img_path;
+	}
+	else if (name == "selected_img_path") {
+		return selected_img_path;
+	}
 
 	return "";
 }
@@ -101,6 +107,12 @@ void Knob::Info::SetAttribute(const StringPair& attribute)
 	}
 	else if (attribute.first == "bgColorClicked") {
 		bgColorClicked.LoadFromString(attribute.second);
+	}
+	else if (attribute.first == "img_path") {
+		img_path = attribute.second;
+	}
+	else if (attribute.first == "selected_img_path") {
+		selected_img_path = attribute.second;
 	}
 }
 
