@@ -139,7 +139,9 @@ public:
 
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
+		
 		virtual void ReloadInfo();
+		virtual void SetInfo(const ax::StringPairVector& attributes);
 	};
 
 	class Builder : public ax::widget::Builder {
