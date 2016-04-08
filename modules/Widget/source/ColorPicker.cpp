@@ -13,30 +13,23 @@ ColorPicker::Info::Info()
 {
 }
 
-ColorPicker::ColorPicker(const ax::Rect& rect, const ax::ColorPicker::Info& info, const ax::Color& color)
+ColorPicker::ColorPicker(const ax::Point& position, const ax::ColorPicker::Events& events,
+	const ax::ColorPicker::Info& info, const ax::Color& color)
 	: _color(color)
 	, _font(0)
 {
-	win = ax::Window::Create(rect);
+	const ax::Size size(205, 272);
+	win = ax::Window::Create(ax::Rect(position, size));
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &ColorPicker::OnPaint);
 
-//	ax::Slider::Info sld_info;
-//	sld_info.img_path = "sliderPlain.png";
-//	sld_info.btn_size = ax::Size(12, 12);
-//	sld_info.slider_width = 4;
-//	sld_info.contour_round_radius = 0;
-//	sld_info.bgColorNormal = ax::Color(0.97);
-//	sld_info.bgColorHover = sld_info.bgColorNormal;
-//	sld_info.bgColorClicked = sld_info.bgColorNormal;
-//
-//	sld_info.sliderColorNormal = ax::Color(0.801);
-//	sld_info.sliderColorHover = sld_info.sliderColorNormal;
-//	sld_info.sliderColorClicked = sld_info.sliderColorNormal;
-//	sld_info.sliderContourColor = ax::Color(0.901);
-//
-//	sld_info.contourColor = ax::Color(0.88);
-//	sld_info.backSliderColor = ax::Color(0.0);
-//	sld_info.backSliderContourColor = ax::Color(0.0);
+
+	if(events.select) {
+		win->AddConnection(Events::SELECT, events.select);
+	}
+	
+	if(events.cancel) {
+		win->AddConnection(Events::CANCEL, events.cancel);
+	}
 
 	const ax::Size sld_size(140, 20);
 	ax::Point pos(22, 120);
@@ -53,15 +46,15 @@ ColorPicker::ColorPicker(const ax::Rect& rect, const ax::ColorPicker::Info& info
 		_sliders[i] = sld.get();
 	}
 
-//	ax::TextBox::Info txtInfo;
-//	txtInfo.normal = ax::Color(0.97);
-//	txtInfo.hover = txtInfo.normal;
-//	txtInfo.selected = txtInfo.normal;
-//	txtInfo.highlight = ax::Color(0.4f, 0.4f, 0.6f, 0.2f);
-//	txtInfo.contour = ax::Color(0.88);
-//	txtInfo.cursor = ax::Color(1.0f, 0.0f, 0.0f);
-//	txtInfo.selected_shadow = ax::Color(0.8f, 0.8f, 0.8f);
-//	txtInfo.font_color = ax::Color(0.0);
+	//	ax::TextBox::Info txtInfo;
+	//	txtInfo.normal = ax::Color(0.97);
+	//	txtInfo.hover = txtInfo.normal;
+	//	txtInfo.selected = txtInfo.normal;
+	//	txtInfo.highlight = ax::Color(0.4f, 0.4f, 0.6f, 0.2f);
+	//	txtInfo.contour = ax::Color(0.88);
+	//	txtInfo.cursor = ax::Color(1.0f, 0.0f, 0.0f);
+	//	txtInfo.selected_shadow = ax::Color(0.8f, 0.8f, 0.8f);
+	//	txtInfo.font_color = ax::Color(0.0);
 
 	ax::Event::Function txt_fcts[4] = { GetOnRedTxt(), GetOnGreenTxt(), GetOnBlueTxt(), GetOnAlphaTxt() };
 
@@ -80,21 +73,22 @@ ColorPicker::ColorPicker(const ax::Rect& rect, const ax::ColorPicker::Info& info
 		_txt_boxes[i] = txt_box.get();
 	}
 
-//	ax::Button::Info btn_info;
-//	btn_info.normal = ax::Color(0.97);
-//	btn_info.hover = ax::Color(0.99);
-//	btn_info.clicking = ax::Color(0.96);
-//	btn_info.selected = btn_info.normal;
-//	btn_info.contour = ax::Color(0.88);
-//	btn_info.font_color = ax::Color(0.0);
-//	btn_info.corner_radius = 0;
+	//	ax::Button::Info btn_info;
+	//	btn_info.normal = ax::Color(0.97);
+	//	btn_info.hover = ax::Color(0.99);
+	//	btn_info.clicking = ax::Color(0.96);
+	//	btn_info.selected = btn_info.normal;
+	//	btn_info.contour = ax::Color(0.88);
+	//	btn_info.font_color = ax::Color(0.0);
+	//	btn_info.corner_radius = 0;
 
-	ax::Point btn_pos(10, rect.size.y - 32);
+	ax::Point btn_pos(10, size.y - 32);
 	const ax::Size btn_size(88, 25);
-	auto ok_btn = ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnSelect(), info.btn_info, "", "Select");
+	auto ok_btn
+		= ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnSelect(), info.btn_info, "", "Select");
 	win->node.Add(ok_btn);
 
-	btn_pos.x = rect.size.x - btn_size.x - 10;
+	btn_pos.x = size.x - btn_size.x - 10;
 	auto cancel_btn
 		= ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnCancel(), info.btn_info, "", "Cancel");
 	win->node.Add(cancel_btn);
