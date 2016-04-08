@@ -71,6 +71,14 @@ public:
 		virtual ax::StringVector GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
+		
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
+		{
+			return {
+				widget::ParamInfo(widget::ParamType::COLOR, "background"),
+				widget::ParamInfo(widget::ParamType::COLOR, "contour"),
+				widget::ParamInfo(widget::ParamType::INTEGER, "round_corner_radius") };
+		}
 
 		ax::Color background; /// Normal background color.
 		ax::Color contour; /// Contour color.
