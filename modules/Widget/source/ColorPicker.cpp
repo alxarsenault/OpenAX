@@ -9,30 +9,34 @@
 #include "ColorPicker.h"
 
 namespace ax {
-ColorPicker::ColorPicker(const ax::Rect& rect, const ax::Color& color)
+ColorPicker::Info::Info()
+{
+}
+
+ColorPicker::ColorPicker(const ax::Rect& rect, const ax::ColorPicker::Info& info, const ax::Color& color)
 	: _color(color)
 	, _font(0)
 {
 	win = ax::Window::Create(rect);
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &ColorPicker::OnPaint);
 
-	ax::Slider::Info sld_info;
-	sld_info.img_path = "sliderPlain.png";
-	sld_info.btn_size = ax::Size(12, 12);
-	sld_info.slider_width = 4;
-	sld_info.contour_round_radius = 0;
-	sld_info.bgColorNormal = ax::Color(0.97);
-	sld_info.bgColorHover = sld_info.bgColorNormal;
-	sld_info.bgColorClicked = sld_info.bgColorNormal;
-	
-	sld_info.sliderColorNormal = ax::Color(0.801);
-	sld_info.sliderColorHover = sld_info.sliderColorNormal;
-	sld_info.sliderColorClicked = sld_info.sliderColorNormal;
-	sld_info.sliderContourColor = ax::Color(0.901);
-	
-	sld_info.contourColor = ax::Color(0.88);
-	sld_info.backSliderColor = ax::Color(0.0);
-	sld_info.backSliderContourColor = ax::Color(0.0);
+//	ax::Slider::Info sld_info;
+//	sld_info.img_path = "sliderPlain.png";
+//	sld_info.btn_size = ax::Size(12, 12);
+//	sld_info.slider_width = 4;
+//	sld_info.contour_round_radius = 0;
+//	sld_info.bgColorNormal = ax::Color(0.97);
+//	sld_info.bgColorHover = sld_info.bgColorNormal;
+//	sld_info.bgColorClicked = sld_info.bgColorNormal;
+//
+//	sld_info.sliderColorNormal = ax::Color(0.801);
+//	sld_info.sliderColorHover = sld_info.sliderColorNormal;
+//	sld_info.sliderColorClicked = sld_info.sliderColorNormal;
+//	sld_info.sliderContourColor = ax::Color(0.901);
+//
+//	sld_info.contourColor = ax::Color(0.88);
+//	sld_info.backSliderColor = ax::Color(0.0);
+//	sld_info.backSliderContourColor = ax::Color(0.0);
 
 	const ax::Size sld_size(140, 20);
 	ax::Point pos(22, 120);
@@ -42,22 +46,22 @@ ColorPicker::ColorPicker(const ax::Rect& rect, const ax::Color& color)
 
 	for (int i = 0; i <= ALPHA; i++) {
 		auto sld = ax::shared<ax::Slider>(
-			ax::Rect(pos, sld_size), sld_fcts[i], sld_info, ax::Slider::Flags::CLICK_ANYWHERE);
+			ax::Rect(pos, sld_size), sld_fcts[i], info.sld_info, ax::Slider::Flags::CLICK_ANYWHERE);
 		win->node.Add(sld);
 		pos = sld->GetWindow()->dimension.GetRect().GetNextPosDown(10);
 		sld->SetValue(GetColor(i));
 		_sliders[i] = sld.get();
 	}
 
-	ax::TextBox::Info txtInfo;
-	txtInfo.normal = ax::Color(0.97);
-	txtInfo.hover = txtInfo.normal;
-	txtInfo.selected = txtInfo.normal;
-	txtInfo.highlight = ax::Color(0.4f, 0.4f, 0.6f, 0.2f);
-	txtInfo.contour = ax::Color(0.88);
-	txtInfo.cursor = ax::Color(1.0f, 0.0f, 0.0f);
-	txtInfo.selected_shadow = ax::Color(0.8f, 0.8f, 0.8f);
-	txtInfo.font_color = ax::Color(0.0);
+//	ax::TextBox::Info txtInfo;
+//	txtInfo.normal = ax::Color(0.97);
+//	txtInfo.hover = txtInfo.normal;
+//	txtInfo.selected = txtInfo.normal;
+//	txtInfo.highlight = ax::Color(0.4f, 0.4f, 0.6f, 0.2f);
+//	txtInfo.contour = ax::Color(0.88);
+//	txtInfo.cursor = ax::Color(1.0f, 0.0f, 0.0f);
+//	txtInfo.selected_shadow = ax::Color(0.8f, 0.8f, 0.8f);
+//	txtInfo.font_color = ax::Color(0.0);
 
 	ax::Event::Function txt_fcts[4] = { GetOnRedTxt(), GetOnGreenTxt(), GetOnBlueTxt(), GetOnAlphaTxt() };
 
@@ -69,29 +73,30 @@ ColorPicker::ColorPicker(const ax::Rect& rect, const ax::Color& color)
 		const ax::Point txt_pos(
 			_sliders[i]->GetWindow()->dimension.GetRect().GetNextPosRight(5) - ax::Point(0, 3));
 
-		auto txt_box(ax::shared<ax::TextBox>(ax::Rect(txt_pos, ax::Size(30, 25)), txt_evts, txtInfo, "",
+		auto txt_box(ax::shared<ax::TextBox>(ax::Rect(txt_pos, ax::Size(30, 25)), txt_evts, info.txt_info, "",
 			std::to_string(int(GetColor(i) * 255.0))));
 
 		win->node.Add(txt_box);
 		_txt_boxes[i] = txt_box.get();
 	}
-	
-	ax::Button::Info btn_info;
-	btn_info.normal = ax::Color(0.97);
-	btn_info.hover = ax::Color(0.99);
-	btn_info.clicking = ax::Color(0.96);
-	btn_info.selected = btn_info.normal;
-	btn_info.contour = ax::Color(0.88);
-	btn_info.font_color = ax::Color(0.0);
-	btn_info.corner_radius = 0;
-	
+
+//	ax::Button::Info btn_info;
+//	btn_info.normal = ax::Color(0.97);
+//	btn_info.hover = ax::Color(0.99);
+//	btn_info.clicking = ax::Color(0.96);
+//	btn_info.selected = btn_info.normal;
+//	btn_info.contour = ax::Color(0.88);
+//	btn_info.font_color = ax::Color(0.0);
+//	btn_info.corner_radius = 0;
+
 	ax::Point btn_pos(10, rect.size.y - 32);
 	const ax::Size btn_size(88, 25);
-	auto ok_btn = ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnSelect(), btn_info, "", "Select");
+	auto ok_btn = ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnSelect(), info.btn_info, "", "Select");
 	win->node.Add(ok_btn);
-	
+
 	btn_pos.x = rect.size.x - btn_size.x - 10;
-	auto cancel_btn = ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnCancel(), btn_info, "", "Cancel");
+	auto cancel_btn
+		= ax::shared<ax::Button>(ax::Rect(btn_pos, btn_size), GetOnCancel(), info.btn_info, "", "Cancel");
 	win->node.Add(cancel_btn);
 }
 
@@ -218,20 +223,19 @@ void ColorPicker::OnPaint(ax::GC gc)
 	gc.DrawRectangle(rect);
 
 	const ax::Rect color_rect(8, 8, rect.size.x - 14, 100);
-	
-	
+
 	// Draw color rectangle background.
 	int line_index = 0;
-	for(int y = color_rect.position.y; y < color_rect.position.y + color_rect.size.y; y += 5) {
-		for(int x = color_rect.position.x; x < color_rect.position.x + color_rect.size.x - 5; x += 10) {
+	for (int y = color_rect.position.y; y < color_rect.position.y + color_rect.size.y; y += 5) {
+		for (int x = color_rect.position.x; x < color_rect.position.x + color_rect.size.x - 5; x += 10) {
 			int xx = x;
 			int sx = 5;
-			
-			if(xx + 10 > color_rect.position.x + color_rect.size.x) {
+
+			if (xx + 10 > color_rect.position.x + color_rect.size.x) {
 				sx = (xx + 10) - (color_rect.position.x + color_rect.size.x);
 			}
-			
-			if(line_index % 2) {
+
+			if (line_index % 2) {
 				gc.SetColor(ax::Color(0.8));
 				gc.DrawRectangle(ax::Rect(xx, y, 5, 5));
 				gc.SetColor(ax::Color(0.9));
@@ -244,16 +248,16 @@ void ColorPicker::OnPaint(ax::GC gc)
 				gc.DrawRectangle(ax::Rect(xx + 5, y, sx, 5));
 			}
 		}
-		
+
 		line_index++;
 	}
-	
+
 	// Draw color rectangle.
 	gc.SetColor(_color);
 	gc.DrawRectangle(color_rect);
 	gc.SetColor(ax::Color(0.6));
 	gc.DrawRectangleContour(color_rect);
-	
+
 	ax::Point red_pos(color_rect.GetNextPosDown(13));
 	gc.SetColor(ax::Color(0.0));
 

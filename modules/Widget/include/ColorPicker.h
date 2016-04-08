@@ -22,7 +22,25 @@ namespace ax {
 		
 		typedef ax::Event::SimpleMsg<ax::Color> Msg;
 		
-		ColorPicker(const ax::Rect& rect, const ax::Color& color);
+		class Info : public ax::widget::Info {
+		public:
+			Info();
+			
+			//		/// Info needed for debug editor. Derived from axInfo.
+			//		virtual ax::StringVector GetParamNameList() const;
+			//
+			//		virtual std::string GetAttributeValue(const std::string& name);
+			//
+			//		virtual void SetAttribute(const ax::StringPair& attribute);
+			//
+			//		virtual std::vector<widget::ParamInfo> GetParametersInfo() const;
+			
+			ax::Button::Info btn_info;
+			ax::Slider::Info sld_info;
+			ax::TextBox::Info txt_info;
+		};
+		
+		ColorPicker(const ax::Rect& rect, const ax::ColorPicker::Info& info, const ax::Color& color);
 		
 	private:
 		ax::Color _color;
