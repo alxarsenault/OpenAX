@@ -4,6 +4,30 @@
 #include "TextBox.h"
 
 namespace ax {
+/*
+ * ax::NumberScroll::Msg.
+ */
+NumberScroll::Msg::Msg(const double& value, ax::Utils::Control::Type type)
+	: _value(value)
+	, _type(type)
+{
+}
+
+double NumberScroll::Msg::GetValue() const
+{
+	return _value;
+}
+
+ax::Utils::Control::Type NumberScroll::Msg::GetType() const
+{
+	return _type;
+}
+
+ax::Event::Msg* NumberScroll::Msg::GetCopy()
+{
+	return new Msg(*this);
+}
+
 NumberScroll::NumberScroll(const ax::Rect& rect, double value, ax::Utils::Control::Type type,
 	const ax::Utils::Range<double>& range, double increment)
 	: _value(value)
@@ -32,15 +56,15 @@ NumberScroll::NumberScroll(const ax::Rect& rect, double value, ax::Utils::Contro
 
 	std::string v_str;
 	switch (_type) {
-		case ax::Utils::Control::Type::INTEGER:
-			v_str = std::to_string((int)_value);
-			break;
-		default:
-			v_str = std::to_string(_value);
+	case ax::Utils::Control::Type::INTEGER:
+		v_str = std::to_string((int)_value);
+		break;
+	default:
+		v_str = std::to_string(_value);
 	}
 
-	auto txt_box = ax::shared<ax::TextBox>(ax::Rect(ax::Point(0, 0), ax::Size(rect.size.x - 19, rect.size.y)),
-		txt_evts, txtInfo, "", v_str);
+	auto txt_box = ax::shared<ax::TextBox>(
+		ax::Rect(ax::Point(0, 0), ax::Size(rect.size.x - 19, rect.size.y)), txt_evts, txtInfo, "", v_str);
 
 	win->node.Add(txt_box);
 	_txtbox = txt_box.get();
@@ -72,19 +96,23 @@ NumberScroll::NumberScroll(const ax::Rect& rect, double value, ax::Utils::Contro
 
 void NumberScroll::SetValue(double value)
 {
-	_value = ax::Utils::Clamp(value, _range.left, _range.right);
+	if (_value != value) {
+		_value = ax::Utils::Clamp(value, _range.left, _range.right);
 
-	switch (_type) {
-	case ax::Utils::Control::Type::INTEGER:
-		_txtbox->SetLabel(std::to_string((int)_value));
-		break;
+		switch (_type) {
+		case ax::Utils::Control::Type::INTEGER:
+			_txtbox->SetLabel(std::to_string((int)_value));
+			break;
 
-	case ax::Utils::Control::Type::REAL:
-		_txtbox->SetLabel(std::to_string(_value));
-		break;
+		case ax::Utils::Control::Type::REAL:
+			_txtbox->SetLabel(std::to_string(_value));
+			break;
 
-	default:
-		_txtbox->SetLabel(std::to_string(_value));
+		default:
+			_txtbox->SetLabel(std::to_string(_value));
+		}
+
+		win->PushEvent(VALUE_CHANGE, new NumberScroll::Msg(_value, _type));
 	}
 }
 
@@ -105,7 +133,7 @@ void NumberScroll::OnButtonDown(const ax::Button::Msg& msg)
 	SetValue(_value);
 }
 
-void NumberScroll::OnTextEnter(const ax::TextBox::Msg &msg)
+void NumberScroll::OnTextEnter(const ax::TextBox::Msg& msg)
 {
 	try {
 		double v = std::stod(msg.GetMsg());
