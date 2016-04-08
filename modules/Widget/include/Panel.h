@@ -100,6 +100,7 @@ public:
 		}
 
 		ax::StringPairVector GetBuilderAttributes();
+		std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
 
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
 

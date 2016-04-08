@@ -259,6 +259,15 @@ ax::StringPairVector Button::Component::GetBuilderAttributes()
 	return atts;
 }
 
+std::vector<ax::widget::ParamInfo> Button::Component::GetBuilderAttributesInfo() const
+{
+	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
+		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
+		ax::widget::ParamInfo(ax::widget::ParamType::FILEPATH, "img_path"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "label"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "msg") };
+}
+
 void Button::Component::SetInfo(const ax::StringPairVector& attributes)
 {
 	_info->SetAttributes(attributes);

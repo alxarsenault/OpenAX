@@ -186,16 +186,17 @@ void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attribut
 			ax::Size size = ax::Xml::StringToSize(n.second);
 			GetWindow()->dimension.SetSize(size);
 		}
-		//		 else if(n.first == "label") {
-		//			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
-		//			 label->SetLabel(n.second);
-		//		 }
 		else if (n.first == "bg_img") {
 			ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
-			//			 ax::Label* label = static_cast<ax::Label*>(GetWindow()->backbone.get());
-			//			 label->SetLabel(n.second);
 		}
 	}
+}
+
+std::vector<ax::widget::ParamInfo> Panel::Component::GetBuilderAttributesInfo() const
+{
+	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
+		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
+		ax::widget::ParamInfo(ax::widget::ParamType::FILEPATH, "bg_img") };
 }
 
 Panel::Builder::Builder()

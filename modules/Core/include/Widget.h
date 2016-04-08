@@ -104,6 +104,11 @@ namespace widget {
 
 		virtual ax::StringPairVector GetBuilderAttributes();
 		
+		virtual std::vector<ParamInfo> GetBuilderAttributesInfo() const
+		{
+			return std::vector<ParamInfo>();
+		}
+		
 		virtual void ReloadInfo()
 		{
 		}

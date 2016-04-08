@@ -179,6 +179,14 @@ ax::StringPairVector Knob::Component::GetBuilderAttributes()
 	return atts;
 }
 
+std::vector<ax::widget::ParamInfo> Knob::Component::GetBuilderAttributesInfo() const
+{
+	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
+		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "flags"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "msg") };
+}
+
 Knob::Builder::Builder()
 {
 }

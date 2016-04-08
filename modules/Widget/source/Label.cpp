@@ -206,6 +206,13 @@ void Label::Component::SetBuilderAttributes(const ax::StringPairVector& attribut
 	}
 }
 
+std::vector<ax::widget::ParamInfo> Label::Component::GetBuilderAttributesInfo() const
+{
+	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
+		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "label") };
+}
+
 void Label::Component::SetInfo(const ax::StringPairVector& attributes)
 {
 	_info->SetAttributes(attributes);

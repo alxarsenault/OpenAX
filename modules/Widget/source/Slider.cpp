@@ -273,6 +273,13 @@ ax::StringPairVector Slider::Component::GetBuilderAttributes()
 	return atts;
 }
 
+std::vector<ax::widget::ParamInfo> ax::Slider::Component::GetBuilderAttributesInfo() const
+{
+	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
+		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "flags") };
+}
+
 Slider::Builder::Builder()
 {
 }

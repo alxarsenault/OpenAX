@@ -142,6 +142,8 @@ public:
 		
 		void SetBuilderAttributes(const ax::StringPairVector& attributes);
 		
+		virtual std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
+		
 		virtual void ReloadInfo();
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 	};

@@ -62,8 +62,11 @@ public:
 
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
+		std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
 
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
+		
+		
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 		virtual void ReloadInfo();
 	};

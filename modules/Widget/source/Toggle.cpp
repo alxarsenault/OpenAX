@@ -295,6 +295,15 @@ ax::StringPairVector ax::Toggle::Component::GetBuilderAttributes()
 	return atts;
 }
 
+std::vector<ax::widget::ParamInfo> ax::Toggle::Component::GetBuilderAttributesInfo() const
+{
+	return { ax::widget::ParamInfo(ax::widget::ParamType::POINT, "position"),
+		ax::widget::ParamInfo(ax::widget::ParamType::SIZE, "size"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "label"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "msg"),
+		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "flags") };
+}
+
 ax::Toggle::Builder::Builder()
 {
 }

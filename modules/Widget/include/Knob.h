@@ -123,6 +123,8 @@ public:
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 
 		virtual ax::StringPairVector GetBuilderAttributes();
+		virtual std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
+		
 	};
 
 	class Builder : public ax::widget::Builder {
