@@ -55,8 +55,9 @@ int main()
 
 		win->node.Add(txt_box);
 
-		win->node.Add(ax::shared<ax::NumberScroll>(ax::Rect(300, 300, 70, 25), ax::NumberScroll::Events(), 12,
-			ax::Utils::Control::Type::INTEGER, ax::Utils::Range<double>(1.0, 10000.0), 1.0));
+		win->node.Add(ax::shared<ax::NumberScroll>(ax::Rect(300, 300, 70, 25), ax::NumberScroll::Events(),
+			ax::NumberScroll::Info(), 12, ax::Utils::Control::Type::INTEGER,
+			ax::Utils::Range<double>(1.0, 10000.0), 1.0));
 
 	});
 

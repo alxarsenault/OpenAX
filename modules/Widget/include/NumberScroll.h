@@ -41,15 +41,11 @@ public:
 		
 		ax::Event::Function value_change;
 	};
-
-	NumberScroll(const ax::Rect& rect, const NumberScroll::Events& events, double value,
-		ax::Utils::Control::Type type = ax::Utils::Control::Type::REAL,
-		const ax::Utils::Range<double>& range = ax::Utils::Range<double>(0.0, 1.0), double increment = 0.1);
-
+	
 	class Info : public ax::widget::Info {
 	public:
 		Info();
-
+		
 		//		/// Info needed for debug editor. Derived from axInfo.
 		//		virtual ax::StringVector GetParamNameList() const;
 		//
@@ -58,12 +54,18 @@ public:
 		//		virtual void SetAttribute(const ax::StringPair& attribute);
 		//
 		//		virtual std::vector<widget::ParamInfo> GetParametersInfo() const;
-
+		
 		std::string up_btn;
 		std::string down_btn;
 		ax::Button::Info btn_info;
 		ax::TextBox::Info txt_info;
 	};
+
+	NumberScroll(const ax::Rect& rect, const NumberScroll::Events& events, const ax::NumberScroll::Info& info, double value,
+		ax::Utils::Control::Type type = ax::Utils::Control::Type::REAL,
+		const ax::Utils::Range<double>& range = ax::Utils::Range<double>(0.0, 1.0), double increment = 0.1);
+
+	
 
 	void SetValue(double value);
 	
