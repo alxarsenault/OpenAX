@@ -122,22 +122,22 @@ std::string Button::Info::GetAttributeValue(const std::string& name)
 void Button::Info::SetAttribute(const StringPair& attribute)
 {
 	if (attribute.first == "normal") {
-		normal.LoadFromString(attribute.second);
+		normal = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "hover") {
-		hover.LoadFromString(attribute.second);
+		hover = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "clicking") {
-		clicking.LoadFromString(attribute.second);
+		clicking = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected") {
-		selected.LoadFromString(attribute.second);
+		selected = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "contour") {
-		contour.LoadFromString(attribute.second);
+		contour = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "font_color") {
-		font_color.LoadFromString(attribute.second);
+		font_color = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "corner_radius") {
 		corner_radius = std::stoi(attribute.second);
