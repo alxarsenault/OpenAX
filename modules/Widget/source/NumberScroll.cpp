@@ -28,8 +28,8 @@ ax::Event::Msg* NumberScroll::Msg::GetCopy()
 	return new Msg(*this);
 }
 
-NumberScroll::NumberScroll(const ax::Rect& rect, double value, ax::Utils::Control::Type type,
-	const ax::Utils::Range<double>& range, double increment)
+NumberScroll::NumberScroll(const ax::Rect& rect, const NumberScroll::Events& events, double value,
+	ax::Utils::Control::Type type, const ax::Utils::Range<double>& range, double increment)
 	: _value(value)
 	, _type(type)
 	, _range(range)
@@ -38,6 +38,10 @@ NumberScroll::NumberScroll(const ax::Rect& rect, double value, ax::Utils::Contro
 	win = ax::Window::Create(rect);
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &NumberScroll::OnPaint);
 	win->event.OnResize = ax::WBind<ax::Size>(this, &NumberScroll::OnResize);
+
+	if (events.value_change) {
+		win->AddConnection(Events::VALUE_CHANGE, events.value_change);
+	}
 
 	ax::TextBox::Info txtInfo;
 	txtInfo.normal = ax::Color(1.0);
@@ -96,24 +100,22 @@ NumberScroll::NumberScroll(const ax::Rect& rect, double value, ax::Utils::Contro
 
 void NumberScroll::SetValue(double value)
 {
-	if (_value != value) {
-		_value = ax::Utils::Clamp(value, _range.left, _range.right);
+	_value = ax::Utils::Clamp(value, _range.left, _range.right);
 
-		switch (_type) {
-		case ax::Utils::Control::Type::INTEGER:
-			_txtbox->SetLabel(std::to_string((int)_value));
-			break;
+	switch (_type) {
+	case ax::Utils::Control::Type::INTEGER:
+		_txtbox->SetLabel(std::to_string((int)_value));
+		break;
 
-		case ax::Utils::Control::Type::REAL:
-			_txtbox->SetLabel(std::to_string(_value));
-			break;
+	case ax::Utils::Control::Type::REAL:
+		_txtbox->SetLabel(std::to_string(_value));
+		break;
 
-		default:
-			_txtbox->SetLabel(std::to_string(_value));
-		}
-
-		win->PushEvent(VALUE_CHANGE, new NumberScroll::Msg(_value, _type));
+	default:
+		_txtbox->SetLabel(std::to_string(_value));
 	}
+
+	win->PushEvent(Events::VALUE_CHANGE, new NumberScroll::Msg(_value, _type));
 }
 
 double NumberScroll::GetValue() const

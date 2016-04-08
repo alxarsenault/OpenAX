@@ -8,8 +8,6 @@
 namespace ax {
 class NumberScroll : public ax::Window::Backbone {
 public:
-	enum Events : ax::Event::Id { VALUE_CHANGE };
-	
 	class Msg : public ax::Event::Msg {
 	public:
 		Msg(const double& value, ax::Utils::Control::Type type);
@@ -24,8 +22,27 @@ public:
 		double _value;
 		ax::Utils::Control::Type _type;
 	};
+	
+	/*
+	 * ax::ScrollNumber::Events.
+	 */
+	class Events {
+	public:
+		enum : ax::Event::Id { VALUE_CHANGE };
+		
+		Events()
+		{
+		}
+		
+		Events(const ax::Event::Function& fct)
+		{
+			value_change = fct;
+		}
+		
+		ax::Event::Function value_change;
+	};
 
-	NumberScroll(const ax::Rect& rect, double value,
+	NumberScroll(const ax::Rect& rect, const NumberScroll::Events& events, double value,
 		ax::Utils::Control::Type type = ax::Utils::Control::Type::REAL,
 		const ax::Utils::Range<double>& range = ax::Utils::Range<double>(0.0, 1.0), double increment = 0.1);
 
