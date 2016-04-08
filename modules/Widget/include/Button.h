@@ -140,6 +140,8 @@ public:
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
 		
+		void SetBuilderAttributes(const ax::StringPairVector& attributes);
+		
 		virtual void ReloadInfo();
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 	};

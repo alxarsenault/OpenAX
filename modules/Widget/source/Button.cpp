@@ -273,6 +273,40 @@ void Button::Component::ReloadInfo()
 	_win->Update();
 }
 
+void Button::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
+{
+	ax::Button* btn = static_cast<ax::Button*>(GetWindow()->backbone.get());
+	
+	for (auto& n : attributes) {
+		if (n.first == "position") {
+			ax::Point pos = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetPosition(pos);
+		}
+		else if (n.first == "size") {
+			ax::Size size = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetSize(size);
+		}
+		else if (n.first == "img_path") {
+			if(btn->_btnImg != nullptr) {
+				delete btn->_btnImg;
+				btn->_btnImg = nullptr;
+			}
+			
+			if(!n.second.empty()) {
+				btn->_btnImg = new Image(n.second);
+			}
+		}
+		else if (n.first == "label") {
+			btn->SetLabel(n.second);
+		}
+		else if (n.first == "msg") {
+			btn->SetMsg(n.second);
+		}
+	}
+	
+	GetWindow()->Update();
+}
+
 Button::Builder::Builder()
 {
 }
