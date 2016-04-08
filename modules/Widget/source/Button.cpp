@@ -259,6 +259,19 @@ ax::StringPairVector Button::Component::GetBuilderAttributes()
 	return atts;
 }
 
+void Button::Component::ReloadInfo()
+{
+//	Button* btn = static_cast<Button*>(_win->backbone.get());
+//	Button::Info* info = static_cast<Button::Info*>(_info);
+
+//	if (!info->font_name.empty()) {
+//		label_obj->_font->SetFontType(info->font_name);
+//	}
+//	label_obj->_font->SetFontSize(info->font_size);
+
+	_win->Update();
+}
+
 Button::Builder::Builder()
 {
 }
