@@ -41,7 +41,9 @@ public:
 		Info(const ax::StringPairVector& attributes);
 
 		virtual ax::StringVector GetParamNameList() const;
+		
 		virtual std::string GetAttributeValue(const std::string& name);
+		
 		virtual void SetAttribute(const ax::StringPair& attribute);
 		
 		virtual std::vector<widget::ParamInfo> GetParametersInfo() const;
