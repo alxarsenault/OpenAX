@@ -187,6 +187,45 @@ std::vector<ax::widget::ParamInfo> Knob::Component::GetBuilderAttributesInfo() c
 		ax::widget::ParamInfo(ax::widget::ParamType::TEXT, "msg") };
 }
 
+void Knob::Component::SetBuilderAttributes(const ax::StringPairVector& attributes)
+{
+	ax::Knob* knob = static_cast<ax::Knob*>(GetWindow()->backbone.get());
+	
+	for (auto& n : attributes) {
+		if (n.first == "position") {
+			ax::Point pos = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetPosition(pos);
+		}
+		else if (n.first == "size") {
+			ax::Size size = ax::Xml::StringToSize(n.second);
+			GetWindow()->dimension.SetSize(size);
+		}
+		else if (n.first == "msg") {
+			knob->SetMsg(n.second);
+		}
+	}
+}
+
+void Knob::Component::SetInfo(const ax::StringPairVector& attributes)
+{
+	_info->SetAttributes(attributes);
+}
+
+void Knob::Component::ReloadInfo()
+{
+	Knob* knob_obj = static_cast<Knob*>(_win->backbone.get());
+	Knob::Info* info = static_cast<Knob::Info*>(_info);
+	
+	if(knob_obj->_knobImg->GetImagePath() != info->img_path) {
+		knob_obj->_knobImg.reset(new Image(info->img_path));
+	}
+
+	knob_obj->_currentBgColor = info->bgColorNormal;
+	knob_obj->_nCurrentImg = knob_obj->_knobValue * (info->n_knob - 1);
+
+	_win->Update();
+}
+
 Knob::Builder::Builder()
 {
 }

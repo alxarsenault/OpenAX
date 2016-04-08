@@ -125,6 +125,9 @@ public:
 		virtual ax::StringPairVector GetBuilderAttributes();
 		virtual std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
 		
+		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
+		virtual void SetInfo(const ax::StringPairVector& attributes);
+		virtual void ReloadInfo();
 	};
 
 	class Builder : public ax::widget::Builder {
@@ -164,6 +167,11 @@ public:
 	std::string GetMsg() const
 	{
 		return _msg;
+	}
+	
+	void SetMsg(const std::string& msg)
+	{
+		_msg = msg;
 	}
 
 protected:
