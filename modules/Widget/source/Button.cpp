@@ -287,14 +287,7 @@ void Button::Component::SetBuilderAttributes(const ax::StringPairVector& attribu
 			GetWindow()->dimension.SetSize(size);
 		}
 		else if (n.first == "img_path") {
-			if(btn->_btnImg != nullptr) {
-				delete btn->_btnImg;
-				btn->_btnImg = nullptr;
-			}
-			
-			if(!n.second.empty()) {
-				btn->_btnImg = new Image(n.second);
-			}
+			btn->_btnImg.reset(new Image(n.second));
 		}
 		else if (n.first == "label") {
 			btn->SetLabel(n.second);
@@ -447,7 +440,8 @@ Button::Button(const Rect& rect, const Button::Events& events, const Button::Inf
 
 	_currentColor = info.normal;
 
-	_btnImg = new Image(img_path);
+//	_btnImg = new Image(img_path);
+	_btnImg = std::unique_ptr<ax::Image>(new Image(img_path));
 
 	if (_events.button_click) {
 		win->AddConnection(Events::BUTTON_CLICK, _events.button_click);
@@ -481,7 +475,8 @@ Button::Button(const Point& pos, const Button::Events& events, std::string label
 
 	_currentColor = info.normal;
 
-	_btnImg = new Image(img_path);
+//	_btnImg = new Image(img_path);
+	_btnImg = std::unique_ptr<ax::Image>(new Image(img_path));
 
 	if (_events.button_click) {
 		win->AddConnection(Events::BUTTON_CLICK, _events.button_click);
@@ -631,10 +626,10 @@ void Button::OnPaint(GC gc)
 
 	if (_btnImg->IsImageReady()) {
 		if (IsFlag(Flags::SINGLE_IMG, _flags)) {
-			gc.DrawImageResize(_btnImg, rect0.position, rect0.size - ax::Size(1, 1), 1.0);
+			gc.DrawImageResize(_btnImg.get(), rect0.position, rect0.size - ax::Size(1, 1), 1.0);
 		}
 		else {
-			gc.DrawPartOfImage(_btnImg, Point(0, _nCurrentImg * rect.size.y), rect.size, Point(0, 0));
+			gc.DrawPartOfImage(_btnImg.get(), Point(0, _nCurrentImg * rect.size.y), rect.size, Point(0, 0));
 		}
 	}
 
