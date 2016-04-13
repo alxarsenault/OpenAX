@@ -72,7 +72,7 @@ namespace GL {
 	{
 #ifdef ANDROID 
 #else
-		std::cout << "Delete framebuffer" << std::endl;
+//		std::cout << "Delete framebuffer" << std::endl;
 		//Delete resources
 		//glBindTexture(GL_TEXTURE_2D, 0);
 		glDeleteTextures(1, &_frameBufferTexture);

@@ -31,7 +31,7 @@ namespace Utils {
 
 	ResourceStorage::~ResourceStorage()
 	{
-		std::cout << "Delete resource storage" << std::endl;
+//		std::cout << "Delete resource storage" << std::endl;
 	}
 
 	void ResourceStorage::Add(std::string id, Var value)

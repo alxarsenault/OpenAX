@@ -37,8 +37,8 @@ namespace audio {
 		const PaDeviceInfo* deviceInfo;
 		for (int i = 0; i < numDevices; i++) {
 			deviceInfo = Pa_GetDeviceInfo(i);
-			 std::cout << "OUTPUT : " << i << " " << deviceInfo->name <<
-			 std::endl;
+//			 std::cout << "OUTPUT : " << i << " " << deviceInfo->name <<
+//			 std::endl;
 		}
 
 		//----------------------------------------------------------------------

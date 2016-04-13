@@ -622,9 +622,9 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 	// Click on boutton to move.
 	else {
 
-		std::cout << "ELSE" << std::endl;
+//		std::cout << "ELSE" << std::endl;
 		if (sliderBtnRect.IsPointInside(pos) && _nCurrentImg != axBTN_DOWN) {
-			std::cout << "ELSE IN" << std::endl;
+//			std::cout << "ELSE IN" << std::endl;
 			_nCurrentImg = axBTN_DOWN;
 			_currentSliderColor = _info.sliderColorClicked;
 
@@ -635,10 +635,10 @@ void ax::Slider::OnMouseLeftDown(const ax::Point& mousePos)
 				_delta_click = sliderBtnRect.position.x - pos.x;
 			}
 
-			std::cout << "MOUSE GRAB before" << std::endl;
+//			std::cout << "MOUSE GRAB before" << std::endl;
 			win->event.GrabMouse();
 
-			std::cout << "MOUSE GRAB" << std::endl;
+//			std::cout << "MOUSE GRAB" << std::endl;
 
 			// Send value change event.
 			//			if (_events.slider_value_change)

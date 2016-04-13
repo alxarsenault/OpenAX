@@ -140,7 +140,7 @@ namespace audio {
 		_info.sample_rate = m_info->samplerate;
 		_info.channels = m_info->channels;
 
-		std::cout << "Nb channel : " << _info.channels << std::endl;
+//		std::cout << "Nb channel : " << _info.channels << std::endl;
 
 		return axNO_ERROR;
 	}

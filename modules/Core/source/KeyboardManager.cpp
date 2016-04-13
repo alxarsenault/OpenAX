@@ -82,6 +82,10 @@ void axKeyboardManager::OnBackSpaceDown()
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnBackSpaceDown('0');
 	}
+	
+	for(auto& n : _globalKeyGrabbed) {
+		n->event.OnBackSpaceDown('0');
+	}
 }
 
 void axKeyboardManager::GrabKey(ax::Window* win)

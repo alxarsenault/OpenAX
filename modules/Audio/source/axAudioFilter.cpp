@@ -27,7 +27,7 @@ void axAudioFilter::SetFreq(float f)
 	freq = ax::Utils::Clamp<float>(f, 20.0, 20000.0);
 	Compute_Variables(freq, q);
 
-	std::cout << "filter freq : " << freq << std::endl;
+//	std::cout << "filter freq : " << freq << std::endl;
 }
 void axAudioFilter::SetQ(float f)
 {
@@ -39,7 +39,7 @@ void axAudioFilter::SetGain(float f)
 {
 	gain = ax::Utils::Clamp<float>(f, 0.0, 3.0);
 
-	std::cout << "filter gain : " << gain << std::endl;
+//	std::cout << "filter gain : " << gain << std::endl;
 }
 
 float axAudioFilter::GetFreq() const
@@ -233,7 +233,7 @@ t_out axAudioFilter::ProcessStereo(t_out in)
 	}
 
 	if (a0 == 0.0) {
-		std::cout << "a0 is 0.0" << std::endl;
+//		std::cout << "a0 is 0.0" << std::endl;
 	}
 
 	// Compute_Variables(in, float q)
@@ -319,7 +319,7 @@ void axAudioFilter::ProcessStereo(float* in, float* out)
 	}
 
 	if (a0 == 0.0) {
-		std::cout << "a0 is 0.0" << std::endl;
+//		std::cout << "a0 is 0.0" << std::endl;
 	}
 
 	// Compute_Variables(in, float q)

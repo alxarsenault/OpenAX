@@ -147,7 +147,7 @@ ax::Window::Event::Event(ax::Window* win, ax::Core::WindowManager* win_manager)
 
 ax::Window::Event::~Event()
 {
-	std::cout << "Delete window event." << std::endl;
+//	std::cout << "Delete window event." << std::endl;
 }
 
 ax::Window::Ptr ax::Window::Event::GetWindow()
