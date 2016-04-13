@@ -23,13 +23,13 @@ namespace Audio {
 
 		BiquadFilter(const unsigned long& sampling_rate, const Type& type = Lowpass,
 			const P& freq = 20000.0, const P& q = 0.7071067811865476, const P& gain = 1.0)
-			: _samplingRate(sampling_rate)
-			, _type(type)
-			, _freq(freq)
+			: _freq(freq)
 			, _q(q)
 			, _gain(gain)
+			, _type(type)
 			, _active(true)
 			, _needToInit(true)
+			, _samplingRate(sampling_rate)
 		{
 			ComputeCoefficients();
 		}

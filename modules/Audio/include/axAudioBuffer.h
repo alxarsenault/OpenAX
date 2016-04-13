@@ -58,7 +58,7 @@ namespace audio {
 		SF_INFO* m_info;
 		
 		std::string m_path;
-		sf_count_t m_count;
+//		sf_count_t m_count;
 
 		float *m_buffer, *m_start, *m_end;
 
