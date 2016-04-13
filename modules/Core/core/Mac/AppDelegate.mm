@@ -199,6 +199,9 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	else if (cursor_id == 1) {
 		[[NSCursor resizeUpDownCursor] set];
 	}
+	else if( cursor_id == 2) {
+		[[NSCursor resizeLeftRightCursor] set];
+	}
 
 	return self;
 }

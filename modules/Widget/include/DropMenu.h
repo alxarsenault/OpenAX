@@ -24,9 +24,9 @@
 #define __AX_DROP_MENU_H__
 
 /*
- * @file    axDropmenu.h
+ * @file    Dropmenu.h
  * @author  Alexandre Arsenault <alx.arsenault@gmail.com>
- * @brief   axButton.
+ * @brief   DropMenu.
  * @date    30/01/2016
  */
 
@@ -56,7 +56,7 @@ public:
 	};
 
 	/*
-	 * ax::Button::Msg.
+	 * ax::DropMenu::Msg.
 	 */
 	class Msg : public ax::Event::Msg {
 	public:
@@ -79,7 +79,7 @@ public:
 	};
 
 	/*
-	 * axButton::Events.
+	 * ax::DropMenu::Events.
 	 */
 	class Events {
 	public:

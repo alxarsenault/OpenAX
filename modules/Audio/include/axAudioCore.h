@@ -10,7 +10,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include "portaudio.h"
-
+#include "Utils.h"
 //-----------------------------------------------------------------------------
 // Audio.
 //-----------------------------------------------------------------------------
@@ -26,22 +26,12 @@ namespace audio {
 		int InitAudio();
 		void StartAudio();
 		void StopAudio();
-
-		//            virtual int CallbackAudio(const double** input,
-		//                                      double** output,
-		//                                      const unsigned long& frameCount)
-		//            {
-		//                double* left = output[0];
-		//                double* right = output[1];
-		//
-		//                for(unsigned long i = 0; i < frameCount; i++)
-		//                {
-		//                    *left++ = 0.0;
-		//                    *right++ = 0.0;
-		//                }
-		//
-		//                return 0;
-		//            }
+		
+		ax::StringVector GetInputDevices();
+		ax::StringVector GetOutputDevices();
+		
+		std::string GetCurrentOutputDevice();
+		std::string GetCurrentInputDevice();
 
 		virtual int CoreCallbackAudio(const float* input, float* output, unsigned long frameCount)
 		{

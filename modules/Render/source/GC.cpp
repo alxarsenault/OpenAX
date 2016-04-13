@@ -999,7 +999,7 @@ void ax::GC::DrawStringAlignedCenter(
 			glEnableVertexAttribArray(2);
 
 			DrawTexture(font.GetTexture(),
-				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height),
+				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height - 1),
 							font.GetSize()));
 
 			x += font.GetNextPosition();

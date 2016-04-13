@@ -81,6 +81,72 @@ namespace audio {
 
 		return 0;
 	}
+	
+	ax::StringVector Core::GetInputDevices()
+	{
+		int numDevices = Pa_GetDeviceCount();
+		
+		if (numDevices < 0) {
+			std::cerr << "ERROR: Pa_CountDevices returned : " << numDevices
+			<< std::endl;
+		}
+		
+		ax::StringVector devices;
+		
+		for (int i = 0; i < numDevices; i++) {
+			const PaDeviceInfo* device_info = Pa_GetDeviceInfo(i);
+			if(device_info->maxInputChannels != 0) {
+				devices.push_back(device_info->name);
+			}
+		}
+
+		return devices;
+	}
+	
+	ax::StringVector Core::GetOutputDevices()
+	{
+		int numDevices = Pa_GetDeviceCount();
+		
+		if (numDevices < 0) {
+			std::cerr << "ERROR: Pa_CountDevices returned : " << numDevices
+			<< std::endl;
+		}
+		
+		ax::StringVector devices;
+		
+		for (int i = 0; i < numDevices; i++) {
+			const PaDeviceInfo* device_info = Pa_GetDeviceInfo(i);
+			if(device_info->maxOutputChannels != 0) {
+				devices.push_back(device_info->name);
+			}
+		}
+		
+		return devices;
+	}
+	
+	std::string Core::GetCurrentInputDevice()
+	{
+		return std::string("None");
+	}
+	
+	std::string Core::GetCurrentOutputDevice()
+	{
+		int numDevices = Pa_GetDeviceCount();
+		
+		if (numDevices < 0) {
+			std::cerr << "ERROR: Pa_CountDevices returned : " << numDevices
+			<< std::endl;
+		}
+		
+		for (int i = 0; i < numDevices; i++) {
+			const PaDeviceInfo* device_info = Pa_GetDeviceInfo(i);
+			if(i == outputParameters.device) {
+				return std::string(device_info->name);
+			}
+		}
+		
+		return std::string("None");
+	}
 
 	void Core::StartAudio()
 	{

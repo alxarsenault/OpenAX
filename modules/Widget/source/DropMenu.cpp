@@ -324,13 +324,13 @@ void ax::DropMenu::OnMouseLeftDown(const ax::Point& pos)
 		return;
 	}
 
-	if (i != _selected_item) {
+//	if (i != _selected_item) {
 		_selected_item = i;
 		ax::Print("new ax::DropMenu::win->PushEvent");
 		win->PushEvent(
 			Events::ITEM_CLICK, new ax::DropMenu::Msg(this, _items[i], i));
 		win->Update();
-	}
+//	}
 }
 
 void ax::DropMenu::OnMouseLeftUp(const ax::Point& pos)
