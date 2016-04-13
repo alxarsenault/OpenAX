@@ -51,11 +51,11 @@ Event::Msg* Knob::Msg::GetCopy()
  * axKnob::Info.
  */
 Knob::Info::Info()
-	: knob_size(Size(50, 50))
-	, n_knob(128)
-	, bgColorNormal(Color(0.0, 0.0))
+	: bgColorNormal(Color(0.0, 0.0))
 	, bgColorHover(Color(0.0, 0.0))
 	, bgColorClicked(Color(0.0, 0.0))
+	, knob_size(Size(50, 50))
+	, n_knob(128)
 {
 }
 
@@ -302,10 +302,11 @@ std::shared_ptr<Window::Backbone> Knob::Builder::Create(Xml::Node& node)
 Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info, Flag flags, double value,
 	const std::string& msg)
 	: _events(events)
+	, _msg(msg)
+	, _flags(flags)
+	, _range(0.0, 1.0)
 	, _knobValue(value)
 	, _zeroToOneValue(value)
-	, _range(0.0, 1.0)
-	, _msg(msg)
 {
 	win = Window::Create(rect);
 
@@ -326,8 +327,6 @@ Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info,
 	}
 
 	_currentBgColor = info.bgColorNormal;
-
-	_bgAlpha = 1.0;
 
 	_nCurrentImg = _knobValue * (info.n_knob - 1);
 

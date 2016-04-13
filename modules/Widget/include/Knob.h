@@ -153,12 +153,6 @@ public:
 
 	void SetValue(const double& value, bool callValueChangeEvent = true);
 
-	void SetBackgroundAlpha(const float& alpha)
-	{
-		_bgAlpha = alpha;
-		win->Update();
-	}
-
 	ax::Flag GetFlags() const
 	{
 		return _flags;
@@ -185,7 +179,6 @@ protected:
 	unsigned int _nCurrentImg;
 	double _knobValue;
 	int _clickPosY;
-	float _bgAlpha;
 	double _zeroToOneValue;
 
 	void OnPaint(ax::GC gc);

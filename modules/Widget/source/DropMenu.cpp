@@ -90,9 +90,10 @@ ax::DropMenu::DropMenu(const ax::Rect& rect, const ax::DropMenu::Events& events,
 	const ax::DropMenu::Info& info, const ax::StringVector& items,
 	ax::Flag flags)
 	: _events(events)
+	, _flags(flags)
 	, _selected_item(-1)
 	, _mouse_hover_item(-1)
-	, _flags(flags)
+
 {
 	for (int i = 0; i < items.size(); i++) {
 		if (items[i].empty()) {

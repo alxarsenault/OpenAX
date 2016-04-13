@@ -29,8 +29,8 @@ axMouseManager::axMouseManager()
 	, _mouseCaptureWindow(nullptr)
 	, _pastWindow(nullptr)
 	, _currentWindow(nullptr)
-	, _evtHasReachWindow(false)
 	, _scrollCaptureWindow(nullptr)
+	, _evtHasReachWindow(false)
 {
 }
 
