@@ -267,7 +267,7 @@ public:
 
 		virtual ~Backbone()
 		{
-			ax::Print("Delete backbone");
+//			ax::Print("Delete backbone");
 		}
 
 		inline void AssignWindow(Ptr window);

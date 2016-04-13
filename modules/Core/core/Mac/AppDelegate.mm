@@ -192,7 +192,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (id)ChangeMouseCursor:(int)cursor_id
 {
-	ax::Print("Mouse in cocoa.");
+//	ax::Print("Mouse in cocoa.");
 	if (cursor_id == 0) {
 		[[NSCursor arrowCursor] set];
 	}

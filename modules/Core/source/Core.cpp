@@ -35,7 +35,7 @@ axCore::axCore()
 
 void axCore::InitManagers()
 {
-	ax::Print("axCore::InitManagers");
+//	ax::Print("axCore::InitManagers");
 	_windowManager = std::unique_ptr<ax::Core::WindowManager>(
 		new ax::Core::WindowManager());
 	_windowManager->_managerName = "WindowManager";

@@ -343,7 +343,7 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
 	ax::Flag flags = 0;
 
 	for (auto& n : flags_strs) {
-		ax::Print("OPT : ", n);
+//		ax::Print("OPT : ", n);
 		if (n == "VERTICAL") {
 			flags |= Flags::VERTICAL;
 		}
@@ -394,7 +394,7 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(ax::Xml::Node& con
 	ax::Flag flags = 0;
 
 	for (auto& n : flags_strs) {
-		ax::Print("OPT : ", n);
+//		ax::Print("OPT : ", n);
 		if (n == "VERTICAL") {
 			flags |= Flags::VERTICAL;
 		}

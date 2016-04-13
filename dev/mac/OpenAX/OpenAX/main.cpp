@@ -140,7 +140,7 @@ private:
 	axEVENT_ACCESSOR(ax::DropMenu::Msg, OnMenuChoice);
 	void OnMenuChoice(const ax::DropMenu::Msg& msg)
 	{
-		ax::Print(msg.GetItem());
+//		ax::Print(msg.GetItem());
 		_drop_btn->SetLabel(msg.GetItem());
 		RemoveMenu();
 		_is_droped = false;

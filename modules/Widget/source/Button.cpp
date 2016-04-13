@@ -342,7 +342,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	std::string builder_name = control.GetAttribute("builder");
 	std::string obj_name = control.GetAttribute("name");
 
-	ax::Print(builder_name, obj_name);
+//	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 	std::string img_path = control.GetChildNodeValue("img_path");
@@ -355,7 +355,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	for (auto& n : flags_strs) {
 
 		if (n == "SINGLE_IMG") {
-			ax::Print("OPT : ", n);
+//			ax::Print("OPT : ", n);
 			flags |= ax::Button::Flags::SINGLE_IMG;
 		}
 		else if (n == "IMG_RESIZE") {
@@ -368,7 +368,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 
 	std::string msg = control.GetChildNodeValue("msg");
 
-	ax::Print(size.x, size.y);
+//	ax::Print(size.x, size.y);
 
 	ax::Xml::Node info_node = control.GetNode("info");
 
@@ -391,7 +391,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& nod
 {
 	std::string builder_name = node.GetAttribute("builder");
 
-	ax::Print(builder_name);
+//	ax::Print(builder_name);
 
 	ax::Point pos = ax::Xml::StringToSize(node.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
@@ -405,7 +405,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& nod
 	for (auto& n : flags_strs) {
 
 		if (n == "SINGLE_IMG") {
-			ax::Print("OPT : ", n);
+//			ax::Print("OPT : ", n);
 			flags |= ax::Button::Flags::SINGLE_IMG;
 		}
 		else if (n == "IMG_RESIZE") {

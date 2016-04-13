@@ -25,7 +25,7 @@ namespace os {
 
 			new_path = new_path.substr(0, pos + 1);
 
-			ax::Print(new_path);
+//			ax::Print(new_path);
 
 			Goto(new_path);
 		}

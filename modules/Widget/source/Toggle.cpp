@@ -385,7 +385,7 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 	std::string builder_name = control.GetAttribute("builder");
 	std::string obj_name = control.GetAttribute("name");
 
-	ax::Print(builder_name, obj_name);
+//	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 	//	std::string img_path = control.GetChildNodeValue("img_path");
@@ -437,7 +437,7 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(ax::Xml::Node&
 {
 	std::string builder_name = node.GetAttribute("builder");
 
-	ax::Print(builder_name);
+//	ax::Print(builder_name);
 
 	ax::Point pos = ax::Xml::StringToSize(node.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));

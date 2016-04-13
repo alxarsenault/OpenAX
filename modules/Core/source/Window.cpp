@@ -361,16 +361,7 @@ void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
 
 void ax::Window::Node::Reparent(Window* parent, const ax::Point& position)
 {
-	ax::Print("TODO FIX THIS : axWindow.cpp Line 329");
-		
-		//        _parent = parent;
-		//        dimension.SetPosition(position);
-		//
-		//        ax::Event::ID temp = _parent->GetId();
-		//        _parent->ChangeId(GetId());
-		//        ChangeId(temp);
-		
-//	Update();
+	ax::Error("ax::Window::Node::Reparent not implemented yet");
 }
 
 void ax::Window::Node::BeforeDrawing(ax::Window* win)
@@ -475,7 +466,7 @@ void Window::Node::Draw()
 	GLenum err = GL_NO_ERROR;
 	while((err = glGetError()) != GL_NO_ERROR) {
   		//Process/log the error.
-  		ax::Print("GL ERROR :", err);
+  		ax::Error("GL ERROR :", err);
 	}
 
 	// Draw all children.

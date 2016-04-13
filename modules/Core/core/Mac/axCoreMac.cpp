@@ -128,6 +128,6 @@ void axCoreMac::SetFocusAndCenter()
 
 void axCoreMac::SetCursor(const int& cursor_id)
 {
-	ax::Print("axMacCore set cursor");
+//	ax::Print("axMacCore set cursor");
 	axCocoaChangeMouseCursor(cursor_id);
 }

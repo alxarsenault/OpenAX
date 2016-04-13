@@ -63,7 +63,7 @@ int ax::DropMenu::Msg::GetIndex() const
 
 ax::Event::Msg* ax::DropMenu::Msg::GetCopy()
 {
-	ax::Print("ax::DropMenu::Msg::GetCopy()");
+//	ax::Print("ax::DropMenu::Msg::GetCopy()");
 	return new ax::DropMenu::Msg(*this);
 }
 
@@ -154,7 +154,7 @@ ax::DropMenu::DropMenu(const ax::Rect& rect, const ax::DropMenu::Events& events,
 		win->AddConnection(DropMenu::Events::ITEM_CLICK, _events.item_click);
 	}
 
-	ax::Print("new ax::DropMenu::win->component");
+//	ax::Print("new ax::DropMenu::win->component");
 	win->component.Add("Widget", widget::Component::Ptr(new widget::Component(
 									 win, new ax::DropMenu::Info(info))));
 
@@ -172,9 +172,9 @@ ax::DropMenu::DropMenu(const ax::Rect& rect, const ax::DropMenu::Events& events,
 		_font->SetFontSize(info.font_size);
 	}
 
-	_up_img = ax::unique<ax::Image>("drop_up.png");
-	_down_img = ax::unique<ax::Image>("drop_down.png");
-	_right_img = ax::unique<ax::Image>("drop_right.png");
+	_up_img = ax::unique<ax::Image>("resources/drop_up.png");
+	_down_img = ax::unique<ax::Image>("resources/drop_down.png");
+	_right_img = ax::unique<ax::Image>("resources/drop_right.png");
 }
 
 const ax::StringVector& ax::DropMenu::GetItems() const
@@ -199,7 +199,7 @@ std::string ax::DropMenu::GetSelectedItem() const
 void ax::DropMenu::SetSelectedItem(const int& index)
 {
 	if (index >= (int)_items.size()) {
-		ax::Error("Index out of bound.");
+		ax::Error("ax::DropMenu::SetSelectedItem -> Index out of bound.");
 		return;
 	}
 
@@ -253,7 +253,7 @@ int ax::DropMenu::MousePosToIndex(const ax::Point& pos)
 			return _top_item_index + index - 1;
 		}
 		else {
-			ax::Print("Should never happen.");
+			ax::Error("ax::DropMenu::MousePosToIndex -> Should never happen.");
 		}
 	}
 
@@ -308,7 +308,7 @@ void ax::DropMenu::OnMouseLeftDown(const ax::Point& pos)
 				return;
 			}
 
-			ax::Print("Should not happen (down)");
+			ax::Error("ax::DropMenu::OnMouseLeftDown -> Should not happen (down)");
 			_top_item_index++;
 			win->Update();
 			return;
@@ -320,13 +320,13 @@ void ax::DropMenu::OnMouseLeftDown(const ax::Point& pos)
 			return;
 		}
 
-		ax::Print("Should never happen.");
+		ax::Error("ax::DropMenu::OnMouseLeftDown -> Should never happen.");
 		return;
 	}
 
 //	if (i != _selected_item) {
 		_selected_item = i;
-		ax::Print("new ax::DropMenu::win->PushEvent");
+//		ax::Print("new ax::DropMenu::win->PushEvent");
 		win->PushEvent(
 			Events::ITEM_CLICK, new ax::DropMenu::Msg(this, _items[i], i));
 		win->Update();
@@ -497,7 +497,7 @@ void ax::DropMenu::OnPaint(ax::GC gc)
 			gc.DrawImageColor(_down_img.get(), d_img_pos, info->up_down_arrow);
 		}
 		else {
-			ax::Print("Should not happen (draw)");
+			ax::Error("ax::DropMenu::OnPaint -> Should not happen (draw)");
 		}
 
 		//		for (int i = 0; i < _n_shown_item; i++) {

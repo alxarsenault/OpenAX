@@ -194,7 +194,7 @@ void axCocoaSetTitleBar(bool title_bar)
 
 void axCocoaChangeMouseCursor(int cursor_id)
 {
-	ax::Print("Mouse cursor cocoa interface.");
+//	ax::Print("Mouse cursor cocoa interface.");
 	[GlobalAppDelegate ChangeMouseCursor:cursor_id];
 }
 

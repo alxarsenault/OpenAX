@@ -210,8 +210,9 @@ void ScrollBar::OnPaint(GC gc)
 	gc.DrawRectangleColorFade(rect, _info.bg_top, _info.bg_bottom);
 
 	gc.SetColor(_currentScrollBarColor);
-	Rect bar_rect(0, _sliderPos, rect.size.x, _sliderHeight);
+	Rect bar_rect(rect.position.x, _sliderPos, rect.size.x, _sliderHeight);
 	gc.DrawRectangle(bar_rect);
+//	gc.DrawRoundedRectangle(bar_rect, 3);
 
 	gc.SetColor(_info.slider_contour);
 	gc.DrawRectangleContour(bar_rect);

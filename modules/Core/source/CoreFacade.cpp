@@ -77,7 +77,7 @@ namespace Core {
 		_core->Init(frame_size);
 		_core->SetGlobalSize(frame_size);
 #else
-		ax::Print("Facade _core = new axCoreMac");
+//		ax::Print("Facade _core = new axCoreMac");
 		_core = new axCoreMac();
 		_core->SetGlobalSize(frame_size);
 //_core->Init(frame_size);

@@ -38,7 +38,7 @@ void Window3D::Render3D()
 	// Calculate the aspect ratio of the window.
 	//	double asp_ratio = rect.size.x / (double)rect.size.y;
 
-	ax::Print("NOT GLU PERSPECTIVE.");
+//	ax::Print("NOT GLU PERSPECTIVE.");
 	// gluPerspective(45.0, asp_ratio, 0.1, 100.0);
 
 	glMatrixMode(GL_MODELVIEW);

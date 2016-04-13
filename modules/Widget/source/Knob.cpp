@@ -243,7 +243,7 @@ std::shared_ptr<Window::Backbone> Knob::Builder::Create(const Point& pos, const 
 	std::string builder_name = control.GetAttribute("builder");
 	std::string obj_name = control.GetAttribute("name");
 
-	ax::Print(builder_name, obj_name);
+//	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 	ax::Flag flags = std::stoi(control.GetChildNodeValue("flags"));
@@ -271,7 +271,7 @@ std::shared_ptr<Window::Backbone> Knob::Builder::Create(Xml::Node& node)
 	ax::Xml::Node control(node);
 	std::string builder_name = control.GetAttribute("builder");
 
-	ax::Print(builder_name);
+//	ax::Print(builder_name);
 
 	ax::Size pos = ax::Xml::StringToSize(control.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
@@ -340,7 +340,7 @@ Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info,
 
 void Knob::OnMouseLeftDown(const Point& pos)
 {
-	ax::Print("Knob mouse left down.");
+//	ax::Print("Knob mouse left down.");
 	_clickPosY = (pos - win->dimension.GetAbsoluteRect().position).y;
 
 	win->event.GrabMouse();

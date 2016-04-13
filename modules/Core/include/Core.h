@@ -65,7 +65,7 @@ public:
 
 	virtual void SetCursor(const int& cursor_id)
 	{
-		ax::Print("axCore set cursor");
+//		ax::Print("axCore set cursor");
 	}
 
 	virtual ax::Core::WindowManager* GetWindowManager();

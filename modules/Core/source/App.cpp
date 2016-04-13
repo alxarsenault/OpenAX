@@ -45,7 +45,7 @@ ax::Size ax::App::_frameSize = ax::Size(500, 500);
 ax::App& ax::App::GetInstance()
 {
 	if (ax::App::_instance == nullptr) {
-		ax::Print("new ax::App::GetInstance");
+		//ax::Print("new ax::App::GetInstance");
 		ax::App::_instance.reset(new ax::App());
 	}
 	return *ax::App::_instance;
@@ -54,7 +54,7 @@ ax::App& ax::App::GetInstance()
 ax::App* ax::App::Create(axCore* core)
 {
 	if (ax::App::_instance == nullptr) {
-		ax::Print("new ax::App::GetInstance");
+		//ax::Print("new ax::App::GetInstance");
 		ax::App::_instance.reset(new ax::App(core));
 	}
 
@@ -233,8 +233,8 @@ ax::App::App()
 	, _evtManager(new ax::Event::Manager([&] { PushEventOnSystemQueue(); }))
 	, _resourceManager(new ax::Utils::ResourceStorage())
 {
-	ax::Print("new ax::App::_evtManager");
-	ax::Print("new ax::App::_resourceManager");
+//	ax::Print("new ax::App::_evtManager");
+//	ax::Print("new ax::App::_resourceManager");
 }
 
 ax::App::App(axCore* core)
@@ -242,8 +242,8 @@ ax::App::App(axCore* core)
 	, _evtManager(new ax::Event::Manager([&] { PushEventOnSystemQueue(); }))
 	, _resourceManager(new ax::Utils::ResourceStorage())
 {
-	ax::Print("new ax::App::_evtManager");
-	ax::Print("new ax::App::_resourceManager");
+//	ax::Print("new ax::App::_evtManager");
+//	ax::Print("new ax::App::_resourceManager");
 }
 
 ax::App::App(const ax::App& a)
