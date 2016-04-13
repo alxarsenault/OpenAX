@@ -132,28 +132,28 @@ std::string TextBox::Info::GetAttributeValue(const std::string& name)
 void TextBox::Info::SetAttribute(const ax::StringPair& attribute)
 {
 	if (attribute.first == "normal") {
-		normal.LoadFromString(attribute.second);
+		normal = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "hover") {
-		hover.LoadFromString(attribute.second);
+		hover = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "highlight") {
-		highlight.LoadFromString(attribute.second);
+		highlight = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected") {
-		selected.LoadFromString(attribute.second);
+		selected = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "selected_shadow") {
-		selected_shadow.LoadFromString(attribute.second);
+		selected_shadow = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "cursor") {
-		cursor.LoadFromString(attribute.second);
+		cursor = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "contour") {
-		contour.LoadFromString(attribute.second);
+		contour = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "font_color") {
-		font_color.LoadFromString(attribute.second);
+		font_color = ax::Xml::StringToColor(attribute.second);
 	}
 }
 

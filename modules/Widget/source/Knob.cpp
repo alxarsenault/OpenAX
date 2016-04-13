@@ -100,13 +100,13 @@ void Knob::Info::SetAttribute(const StringPair& attribute)
 		n_knob = std::stoi(attribute.second);
 	}
 	else if (attribute.first == "bgColorNormal") {
-		bgColorNormal.LoadFromString(attribute.second);
+		bgColorNormal = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "bgColorHover") {
-		bgColorHover.LoadFromString(attribute.second);
+		bgColorHover = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "bgColorClicked") {
-		bgColorClicked.LoadFromString(attribute.second);
+		bgColorClicked = ax::Xml::StringToColor(attribute.second);
 	}
 	else if (attribute.first == "img_path") {
 		img_path = attribute.second;
@@ -339,7 +339,6 @@ Knob::Knob(const Rect& rect, const Knob::Events& events, const Knob::Info& info,
 
 void Knob::OnMouseLeftDown(const Point& pos)
 {
-//	ax::Print("Knob mouse left down.");
 	_clickPosY = (pos - win->dimension.GetAbsoluteRect().position).y;
 
 	win->event.GrabMouse();
