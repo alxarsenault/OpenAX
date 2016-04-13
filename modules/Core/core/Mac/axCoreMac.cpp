@@ -26,108 +26,112 @@
 
 #include <unistd.h>
 
-axCoreMac::axCoreMac()
-{
+namespace ax {
+namespace core {
+	CoreMac::CoreMac()
+	{
+	}
+
+	void CoreMac::MainLoop()
+	{
+		//	std::cout << "MainLoop" << std::endl;
+		axCallNSApplicationMain();
+	}
+
+	void CoreMac::Init(const ax::Size& frame_size)
+	{
+//		std::cout << "Init axCoreMac." << std::endl;
+		InitManagers();
+		InitGL();
+		ResizeFrame(frame_size);
+		//    _size = frame_size;
+	}
+
+	ax::Size CoreMac::GetScreenSize()
+	{
+		return axCocoaGetScreenSize();
+	}
+
+	std::string CoreMac::GetAppDirectory()
+	{
+		return std::string(CocoaGetAppDirectory() + std::string("/"));
+	}
+
+	std::string CoreMac::GetAppPath()
+	{
+		return std::string(CocoaGetAppPath() + std::string("/"));
+	}
+
+	// bool axCoreMac::CreatePopupWindow(const char* title, int width, int height)
+	//{
+	//    return false;
+	//}
+
+	ax::Rect CoreMac::GetScreenRect()
+	{
+		return axCocoaGetScreenSize();
+	}
+
+	void CoreMac::KillGLWindow()
+	{
+	}
+
+	bool CoreMac::CreateGLWindow(const char* title, int width, int height, int bits)
+	{
+		return true;
+	}
+
+	void CoreMac::UpdateAll()
+	{
+		Core::UpdateAll();
+		TestFunctionInterface();
+	}
+
+	void CoreMac::ResizeFrame(const ax::Size& size)
+	{
+		axCocoaResizeFrame(size);
+		ResizeGLScene(size);
+	}
+
+	std::string CoreMac::OpenFileDialog()
+	{
+		return axOpenFileDialog();
+	}
+
+	void CoreMac::PushEventOnSystemQueue()
+	{
+		AddEventToDispatchQueue();
+	}
+
+	void CoreMac::HideMouse()
+	{
+		axCocoaHideMouse();
+	}
+
+	void CoreMac::ShowMouse()
+	{
+		axCocoaShowMouse();
+	}
+
+	void CoreMac::SetResizable(bool resizable)
+	{
+		axCocoaSetResizable(resizable);
+	}
+
+	void CoreMac::SetTitleBar(bool titlebar)
+	{
+		axCocoaSetTitleBar(titlebar);
+	}
+
+	void CoreMac::SetFocusAndCenter()
+	{
+		axCocoaSetFocusAndCenter();
+	}
+
+	void CoreMac::SetCursor(const Cursor& cursor_id)
+	{
+		//	ax::Print("axMacCore set cursor");
+		axCocoaChangeMouseCursor(cursor_id);
+	}
 }
-
-void axCoreMac::MainLoop()
-{
-//	std::cout << "MainLoop" << std::endl;
-	axCallNSApplicationMain();
-}
-
-void axCoreMac::Init(const ax::Size& frame_size)
-{
-	std::cout << "Init axCoreMac." << std::endl;
-	InitManagers();
-	InitGL();
-	ResizeFrame(frame_size);
-	//    _size = frame_size;
-}
-
-ax::Size axCoreMac::GetScreenSize()
-{
-	return axCocoaGetScreenSize();
-}
-
-std::string axCoreMac::GetAppDirectory()
-{
-	return std::string(CocoaGetAppDirectory() + std::string("/"));
-}
-
-std::string axCoreMac::GetAppPath()
-{
-	return std::string(CocoaGetAppPath() + std::string("/"));
-}
-
-// bool axCoreMac::CreatePopupWindow(const char* title, int width, int height)
-//{
-//    return false;
-//}
-
-ax::Rect axCoreMac::GetScreenRect()
-{
-	return axCocoaGetScreenSize();
-}
-
-void axCoreMac::KillGLWindow()
-{
-}
-
-bool axCoreMac::CreateGLWindow(const char* title, int width, int height, int bits)
-{
-	return true;
-}
-
-void axCoreMac::UpdateAll()
-{
-	axCore::UpdateAll();
-	TestFunctionInterface();
-}
-
-void axCoreMac::ResizeFrame(const ax::Size& size)
-{
-	axCocoaResizeFrame(size);
-	ResizeGLScene(size);
-}
-
-std::string axCoreMac::OpenFileDialog()
-{
-	return axOpenFileDialog();
-}
-
-void axCoreMac::PushEventOnSystemQueue()
-{
-	AddEventToDispatchQueue();
-}
-
-void axCoreMac::HideMouse()
-{
-	axCocoaHideMouse();
-}
-
-void axCoreMac::ShowMouse()
-{
-	axCocoaShowMouse();
-}
-
-void axCoreMac::SetResizable(bool resizable)
-{
-	axCocoaSetResizable(resizable);
-}
-
-void axCoreMac::SetTitleBar(bool titlebar)
-{
-	axCocoaSetTitleBar(titlebar);
-}
-
-void axCoreMac::SetFocusAndCenter()
-{
-	axCocoaSetFocusAndCenter();
-}
-
-void axCoreMac::SetCursor(const int& cursor_id)
-{
-//	ax::Print("axMacCore set cursor");
-	axCocoaChangeMouseCursor(cursor_id);
 }

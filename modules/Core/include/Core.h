@@ -19,7 +19,7 @@
  * To release a closed-source product which uses axFrameworks, commercial
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
- 
+
 #ifndef __AX_CORE__
 #define __AX_CORE__
 
@@ -27,105 +27,111 @@
 /// @{
 
 #include "WindowManager.h"
-#include <time.h>
 #include <memory>
+#include <time.h>
 
-class axCore {
-public:
-	axCore();
+namespace ax {
+namespace core {
 
-	virtual void MainLoop() = 0;
+	class Core {
+	public:
+		Core();
 
-	virtual void Init(const ax::Size& frame_size) = 0;
+		virtual void MainLoop() = 0;
 
-	virtual void ResizeGLScene(const ax::Size& size);
+		virtual void Init(const ax::Size& frame_size) = 0;
 
-	virtual bool CreateGLWindow(const char* title, int width, int height, int bits) = 0;
+		virtual void ResizeGLScene(const ax::Size& size);
 
-	virtual std::string GetAppDirectory() = 0;
+		virtual bool CreateGLWindow(const char* title, int width, int height, int bits) = 0;
 
-	virtual std::string GetAppPath()
-	{
-		return "";
-	}
+		virtual std::string GetAppDirectory() = 0;
 
-	virtual ax::Rect GetScreenRect() = 0;
+		virtual std::string GetAppPath()
+		{
+			return "";
+		}
 
-	virtual ax::Size GetScreenSize() = 0;
+		virtual ax::Rect GetScreenRect() = 0;
 
-	virtual std::string OpenFileDialog() = 0;
+		virtual ax::Size GetScreenSize() = 0;
 
-	virtual void PushEventOnSystemQueue() = 0;
+		virtual std::string OpenFileDialog() = 0;
 
-	virtual void ResizeFrame(const ax::Size& size) = 0;
+		virtual void PushEventOnSystemQueue() = 0;
 
-	virtual void KillGLWindow() = 0;
+		virtual void ResizeFrame(const ax::Size& size) = 0;
 
-	int InitGL();
+		virtual void KillGLWindow() = 0;
 
-	virtual void SetCursor(const int& cursor_id)
-	{
-//		ax::Print("axCore set cursor");
-	}
+		int InitGL();
 
-	virtual ax::Core::WindowManager* GetWindowManager();
+		enum Cursor { NORMAL, RESIZE_UP_DOWN, RESIZE_LEFT_RIGHT };
 
-	virtual ax::Core::WindowManager* GetPopupManager();
+		virtual void SetCursor(const Cursor& cursor_id)
+		{
+			//		ax::Print("axCore set cursor");
+		}
 
-	virtual ax::Core::WindowManager* GetRealPopWindowManager();
-	
-	virtual ax::Core::WindowManager* GetEditorWindowManager()
-	{
-		return _editor_manager.get();
-	}
+		virtual ax::core::WindowManager* GetWindowManager();
 
-	ax::Size GetGlobalSize() const;
+		virtual ax::core::WindowManager* GetPopupManager();
 
-	void SetGlobalSize(const ax::Size& size);
+		virtual ax::core::WindowManager* GetRealPopWindowManager();
 
-	virtual void UpdateAll();
+		virtual ax::core::WindowManager* GetEditorWindowManager()
+		{
+			return _editor_manager.get();
+		}
 
-	virtual void HideMouse()
-	{
-	}
+		ax::Size GetGlobalSize() const;
 
-	virtual void ShowMouse()
-	{
-	}
-	
-	virtual void SetResizable(bool resizable)
-	{
-	}
-	
-	virtual void SetTitleBar(bool titlebar)
-	{
-	}
-	
-	virtual void SetFocusAndCenter()
-	{
-		
-	}
+		void SetGlobalSize(const ax::Size& size);
 
-	virtual int DrawGLScene();
-	
-//	virtual void SetMouseCursor(int cursor_id)
-//	{
-//		
-//	}
+		virtual void UpdateAll();
 
-protected:
-	std::unique_ptr<ax::Core::WindowManager> _windowManager;
-	std::unique_ptr<ax::Core::WindowManager> _popupManager;
-	std::unique_ptr<ax::Core::WindowManager> _editor_manager;
-	
-	std::unique_ptr<ax::Core::WindowManager> _realPopWindowManager;
+		virtual void HideMouse()
+		{
+		}
 
-	bool _needToDraw, _popupNeedToDraw;
-	ax::Size _size, _popSize;
-	int _cursor_id;
+		virtual void ShowMouse()
+		{
+		}
 
-	virtual void InitManagers();
-};
+		virtual void SetResizable(bool resizable)
+		{
+		}
+
+		virtual void SetTitleBar(bool titlebar)
+		{
+		}
+
+		virtual void SetFocusAndCenter()
+		{
+		}
+
+		virtual int DrawGLScene();
+
+		//	virtual void SetMouseCursor(int cursor_id)
+		//	{
+		//
+		//	}
+
+	protected:
+		std::unique_ptr<ax::core::WindowManager> _windowManager;
+		std::unique_ptr<ax::core::WindowManager> _popupManager;
+		std::unique_ptr<ax::core::WindowManager> _editor_manager;
+
+		std::unique_ptr<ax::core::WindowManager> _realPopWindowManager;
+
+		bool _needToDraw, _popupNeedToDraw;
+		ax::Size _size, _popSize;
+		int _cursor_id;
+
+		virtual void InitManagers();
+	};
+}
+}
 
 /// @}
 #endif //__AX_CORE__

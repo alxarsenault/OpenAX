@@ -28,9 +28,11 @@
 
 #include "Core.h"
 
-class axCoreMac : public axCore {
+namespace ax {
+namespace core {
+class CoreMac : public Core {
 public:
-	axCoreMac();
+	CoreMac();
 
 	virtual void MainLoop();
 
@@ -60,7 +62,7 @@ public:
 
 	virtual void ShowMouse();
 	
-	virtual void SetCursor(const int& cursor_id);
+	virtual void SetCursor(const Cursor& cursor_id);
 	
 	virtual void SetResizable(bool resizable);
 	
@@ -68,6 +70,8 @@ public:
 	
 	virtual void SetFocusAndCenter();
 };
+}
+}
 
 #endif // __APPLE__
 

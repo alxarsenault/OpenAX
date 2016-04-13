@@ -42,6 +42,7 @@
 #include <thread>
 
 namespace ax {
+
 namespace Event {
 	class Manager;
 }
@@ -54,12 +55,12 @@ namespace Utils {
  * Starting point of any application.
  * It is the highest abstraction of the ax::Core for user simplicity.
  */
-class App : public ax::Core::Facade {
+class App : public core::Facade {
 public:
 	/// Create or access the application.
 	static ax::App& GetInstance();
 	
-	static ax::App* Create(axCore* core);
+	static ax::App* Create(core::Core* core);
 
 	/// Use this before getInstance to set your application window size.
 	static inline void SetSize(const ax::Size& appSize)
@@ -122,7 +123,7 @@ private:
 	static std::once_flag _onlyOne;
 	
 	App(const ax::App& a);
-	App(axCore* core);
+	App(core::Core* core);
 	App& operator=(const ax::App& a);
 
 	/* Managers */

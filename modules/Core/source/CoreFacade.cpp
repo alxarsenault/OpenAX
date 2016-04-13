@@ -51,7 +51,7 @@
 #endif // __APPLE__
 
 namespace ax {
-namespace Core {
+namespace core {
 	Facade::Facade(const ax::Size& frame_size)
 	{
 #ifdef ANDROID
@@ -78,7 +78,7 @@ namespace Core {
 		_core->SetGlobalSize(frame_size);
 #else
 //		ax::Print("Facade _core = new axCoreMac");
-		_core = new axCoreMac();
+		_core = new CoreMac();
 		_core->SetGlobalSize(frame_size);
 //_core->Init(frame_size);
 #endif // _AX_VST_APP_
@@ -86,7 +86,7 @@ namespace Core {
 #endif // __APPLE__
 	}
 	
-	Facade::Facade(const ax::Size& frame_size, axCore* core)
+	Facade::Facade(const ax::Size& frame_size, Core* core)
 	{
 		_core = core;
 //		_core->Init(frame_size);
@@ -124,7 +124,7 @@ namespace Core {
 		return _core->GetScreenSize();
 	}
 
-	void Facade::SetCursor(const int& cursor_id)
+	void Facade::SetCursor(const Core::Cursor& cursor_id)
 	{
 		_core->SetCursor(cursor_id);
 	}
@@ -144,17 +144,17 @@ namespace Core {
 		_core->SetFocusAndCenter();
 	}
 
-	ax::Core::WindowManager* Facade::GetWindowManager()
+	ax::core::WindowManager* Facade::GetWindowManager()
 	{
 		return _core->GetWindowManager();
 	}
 
-	ax::Core::WindowManager* Facade::GetPopupManager()
+	ax::core::WindowManager* Facade::GetPopupManager()
 	{
 		return _core->GetPopupManager();
 	}
 
-	ax::Core::WindowManager* Facade::GetRealPopWindowManager()
+	ax::core::WindowManager* Facade::GetRealPopWindowManager()
 	{
 		return _core->GetRealPopWindowManager();
 	}
@@ -199,7 +199,7 @@ namespace Core {
 		_core->PushEventOnSystemQueue();
 	}
 
-	axCore* Facade::GetCore()
+	Core* Facade::GetCore()
 	{
 		return _core;
 	}

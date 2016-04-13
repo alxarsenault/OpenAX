@@ -35,9 +35,9 @@
 #include "KeyboardManager.h"
 
 namespace ax {
-namespace Core {
+namespace core {
 	/*
-	 * ax::Core::WindowManager.
+	 * ax::core::WindowManager.
 	 */
 	class WindowManager : public axMouseManager, public axKeyboardManager {
 	public:

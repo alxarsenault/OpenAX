@@ -139,7 +139,7 @@ ax::Point ax::Window::Dimension::GetScrollDecay() const
 /*
  * Window event.
  */
-ax::Window::Event::Event(ax::Window* win, ax::Core::WindowManager* win_manager)
+ax::Window::Event::Event(ax::Window* win, ax::core::WindowManager* win_manager)
 	: _win(win)
 	, _windowManager(win_manager)
 {

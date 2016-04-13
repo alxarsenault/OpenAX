@@ -51,7 +51,7 @@ ax::App& ax::App::GetInstance()
 	return *ax::App::_instance;
 }
 
-ax::App* ax::App::Create(axCore* core)
+ax::App* ax::App::Create(core::Core* core)
 {
 	if (ax::App::_instance == nullptr) {
 		//ax::Print("new ax::App::GetInstance");
@@ -229,7 +229,7 @@ ax::Window::Ptr ax::App::GetTopLevel()
 /* Private */
 
 ax::App::App()
-	: ax::Core::Facade(_frameSize)
+	: ax::core::Facade(_frameSize)
 	, _evtManager(new ax::Event::Manager([&] { PushEventOnSystemQueue(); }))
 	, _resourceManager(new ax::Utils::ResourceStorage())
 {
@@ -237,8 +237,8 @@ ax::App::App()
 //	ax::Print("new ax::App::_resourceManager");
 }
 
-ax::App::App(axCore* core)
-	: ax::Core::Facade(_frameSize, core)
+ax::App::App(core::Core* core)
+	: ax::core::Facade(_frameSize, core)
 	, _evtManager(new ax::Event::Manager([&] { PushEventOnSystemQueue(); }))
 	, _resourceManager(new ax::Utils::ResourceStorage())
 {
@@ -247,7 +247,7 @@ ax::App::App(axCore* core)
 }
 
 ax::App::App(const ax::App& a)
-	: ax::Core::Facade(a._frameSize)
+	: ax::core::Facade(a._frameSize)
 {
 	_instance = a._instance;
 	_frameSize = a._frameSize;

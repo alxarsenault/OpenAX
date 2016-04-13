@@ -36,7 +36,7 @@
 namespace ax {
 class App;
 
-namespace Core {
+namespace core {
 	class WindowManager;
 }
 
@@ -146,7 +146,7 @@ public:
 		/***********************************************************************
 		 * Event.
 		 **********************************************************************/
-		Event(ax::Window* win, ax::Core::WindowManager* win_manager);
+		Event(ax::Window* win, ax::core::WindowManager* win_manager);
 
 		~Event();
 
@@ -234,7 +234,7 @@ public:
 
 	protected:
 		ax::Window* _win = nullptr;
-		ax::Core::WindowManager* _windowManager;
+		ax::core::WindowManager* _windowManager;
 	};
 
 	enum StateOption { Hidden, NeedUpdate, NUMBER_OF_STATES };
@@ -361,7 +361,7 @@ public:
 protected:
 	Window(const ax::Rect& rect);
 
-	ax::Core::WindowManager* _windowManager;
+	ax::core::WindowManager* _windowManager;
 
 public:
 	/// Window dimensions.

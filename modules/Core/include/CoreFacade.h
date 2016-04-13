@@ -24,12 +24,11 @@
 #define __axLib__axCoreFacade__
 
 #include "Utils.h"
+#include "Core.h"
 #include <string>
 
-class axCore;
-
 namespace ax {
-namespace Core {
+namespace core {
 
 	class WindowManager;
 
@@ -37,7 +36,7 @@ namespace Core {
 	public:
 		Facade(const ax::Size& frame_size);
 		
-		Facade(const ax::Size& frame_size, axCore* core);
+		Facade(const ax::Size& frame_size, Core* core);
 
 		void Init(const ax::Size& frame_size);
 
@@ -55,11 +54,11 @@ namespace Core {
 
 		void SetFrameSize(const ax::Size& size);
 
-		ax::Core::WindowManager* GetWindowManager();
+		ax::core::WindowManager* GetWindowManager();
 
-		ax::Core::WindowManager* GetPopupManager();
+		ax::core::WindowManager* GetPopupManager();
 
-		ax::Core::WindowManager* GetRealPopWindowManager();
+		ax::core::WindowManager* GetRealPopWindowManager();
 
 		void UpdateAll();
 
@@ -71,7 +70,7 @@ namespace Core {
 
 		virtual void MainLoop();
 
-		void SetCursor(const int& cursor_id);
+		void SetCursor(const Core::Cursor& cursor_id);
 		
 		void SetResizable(bool resizable);
 		
@@ -79,15 +78,15 @@ namespace Core {
 		
 		void SetFocusAndCenter();
 
-		/// ax::App -> ax::Core::Facade should be use instead of this.
-		/// Better know what you are doing when you're using this function.
-		axCore* GetCore();
+		/// ax::App -> ax::core::Facade should be use instead of this.
+		/// You better know what you are doing when you're using this function.
+		Core* GetCore();
 
 	protected:
 		void PushEventOnSystemQueue();
 
 	private:
-		axCore* _core;
+		Core* _core;
 	};
 }
 }

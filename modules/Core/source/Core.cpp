@@ -21,10 +21,12 @@
  */
 
 #include "Core.h"
-#include "Render.h"
 #include "GraphicInterface.h"
+#include "Render.h"
 
-axCore::axCore()
+namespace ax {
+namespace core {
+Core::Core()
 	: _needToDraw(true)
 	, _popupNeedToDraw(true)
 {
@@ -33,27 +35,23 @@ axCore::axCore()
 	_editor_manager = nullptr;
 }
 
-void axCore::InitManagers()
+void Core::InitManagers()
 {
-//	ax::Print("axCore::InitManagers");
-	_windowManager = std::unique_ptr<ax::Core::WindowManager>(
-		new ax::Core::WindowManager());
+	//	ax::Print("axCore::InitManagers");
+	_windowManager = std::unique_ptr<ax::core::WindowManager>(new ax::core::WindowManager());
 	_windowManager->_managerName = "WindowManager";
 
-	_popupManager = std::unique_ptr<ax::Core::WindowManager>(
-		new ax::Core::WindowManager());
+	_popupManager = std::unique_ptr<ax::core::WindowManager>(new ax::core::WindowManager());
 	_popupManager->_managerName = "PopupManager";
 
-	_realPopWindowManager = std::unique_ptr<ax::Core::WindowManager>(
-		new ax::Core::WindowManager());
+	_realPopWindowManager = std::unique_ptr<ax::core::WindowManager>(new ax::core::WindowManager());
 	_realPopWindowManager->_managerName = "RealPopWindowManager";
-	
-	_editor_manager = std::unique_ptr<ax::Core::WindowManager>(
-		new ax::Core::WindowManager());
+
+	_editor_manager = std::unique_ptr<ax::core::WindowManager>(new ax::core::WindowManager());
 	_editor_manager->_managerName = "Editor";
 }
 
-int axCore::InitGL()
+int Core::InitGL()
 {
 	GLenum err = glGetError();
 	if (err != GL_NO_ERROR) {
@@ -68,8 +66,7 @@ int axCore::InitGL()
 	}
 
 	// Normal vertex shader.
-	const std::string v_normal(
-		"uniform sampler2D texture1; 						\
+	const std::string v_normal("uniform sampler2D texture1; 						\
 		 uniform mat4 mvp_matrix;							\
 		 attribute vec4 vPosition;							\
 		 attribute vec4 vColor;								\
@@ -82,8 +79,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Normal fragment shader.
-	const std::string f_normal(
-		"varying vec4 fragColor;							\
+	const std::string f_normal("varying vec4 fragColor;							\
 		 uniform sampler2D texture1;						\
 															\
 		 void main()										\
@@ -115,8 +111,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Font vertex shader.
-	const std::string v_font(
-		"uniform mat4 mvp_matrix;							\
+	const std::string v_font("uniform mat4 mvp_matrix;							\
 		 attribute vec4 vPosition;							\
 		 attribute vec2 vTexCoord;							\
 		 attribute vec4 vColor;								\
@@ -131,8 +126,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Font fragment shader.
-	const std::string f_font(
-		"uniform sampler2D texture1;						\
+	const std::string f_font("uniform sampler2D texture1;						\
 		 varying vec4 fragColor;							\
 		 varying vec2 v_texCoor;							\
 															\
@@ -143,8 +137,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Image vertex shader.
-	const std::string v_img(
-		"attribute vec4 vPosition;							\
+	const std::string v_img("attribute vec4 vPosition;							\
 		 attribute vec2 vTexCoord;							\
 		 attribute vec4 vColor;								\
 		 varying vec2 v_texCoor;							\
@@ -157,8 +150,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Image fragment shader.
-	const std::string f_img(
-		"uniform sampler2D texture1;						\
+	const std::string f_img("uniform sampler2D texture1;						\
 		 varying vec2 v_texCoor;							\
 															\
 		 void main()										\
@@ -167,8 +159,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Trasnparent image vertex shader.
-	const std::string v_img_alpha(
-		"attribute vec4 vPosition;							\
+	const std::string v_img_alpha("attribute vec4 vPosition;							\
 		 attribute vec2 vTexCoord;							\
 		 attribute vec4 vColor;								\
 		 varying vec4 fragColor;							\
@@ -183,8 +174,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Transparent image fragment shader.
-	const std::string f_img_alpha(
-		"varying vec2 v_texCoor;							\
+	const std::string f_img_alpha("varying vec2 v_texCoor;							\
 		 varying vec4 fragColor;							\
 		 uniform sampler2D texture1;						\
 								  							\
@@ -195,8 +185,7 @@ int axCore::InitGL()
 		 }													");
 
 	// Color image vertex shader.
-	const std::string v_img_color(
-		"attribute vec4 vPosition;							\
+	const std::string v_img_color("attribute vec4 vPosition;							\
 		 attribute vec2 vTexCoord;							\
 	     attribute vec4 vColor;								\
 	     varying vec4 fragColor;							\
@@ -211,8 +200,7 @@ int axCore::InitGL()
 	     }													");
 
 	// Color image fragment shader.
-	const std::string f_img_color(
-		"varying vec2 v_texCoor;							\
+	const std::string f_img_color("varying vec2 v_texCoor;							\
 		 varying vec4 fragColor;							\
 		 uniform sampler2D texture1;						\
 													        \
@@ -222,7 +210,7 @@ int axCore::InitGL()
 		 	float cc = txtColor.a;							\
 		 	gl_FragColor = vec4(fragColor.r, fragColor.g, fragColor.b, cc);			\
 		 }													");
-	
+
 	ax::GC::shader_normal = ax::GL::Shader(true, v_normal, f_normal);
 	ax::GC::shader_fb = ax::GL::Shader(true, v_fb, f_fb);
 	ax::GC::shader_font = ax::GL::Shader(true, v_font, f_font);
@@ -241,22 +229,22 @@ int axCore::InitGL()
 	return true;
 }
 
-ax::Core::WindowManager* axCore::GetWindowManager()
+ax::core::WindowManager* Core::GetWindowManager()
 {
 	return _windowManager.get();
 }
 
-ax::Core::WindowManager* axCore::GetPopupManager()
+ax::core::WindowManager* Core::GetPopupManager()
 {
 	return _popupManager.get();
 }
 
-ax::Core::WindowManager* axCore::GetRealPopWindowManager()
+ax::core::WindowManager* Core::GetRealPopWindowManager()
 {
 	return _realPopWindowManager.get();
 }
 
-void axCore::ResizeGLScene(const ax::Size& size)
+void Core::ResizeGLScene(const ax::Size& size)
 {
 	// Prevent a division by zero.
 	_size = ax::Size(size.x, size.y == 0 ? 1 : size.y);
@@ -267,27 +255,27 @@ void axCore::ResizeGLScene(const ax::Size& size)
 	_popupNeedToDraw = true;
 
 	GetWindowManager()->OnSize(size);
-//	GetPopupManager()->OnSize(size);
-//	GetEditorWindowManager()->OnSize(size);
+	//	GetPopupManager()->OnSize(size);
+	//	GetEditorWindowManager()->OnSize(size);
 }
 
-ax::Size axCore::GetGlobalSize() const
+ax::Size Core::GetGlobalSize() const
 {
 	return _size;
 }
 
-void axCore::SetGlobalSize(const ax::Size& size)
+void Core::SetGlobalSize(const ax::Size& size)
 {
 	_size = size;
 }
 
-void axCore::UpdateAll()
+void Core::UpdateAll()
 {
 	_needToDraw = true;
 	_popupNeedToDraw = true;
 }
 
-int axCore::DrawGLScene()
+int Core::DrawGLScene()
 {
 	if (_needToDraw) {
 		ax::GL::Draw(_size);
@@ -302,4 +290,6 @@ int axCore::DrawGLScene()
 	}
 
 	return false;
+}
+}
 }

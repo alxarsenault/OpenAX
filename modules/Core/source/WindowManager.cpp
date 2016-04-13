@@ -27,7 +27,7 @@
 #include "Config.h"
 
 namespace ax {
-namespace Core {
+namespace core {
 	WindowManager::WindowManager()
 		: axMouseManager()
 		, axKeyboardManager()
