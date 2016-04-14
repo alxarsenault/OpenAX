@@ -185,9 +185,8 @@ private:
 	ax::Font* _font;
 
 	ax::Utils::Control::Type _type;
-	ax::Utils::Control::Unit _unit;
 	ax::FloatRange _range;
-	ax::Utils::Control::Interpolation _interpolation;
+//	ax::Utils::Control::Interpolation _interpolation;
 
 	ax::Color _currentColor;
 	int _nCurrentImg;

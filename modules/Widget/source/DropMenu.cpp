@@ -72,14 +72,17 @@ ax::Event::Msg* ax::DropMenu::Msg::GetCopy()
  */
 ax::DropMenu::Info::Info()
 	: ax::widget::Info()
-	, normal(0.5f)
-	, hover(0.6f)
-	//	, clicking(0.4f)
-	, selected(0.7f)
-	, selected_hover(0.8f)
-	//	, selected_clicking(0.6f)
-	, contour(0.0)
+	, normal(0.5)
+	, hover(0.6)
 	, font_color(0.0)
+	, selected(0.7)
+	, selected_hover(0.8)
+	, selected_font_color(0.0)
+	, contour(0.0)
+	, separation(0.0)
+	, up_down_arrow(0.0)
+	, right_arrow(0.0)
+
 {
 }
 

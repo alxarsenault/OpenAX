@@ -34,9 +34,9 @@ ScrollBar::Info::Info()
  * ax::ScrollBar.
  */
 ScrollBar::ScrollBar(const ax::Rect& rect, const ScrollBar::Events& events, const ScrollBar::Info& info)
-	: _handle(nullptr)
-	, _events(events)
+	: _events(events)
 	, _info(info)
+	, _handle(nullptr)
 {
 	win = ax::Window::Create(rect);
 	win->event.OnPaint = ax::WBind<ax::GC>(this, &ScrollBar::OnPaint);

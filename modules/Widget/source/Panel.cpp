@@ -324,10 +324,9 @@ void Panel::Builder::CreateChildren(ax::Xml::Node& node, ax::Panel* panel)
  */
 Panel::Panel(
 	const Rect& rect, const Panel::Info& info, const std::string& bg_img, const std::string& name, Flag flags)
-	: _bg_img_path(bg_img)
+	: _flags(flags)
+	, _bg_img_path(bg_img)
 	, _name(name)
-	, _flags(flags)
-
 {
 	win = Window::Create(rect);
 
