@@ -64,6 +64,11 @@ public:
 		virtual ax::StringPairVector GetBuilderAttributes();
 		std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
 
+		std::string GetBuilderName() const
+		{
+			return "Label";
+		}
+
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
 		
 		

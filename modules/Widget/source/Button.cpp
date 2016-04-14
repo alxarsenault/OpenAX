@@ -391,8 +391,6 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& nod
 {
 	std::string builder_name = node.GetAttribute("builder");
 
-//	ax::Print(builder_name);
-
 	ax::Point pos = ax::Xml::StringToSize(node.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
 	std::string img_path = node.GetChildNodeValue("img_path");

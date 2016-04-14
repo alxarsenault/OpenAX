@@ -98,6 +98,11 @@ public:
 		{
 			_save_child_callback = fct;
 		}
+		
+		std::string GetBuilderName() const
+		{
+			return "Panel";
+		}
 
 		ax::StringPairVector GetBuilderAttributes();
 		std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;

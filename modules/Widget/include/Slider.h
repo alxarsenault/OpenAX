@@ -168,6 +168,11 @@ public:
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 		virtual void ReloadInfo();
+		
+		std::string GetBuilderName() const
+		{
+			return "Slider";
+		}
 	};
 
 	class Builder : public ax::widget::Builder {

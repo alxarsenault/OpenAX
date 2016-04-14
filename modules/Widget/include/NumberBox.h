@@ -113,6 +113,11 @@ public:
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
 		
+		std::string GetBuilderName() const
+		{
+			return "NumberBox";
+		}
+		
 		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
 		{
 			return {

@@ -122,6 +122,11 @@ public:
 
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 
+		std::string GetBuilderName() const
+		{
+			return "Knob";
+		}
+
 		virtual ax::StringPairVector GetBuilderAttributes();
 		virtual std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
 		

@@ -99,6 +99,11 @@ namespace widget {
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 
 		ax::widget::Info* GetInfo();
+		
+		virtual std::string GetBuilderName() const
+		{
+			return "None";
+		}
 
 		virtual void SetBuilderAttributes(const ax::StringPairVector& attributes);
 

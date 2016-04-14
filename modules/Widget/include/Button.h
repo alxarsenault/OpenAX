@@ -140,6 +140,11 @@ public:
 		virtual ax::Xml::Node Save(ax::Xml& xml, ax::Xml::Node& node);
 		virtual ax::StringPairVector GetBuilderAttributes();
 		
+		std::string GetBuilderName() const
+		{
+			return "Button";
+		}
+		
 		void SetBuilderAttributes(const ax::StringPairVector& attributes);
 		
 		virtual std::vector<ax::widget::ParamInfo> GetBuilderAttributesInfo() const;
