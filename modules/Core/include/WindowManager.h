@@ -39,7 +39,7 @@ namespace core {
 	/*
 	 * ax::core::WindowManager.
 	 */
-	class WindowManager : public axMouseManager, public axKeyboardManager {
+	class WindowManager : public MouseManager, public axKeyboardManager {
 	public:
 		WindowManager();
 

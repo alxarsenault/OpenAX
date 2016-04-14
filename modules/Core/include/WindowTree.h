@@ -32,6 +32,7 @@
 #include <deque>
 
 namespace ax {
+
 /*
  * WindowTree
  */

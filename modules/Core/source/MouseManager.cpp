@@ -24,163 +24,204 @@
 #include "Window.h"
 #include "WindowTree.h"
 
-axMouseManager::axMouseManager()
-	: _windowTree(nullptr)
-	, _mouseCaptureWindow(nullptr)
-	, _pastWindow(nullptr)
-	, _currentWindow(nullptr)
-	, _scrollCaptureWindow(nullptr)
-	, _evtHasReachWindow(false)
-{
-}
+namespace ax {
+namespace core {
 
-void axMouseManager::SetWindowTree(ax::WindowTree* tree)
-{
-	_windowTree = tree;
-}
+	MouseManager::MouseManager()
+		: _windowTree(nullptr)
+		, _mouseCaptureWindow(nullptr)
+		, _pastWindow(nullptr)
+		, _currentWindow(nullptr)
+		, _scrollCaptureWindow(nullptr)
+		, _evtHasReachWindow(false)
+	{
+	}
 
-bool axMouseManager::IsEventReachWindow() const
-{
-	return _evtHasReachWindow;
-}
+	void MouseManager::SetWindowTree(ax::WindowTree* tree)
+	{
+		_windowTree = tree;
+	}
 
-void axMouseManager::VerifyAndProcessWindowChange()
-{
-	if (_pastWindow != _currentWindow) {
-		ax::Window* last_past = _pastWindow;
-		_pastWindow = _currentWindow;
+	bool MouseManager::IsEventReachWindow() const
+	{
+		return _evtHasReachWindow;
+	}
 
-		// Mouse leave event first.
-		if (last_past != nullptr) {
-			last_past->event.OnMouseLeave(_mousePosition);
-			
-			/// @todo This is called a lot for nothing.
-			/// 	  Realy not a good idea but practical.
-			ax::Window* win = last_past->node.GetParent();
-			
-			while(win) {
-				win->event.OnMouseLeaveChild(_mousePosition);
-				win = win->node.GetParent();
+	void MouseManager::VerifyAndProcessWindowChange()
+	{
+		if (_pastWindow != _currentWindow) {
+			ax::Window* last_past = _pastWindow;
+			_pastWindow = _currentWindow;
+
+			// Mouse leave event first.
+			if (last_past != nullptr) {
+				last_past->event.OnMouseLeave(_mousePosition);
+
+				/// @todo This is called a lot for nothing.
+				/// 	  Realy not a good idea but practical.
+				ax::Window* win = last_past->node.GetParent();
+
+				while (win) {
+					win->event.OnMouseLeaveChild(_mousePosition);
+					win = win->node.GetParent();
+				}
 			}
-		}
 
-		// Then mouse enter event.
-		if (_currentWindow != nullptr) {
-			_currentWindow->event.OnMouseEnter(_mousePosition);
-			
-			// Enter one of child window.
-			ax::Window* win = _currentWindow->node.GetParent();
-			
-			/// @todo This is called a lot for nothing.
-			/// 	  Realy not a good idea but practical.
-			while(win) {
-				win->event.OnMouseEnterChild(_mousePosition);
-				win = win->node.GetParent();
-			}
-		}
-	}
-}
-
-void axMouseManager::OnMouseLeftDragging(const ax::Point& pos)
-{
-	if (_mouseCaptureWindow != nullptr) {
-		_mouseCaptureWindow->event.OnMouseLeftDragging(pos);
-		_evtHasReachWindow = true;
-	}
-	else {
-		_evtHasReachWindow = false;
-	}
-}
-
-void axMouseManager::OnMouseMotion(const ax::Point& pos)
-{
-	_mousePosition = pos;
-
-	// Only for Windows and Linux
-	if (_mouseCaptureWindow != nullptr) {
-		_mouseCaptureWindow->event.OnMouseLeftDragging(pos);
-		_evtHasReachWindow = true;
-	}
-	else {
-		ax::Window* win = _windowTree->FindMousePosition(pos);
-
-		if (win != nullptr && win->property.HasProperty("Selectable")) {
-			_currentWindow = win;
-
+			// Then mouse enter event.
 			if (_currentWindow != nullptr) {
-				_currentWindow->event.OnMouseMotion(pos);
-				_evtHasReachWindow = true;
+				_currentWindow->event.OnMouseEnter(_mousePosition);
+
+				// Enter one of child window.
+				ax::Window* win = _currentWindow->node.GetParent();
+
+				/// @todo This is called a lot for nothing.
+				/// 	  Realy not a good idea but practical.
+				while (win) {
+					win->event.OnMouseEnterChild(_mousePosition);
+					win = win->node.GetParent();
+				}
+			}
+		}
+	}
+
+	void MouseManager::OnMouseLeftDragging(const ax::Point& pos)
+	{
+		if (_mouseCaptureWindow != nullptr) {
+			_mouseCaptureWindow->event.OnMouseLeftDragging(pos);
+			_evtHasReachWindow = true;
+		}
+		else {
+			_evtHasReachWindow = false;
+		}
+	}
+
+	void MouseManager::OnMouseMotion(const ax::Point& pos)
+	{
+		_mousePosition = pos;
+
+		// Only for Windows and Linux
+		if (_mouseCaptureWindow != nullptr) {
+			_mouseCaptureWindow->event.OnMouseLeftDragging(pos);
+			_evtHasReachWindow = true;
+		}
+		else {
+			ax::Window* win = _windowTree->FindMousePosition(pos);
+
+			if (win != nullptr && win->property.HasProperty("Selectable")) {
+				_currentWindow = win;
+
+				if (_currentWindow != nullptr) {
+					_currentWindow->event.OnMouseMotion(pos);
+					_evtHasReachWindow = true;
+				}
+				else {
+					_evtHasReachWindow = false;
+				}
+
+				VerifyAndProcessWindowChange();
 			}
 			else {
 				_evtHasReachWindow = false;
 			}
+		}
+	}
 
-			VerifyAndProcessWindowChange();
+	void MouseManager::OnMouseLeftDoubleClick(const ax::Point& pos)
+	{
+		_mousePosition = pos;
+
+		//	ax::Print("OnMouseLeftDoubleClick");
+
+		if (_mouseCaptureWindow != nullptr) {
+			//		ax::Print("Captured");
+			//		_mouseCaptureWindow->event.OnMouseLeftDoubleClick(pos);
+			//		_evtHasReachWindow = true;
 		}
 		else {
-			_evtHasReachWindow = false;
-		}
-	}
-}
+			//		ax::Print("Not Captured");
+			ax::Window* win = _windowTree->FindMousePosition(pos);
 
-void axMouseManager::OnMouseLeftDoubleClick(const ax::Point& pos)
-{
-	_mousePosition = pos;
-
-//	ax::Print("OnMouseLeftDoubleClick");
-
-	if (_mouseCaptureWindow != nullptr) {
-//		ax::Print("Captured");
-//		_mouseCaptureWindow->event.OnMouseLeftDoubleClick(pos);
-//		_evtHasReachWindow = true;
-	}
-	else {
-//		ax::Print("Not Captured");
-		ax::Window* win = _windowTree->FindMousePosition(pos);
-
-		_currentWindow = win;
-
-		if (win != nullptr) {
-			ax::Print("Win id :", win->GetId());
-			win->event.OnMouseLeftDoubleClick(pos);
-			_evtHasReachWindow = true;
-//			ax::Print("Win not null");
-		}
-		else {
-			_evtHasReachWindow = false;
-		}
-
-		VerifyAndProcessWindowChange();
-	}
-}
-
-void axMouseManager::OnMouseLeftDown(const ax::Point& pos)
-{
-	_mousePosition = pos;
-	
-	if (_global_click_listener.size()) {
-		for (auto& n : _global_click_listener) {
-			ax::Window::Event::GlobalClick msg;
-			msg.type = ax::Window::Event::GlobalClick::LEFT_CLICK_DOWN;
-			msg.pos = pos;
-			n->event.OnGlobalClick(msg);
-		}
-	}
-
-	// If mouse is already grabbed.
-	if (_mouseCaptureWindow != nullptr) {
-		_mouseCaptureWindow->event.OnMouseLeftDown(pos);
-		_evtHasReachWindow = true;
-	}
-	else {
-
-		ax::Window* win = _windowTree->FindMousePosition(pos);
-
-		if (win != nullptr && win->property.HasProperty("Selectable")) {
 			_currentWindow = win;
 
 			if (win != nullptr) {
-				win->event.OnMouseLeftDown(pos);
+				ax::Print("Win id :", win->GetId());
+				win->event.OnMouseLeftDoubleClick(pos);
+				_evtHasReachWindow = true;
+				//			ax::Print("Win not null");
+			}
+			else {
+				_evtHasReachWindow = false;
+			}
+
+			VerifyAndProcessWindowChange();
+		}
+	}
+
+	void MouseManager::OnMouseLeftDown(const ax::Point& pos)
+	{
+		_mousePosition = pos;
+
+		if (_global_click_listener.size()) {
+			for (auto& n : _global_click_listener) {
+				ax::Window::Event::GlobalClick msg;
+				msg.type = ax::Window::Event::GlobalClick::LEFT_CLICK_DOWN;
+				msg.pos = pos;
+				n->event.OnGlobalClick(msg);
+			}
+		}
+
+		// If mouse is already grabbed.
+		if (_mouseCaptureWindow != nullptr) {
+			_mouseCaptureWindow->event.OnMouseLeftDown(pos);
+			_evtHasReachWindow = true;
+		}
+		else {
+
+			ax::Window* win = _windowTree->FindMousePosition(pos);
+
+			if (win != nullptr && win->property.HasProperty("Selectable")) {
+				_currentWindow = win;
+
+				if (win != nullptr) {
+					win->event.OnMouseLeftDown(pos);
+					_evtHasReachWindow = true;
+				}
+				else {
+					_evtHasReachWindow = false;
+				}
+
+				VerifyAndProcessWindowChange();
+			}
+			else {
+				_evtHasReachWindow = false;
+			}
+		}
+	}
+
+	void MouseManager::OnMouseRightDown(const ax::Point& pos)
+	{
+		_mousePosition = pos;
+
+		if (_global_click_listener.size()) {
+			for (auto& n : _global_click_listener) {
+				ax::Window::Event::GlobalClick msg;
+				msg.type = ax::Window::Event::GlobalClick::RIGHT_CLICK_DOWN;
+				msg.pos = pos;
+				n->event.OnGlobalClick(msg);
+			}
+		}
+
+		if (_mouseCaptureWindow) {
+			_mouseCaptureWindow->event.OnMouseRightDown(pos);
+			_evtHasReachWindow = true;
+		}
+		else {
+			ax::Window* win = _windowTree->FindMousePosition(pos);
+			_currentWindow = win;
+
+			if (win != nullptr) {
+
+				win->event.OnMouseRightDown(pos);
 				_evtHasReachWindow = true;
 			}
 			else {
@@ -189,158 +230,121 @@ void axMouseManager::OnMouseLeftDown(const ax::Point& pos)
 
 			VerifyAndProcessWindowChange();
 		}
-		else {
-			_evtHasReachWindow = false;
-		}
-	}
-}
-
-void axMouseManager::OnMouseRightDown(const ax::Point& pos)
-{
-	_mousePosition = pos;
-	
-	if (_global_click_listener.size()) {
-		for (auto& n : _global_click_listener) {
-			ax::Window::Event::GlobalClick msg;
-			msg.type = ax::Window::Event::GlobalClick::RIGHT_CLICK_DOWN;
-			msg.pos = pos;
-			n->event.OnGlobalClick(msg);
-		}
 	}
 
-	if (_mouseCaptureWindow) {
-		_mouseCaptureWindow->event.OnMouseRightDown(pos);
-		_evtHasReachWindow = true;
-	}
-	else {
-		ax::Window* win = _windowTree->FindMousePosition(pos);
-		_currentWindow = win;
+	void MouseManager::OnMouseLeftUp(const ax::Point& pos)
+	{
+		_mousePosition = pos;
 
-		if (win != nullptr) {
-
-			win->event.OnMouseRightDown(pos);
+		if (_mouseCaptureWindow) {
+			_currentWindow = _windowTree->FindMousePosition(pos);
+			_mouseCaptureWindow->event.OnMouseLeftUp(pos);
 			_evtHasReachWindow = true;
 		}
 		else {
+			ax::Window* win = _windowTree->FindMousePosition(pos);
+			_currentWindow = win;
+
+			if (win != nullptr) {
+				win->event.OnMouseLeftUp(pos);
+				_evtHasReachWindow = true;
+			}
+			else {
+				_evtHasReachWindow = false;
+			}
+
+			VerifyAndProcessWindowChange();
+		}
+	}
+
+	void MouseManager::OnScrollWheel(const ax::Point& delta)
+	{
+		if (_scrollCaptureWindow == nullptr) {
 			_evtHasReachWindow = false;
-		}
-
-		VerifyAndProcessWindowChange();
-	}
-}
-
-void axMouseManager::OnMouseLeftUp(const ax::Point& pos)
-{
-	_mousePosition = pos;
-
-	if (_mouseCaptureWindow) {
-		_currentWindow = _windowTree->FindMousePosition(pos);
-		_mouseCaptureWindow->event.OnMouseLeftUp(pos);
-		_evtHasReachWindow = true;
-	}
-	else {
-		ax::Window* win = _windowTree->FindMousePosition(pos);
-		_currentWindow = win;
-
-		if (win != nullptr) {
-			win->event.OnMouseLeftUp(pos);
-			_evtHasReachWindow = true;
-		}
-		else {
-			_evtHasReachWindow = false;
-		}
-
-		VerifyAndProcessWindowChange();
-	}
-}
-
-void axMouseManager::OnScrollWheel(const ax::Point& delta)
-{
-	if(_scrollCaptureWindow == nullptr) {
-		_evtHasReachWindow = false;
-		return;
-	}
-	
-	_scrollCaptureWindow->event.OnScrollWheel(delta);
-	_evtHasReachWindow = true;
-
-}
-
-void axMouseManager::OnMouseRightUp()
-{
-	_evtHasReachWindow = false;
-}
-
-void axMouseManager::ReleaseMouseHover()
-{
-	_currentWindow = nullptr;
-	_pastWindow = nullptr;
-}
-
-void axMouseManager::GrabMouse(ax::Window* win)
-{
-	_mouseCaptureWindow = win;
-}
-
-void axMouseManager::UnGrabMouse()
-{
-	_mouseCaptureWindow = nullptr;
-}
-
-bool axMouseManager::IsGrab() const
-{
-	return (_mouseCaptureWindow != nullptr);
-}
-
-bool axMouseManager::IsMouseHoverWindow(const ax::Window* win) const
-{
-	return (win == _currentWindow);
-}
-
-bool axMouseManager::IsMouseStillInChildWindow(const ax::Window* win) const
-{
-	ax::Window* w = _currentWindow;
-
-	while (w != nullptr) {
-		if (w == win) {
-			return true;
-		}
-
-		w = w->node.GetParent();
-	}
-
-	return false;
-}
-
-void axMouseManager::SetPastWindow(ax::Window* win)
-{
-	_pastWindow = win;
-}
-
-void axMouseManager::AddGlobalClickListener(ax::Window* win)
-{
-	// Check if window is already in global listener.
-	for (auto& n : _global_click_listener) {
-		if (n->GetId() == win->GetId()) {
 			return;
 		}
+
+		_scrollCaptureWindow->event.OnScrollWheel(delta);
+		_evtHasReachWindow = true;
 	}
 
-	_global_click_listener.push_back(win);
-}
+	void MouseManager::OnMouseRightUp()
+	{
+		_evtHasReachWindow = false;
+	}
 
-void axMouseManager::RemoveGlobalClickListener(ax::Window* win)
-{
-	int index = -1;
-	// Check for window index.
-	for (int i = 0; i <_global_click_listener.size(); i++) {
-		if (_global_click_listener[i]->GetId() == win->GetId()) {
-			index = i;
-			break;
+	void MouseManager::ReleaseMouseHover()
+	{
+		_currentWindow = nullptr;
+		_pastWindow = nullptr;
+	}
+
+	void MouseManager::GrabMouse(ax::Window* win)
+	{
+		_mouseCaptureWindow = win;
+	}
+
+	void MouseManager::UnGrabMouse()
+	{
+		_mouseCaptureWindow = nullptr;
+	}
+
+	bool MouseManager::IsGrab() const
+	{
+		return (_mouseCaptureWindow != nullptr);
+	}
+
+	bool MouseManager::IsMouseHoverWindow(const ax::Window* win) const
+	{
+		return (win == _currentWindow);
+	}
+
+	bool MouseManager::IsMouseStillInChildWindow(const ax::Window* win) const
+	{
+		ax::Window* w = _currentWindow;
+
+		while (w != nullptr) {
+			if (w == win) {
+				return true;
+			}
+
+			w = w->node.GetParent();
+		}
+
+		return false;
+	}
+
+	void MouseManager::SetPastWindow(ax::Window* win)
+	{
+		_pastWindow = win;
+	}
+
+	void MouseManager::AddGlobalClickListener(ax::Window* win)
+	{
+		// Check if window is already in global listener.
+		for (auto& n : _global_click_listener) {
+			if (n->GetId() == win->GetId()) {
+				return;
+			}
+		}
+
+		_global_click_listener.push_back(win);
+	}
+
+	void MouseManager::RemoveGlobalClickListener(ax::Window* win)
+	{
+		int index = -1;
+		// Check for window index.
+		for (int i = 0; i < _global_click_listener.size(); i++) {
+			if (_global_click_listener[i]->GetId() == win->GetId()) {
+				index = i;
+				break;
+			}
+		}
+
+		if (index != -1) {
+			_global_click_listener.erase(_global_click_listener.begin() + index);
 		}
 	}
-	
-	if(index != -1) {
-		_global_click_listener.erase(_global_click_listener.begin() + index);
-	}
+}
 }
