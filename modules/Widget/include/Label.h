@@ -88,6 +88,8 @@ public:
 
 	Label(const ax::Rect& rect, const Label::Info& info, const std::string& label);
 
+	ax::Window::Backbone* GetCopy();
+
 	void SetLabel(const std::string& label);
 
 	std::string GetLabel() const

@@ -187,6 +187,8 @@ public:
 	Toggle(const ax::Rect& rect, const Events& events, const Info& info, std::string img_path = "",
 		std::string label = "", ax::Flag flags = 0, std::string msg = "");
 
+	ax::Window::Backbone* GetCopy();
+
 	void SetMsg(const std::string& msg);
 
 	void SetSelected(const bool& selected);

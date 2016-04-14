@@ -152,7 +152,7 @@ ax::NumberBox::NumberBox(const ax::Rect& rect, const ax::NumberBox::Events& even
 	, _font(nullptr)
 	, _type(type)
 	, _range(range)
-//	, _interpolation(interpolation)
+	//	, _interpolation(interpolation)
 	, _nCurrentImg(axNUM_BOX_NORMAL)
 
 {
@@ -196,7 +196,7 @@ ax::NumberBox::NumberBox(const ax::Point& pos, const ax::NumberBox::Events& even
 	, _font(nullptr)
 	, _type(type)
 	, _range(range)
-//	, _interpolation(interpolation)
+	//	, _interpolation(interpolation)
 	, _nCurrentImg(axNUM_BOX_NORMAL)
 
 {
@@ -229,6 +229,16 @@ ax::NumberBox::NumberBox(const ax::Point& pos, const ax::NumberBox::Events& even
 	if (_events.value_change) {
 		win->AddConnection(Events::VALUE_CHANGE, _events.value_change);
 	}
+}
+
+ax::Window::Backbone* ax::NumberBox::GetCopy()
+{
+	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+	ax::NumberBox::Info* info = static_cast<ax::NumberBox::Info*>(widget->GetInfo());
+	ax::NumberBox* nbox = new ax::NumberBox(win->dimension.GetRect(), _events, *info, _flags, _value, _range,
+		_type, ax::Utils::Control::Unit::axCTRL_NO_UNIT, ax::Utils::Control::Interpolation::axCTRL_LINEAR,
+		_label);
+	return nbox;
 }
 
 double ax::NumberBox::GetValue()

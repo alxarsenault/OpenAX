@@ -548,6 +548,14 @@ ax::Slider::Slider(
 	win->Update();
 }
 
+ax::Window::Backbone* ax::Slider::GetCopy()
+{
+	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+	ax::Slider::Info* info = static_cast<ax::Slider::Info*>(widget->GetInfo());
+	ax::Slider* sld = new ax::Slider(win->dimension.GetRect(), _events, *info, _flags);
+	return sld;
+}
+
 void ax::Slider::OnResize(const ax::Size& size)
 {
 	if (ax::IsFlag(Flags::VERTICAL, _flags)) {

@@ -174,6 +174,8 @@ public:
 		return ax::NumberBox::Ptr(
 			new ax::NumberBox(pos, events, info, flags, value, range, type, m_unit, interpolation, label));
 	}
+	
+	ax::Window::Backbone* GetCopy();
 
 	double GetValue();
 

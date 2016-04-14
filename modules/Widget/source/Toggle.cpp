@@ -525,6 +525,14 @@ ax::Toggle::Toggle(const ax::Rect& rect, const ax::Toggle::Events& events, const
 	}
 }
 
+ax::Window::Backbone* ax::Toggle::GetCopy()
+{
+	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+	ax::Toggle::Info* info = static_cast<ax::Toggle::Info*>(widget->GetInfo());
+	ax::Toggle* tog = new ax::Toggle(win->dimension.GetRect(), _events, *info, _bgImg->GetImagePath(), _label, _flags, _msg);
+	return tog;
+}
+
 void ax::Toggle::SetMsg(const std::string& msg)
 {
 	_msg = msg;

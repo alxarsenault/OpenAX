@@ -314,6 +314,14 @@ Label::Label(const ax::Rect& rect, const Label::Info& info, const std::string& l
 	_font->SetFontSize(info.font_size);
 }
 
+ax::Window::Backbone* Label::GetCopy()
+{
+	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+	ax::Label::Info* info = static_cast<ax::Label::Info*>(widget->GetInfo());
+	ax::Label* label = new ax::Label(win->dimension.GetRect(), *info, _label);
+	return label;
+}
+
 void Label::SetLabel(const std::string& label)
 {
 	_label = label;

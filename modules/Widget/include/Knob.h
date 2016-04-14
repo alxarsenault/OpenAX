@@ -151,6 +151,8 @@ public:
 	Knob(const ax::Rect& rect, const ax::Knob::Events& events, const ax::Knob::Info& info, ax::Flag flags = 0,
 		double value = 0.0, const std::string& msg = "");
 
+	ax::Window::Backbone* GetCopy();
+
 	double GetValue()
 	{
 		return _knobValue;

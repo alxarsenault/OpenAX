@@ -187,6 +187,8 @@ public:
 
 	Slider(const ax::Rect& rect, const Events& events, const Info& info, ax::Flag flags = 0);
 
+	ax::Window::Backbone* GetCopy();
+
 	void SetBackgroundAlpha(const float& alpha)
 	{
 		_bg_alpha = alpha;
