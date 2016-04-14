@@ -145,6 +145,8 @@ public:
 	Panel(const ax::Rect& rect, const Panel::Info& info, const std::string& bg_img,
 		const std::string& name = "", ax::Flag flags = 0);
 
+	ax::Window::Backbone* GetCopy();
+
 	ax::Flag GetFlags() const
 	{
 		return _flags;

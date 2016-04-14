@@ -190,7 +190,7 @@ void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attribut
 			ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
 		}
 	}
-	
+
 	GetWindow()->Update();
 }
 
@@ -230,7 +230,7 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(
 	std::string builder_name = control.GetAttribute("builder");
 	std::string obj_name = control.GetAttribute("name");
 
-//	ax::Print(builder_name, obj_name);
+	//	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 
@@ -259,7 +259,7 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(ax::Xml::Node& node
 	std::string builder_name = node.GetAttribute("builder");
 	//	ax::Print("Attribute name");
 	std::string name = node.GetAttribute("name");
-//	ax::Print(builder_name, name);
+	//	ax::Print(builder_name, name);
 
 	ax::Point pos = ax::Xml::StringToSize(node.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
@@ -347,6 +347,24 @@ Panel::Panel(
 	//	win->property.AddProperty("BlockDrawing");
 }
 
+ax::Window::Backbone* Panel::GetCopy()
+{
+	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+	ax::Panel::Info* info = static_cast<ax::Panel::Info*>(widget->GetInfo());
+	ax::Panel* panel = new ax::Panel(win->dimension.GetRect(), *info, _bg_img_path, _name, _flags);
+	
+	std::vector<ax::Window::Ptr>& children = win->node.GetChildren();
+	
+	if (children.size()) {
+		for (auto& n : children) {
+			std::shared_ptr<ax::Window::Backbone> child_bck_bone(n->backbone->GetCopy());
+			panel->win->node.Add(child_bck_bone);
+		}
+	}
+	
+	return panel;
+}
+
 void Panel::OnPaint(GC gc)
 {
 	Rect rect(win->dimension.GetDrawingRect());
@@ -355,7 +373,7 @@ void Panel::OnPaint(GC gc)
 	Panel::Info* info = static_cast<Panel::Info*>(widget->GetInfo());
 
 	const int radius = info->round_corner_radius;
-	
+
 	if (radius > 0.0) {
 		gc.SetColor(info->background);
 		gc.DrawRoundedRectangle(rect, radius);
