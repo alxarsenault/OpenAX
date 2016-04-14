@@ -152,7 +152,7 @@ ax::NumberBox::NumberBox(const ax::Rect& rect, const ax::NumberBox::Events& even
 	, _font(nullptr)
 	, _type(type)
 	, _range(range)
-	, _interpolation(interpolation)
+//	, _interpolation(interpolation)
 	, _nCurrentImg(axNUM_BOX_NORMAL)
 
 {
@@ -196,7 +196,7 @@ ax::NumberBox::NumberBox(const ax::Point& pos, const ax::NumberBox::Events& even
 	, _font(nullptr)
 	, _type(type)
 	, _range(range)
-	, _interpolation(interpolation)
+//	, _interpolation(interpolation)
 	, _nCurrentImg(axNUM_BOX_NORMAL)
 
 {

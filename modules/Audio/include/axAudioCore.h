@@ -32,6 +32,9 @@ namespace audio {
 		
 		std::string GetCurrentOutputDevice();
 		std::string GetCurrentInputDevice();
+		
+		void SetCurrentOutputDevice(const std::string& name);		
+		void SetCurrentInputDevice(const std::string& name);
 
 		virtual int CoreCallbackAudio(const float* input, float* output, unsigned long frameCount)
 		{
@@ -85,7 +88,8 @@ namespace audio {
 		}
 
 		// private:
-		PaStreamParameters outputParameters;
+		PaStreamParameters _outputParameters;
+		PaStreamParameters _inputParameters;
 		PaStream* stream;
 		PaError err;
 
