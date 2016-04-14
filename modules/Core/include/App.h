@@ -104,7 +104,6 @@ public:
 	void CallAfterGUILoadFunction();
 
 	/// Add the main window.
-//	ax::Window::Ptr AddTopLevel(ax::Window::Ptr win);
 	void AddTopLevel(ax::Window::Ptr win);
 
 	void AddTopLevel(std::shared_ptr<ax::Window::Backbone> win);
@@ -129,10 +128,6 @@ private:
 	/* Managers */
 	std::shared_ptr<ax::Event::Manager> _evtManager;
 	std::shared_ptr<ax::Utils::ResourceStorage> _resourceManager;
-
-	/* Callbacks */
-//	std::function<void()> _mainEntryFunction; /// Main GUI callback.
-//	std::function<void()> _afterGuiLoadFunction; /// After GUI callback.
 };
 }
 

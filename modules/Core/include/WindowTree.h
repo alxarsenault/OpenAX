@@ -41,7 +41,6 @@ public:
 	WindowTree();
 
 	void AddTopLevel(ax::Window::Ptr win);
-//	void AddTopLevel(ax::Window* win);
 
 	ax::Window::Ptr GetTopLevel();
 
