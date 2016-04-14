@@ -149,12 +149,13 @@ ax::NumberBox::NumberBox(const ax::Rect& rect, const ax::NumberBox::Events& even
 	ax::Utils::Control::Interpolation interpolation, std::string label)
 	: _events(events)
 	, _flags(flags)
-	, _range(range)
+	, _font(nullptr)
 	, _type(type)
 	, _unit(unit)
+	, _range(range)
 	, _interpolation(interpolation)
 	, _nCurrentImg(axNUM_BOX_NORMAL)
-	, _font(nullptr)
+
 {
 	win = ax::Window::Create(rect);
 
@@ -193,12 +194,13 @@ ax::NumberBox::NumberBox(const ax::Point& pos, const ax::NumberBox::Events& even
 	ax::Utils::Control::Interpolation interpolation, std::string label)
 	: _events(events)
 	, _flags(flags)
-	, _range(range)
+	, _font(nullptr)
 	, _type(type)
 	, _unit(unit)
+	, _range(range)
 	, _interpolation(interpolation)
 	, _nCurrentImg(axNUM_BOX_NORMAL)
-	, _font(nullptr)
+
 {
 	win = ax::Window::Create(ax::Rect(pos, ax::Size(50, 20)));
 

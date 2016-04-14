@@ -36,7 +36,6 @@ LD_FLAGS :=
 
 all: $(OBJ_FILES)
 	ar rcs lib/$(STATIC_LIB_NAME) $(OBJ_FILES)
-	# $(CC) $(CC_FLAGS) -dynamiclib $(OBJ_FILES) -o lib/$(DYN_LIB_NAME)
 
 build/%.o: source/%.cpp
 	$(CC) $(CC_FLAGS) $(INCLUDE_SRC) -c -o $@ $<
