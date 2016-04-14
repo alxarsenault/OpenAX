@@ -267,18 +267,19 @@ public:
 
 		virtual ~Backbone()
 		{
-//			ax::Print("Delete backbone");
 		}
 
 		inline void AssignWindow(Ptr window);
-
-//		inline Ptr GetWindow();
 		
 		inline ax::Window* GetWindow();
 		inline const ax::Window* GetWindow() const;
+		
+		virtual Backbone* GetCopy()
+		{
+			return nullptr;
+		}
 
 	protected:
-//		Ptr win;
 		ax::Window* win;
 	};
 
@@ -328,11 +329,8 @@ public:
 	/***************************************************************************
 	 * Window.
 	 **************************************************************************/
-//	inline static ax::Window::Ptr Create(const ax::Rect& rect)
 	inline static ax::Window* Create(const ax::Rect& rect)
 	{
-//		ax::Print("Window::Create");
-//		return Ptr(new Window(rect));
 		return (new Window(rect));
 	}
 

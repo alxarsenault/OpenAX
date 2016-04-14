@@ -209,6 +209,8 @@ public:
 	{
 		return _btnImg->GetImagePath();
 	}
+	
+	virtual Backbone* GetCopy();
 
 protected:
 	Button::Events _events;

@@ -470,6 +470,14 @@ Button::Button(const Rect& rect, const Button::Events& events, const Button::Inf
 	}
 }
 
+ax::Window::Backbone* Button::GetCopy()
+{
+	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+	ax::Button::Info* info = static_cast<ax::Button::Info*>(widget->GetInfo());
+	ax::Button* btn = new ax::Button(win->dimension.GetRect(), _events, *info, _btnImg->GetImagePath(), _label, _flags, _msg);
+	return btn;
+}
+
 Button::Button(const Point& pos, const Button::Events& events, std::string label, std::string img_path,
 	const Button::Info& info, Flag flags,
 	std::string msg)
