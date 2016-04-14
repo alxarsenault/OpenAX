@@ -54,7 +54,6 @@ LD_FLAGS :=
 
 all: createDir $(OBJ_FILES)
 	ar rcs lib/$(STATIC_LIB_NAME) $(OBJ_FILES)
-	# $(CC) $(CC_FLAGS) -dynamiclib $(OBJ_FILES) -o lib/$(DYN_LIB_NAME)
 
 createDir:
 	@mkdir -p build lib
