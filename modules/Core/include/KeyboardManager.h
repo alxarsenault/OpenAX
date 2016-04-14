@@ -30,16 +30,14 @@
 #include "Window.h"
 
 namespace ax {
+namespace core {
 class WindowTree;
-}
 
-class axWindowTree;
-
-class axKeyboardManager {
+class KeyboardManager {
 public:
-	axKeyboardManager();
+	KeyboardManager();
 
-	void SetWindowTree(ax::WindowTree* tree);
+	void SetWindowTree(WindowTree* tree);
 
 	void OnKeyDown(const char& key);
 	void OnKeyUp(const char& key);
@@ -65,13 +63,15 @@ public:
 	void SetPastKeyWindow(ax::Window* win);
 
 private:
-	ax::WindowTree* _windowTree;
+	WindowTree* _windowTree;
 	ax::Window* _keyGrabbedWindow;
 	
 	std::vector<ax::Window*> _globalKeyGrabbed;
 	
 	bool _isCmdDown;
 };
+}
+}
 
 /// @}
 #endif //__AX_KEYBOARD_MANAGER__

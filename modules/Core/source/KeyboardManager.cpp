@@ -24,34 +24,36 @@
 #include "Window.h"
 #include "WindowTree.h"
 
-axKeyboardManager::axKeyboardManager()
+namespace ax {
+namespace core {
+KeyboardManager::KeyboardManager()
 	: _windowTree(nullptr)
 	, _keyGrabbedWindow(nullptr)
 	, _isCmdDown(false)
 {
 }
 
-void axKeyboardManager::SetWindowTree(ax::WindowTree* tree)
+void KeyboardManager::SetWindowTree(WindowTree* tree)
 {
 	_windowTree = tree;
 }
 
-void axKeyboardManager::SetPastKeyWindow(ax::Window* win)
+void KeyboardManager::SetPastKeyWindow(ax::Window* win)
 {
 	_keyGrabbedWindow = win;
 }
 
-void axKeyboardManager::AddGlobalGrabedWindow(ax::Window* win)
+void KeyboardManager::AddGlobalGrabedWindow(ax::Window* win)
 {
 	_globalKeyGrabbed.push_back(win);
 }
 
-bool axKeyboardManager::IsCmdDown() const
+bool KeyboardManager::IsCmdDown() const
 {
 	return _isCmdDown;
 }
 
-void axKeyboardManager::OnKeyDown(const char& key)
+void KeyboardManager::OnKeyDown(const char& key)
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnKeyDown(key);
@@ -62,7 +64,7 @@ void axKeyboardManager::OnKeyDown(const char& key)
 	}
 }
 
-void axKeyboardManager::OnEnterDown()
+void KeyboardManager::OnEnterDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnEnterDown('0');
@@ -73,11 +75,11 @@ void axKeyboardManager::OnEnterDown()
 	}
 }
 
-void axKeyboardManager::OnKeyUp(const char& key)
+void KeyboardManager::OnKeyUp(const char& key)
 {
 }
 
-void axKeyboardManager::OnBackSpaceDown()
+void KeyboardManager::OnBackSpaceDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnBackSpaceDown('0');
@@ -88,7 +90,7 @@ void axKeyboardManager::OnBackSpaceDown()
 	}
 }
 
-void axKeyboardManager::GrabKey(ax::Window* win)
+void KeyboardManager::GrabKey(ax::Window* win)
 {
 	if (_keyGrabbedWindow != win) {
 		if (_keyGrabbedWindow != nullptr) {
@@ -101,7 +103,7 @@ void axKeyboardManager::GrabKey(ax::Window* win)
 	_keyGrabbedWindow = win;
 }
 
-void axKeyboardManager::UnGrabKey()
+void KeyboardManager::UnGrabKey()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnWasKeyUnGrabbed('0');
@@ -109,12 +111,12 @@ void axKeyboardManager::UnGrabKey()
 	}
 }
 
-bool axKeyboardManager::IsKeyGrab(const ax::Window* win) const
+bool KeyboardManager::IsKeyGrab(const ax::Window* win) const
 {
 	return (win == _keyGrabbedWindow);
 }
 
-void axKeyboardManager::OnLeftArrowDown()
+void KeyboardManager::OnLeftArrowDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnLeftArrowDown('0');
@@ -125,7 +127,7 @@ void axKeyboardManager::OnLeftArrowDown()
 	}
 }
 
-void axKeyboardManager::OnRightArrowDown()
+void KeyboardManager::OnRightArrowDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnRightArrowDown('0');
@@ -136,7 +138,7 @@ void axKeyboardManager::OnRightArrowDown()
 	}
 }
 
-void axKeyboardManager::OnUpArrowDown()
+void KeyboardManager::OnUpArrowDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnUpArrowDown('0');
@@ -147,7 +149,7 @@ void axKeyboardManager::OnUpArrowDown()
 	}
 }
 
-void axKeyboardManager::OnDownArrowDown()
+void KeyboardManager::OnDownArrowDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnDownArrowDown('0');
@@ -158,7 +160,7 @@ void axKeyboardManager::OnDownArrowDown()
 	}
 }
 
-void axKeyboardManager::OnKeyDeleteDown()
+void KeyboardManager::OnKeyDeleteDown()
 {
 	if (_keyGrabbedWindow != nullptr) {
 		_keyGrabbedWindow->event.OnKeyDeleteDown('0');
@@ -169,7 +171,7 @@ void axKeyboardManager::OnKeyDeleteDown()
 	}
 }
 
-void axKeyboardManager::OnCmdDown()
+void KeyboardManager::OnCmdDown()
 {
 	_isCmdDown = !_isCmdDown;
 
@@ -190,4 +192,6 @@ void axKeyboardManager::OnCmdDown()
 			n->event.OnCmdUp('0');
 		}
 	}
+}
+}
 }

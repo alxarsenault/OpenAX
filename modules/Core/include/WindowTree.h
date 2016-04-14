@@ -32,7 +32,7 @@
 #include <deque>
 
 namespace ax {
-
+namespace core {
 /*
  * WindowTree
  */
@@ -61,6 +61,7 @@ public:
 private:
 	std::vector<ax::Window::Ptr> _nodes;
 };
+}
 }
 
 /// @}

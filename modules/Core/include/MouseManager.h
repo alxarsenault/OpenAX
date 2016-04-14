@@ -30,17 +30,15 @@
 #include "Window.h"
 
 namespace ax {
-class WindowTree;
-
 namespace core {
 
-	// class axWindowTree;
+	class WindowTree;
 
 	class MouseManager {
 	public:
 		MouseManager();
 
-		void SetWindowTree(ax::WindowTree* tree);
+		void SetWindowTree(WindowTree* tree);
 
 		// Mouse events.
 		void OnMouseMotion(const ax::Point& pos);
@@ -81,7 +79,7 @@ namespace core {
 		void RemoveGlobalClickListener(ax::Window* win);
 
 	private:
-		ax::WindowTree* _windowTree;
+		WindowTree* _windowTree;
 
 		// Mouse.
 		ax::Window* _mouseCaptureWindow;

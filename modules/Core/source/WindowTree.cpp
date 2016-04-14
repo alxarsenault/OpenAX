@@ -30,6 +30,7 @@
 #include <algorithm>
 
 namespace ax {
+namespace core {
 WindowTree::WindowTree()
 {
 }
@@ -125,5 +126,7 @@ void WindowTree::Draw()
 std::vector<ax::Window::Ptr>& WindowTree::GetNodeVector()
 {
 	return _nodes;
+}
+
 }
 }

@@ -39,7 +39,7 @@ namespace core {
 	/*
 	 * ax::core::WindowManager.
 	 */
-	class WindowManager : public MouseManager, public axKeyboardManager {
+	class WindowManager : public MouseManager, public KeyboardManager {
 	public:
 		WindowManager();
 
@@ -54,10 +54,10 @@ namespace core {
 		void OnSize(const ax::Size& size);
 
 		std::string _managerName;
-		ax::WindowTree* GetWindowTree();
+		WindowTree* GetWindowTree();
 
 	private:
-		ax::WindowTree _windowTree;
+		WindowTree _windowTree;
 	};
 }
 }

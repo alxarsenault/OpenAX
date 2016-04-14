@@ -37,7 +37,7 @@ namespace core {
 	{
 	}
 
-	void MouseManager::SetWindowTree(ax::WindowTree* tree)
+	void MouseManager::SetWindowTree(WindowTree* tree)
 	{
 		_windowTree = tree;
 	}

@@ -30,10 +30,10 @@ namespace ax {
 namespace core {
 	WindowManager::WindowManager()
 		: MouseManager()
-		, axKeyboardManager()
+		, KeyboardManager()
 	{
 		MouseManager::SetWindowTree(&_windowTree);
-		axKeyboardManager::SetWindowTree(&_windowTree);
+		KeyboardManager::SetWindowTree(&_windowTree);
 	}
 
 	WindowManager::~WindowManager()
@@ -58,7 +58,7 @@ namespace core {
 	{
 	}
 
-	ax::WindowTree* WindowManager::GetWindowTree()
+	WindowTree* WindowManager::GetWindowTree()
 	{
 		return &_windowTree;
 	}
