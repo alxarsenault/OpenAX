@@ -169,6 +169,11 @@ public:
 		
 		virtual void ReloadInfo();
 		virtual void SetInfo(const ax::StringPairVector& attributes);
+		
+		std::string GetBuilderName() const
+		{
+			return "Toggle";
+		}
 	};
 
 	class Builder : public ax::widget::Builder {

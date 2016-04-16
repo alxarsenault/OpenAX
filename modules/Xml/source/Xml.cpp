@@ -77,23 +77,23 @@ bool Xml::Parse()
 	return true;
 }
 
-	bool Xml::Parse(const std::string& content)
-	{		
-		_xml_buffer = std::vector<char>(content.begin(), content.end());
-		_xml_buffer.push_back('\0');
-		
-		_xml_doc.clear();
-		
-		try {
-			_xml_doc.parse<0>(&_xml_buffer[0]);
-		}
-		catch (rapidxml::parse_error& e) {
-			ax::Error("Xml parsing", e.what());
-			return false;
-		}
-		
-		return true;
+bool Xml::Parse(const std::string& content)
+{
+	_xml_buffer = std::vector<char>(content.begin(), content.end());
+	_xml_buffer.push_back('\0');
+
+	_xml_doc.clear();
+
+	try {
+		_xml_doc.parse<0>(&_xml_buffer[0]);
 	}
+	catch (rapidxml::parse_error& e) {
+		ax::Error("Xml parsing", e.what());
+		return false;
+	}
+
+	return true;
+}
 
 Xml::Node Xml::GetNode(const std::string& name)
 {
@@ -111,10 +111,9 @@ Xml::Node::Node(rapidxml::xml_node<>* node)
 Xml::Node::Node(const Node& node)
 	: _node(node._node)
 {
-	
 }
 
-Xml::Node& Xml::Node::operator = (const Node& node)
+Xml::Node& Xml::Node::operator=(const Node& node)
 {
 	_node = node._node;
 	return *this;
@@ -167,7 +166,7 @@ ax::StringPairVector Xml::Node::GetAtributes()
 	while (att) {
 		atts.push_back(ax::StringPair(
 			std::string(att->name(), att->name_size()), std::string(att->value(), att->value_size())));
-		
+
 		att = att->next_attribute();
 	}
 
