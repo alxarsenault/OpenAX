@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-//#include "axUtils.h"
+#include "Utils.h"
 
 #define __MACOSX_CORE__
 #include "RtMidi.h"
@@ -38,6 +38,13 @@ namespace midi {
 	public:
 		Core();
 		~Core();
+		
+		ax::StringVector GetMidiInputList();
+		
+		std::string GetCurrentPortName() const;
+
+		
+		void SetInputPort(const std::string& port_name);
 
 	protected:
 		virtual void OnMidiNoteOn(const Note& msg);
@@ -45,6 +52,7 @@ namespace midi {
 
 	private:
 		RtMidiIn* _midiInHandle;
+		int _input_port;
 
 		static void MidiCallBack(double deltatime,
 			std::vector<unsigned char>* message, void* userData);

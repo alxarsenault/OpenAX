@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7C21391E1C9C973F0050F676 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C21391D1C9C973F0050F676 /* Assets.xcassets */; };
-		7C213A131C9C98F40050F676 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C213A121C9C98F40050F676 /* Cocoa.framework */; };
-		7C213A151C9C98F90050F676 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C213A141C9C98F90050F676 /* OpenGL.framework */; };
 		7C213A171C9C99340050F676 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A161C9C99340050F676 /* main.cpp */; };
 		7C213A191C9C9AD90050F676 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C213A181C9C9AD90050F676 /* MainMenu.xib */; };
 		7C213A331C9C9AF10050F676 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C213A281C9C9AF10050F676 /* App.cpp */; };
@@ -81,6 +79,25 @@
 		7C7476A51CA84101009CBE23 /* axAudioWaveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7476991CA84101009CBE23 /* axAudioWaveTable.cpp */; };
 		7C74777F1CA9EA15009CBE23 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C74777E1CA9EA15009CBE23 /* libportaudio.a */; };
 		7C7477961CAA0F33009CBE23 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7477951CAA0F33009CBE23 /* libsndfile.a */; };
+		7C7B74B41CC5481E006EF72E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A01CC5481D006EF72E /* AudioToolbox.framework */; };
+		7C7B74B51CC5481E006EF72E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A11CC5481D006EF72E /* CoreFoundation.framework */; };
+		7C7B74B61CC5481E006EF72E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A21CC5481D006EF72E /* CoreServices.framework */; };
+		7C7B74B71CC5481E006EF72E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A31CC5481D006EF72E /* Carbon.framework */; };
+		7C7B74B81CC5481E006EF72E /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A41CC5481D006EF72E /* AudioUnit.framework */; };
+		7C7B74B91CC5481E006EF72E /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A51CC5481D006EF72E /* CoreAudioKit.framework */; };
+		7C7B74BA1CC5481E006EF72E /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A61CC5481D006EF72E /* Python.framework */; };
+		7C7B74BB1CC5481E006EF72E /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A71CC5481D006EF72E /* CoreMIDI.framework */; };
+		7C7B74BC1CC5481E006EF72E /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A81CC5481D006EF72E /* CoreAudio.framework */; };
+		7C7B74BD1CC5481E006EF72E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74A91CC5481D006EF72E /* OpenGL.framework */; };
+		7C7B74BE1CC5481E006EF72E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74AA1CC5481D006EF72E /* Cocoa.framework */; };
+		7C7B74BF1CC5481E006EF72E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74AB1CC5481D006EF72E /* libz.dylib */; };
+		7C7B74C01CC5481E006EF72E /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74AC1CC5481D006EF72E /* libbz2.dylib */; };
+		7C7B74C11CC5481E006EF72E /* libboost_python.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74AD1CC5481E006EF72E /* libboost_python.a */; };
+		7C7B74C41CC5481E006EF72E /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74B01CC5481E006EF72E /* libfreetype.a */; };
+		7C7B74C61CC5481E006EF72E /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74B21CC5481E006EF72E /* libpng16.a */; };
+		7C7B74C71CC5481E006EF72E /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7B74B31CC5481E006EF72E /* libsndfile.a */; };
+		7C7B74CF1CC549DB006EF72E /* axMidiCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B74CD1CC549DB006EF72E /* axMidiCore.cpp */; };
+		7C7B74D01CC549DB006EF72E /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B74CE1CC549DB006EF72E /* RtMidi.cpp */; };
 		7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */; };
 		7CBD41671CB6AB01000A22C5 /* NumberScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */; };
 /* End PBXBuildFile section */
@@ -102,8 +119,6 @@
 		7C2139141C9C973F0050F676 /* OpenAX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C21391D1C9C973F0050F676 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C2139221C9C973F0050F676 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C213A121C9C98F40050F676 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		7C213A141C9C98F90050F676 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		7C213A161C9C99340050F676 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = OpenAX/main.cpp; sourceTree = "<group>"; };
 		7C213A181C9C9AD90050F676 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../../../../modules/Core/core/Mac/MainMenu.xib; sourceTree = "<group>"; };
 		7C213A1A1C9C9AE80050F676 /* App.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = App.h; path = ../../../../modules/Core/include/App.h; sourceTree = "<group>"; };
@@ -255,6 +270,27 @@
 		7C7476B11CA8410B009CBE23 /* axAudioWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = axAudioWaveTable.h; path = ../../../../modules/Audio/include/axAudioWaveTable.h; sourceTree = "<group>"; };
 		7C74777E1CA9EA15009CBE23 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../../../../../usr/local/lib/libportaudio.a; sourceTree = "<group>"; };
 		7C7477951CAA0F33009CBE23 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
+		7C7B74A01CC5481D006EF72E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7C7B74A11CC5481D006EF72E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		7C7B74A21CC5481D006EF72E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		7C7B74A31CC5481D006EF72E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		7C7B74A41CC5481D006EF72E /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		7C7B74A51CC5481D006EF72E /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		7C7B74A61CC5481D006EF72E /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
+		7C7B74A71CC5481D006EF72E /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		7C7B74A81CC5481D006EF72E /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		7C7B74A91CC5481D006EF72E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7C7B74AA1CC5481D006EF72E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		7C7B74AB1CC5481D006EF72E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = ../../../../../../../usr/lib/libz.dylib; sourceTree = "<group>"; };
+		7C7B74AC1CC5481D006EF72E /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = ../../../../../../../usr/lib/libbz2.dylib; sourceTree = "<group>"; };
+		7C7B74AD1CC5481E006EF72E /* libboost_python.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_python.a; path = ../../../../../../../usr/local/lib/libboost_python.a; sourceTree = "<group>"; };
+		7C7B74B01CC5481E006EF72E /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../../../../../../usr/local/lib/libfreetype.a; sourceTree = "<group>"; };
+		7C7B74B21CC5481E006EF72E /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../../../../../../usr/local/lib/libpng16.a; sourceTree = "<group>"; };
+		7C7B74B31CC5481E006EF72E /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../usr/local/lib/libsndfile.a; sourceTree = "<group>"; };
+		7C7B74CA1CC549DB006EF72E /* axMidiCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axMidiCore.h; sourceTree = "<group>"; };
+		7C7B74CB1CC549DB006EF72E /* RtMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtMidi.h; sourceTree = "<group>"; };
+		7C7B74CD1CC549DB006EF72E /* axMidiCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = axMidiCore.cpp; sourceTree = "<group>"; };
+		7C7B74CE1CC549DB006EF72E /* RtMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RtMidi.cpp; sourceTree = "<group>"; };
 		7CBD41591CB60E74000A22C5 /* ColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColorPicker.h; path = ../../../../modules/Widget/include/ColorPicker.h; sourceTree = "<group>"; };
 		7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorPicker.cpp; path = ../../../../modules/Widget/source/ColorPicker.cpp; sourceTree = "<group>"; };
 		7CBD41651CB6AADA000A22C5 /* NumberScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberScroll.h; path = ../../../../modules/Widget/include/NumberScroll.h; sourceTree = "<group>"; };
@@ -266,10 +302,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C213A151C9C98F90050F676 /* OpenGL.framework in Frameworks */,
-				7C213A131C9C98F40050F676 /* Cocoa.framework in Frameworks */,
+				7C7B74C11CC5481E006EF72E /* libboost_python.a in Frameworks */,
+				7C7B74B71CC5481E006EF72E /* Carbon.framework in Frameworks */,
+				7C7B74BC1CC5481E006EF72E /* CoreAudio.framework in Frameworks */,
+				7C7B74C61CC5481E006EF72E /* libpng16.a in Frameworks */,
+				7C7B74BD1CC5481E006EF72E /* OpenGL.framework in Frameworks */,
+				7C7B74B51CC5481E006EF72E /* CoreFoundation.framework in Frameworks */,
+				7C7B74B41CC5481E006EF72E /* AudioToolbox.framework in Frameworks */,
 				7C74777F1CA9EA15009CBE23 /* libportaudio.a in Frameworks */,
+				7C7B74C41CC5481E006EF72E /* libfreetype.a in Frameworks */,
+				7C7B74B61CC5481E006EF72E /* CoreServices.framework in Frameworks */,
+				7C7B74C71CC5481E006EF72E /* libsndfile.a in Frameworks */,
 				7C7477961CAA0F33009CBE23 /* libsndfile.a in Frameworks */,
+				7C7B74BA1CC5481E006EF72E /* Python.framework in Frameworks */,
+				7C7B74BE1CC5481E006EF72E /* Cocoa.framework in Frameworks */,
+				7C7B74C01CC5481E006EF72E /* libbz2.dylib in Frameworks */,
+				7C7B74B81CC5481E006EF72E /* AudioUnit.framework in Frameworks */,
+				7C7B74BF1CC5481E006EF72E /* libz.dylib in Frameworks */,
+				7C7B74BB1CC5481E006EF72E /* CoreMIDI.framework in Frameworks */,
+				7C7B74B91CC5481E006EF72E /* CoreAudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,10 +330,25 @@
 		7C21390B1C9C973F0050F676 = {
 			isa = PBXGroup;
 			children = (
+				7C7B74A01CC5481D006EF72E /* AudioToolbox.framework */,
+				7C7B74A11CC5481D006EF72E /* CoreFoundation.framework */,
+				7C7B74A21CC5481D006EF72E /* CoreServices.framework */,
+				7C7B74A31CC5481D006EF72E /* Carbon.framework */,
+				7C7B74A41CC5481D006EF72E /* AudioUnit.framework */,
+				7C7B74A51CC5481D006EF72E /* CoreAudioKit.framework */,
+				7C7B74A61CC5481D006EF72E /* Python.framework */,
+				7C7B74A71CC5481D006EF72E /* CoreMIDI.framework */,
+				7C7B74A81CC5481D006EF72E /* CoreAudio.framework */,
+				7C7B74A91CC5481D006EF72E /* OpenGL.framework */,
+				7C7B74AA1CC5481D006EF72E /* Cocoa.framework */,
+				7C7B74AB1CC5481D006EF72E /* libz.dylib */,
+				7C7B74AC1CC5481D006EF72E /* libbz2.dylib */,
+				7C7B74AD1CC5481E006EF72E /* libboost_python.a */,
+				7C7B74B01CC5481E006EF72E /* libfreetype.a */,
+				7C7B74B21CC5481E006EF72E /* libpng16.a */,
+				7C7B74B31CC5481E006EF72E /* libsndfile.a */,
 				7C74777E1CA9EA15009CBE23 /* libportaudio.a */,
 				7C7477951CAA0F33009CBE23 /* libsndfile.a */,
-				7C213A141C9C98F90050F676 /* OpenGL.framework */,
-				7C213A121C9C98F40050F676 /* Cocoa.framework */,
 				7C2139161C9C973F0050F676 /* OpenAX */,
 				7C213A161C9C99340050F676 /* main.cpp */,
 				7C21391A1C9C973F0050F676 /* Supporting Files */,
@@ -301,6 +367,7 @@
 		7C2139161C9C973F0050F676 /* OpenAX */ = {
 			isa = PBXGroup;
 			children = (
+				7C7B74C81CC549B1006EF72E /* Midi */,
 				7C74768B1CA840B5009CBE23 /* Audio */,
 				7C2139281C9C97520050F676 /* Core */,
 				7C21392A1C9C975C0050F676 /* Event */,
@@ -667,6 +734,35 @@
 			name = source;
 			sourceTree = "<group>";
 		};
+		7C7B74C81CC549B1006EF72E /* Midi */ = {
+			isa = PBXGroup;
+			children = (
+				7C7B74C91CC549DB006EF72E /* include */,
+				7C7B74CC1CC549DB006EF72E /* source */,
+			);
+			name = Midi;
+			sourceTree = "<group>";
+		};
+		7C7B74C91CC549DB006EF72E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				7C7B74CA1CC549DB006EF72E /* axMidiCore.h */,
+				7C7B74CB1CC549DB006EF72E /* RtMidi.h */,
+			);
+			name = include;
+			path = ../../../../modules/Midi/include;
+			sourceTree = "<group>";
+		};
+		7C7B74CC1CC549DB006EF72E /* source */ = {
+			isa = PBXGroup;
+			children = (
+				7C7B74CD1CC549DB006EF72E /* axMidiCore.cpp */,
+				7C7B74CE1CC549DB006EF72E /* RtMidi.cpp */,
+			);
+			name = source;
+			path = ../../../../modules/Midi/source;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -757,6 +853,7 @@
 				7C7476A31CA84101009CBE23 /* axAudioSignalBalance.cpp in Sources */,
 				7C213A3B1C9C9AF10050F676 /* Window.cpp in Sources */,
 				7C213A9B1C9C9B460050F676 /* StaticImage.cpp in Sources */,
+				7C7B74D01CC549DB006EF72E /* RtMidi.cpp in Sources */,
 				7C213AC11C9C9B630050F676 /* GC.cpp in Sources */,
 				7C213A7A1C9C9B230050F676 /* Msg.cpp in Sources */,
 				7C213A931C9C9B460050F676 /* DropMenu.cpp in Sources */,
@@ -803,6 +900,7 @@
 				7C7476A41CA84101009CBE23 /* AudioUtils.cpp in Sources */,
 				7C213A661C9C9B120050F676 /* Flag.cpp in Sources */,
 				7C7476A11CA84101009CBE23 /* axAudioFirstOrderFilter.cpp in Sources */,
+				7C7B74CF1CC549DB006EF72E /* axMidiCore.cpp in Sources */,
 				7C213A9D1C9C9B460050F676 /* TextControl.cpp in Sources */,
 				7C213A361C9C9AF10050F676 /* KeyboardManager.cpp in Sources */,
 				7C213ACF1C9C9B720050F676 /* OSTerminal.cpp in Sources */,

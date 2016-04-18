@@ -42,7 +42,7 @@ STATIC_LIB_NAME = lib$(LIB_NAME).a
 DYN_LIB_NAME = lib$(LIB_NAME).dylib
 endif
 
-INCLUDE_SRC = -Iinclude -I/usr/local/include/
+INCLUDE_SRC = -Iinclude -I/usr/local/include/ -I../Utils/include/
 
 OBJDIR = build
 SRC_DIR = source

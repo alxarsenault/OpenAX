@@ -5,7 +5,7 @@ namespace midi {
 	Core::Core()
 	{
 		_midiInHandle = new RtMidiIn();
-
+		_input_port = 0;
 		// Check available ports.
 		unsigned int nPorts = _midiInHandle->getPortCount();
 
@@ -24,7 +24,7 @@ namespace midi {
 		// {
 		//     _midiInHandle->openPort(i);
 		// }
-		_midiInHandle->openPort(0);
+		_midiInHandle->openPort(_input_port);
 		//            _midiInHandle->openPort( 0 );
 
 		// Set our callback function.  This should be done immediately after
@@ -37,6 +37,42 @@ namespace midi {
 
 		// cleanup:
 		//    delete midiin;
+	}
+	
+	ax::StringVector Core::GetMidiInputList()
+	{
+		ax::StringVector list;
+		
+		unsigned int nPorts = _midiInHandle->getPortCount();
+		
+		for (int i = 0; i < nPorts; i++) {
+			list.push_back(_midiInHandle->getPortName());
+			
+		}
+		
+		return list;
+	}
+	
+	std::string Core::GetCurrentPortName() const
+	{
+		return _midiInHandle->getPortName(_input_port);
+	}
+	
+	void Core::SetInputPort(const std::string& port_name)
+	{
+		unsigned int nPorts = _midiInHandle->getPortCount();
+		
+		for (int i = 0; i < nPorts; i++) {
+			if(port_name == _midiInHandle->getPortName()) {
+				if(_midiInHandle->isPortOpen()) {
+					_midiInHandle->closePort();
+				}
+				
+				_midiInHandle->openPort(i);
+				_input_port = i;
+				break;
+			}
+		}
 	}
 
 	Core::~Core()
