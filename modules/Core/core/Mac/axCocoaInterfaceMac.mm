@@ -377,3 +377,10 @@ void SetCurrentOpenGLContext()
 	//[delegate setNeedsDisplay:YES];
 	//[[delegate window] update];
 }
+
+std::string axCocoaGetPasteboardContent()
+{
+	NSPasteboard*  myPasteboard  = [NSPasteboard generalPasteboard];
+	NSString* myString = [myPasteboard  stringForType:NSPasteboardTypeString];
+	return std::string([myString UTF8String]);
+}

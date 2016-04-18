@@ -77,6 +77,8 @@ namespace core {
 		void SetTitleBar(bool titlebar);
 		
 		void SetFocusAndCenter();
+		
+		std::string GetPasteboardConent();
 
 		/// ax::App -> ax::core::Facade should be use instead of this.
 		/// You better know what you are doing when you're using this function.

@@ -130,8 +130,12 @@ namespace core {
 
 	void CoreMac::SetCursor(const Cursor& cursor_id)
 	{
-		//	ax::Print("axMacCore set cursor");
 		axCocoaChangeMouseCursor(cursor_id);
+	}
+	
+	std::string CoreMac::GetPasteboardContent()
+	{
+		return axCocoaGetPasteboardContent();
 	}
 }
 }

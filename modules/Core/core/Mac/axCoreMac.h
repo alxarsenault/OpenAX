@@ -69,6 +69,8 @@ public:
 	virtual void SetTitleBar(bool titlebar);
 	
 	virtual void SetFocusAndCenter();
+	
+	virtual std::string GetPasteboardContent();
 };
 }
 }

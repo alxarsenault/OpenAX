@@ -188,6 +188,11 @@ namespace core {
 	{
 		_core->SetTitleBar(titlebar);
 	}
+	
+	std::string Facade::GetPasteboardConent()
+	{
+		return _core->GetPasteboardContent();
+	}
 
 	void Facade::MainLoop()
 	{

@@ -65,4 +65,6 @@ void axCocoaSetTitleBar(bool title_bar);
 
 void axCocoaSetFocusAndCenter();
 
+std::string axCocoaGetPasteboardContent();
+
 #endif

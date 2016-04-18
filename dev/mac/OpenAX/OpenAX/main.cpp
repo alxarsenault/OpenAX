@@ -5,6 +5,7 @@
 #include "TextBox.h"
 
 #include "WindowManager.h"
+#include "axCocoaInterfaceMac.h"
 
 class DropInfo : public ax::Window::Backbone {
 public:
@@ -363,6 +364,8 @@ int main()
 		//			ax::Utils::Range<double>(1.0, 10000.0), 1.0));
 
 		win->node.Add(ax::shared<PreferencePanel>(ax::Rect(10, 10, 300, 194)));
+		
+		ax::Print(GetPasteboardContent());
 
 	});
 

@@ -109,6 +109,11 @@ namespace core {
 		virtual void SetFocusAndCenter()
 		{
 		}
+		
+		virtual std::string GetPasteboardContent()
+		{
+			
+		}
 
 		virtual int DrawGLScene();
 
