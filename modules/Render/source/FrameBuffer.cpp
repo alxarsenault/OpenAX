@@ -159,14 +159,18 @@ namespace GL {
 
 	void FrameBuffer::Resize(const ax::Size& size)
 	{
-		glDeleteTextures(1, &_frameBufferTexture);
-
-#ifdef ANDROID
-		glDeleteFramebuffersOES(1, &_frameBuffer);
-#else
-		glDeleteFramebuffers(1, &_frameBuffer);
-#endif
-		Init(size);
+		glBindTexture(GL_TEXTURE_2D, _frameBufferTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA,
+					 GL_UNSIGNED_BYTE, NULL);
+		
+//		glDeleteTextures(1, &_frameBufferTexture);
+//
+//#ifdef ANDROID
+//		glDeleteFramebuffersOES(1, &_frameBuffer);
+//#else
+//		glDeleteFramebuffers(1, &_frameBuffer);
+//#endif
+//		Init(size);
 	}
 
 	void FrameBuffer::DrawOnFrameBuffer(const std::function<void()>& fct,

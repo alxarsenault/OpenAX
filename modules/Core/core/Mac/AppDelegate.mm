@@ -46,7 +46,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 		[self wantsBestResolutionOpenGLSurface];
 
 		//		NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 / 30.0 target:self
-		//selector:@selector(renderTimer:) userInfo:nil repeats:YES];
+		// selector:@selector(renderTimer:) userInfo:nil repeats:YES];
 		//		[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 	}
 
@@ -56,31 +56,29 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 - (BOOL)application:(NSApplication*)app openFile:(NSString*)filename
 {
 	std::ofstream ff("/Users/alexarse/debug.txt");
-	
+
 	ff << "Before filepath" << std::endl;
 	std::string file_path([filename UTF8String]);
-//	ax::Print("AX APP OPEN FILE PATH :", file_path);
-	
+	//	ax::Print("AX APP OPEN FILE PATH :", file_path);
+
 	ff << file_path << std::endl;
-	
-	
+
 	ax::App::GetInstance().SetAppOpenFilePath(file_path);
 	ff << "After filepath" << std::endl;
-	
+
 	ff.close();
 	return TRUE;
 }
 
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender
 {
 	return NSTerminateNow;
 }
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification
+- (void)applicationWillTerminate:(NSNotification*)aNotification
 {
 	ax::Print("APPLICATION WILL TERMINATE");
 	_axApp->CloseApplication();
-	
 }
 
 - (void)renderTimer:(NSTimer*)timer
@@ -160,8 +158,19 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 {
 	NSApplication* myApp = [NSApplication sharedApplication];
 	[myApp activateIgnoringOtherApps:YES];
-	[self.window orderFrontRegardless];
+	
+
 	[[self window] center];
+
+	[[NSRunningApplication currentApplication]
+		activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
+	
+	[[self window] orderFrontRegardless];
+	
+	
+//	[[NSApplication sharedApplication] makeKeyAndOrderFront:myApp];
+
+	//	[self.window makeKeyAndOrderFront];
 }
 
 - (void)windowDidResize:(NSNotification*)notification

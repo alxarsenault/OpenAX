@@ -67,6 +67,9 @@ public:
 
 	void DrawImageColor(
 		ax::Image* img, const ax::Point& pos, const ax::Color& color);
+	
+	void DrawImageResizeColor(
+						ax::Image* img, const ax::Point& pos, const ax::Size& size, const ax::Color& color);
 
 	void DrawImageResize(ax::Image* img, const ax::Point& position,
 		const ax::Size& size, float alpha = 1.0,

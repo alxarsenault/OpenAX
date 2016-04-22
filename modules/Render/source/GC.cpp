@@ -51,8 +51,8 @@ ax::GC::GC()
 
 ax::FloatRect ax::GC::RectToFloatRect(const ax::Rect& rect)
 {
-	return ax::FloatRect(double(rect.position.x), double(rect.position.y),
-		double(rect.size.x), double(rect.size.y));
+	return ax::FloatRect(
+		double(rect.position.x), double(rect.position.y), double(rect.size.x), double(rect.size.y));
 }
 
 void ax::GC::SetColor(const float& r, const float& g, const float& b)
@@ -61,8 +61,7 @@ void ax::GC::SetColor(const float& r, const float& g, const float& b)
 	axGlColor4(r, b, g, 1.0);
 }
 
-void ax::GC::SetColor(
-	const float& r, const float& g, const float& b, const float& a)
+void ax::GC::SetColor(const float& r, const float& g, const float& b, const float& a)
 {
 	current_color = ax::Color(r, g, b, a);
 	axGlColor4(r, g, b, a);
@@ -71,8 +70,7 @@ void ax::GC::SetColor(
 void ax::GC::SetColor(const ax::Color& color)
 {
 	current_color = color;
-	axGlColor4(
-		color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+	axGlColor4(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 
 void ax::GC::SetColor(const ax::Color& color, const float& alpha)
@@ -95,8 +93,8 @@ void ax::GC::DrawRectangle(const ax::Rect& rect)
 	shader_normal.Activate();
 
 	// ModelViewProjection matrix.
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, &points);
@@ -136,8 +134,8 @@ void ax::GC::DrawRectangleContour(const ax::Rect& rect, float linewidth)
 	shader_normal.Activate();
 
 	// ModelViewProjection matrix.
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, &points);
@@ -155,16 +153,15 @@ void ax::GC::DrawRectangleContour(const ax::Rect& rect, float linewidth)
 	glLineWidth(1.0f);
 }
 
-void DrawQuarterCircleContour(const ax::FloatPoint& pos, const int& radius,
-	const double& angle, const int& nSegments)
+void DrawQuarterCircleContour(
+	const ax::FloatPoint& pos, const int& radius, const double& angle, const int& nSegments)
 {
 #ifdef ANDROID
 #else
 	glBegin(GL_LINES);
 	for (int i = 1; i < nSegments; i++) {
 		// Get the current angle.
-		double theta
-			= (2.0f * M_PI) * 0.25 * (double(i - 1)) / double(nSegments);
+		double theta = (2.0f * M_PI) * 0.25 * (double(i - 1)) / double(nSegments);
 
 		double x = radius * cosf(theta + angle);
 		double y = radius * sinf(theta + angle);
@@ -181,8 +178,7 @@ void DrawQuarterCircleContour(const ax::FloatPoint& pos, const int& radius,
 #endif
 }
 
-void ax::GC::DrawRoundedRectangleContour(
-	const ax::Rect& rect, const int& radius)
+void ax::GC::DrawRoundedRectangleContour(const ax::Rect& rect, const int& radius)
 {
 	int r = radius;
 
@@ -203,8 +199,7 @@ void ax::GC::DrawRoundedRectangleContour(
 	// Bottom line.
 	glVertex2d(frect.position.x + r - 2, frect.position.y + frect.size.y);
 
-	glVertex2d(frect.position.x + frect.size.x - r + 2,
-		frect.position.y + frect.size.y);
+	glVertex2d(frect.position.x + frect.size.x - r + 2, frect.position.y + frect.size.y);
 
 	// Left line.
 	glVertex2d(frect.position.x, frect.position.y + r - 2);
@@ -214,41 +209,36 @@ void ax::GC::DrawRoundedRectangleContour(
 	// Right line.
 	glVertex2d(frect.position.x + +frect.size.x, frect.position.y + r - 2);
 
-	glVertex2d(frect.position.x + +frect.size.x,
-		frect.position.y + frect.size.y - r + 2);
+	glVertex2d(frect.position.x + +frect.size.x, frect.position.y + frect.size.y - r + 2);
 	glEnd();
 
 	// Bottom right.
-	DrawQuarterCircleContour(ax::FloatPoint(frect.position.x + frect.size.x - r,
-								 frect.position.y + frect.size.y - r),
-		r, 0, nSegments);
+	DrawQuarterCircleContour(
+		ax::FloatPoint(frect.position.x + frect.size.x - r, frect.position.y + frect.size.y - r), r, 0,
+		nSegments);
 
 	// Top left.
 	DrawQuarterCircleContour(
-		ax::FloatPoint(frect.position.x + r - 1, frect.position.y + r - 1), r,
-		M_PI, nSegments);
+		ax::FloatPoint(frect.position.x + r - 1, frect.position.y + r - 1), r, M_PI, nSegments);
 
 	// Top right.
-	DrawQuarterCircleContour(ax::FloatPoint(frect.position.x + frect.size.x - r,
-								 frect.position.y + r - 1),
-		r, 3.0 * M_PI * 0.5, nSegments);
+	DrawQuarterCircleContour(ax::FloatPoint(frect.position.x + frect.size.x - r, frect.position.y + r - 1), r,
+		3.0 * M_PI * 0.5, nSegments);
 
 	// Bottom left.
-	DrawQuarterCircleContour(ax::FloatPoint(frect.position.x + r - 1,
-								 frect.position.y + frect.size.y - r),
-		r, M_PI * 0.5, nSegments);
+	DrawQuarterCircleContour(ax::FloatPoint(frect.position.x + r - 1, frect.position.y + frect.size.y - r), r,
+		M_PI * 0.5, nSegments);
 }
 
-void DrawQuarterCircleContourSmooth(ax::GC* gc, const ax::FloatPoint& pos,
-	const int& radius, const double& angle, const int& nSegments)
+void DrawQuarterCircleContourSmooth(
+	ax::GC* gc, const ax::FloatPoint& pos, const int& radius, const double& angle, const int& nSegments)
 {
 #ifdef ANDROID
 #else
 	//    glBegin(GL_LINES);
 	for (int i = 1; i < nSegments; i++) {
 		// Get the current angle.
-		double theta
-			= (2.0f * M_PI) * 0.25 * (double(i - 1)) / double(nSegments);
+		double theta = (2.0f * M_PI) * 0.25 * (double(i - 1)) / double(nSegments);
 
 		double x = radius * cosf(theta + angle);
 		double y = radius * sinf(theta + angle);
@@ -270,8 +260,7 @@ void DrawQuarterCircleContourSmooth(ax::GC* gc, const ax::FloatPoint& pos,
 #endif
 }
 
-void ax::GC::DrawRoundedRectangleContourSmooth(
-	const ax::Rect& rect, const int& radius)
+void ax::GC::DrawRoundedRectangleContourSmooth(const ax::Rect& rect, const int& radius)
 {
 #ifdef ANDROID
 #else
@@ -297,10 +286,8 @@ void ax::GC::DrawRoundedRectangleContourSmooth(
 		ax::Point(frect.position.x + frect.size.x - r + 2, frect.position.y));
 
 	// Bottom line.
-	DrawSmouthLine(
-		ax::Point(frect.position.x + r - 2, frect.position.y + frect.size.y),
-		ax::Point(frect.position.x + frect.size.x - r + 2,
-			frect.position.y + frect.size.y));
+	DrawSmouthLine(ax::Point(frect.position.x + r - 2, frect.position.y + frect.size.y),
+		ax::Point(frect.position.x + frect.size.x - r + 2, frect.position.y + frect.size.y));
 
 	//    DrawSmouthLine();
 	//    DrawSmouthLine();
@@ -335,26 +322,21 @@ void ax::GC::DrawRoundedRectangleContourSmooth(
 
 	// Bottom right.
 	DrawQuarterCircleContourSmooth(this,
-		ax::FloatPoint(frect.position.x + frect.size.x - r,
-									   frect.position.y + frect.size.y - r),
-		r, 0, nSegments);
+		ax::FloatPoint(frect.position.x + frect.size.x - r, frect.position.y + frect.size.y - r), r, 0,
+		nSegments);
 
 	// Top left.
-	DrawQuarterCircleContourSmooth(this,
-		ax::FloatPoint(frect.position.x + r, frect.position.y + r), r, M_PI,
-		nSegments);
+	DrawQuarterCircleContourSmooth(
+		this, ax::FloatPoint(frect.position.x + r, frect.position.y + r), r, M_PI, nSegments);
 
 	// Top right.
 	DrawQuarterCircleContourSmooth(this,
-		ax::FloatPoint(frect.position.x + frect.size.x - r,
-									   frect.position.y + r),
-		r, 3.0 * M_PI * 0.5, nSegments);
+		ax::FloatPoint(frect.position.x + frect.size.x - r, frect.position.y + r), r, 3.0 * M_PI * 0.5,
+		nSegments);
 
 	// Bottom left.
 	DrawQuarterCircleContourSmooth(this,
-		ax::FloatPoint(frect.position.x + r,
-									   frect.position.y + frect.size.y - r),
-		r, M_PI * 0.5, nSegments);
+		ax::FloatPoint(frect.position.x + r, frect.position.y + frect.size.y - r), r, M_PI * 0.5, nSegments);
 
 	glDisable(GL_LINE_SMOOTH);
 	glLineWidth(1.0f);
@@ -362,8 +344,8 @@ void ax::GC::DrawRoundedRectangleContourSmooth(
 #endif
 }
 
-void ax::GC::DrawQuarterCircle(const ax::FloatPoint& pos, const int& radius,
-	const double& angle, const int& nSegments)
+void ax::GC::DrawQuarterCircle(
+	const ax::FloatPoint& pos, const int& radius, const double& angle, const int& nSegments)
 {
 	ax::Color& c0(ax::GC::current_color);
 
@@ -387,8 +369,8 @@ void ax::GC::DrawQuarterCircle(const ax::FloatPoint& pos, const int& radius,
 	ax::GC::shader_normal.Activate();
 
 	// ModelViewProjection matrix.
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)points.data());
@@ -404,9 +386,8 @@ void ax::GC::DrawQuarterCircle(const ax::FloatPoint& pos, const int& radius,
 	glDisableVertexAttribArray(2);
 }
 
-void ax::GC::DrawQuarterCircle(const ax::FloatPoint& pos, const int& radius,
-	const double& angle, const int& nSegments, const ax::Color& middle,
-	const ax::Color& around)
+void ax::GC::DrawQuarterCircle(const ax::FloatPoint& pos, const int& radius, const double& angle,
+	const int& nSegments, const ax::Color& middle, const ax::Color& around)
 {
 	std::vector<ax::FloatPoint> points;
 	points.reserve(nSegments + 1);
@@ -426,8 +407,8 @@ void ax::GC::DrawQuarterCircle(const ax::FloatPoint& pos, const int& radius,
 	}
 
 	// ModelViewProjection matrix.
-	glUniformMatrix4fv(ax::GC::shader_normal.GetUniformLocation("mvp_matrix"),
-		1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(ax::GC::shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE,
+		(float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)points.data());
@@ -455,40 +436,35 @@ void ax::GC::DrawRoundedRectangle(const ax::Rect& rect, const int& radius)
 	ax::FloatRect frect = RectToFloatRect(rect);
 
 	// Middle.
-	DrawRectangle(ax::Rect(frect.position.x + r - 1, frect.position.y - 1,
-		frect.size.x - 2.0 * r + 1, frect.size.y + 1));
+	DrawRectangle(ax::Rect(
+		frect.position.x + r - 1, frect.position.y - 1, frect.size.x - 2.0 * r + 1, frect.size.y + 1));
 
 	int size_rect_height = frect.size.y - 2.0 * r + 1;
 
 	if (size_rect_height > 0) {
 		// Left.
-		DrawRectangle(ax::Rect(frect.position.x - 1, frect.position.y + r - 1,
-			r, size_rect_height));
+		DrawRectangle(ax::Rect(frect.position.x - 1, frect.position.y + r - 1, r, size_rect_height));
 
 		// Right.
-		DrawRectangle(ax::Rect(frect.position.x + frect.size.x - r,
-			frect.position.y + r - 1, r + 1, size_rect_height));
+		DrawRectangle(
+			ax::Rect(frect.position.x + frect.size.x - r, frect.position.y + r - 1, r + 1, size_rect_height));
 	}
 
 	// Bottom right.
-	DrawQuarterCircle(ax::FloatPoint(frect.position.x + frect.size.x - r,
-						  frect.position.y + frect.size.y - r),
-		r, 0, nSegments);
+	DrawQuarterCircle(
+		ax::FloatPoint(frect.position.x + frect.size.x - r, frect.position.y + frect.size.y - r), r, 0,
+		nSegments);
 
 	// Top left.
-	DrawQuarterCircle(
-		ax::FloatPoint(frect.position.x + r - 1, frect.position.y + r - 1), r,
-		M_PI, nSegments);
+	DrawQuarterCircle(ax::FloatPoint(frect.position.x + r - 1, frect.position.y + r - 1), r, M_PI, nSegments);
 
 	// Top right.
-	DrawQuarterCircle(ax::FloatPoint(frect.position.x + frect.size.x - r,
-						  frect.position.y + r - 1),
-		r, 3.0 * M_PI * 0.5, nSegments);
+	DrawQuarterCircle(ax::FloatPoint(frect.position.x + frect.size.x - r, frect.position.y + r - 1), r,
+		3.0 * M_PI * 0.5, nSegments);
 
 	// Bottom left.
-	DrawQuarterCircle(ax::FloatPoint(frect.position.x + r - 1,
-						  frect.position.y + frect.size.y - r),
-		r, M_PI * 0.5, nSegments);
+	DrawQuarterCircle(ax::FloatPoint(frect.position.x + r - 1, frect.position.y + frect.size.y - r), r,
+		M_PI * 0.5, nSegments);
 }
 
 void ax::GC::DrawTexture(GLuint texture, const ax::Rect& rect, ax::Color color)
@@ -541,8 +517,8 @@ struct axRectPointsOrder {
 		, bottom_right(points.bottom_right)
 	{
 	}
-	axRectPointsOrder(const ax::FloatPoint& tl, const ax::FloatPoint& tr,
-		const ax::FloatPoint& bl, const ax::FloatPoint& br)
+	axRectPointsOrder(const ax::FloatPoint& tl, const ax::FloatPoint& tr, const ax::FloatPoint& bl,
+		const ax::FloatPoint& br)
 		: top_left(tl)
 		, top_right(tr)
 		, bottom_left(bl)
@@ -576,15 +552,13 @@ void ax::GC::DrawImage(ax::Image* img, const ax::Point& position, float alpha)
 		shader_image.Activate();
 		GLuint prog_id = ax::GC::shader_image.GetProgramId();
 		GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-		glUniformMatrix4fv(
-			MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 	}
 	else {
 		shader_image_alpha.Activate();
 		GLuint prog_id = ax::GC::shader_image_alpha.GetProgramId();
 		GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-		glUniformMatrix4fv(
-			MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 	}
 
 	glEnable(GL_TEXTURE_2D);
@@ -607,11 +581,11 @@ void ax::GC::DrawImage(ax::Image* img, const ax::Point& position, float alpha)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void ax::GC::DrawImageColor(
-	ax::Image* img, const ax::Point& position, const ax::Color& color)
+void ax::GC::DrawImageResizeColor(
+	ax::Image* img, const ax::Point& pos, const ax::Size& size, const ax::Color& color)
 {
-	ax::Point pos = position;
-	ax::Size img_size = img->GetSize();
+//	ax::Point pos = position;
+	ax::Size img_size = size;
 
 	float vertices[8] = {
 		(float)pos.x, (float)pos.y, // Top-left.
@@ -634,8 +608,7 @@ void ax::GC::DrawImageColor(
 
 	GLuint prog_id = ax::GC::shader_image_color.GetProgramId();
 	GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-	glUniformMatrix4fv(
-		MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, img->GetTexture());
@@ -667,8 +640,66 @@ void ax::GC::DrawImageColor(
 	glDisable(GL_TEXTURE_2D);
 }
 
-void ax::GC::DrawImageResize(ax::Image* img, const ax::Point& position,
-	const ax::Size& size, float alpha, bool vertical_inversion)
+void ax::GC::DrawImageColor(ax::Image* img, const ax::Point& position, const ax::Color& color)
+{
+	ax::Point pos = position;
+	ax::Size img_size = img->GetSize();
+
+	float vertices[8] = {
+		(float)pos.x, (float)pos.y, // Top-left.
+		(float)pos.x, (float)pos.y + img_size.y, // Bottom-left.
+		(float)pos.x + img_size.x, (float)pos.y + img_size.y, // Bottom-right.
+		(float)pos.x + img_size.x, (float)pos.y // Top-right.
+	};
+
+	float tex_coords[8] = {
+		0.0, 1.0, // Top-left.
+		0.0, 0.0, // Bottom-left.
+		1.0, 0.0, // Bottom-right.
+		1.0, 1.0 // Top-right.
+	};
+
+	ax::Color c0(color);
+	ax::Color colors[4] = { c0, c0, c0, c0 };
+
+	shader_image_color.Activate();
+
+	GLuint prog_id = ax::GC::shader_image_color.GetProgramId();
+	GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, img->GetTexture());
+
+	glDepthMask(GL_TRUE);
+
+	// Pre-calculated alpha.
+	//	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+	// Vertex coordinates.
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glEnableVertexAttribArray(0);
+
+	// Texture coordinates.
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, tex_coords);
+	glEnableVertexAttribArray(1);
+
+	// Colors coordinates.
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, colors);
+	glEnableVertexAttribArray(2);
+
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
+	//	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE,
+	//						GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_TEXTURE_2D);
+}
+
+void ax::GC::DrawImageResize(
+	ax::Image* img, const ax::Point& position, const ax::Size& size, float alpha, bool vertical_inversion)
 {
 	glColor4f(1.0, 1.0, 1.0, alpha);
 	ax::Color c0(1.0f, 1.0f, 1.0f, alpha);
@@ -694,16 +725,14 @@ void ax::GC::DrawImageResize(ax::Image* img, const ax::Point& position,
 
 		GLuint prog_id = ax::GC::shader_image.GetProgramId();
 		GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-		glUniformMatrix4fv(
-			MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 	}
 	else {
 		shader_image_alpha.Activate();
 
 		GLuint prog_id = ax::GC::shader_image_alpha.GetProgramId();
 		GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-		glUniformMatrix4fv(
-			MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 	}
 
 	glEnable(GL_TEXTURE_2D);
@@ -736,8 +765,8 @@ void ax::GC::DrawImageResize(ax::Image* img, const ax::Point& position,
 	glDisable(GL_TEXTURE_2D);
 }
 
-void ax::GC::DrawPartOfImage(ax::Image* img, const ax::Point& posInImage,
-	const ax::Size& sizeInImage, const ax::Point& position, float alpha)
+void ax::GC::DrawPartOfImage(ax::Image* img, const ax::Point& posInImage, const ax::Size& sizeInImage,
+	const ax::Point& position, float alpha)
 {
 	ax::Point pos = position;
 	ax::Size img_size = img->GetSize();
@@ -758,14 +787,13 @@ void ax::GC::DrawPartOfImage(ax::Image* img, const ax::Point& posInImage,
 		(float)pos.x + sizeInImage.x - 1, (float)pos.y // Top-right.
 	};
 
-	float tex_coords[8] = { (float)x, (float)y, (float)x, (float)img_y,
-		(float)img_x, (float)img_y, (float)img_x, (float)y };
+	float tex_coords[8]
+		= { (float)x, (float)y, (float)x, (float)img_y, (float)img_x, (float)img_y, (float)img_x, (float)y };
 
 	shader_image.Activate();
 	GLuint prog_id = ax::GC::shader_image.GetProgramId();
 	GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-	glUniformMatrix4fv(
-		MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, img->GetTexture());
@@ -786,8 +814,8 @@ void ax::GC::DrawPartOfImage(ax::Image* img, const ax::Point& posInImage,
 	glDisable(GL_TEXTURE_2D);
 }
 
-void ax::GC::DrawPartOfImageResize(ax::Image* img, const ax::Point& posInImage,
-	const ax::Size& sizeInImage, const ax::Rect& rect, float alpha)
+void ax::GC::DrawPartOfImageResize(ax::Image* img, const ax::Point& posInImage, const ax::Size& sizeInImage,
+	const ax::Rect& rect, float alpha)
 {
 	ax::Point pos = rect.position;
 	ax::Size img_size = img->GetSize();
@@ -807,15 +835,14 @@ void ax::GC::DrawPartOfImageResize(ax::Image* img, const ax::Point& posInImage,
 		(float)pos.x + rect.size.x, (float)pos.y // Top-right.
 	};
 
-	float tex_coords[8] = { (float)x, (float)y, (float)x, (float)img_y,
-		(float)img_x, (float)img_y, (float)img_x, (float)y };
+	float tex_coords[8]
+		= { (float)x, (float)y, (float)x, (float)img_y, (float)img_x, (float)img_y, (float)img_x, (float)y };
 
 	shader_image.Activate();
 
 	GLuint prog_id = ax::GC::shader_image.GetProgramId();
 	GLuint MatrixID = glGetUniformLocation(prog_id, "mvp_matrix");
-	glUniformMatrix4fv(
-		MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, img->GetTexture());
@@ -836,16 +863,15 @@ void ax::GC::DrawPartOfImageResize(ax::Image* img, const ax::Point& posInImage,
 	glDisable(GL_TEXTURE_2D);
 }
 
-void ax::GC::DrawString(
-	ax::Font& font, const std::string& text, const ax::Point& pos)
+void ax::GC::DrawString(ax::Font& font, const std::string& text, const ax::Point& pos)
 {
 	if (font) {
 		int x = pos.x;
 
 		shader_font.Activate();
 
-		glUniformMatrix4fv(shader_font.GetUniformLocation("mvp_matrix"), 1,
-			GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(
+			shader_font.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 		ax::Color& c0(ax::GC::current_color);
 		ax::Color colors[4] = { c0, c0, c0, c0 };
@@ -861,9 +887,7 @@ void ax::GC::DrawString(
 			ax::Point delta = font.GetDelta();
 
 			DrawTexture(font.GetTexture(),
-				ax::Rect(ax::Point(
-							 x + delta.x, pos.y - delta.y + font.GetFontSize()),
-							font.GetSize()));
+				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + font.GetFontSize()), font.GetSize()));
 
 			x += font.GetNextPosition();
 		}
@@ -871,8 +895,7 @@ void ax::GC::DrawString(
 	}
 }
 
-ax::Point ax::GC::DrawChar(
-	ax::Font& font, const char& key, const ax::Point& pos)
+ax::Point ax::GC::DrawChar(ax::Font& font, const char& key, const ax::Point& pos)
 {
 	if (font) {
 		int x = pos.x;
@@ -882,8 +905,8 @@ ax::Point ax::GC::DrawChar(
 
 		shader_font.Activate();
 
-		glUniformMatrix4fv(shader_font.GetUniformLocation("mvp_matrix"), 1,
-			GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(
+			shader_font.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 		ax::Color& c0(ax::GC::current_color);
 		ax::Color colors[4] = { c0, c0, c0, c0 };
@@ -896,13 +919,10 @@ ax::Point ax::GC::DrawChar(
 		glEnableVertexAttribArray(2);
 
 		DrawTexture(font.GetTexture(),
-			ax::Rect(ax::Point(
-						 x + delta.x, pos.y - delta.y + font.GetFontSize()),
-						font.GetSize()));
+			ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + font.GetFontSize()), font.GetSize()));
 
 		glDisableVertexAttribArray(2);
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE,
-			GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 		x += font.GetNextPosition();
 
@@ -912,8 +932,7 @@ ax::Point ax::GC::DrawChar(
 	return ax::Point(0, 0);
 }
 
-void ax::GC::DrawStringAlignedLeft(
-	ax::Font& font, const std::string& text, const ax::Rect& rect)
+void ax::GC::DrawStringAlignedLeft(ax::Font& font, const std::string& text, const ax::Rect& rect)
 {
 	if (font) {
 		int height = 0;
@@ -929,8 +948,8 @@ void ax::GC::DrawStringAlignedLeft(
 
 		shader_font.Activate();
 
-		glUniformMatrix4fv(shader_font.GetUniformLocation("mvp_matrix"), 1,
-			GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(
+			shader_font.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 		ax::Color& c0(ax::GC::current_color);
 		ax::Color colors[4] = { c0, c0, c0, c0 };
@@ -947,21 +966,18 @@ void ax::GC::DrawStringAlignedLeft(
 			glEnableVertexAttribArray(2);
 
 			DrawTexture(font.GetTexture(),
-				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height),
-							font.GetSize()));
+				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height), font.GetSize()));
 
 			x += font.GetNextPosition();
 		}
 
 		glDisableVertexAttribArray(2);
 
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE,
-			GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	}
 }
 
-void ax::GC::DrawStringAlignedCenter(
-	ax::Font& font, const std::string& text, const ax::Rect& rect)
+void ax::GC::DrawStringAlignedCenter(ax::Font& font, const std::string& text, const ax::Rect& rect)
 {
 	if (font) {
 		int length = 0;
@@ -981,8 +997,8 @@ void ax::GC::DrawStringAlignedCenter(
 
 		shader_font.Activate();
 
-		glUniformMatrix4fv(shader_font.GetUniformLocation("mvp_matrix"), 1,
-			GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(
+			shader_font.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 		ax::Color& c0(ax::GC::current_color);
 		ax::Color colors[4] = { c0, c0, c0, c0 };
@@ -999,21 +1015,18 @@ void ax::GC::DrawStringAlignedCenter(
 			glEnableVertexAttribArray(2);
 
 			DrawTexture(font.GetTexture(),
-				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height - 1),
-							font.GetSize()));
+				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height - 1), font.GetSize()));
 
 			x += font.GetNextPosition();
 		}
 
 		glDisableVertexAttribArray(2);
 
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE,
-			GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	}
 }
 
-void ax::GC::DrawStringAlignedHorizontalCenter(
-	ax::Font& font, const std::string& text, const ax::Rect& rect)
+void ax::GC::DrawStringAlignedHorizontalCenter(ax::Font& font, const std::string& text, const ax::Rect& rect)
 {
 	if (font) {
 		int length = 0;
@@ -1021,72 +1034,68 @@ void ax::GC::DrawStringAlignedHorizontalCenter(
 		for (int i = 0; i < text.size(); i++) {
 			font.SetChar(text[i]);
 			length += font.GetNextPosition();
-			
+
 			if (font.GetSize().y > height)
 				height = font.GetSize().y;
 		}
-		
+
 		ax::Point pos(rect.position.x + (rect.size.x - length) * 0.5,
-					  rect.position.y + ceil((rect.size.y - height) * 0.5));
-		
-		int x = pos.x;
-		
-		shader_font.Activate();
-		
-		glUniformMatrix4fv(shader_font.GetUniformLocation("mvp_matrix"), 1,
-						   GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
-		
-		ax::Color& c0(ax::GC::current_color);
-		ax::Color colors[4] = { c0, c0, c0, c0 };
-		
-		// Pre-calculated alpha;
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-		
-		for (int i = 0; i < text.size(); i++) {
-			font.SetChar(text[i]);
-			ax::Point delta = font.GetDelta();
-			
-			// Colors coordinates.
-			glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, colors);
-			glEnableVertexAttribArray(2);
-			
-			DrawTexture(font.GetTexture(),
-						ax::Rect(ax::Point(x + delta.x, rect.position.y),
-								 font.GetSize()));
-			
-			x += font.GetNextPosition();
-		}
-		
-		glDisableVertexAttribArray(2);
-		
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE,
-							GL_ONE_MINUS_SRC_ALPHA);
-	}
-}
-
-void ax::GC::DrawStringAlignedRight(
-	ax::Font& font, const std::string& text, const ax::Rect& rect)
-{
-	if (font) {
-		int length = 0;
-		int height = 0;
-		for (int i = 0; i < text.size(); i++) {
-			font.SetChar(text[i]);
-			length += font.GetNextPosition();
-
-			if (font.GetSize().y > height)
-				height = font.GetSize().y;
-		}
-
-		ax::Point pos(rect.position.x + rect.size.x - length - 5,
 			rect.position.y + ceil((rect.size.y - height) * 0.5));
 
 		int x = pos.x;
 
 		shader_font.Activate();
 
-		glUniformMatrix4fv(shader_font.GetUniformLocation("mvp_matrix"), 1,
-			GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+		glUniformMatrix4fv(
+			shader_font.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+
+		ax::Color& c0(ax::GC::current_color);
+		ax::Color colors[4] = { c0, c0, c0, c0 };
+
+		// Pre-calculated alpha;
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+		for (int i = 0; i < text.size(); i++) {
+			font.SetChar(text[i]);
+			ax::Point delta = font.GetDelta();
+
+			// Colors coordinates.
+			glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, colors);
+			glEnableVertexAttribArray(2);
+
+			DrawTexture(font.GetTexture(), ax::Rect(ax::Point(x + delta.x, rect.position.y), font.GetSize()));
+
+			x += font.GetNextPosition();
+		}
+
+		glDisableVertexAttribArray(2);
+
+		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	}
+}
+
+void ax::GC::DrawStringAlignedRight(ax::Font& font, const std::string& text, const ax::Rect& rect)
+{
+	if (font) {
+		int length = 0;
+		int height = 0;
+		for (int i = 0; i < text.size(); i++) {
+			font.SetChar(text[i]);
+			length += font.GetNextPosition();
+
+			if (font.GetSize().y > height)
+				height = font.GetSize().y;
+		}
+
+		ax::Point pos(
+			rect.position.x + rect.size.x - length - 5, rect.position.y + ceil((rect.size.y - height) * 0.5));
+
+		int x = pos.x;
+
+		shader_font.Activate();
+
+		glUniformMatrix4fv(
+			shader_font.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 		ax::Color& c0(ax::GC::current_color);
 		ax::Color colors[4] = { c0, c0, c0, c0 };
@@ -1103,22 +1112,19 @@ void ax::GC::DrawStringAlignedRight(
 			glEnableVertexAttribArray(2);
 
 			DrawTexture(font.GetTexture(),
-				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height),
-							font.GetSize()));
+				ax::Rect(ax::Point(x + delta.x, pos.y - delta.y + height), font.GetSize()));
 
 			x += font.GetNextPosition();
 		}
 
 		glDisableVertexAttribArray(2);
 
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE,
-			GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	}
 }
 
-void ax::GC::DrawRectangleColorFade(const ax::Rect& rectangle,
-	const ax::Color& c1, const float& alpha1, const ax::Color& c2,
-	const float& alpha2)
+void ax::GC::DrawRectangleColorFade(const ax::Rect& rectangle, const ax::Color& c1, const float& alpha1,
+	const ax::Color& c2, const float& alpha2)
 {
 	ax::Color cc1(c1), cc2(c2);
 	cc1.SetAlpha(alpha1);
@@ -1132,8 +1138,8 @@ void ax::GC::DrawRectangleColorFade(const ax::Rect& rectangle,
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, &points);
@@ -1149,8 +1155,7 @@ void ax::GC::DrawRectangleColorFade(const ax::Rect& rectangle,
 	glDisableVertexAttribArray(2);
 }
 
-void ax::GC::DrawRectangleColorFade(
-	const ax::Rect& rectangle, const ax::Color& c1, const ax::Color& c2)
+void ax::GC::DrawRectangleColorFade(const ax::Rect& rectangle, const ax::Color& c1, const ax::Color& c2)
 {
 	ax::FloatRect rect = RectToFloatRect(rectangle);
 	ax::Color colors[4] = { c1, c1, c2, c2 };
@@ -1160,8 +1165,8 @@ void ax::GC::DrawRectangleColorFade(
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, &points);
@@ -1188,8 +1193,8 @@ void ax::GC::DrawRectangleVerticalColorFade(
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)&points);
@@ -1205,8 +1210,7 @@ void ax::GC::DrawRectangleVerticalColorFade(
 	glDisableVertexAttribArray(2);
 }
 
-void ax::GC::DrawRectangleColorFade(
-	const ax::Rect& rectangle, const std::vector<ax::Color>& colors)
+void ax::GC::DrawRectangleColorFade(const ax::Rect& rectangle, const std::vector<ax::Color>& colors)
 {
 	ax::FloatRect rect = RectToFloatRect(rectangle);
 
@@ -1215,8 +1219,8 @@ void ax::GC::DrawRectangleColorFade(
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)&points);
@@ -1246,8 +1250,8 @@ void ax::GC::DrawLines(const std::vector<ax::Point>& pts, float width)
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)points.data());
@@ -1265,8 +1269,7 @@ void ax::GC::DrawLines(const std::vector<ax::Point>& pts, float width)
 	glLineWidth(1.0f);
 }
 
-void ax::GC::DrawSmouthLine(
-	const ax::Point& pt1, const ax::Point& pt2, float width)
+void ax::GC::DrawSmouthLine(const ax::Point& pt1, const ax::Point& pt2, float width)
 {
 #ifdef ANDROID
 #else
@@ -1337,8 +1340,8 @@ void ax::GC::DrawLine(const ax::Point& pt1, const ax::Point& pt2, float width)
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)&points);
@@ -1356,8 +1359,8 @@ void ax::GC::DrawLine(const ax::Point& pt1, const ax::Point& pt2, float width)
 	glLineWidth(1.0f);
 }
 
-void ax::GC::DrawLines(const std::vector<ax::Point>& ipoints,
-	const std::vector<ax::Color>& colors, float width)
+void ax::GC::DrawLines(
+	const std::vector<ax::Point>& ipoints, const std::vector<ax::Color>& colors, float width)
 {
 	// Convert to float points.
 	std::vector<ax::FloatPoint> points;
@@ -1367,8 +1370,8 @@ void ax::GC::DrawLines(const std::vector<ax::Point>& ipoints,
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (float*)points.data());
@@ -1386,16 +1389,15 @@ void ax::GC::DrawLines(const std::vector<ax::Point>& ipoints,
 
 void ax::GC::DrawLineStripple(const ax::Point& pt1, const ax::Point& pt2)
 {
-	ax::FloatPoint points[2]
-		= { ax::FloatPoint(pt1.x, pt1.y), ax::FloatPoint(pt2.x, pt2.y) };
+	ax::FloatPoint points[2] = { ax::FloatPoint(pt1.x, pt1.y), ax::FloatPoint(pt2.x, pt2.y) };
 
 	ax::Color& c0(ax::GC::current_color);
 	ax::Color colors[2] = { c0, c0 };
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// glLineStipple(1, 0xAAAA);
 	// glEnable(GL_LINE_STIPPLE);
@@ -1416,8 +1418,8 @@ void ax::GC::DrawLineStripple(const ax::Point& pt1, const ax::Point& pt2)
 	// glDisable(GL_LINE_STIPPLE);
 }
 
-void ax::GC::DrawLineColorfade(const ax::Point& pt1, const ax::Point& pt2,
-	const ax::Color& c1, const ax::Color& c2, float width)
+void ax::GC::DrawLineColorfade(
+	const ax::Point& pt1, const ax::Point& pt2, const ax::Color& c1, const ax::Color& c2, float width)
 {
 	ax::FloatPoint points[2] = { pt1.Cast<float>(), pt2.Cast<float>() };
 	ax::Color colors[2] = { c1, c2 };
@@ -1426,8 +1428,8 @@ void ax::GC::DrawLineColorfade(const ax::Point& pt1, const ax::Point& pt2,
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)&points);
@@ -1451,8 +1453,8 @@ void ax::GC::DrawPoint(const ax::Point& pt, const int& size)
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	glEnable(GL_POINT_SMOOTH);
 	glPointSize(size);
@@ -1550,8 +1552,7 @@ void ax::GC::SetDefaultLine()
 	glLineWidth(1.0);
 }
 
-void ax::GC::DrawCircle(
-	const ax::Point& pos, const float& radius, const int& nSegments)
+void ax::GC::DrawCircle(const ax::Point& pos, const float& radius, const int& nSegments)
 {
 	ax::Point real_pos = pos;
 	std::vector<ax::FloatPoint> points(nSegments);
@@ -1571,8 +1572,8 @@ void ax::GC::DrawCircle(
 
 	shader_normal.Activate();
 
-	glUniformMatrix4fv(shader_normal.GetUniformLocation("mvp_matrix"), 1,
-		GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)points.data());
@@ -1648,8 +1649,8 @@ void ax::GC::DrawCircle(
 //}
 
 //
-void ax::GC::DrawBigImageResize(ax::BigImage* img, const ax::Point& position,
-	const ax::Size& size, float alpha)
+void ax::GC::DrawBigImageResize(
+	ax::BigImage* img, const ax::Point& position, const ax::Size& size, float alpha)
 {
 #ifdef ANDROID
 #else
@@ -1662,12 +1663,12 @@ void ax::GC::DrawBigImageResize(ax::BigImage* img, const ax::Point& position,
 	void* data = img->GetImageData();
 
 	if (color_type == ax::BigImage::RGB) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, real_img_size.x, real_img_size.y,
-			0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(
+			GL_TEXTURE_2D, 0, GL_RGB, real_img_size.x, real_img_size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	}
 	else {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, real_img_size.x,
-			real_img_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(
+			GL_TEXTURE_2D, 0, GL_RGBA, real_img_size.x, real_img_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	}
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1729,8 +1730,8 @@ void ax::GC::DrawPolygone(const std::vector<ax::Point>& points)
 #endif
 }
 
-void ax::GC::DrawArrow(const ax::Point& p1, const ax::Point& p2,
-	const double& arrow_length, const double& base_length, const double& width)
+void ax::GC::DrawArrow(const ax::Point& p1, const ax::Point& p2, const double& arrow_length,
+	const double& base_length, const double& width)
 {
 #ifdef ANDROID
 #else
@@ -1740,15 +1741,13 @@ void ax::GC::DrawArrow(const ax::Point& p1, const ax::Point& p2,
 
 	ax::Point arrow_vec = p2 - p1;
 	ax::Point normal_vec = ax::Point(-arrow_vec.y, arrow_vec.x);
-	double normal_norm
-		= sqrt(normal_vec.x * normal_vec.x + normal_vec.y * normal_vec.y);
+	double normal_norm = sqrt(normal_vec.x * normal_vec.x + normal_vec.y * normal_vec.y);
 
 	normal_vec.x = (normal_vec.x / normal_norm) * base_length;
 	normal_vec.y = (normal_vec.y / normal_norm) * base_length;
 
 	ax::Point arrow_base = arrow_vec;
-	double norm
-		= sqrt(arrow_base.x * arrow_base.x + arrow_base.y * arrow_base.y);
+	double norm = sqrt(arrow_base.x * arrow_base.x + arrow_base.y * arrow_base.y);
 	arrow_base.x = (arrow_base.x / norm) * arrow_length;
 	arrow_base.y = (arrow_base.y / norm) * arrow_length;
 	arrow_base = p2 - arrow_base;
@@ -1777,9 +1776,8 @@ void ax::GC::DrawArrow(const ax::Point& p1, const ax::Point& p2,
 #endif
 }
 
-void ax::GC::DrawTriangleColorFade(const ax::Point& p1, const ax::Point& p2,
-	const ax::Point& p3, const ax::Color& c1, const ax::Color& c2,
-	const ax::Color& c3)
+void ax::GC::DrawTriangleColorFade(const ax::Point& p1, const ax::Point& p2, const ax::Point& p3,
+	const ax::Color& c1, const ax::Color& c2, const ax::Color& c3)
 {
 #ifdef ANDROID
 #else
