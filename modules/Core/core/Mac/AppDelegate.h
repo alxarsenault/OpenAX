@@ -62,6 +62,13 @@ namespace ax
 
 -(void)renderTimer:(NSTimer *)timer;
 
+- (BOOL)application:(NSApplication *)app
+		   openFile:(NSString *)filename;
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication;
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
+- (void)applicationWillTerminate:(NSNotification *)aNotification;
+
 @property(assign) id< NSApplicationDelegate > delegate;
 @end
 

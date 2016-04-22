@@ -45,7 +45,9 @@ namespace core {
 		std::string GetAppPath();
 
 		std::string OpenFileDialog();
-
+		
+		std::string SaveFileDialog();
+		
 		ax::Rect GetScreenRect();
 
 		ax::Size GetScreenSize();

@@ -101,7 +101,7 @@ void axCallNSApplicationMain()
 	//    //id quitTitle = [@"Quit " stringByAppendingString:appName];
 	//    //id quitMenuItem = [[[NSMenuItem alloc] initWithTitle:quitTitle
 	////                                                  action:@selector(terminate:) keyEquivalent:@"q"]
-	///autorelease];
+	/// autorelease];
 	//    //[appMenu addItem:quitMenuItem];
 	//    //[appMenuItem setSubmenu:appMenu];
 	//    id window = [[[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 200, 200)
@@ -124,6 +124,10 @@ std::string axOpenFileDialog()
 	[openDlg setCanChooseDirectories:YES];
 	[openDlg setPrompt:@"Select"];
 
+	//	NSArray* filesType = [NSImage imageTypes];
+	NSArray* fileTypes = [[NSArray alloc] initWithObjects:@"atproj", @"ATPROJ", nil];
+	[openDlg setAllowedFileTypes:fileTypes];
+
 	std::string file_path;
 
 	if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
@@ -134,6 +138,20 @@ std::string axOpenFileDialog()
 	}
 
 	return file_path;
+}
+
+std::string axSaveFileDialog()
+{
+	NSSavePanel* saveDlg = [NSSavePanel savePanel];
+
+	int modal = (int)[saveDlg runModal];
+
+	if (modal != NSOKButton) {
+		return "";
+	}
+
+	NSString* filename = [saveDlg filename];
+	return std::string([filename UTF8String]);
 }
 
 void TestFunctionInterface()
@@ -194,7 +212,7 @@ void axCocoaSetTitleBar(bool title_bar)
 
 void axCocoaChangeMouseCursor(int cursor_id)
 {
-//	ax::Print("Mouse cursor cocoa interface.");
+	//	ax::Print("Mouse cursor cocoa interface.");
 	[GlobalAppDelegate ChangeMouseCursor:cursor_id];
 }
 
@@ -380,7 +398,7 @@ void SetCurrentOpenGLContext()
 
 std::string axCocoaGetPasteboardContent()
 {
-	NSPasteboard*  myPasteboard  = [NSPasteboard generalPasteboard];
-	NSString* myString = [myPasteboard  stringForType:NSPasteboardTypeString];
+	NSPasteboard* myPasteboard = [NSPasteboard generalPasteboard];
+	NSString* myString = [myPasteboard stringForType:NSPasteboardTypeString];
 	return std::string([myString UTF8String]);
 }

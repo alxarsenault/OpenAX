@@ -44,29 +44,57 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	if (self) {
 
 		[self wantsBestResolutionOpenGLSurface];
-		
-//		NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 / 30.0 target:self selector:@selector(renderTimer:) userInfo:nil repeats:YES];
-//		[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+
+		//		NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 / 30.0 target:self
+		//selector:@selector(renderTimer:) userInfo:nil repeats:YES];
+		//		[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 	}
 
 	return self;
 }
 
--(void)renderTimer:(NSTimer *)timer
+- (BOOL)application:(NSApplication*)app openFile:(NSString*)filename
 {
-	if(![[NSApplication sharedApplication] isHidden]) {
-//		ax::Print("Timer");
-//		[self setNeedsDisplay:YES];
+	std::ofstream ff("/Users/alexarse/debug.txt");
+	
+	ff << "Before filepath" << std::endl;
+	std::string file_path([filename UTF8String]);
+//	ax::Print("AX APP OPEN FILE PATH :", file_path);
+	
+	ff << file_path << std::endl;
+	
+	
+	ax::App::GetInstance().SetAppOpenFilePath(file_path);
+	ff << "After filepath" << std::endl;
+	
+	ff.close();
+	return TRUE;
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+	return NSTerminateNow;
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+	ax::Print("APPLICATION WILL TERMINATE");
+	_axApp->CloseApplication();
+	
+}
+
+- (void)renderTimer:(NSTimer*)timer
+{
+	if (![[NSApplication sharedApplication] isHidden]) {
+		//		ax::Print("Timer");
+		//		[self setNeedsDisplay:YES];
 		[GlobalAppDelegate setNeedsDisplay:YES];
 	}
 }
 
 - (void)viewDidMoveToWindow
 {
-	[self addTrackingRect:[self bounds]
-					owner:self
-				 userData:NULL
-			 assumeInside:YES];
+	[self addTrackingRect:[self bounds] owner:self userData:NULL assumeInside:YES];
 	[[self window] makeFirstResponder:self];
 	[[self window] setAcceptsMouseMovedEvents:YES];
 }
@@ -89,8 +117,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	// Synchronize buffer swaps with vertical refresh rate
 	GLint swapInt = 1;
 	[[self window] setAcceptsMouseMovedEvents:YES];
-	[[self openGLContext] setValues:&swapInt
-					   forParameter:NSOpenGLCPSwapInterval];
+	[[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval];
 
 	_axApp = &ax::App::GetInstance();
 	_axApp->Init(ax::Size(500, 500));
@@ -111,20 +138,17 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (void)SetResizable
 {
-	[[self window]
-		setStyleMask:[[self window] styleMask] | NSResizableWindowMask];
+	[[self window] setStyleMask:[[self window] styleMask] | NSResizableWindowMask];
 }
 
 - (void)SetNotResizable
 {
-	[[self window]
-		setStyleMask:[[self window] styleMask] & ~NSResizableWindowMask];
+	[[self window] setStyleMask:[[self window] styleMask] & ~NSResizableWindowMask];
 }
 
 - (void)SetNoTitleBar
 {
-	[[self window]
-		setStyleMask:[[self window] styleMask] & ~NSTitledWindowMask];
+	[[self window] setStyleMask:[[self window] styleMask] & ~NSTitledWindowMask];
 }
 
 - (void)SetTitleBar
@@ -132,9 +156,9 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	[[self window] setStyleMask:[[self window] styleMask] | NSTitledWindowMask];
 }
 
--(void)SetFocusAndCenter
+- (void)SetFocusAndCenter
 {
-	NSApplication *myApp = [NSApplication sharedApplication];
+	NSApplication* myApp = [NSApplication sharedApplication];
 	[myApp activateIgnoringOtherApps:YES];
 	[self.window orderFrontRegardless];
 	[[self window] center];
@@ -142,28 +166,26 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (void)windowDidResize:(NSNotification*)notification
 {
-	ax::Size size(
-		[[self window] frame].size.width, [[self window] frame].size.height);
+	ax::Size size([[self window] frame].size.width, [[self window] frame].size.height);
 
 	ax::Size size2([self bounds].size.width, [self bounds].size.height);
 
-	ax::Size size3([[self window] contentLayoutRect].size.width,
-		[[self window] contentLayoutRect].size.height);
+	ax::Size size3(
+		[[self window] contentLayoutRect].size.width, [[self window] contentLayoutRect].size.height);
 
 	ax::App::GetInstance().SetFrameSize(size3);
 
 	// Resize openGL panel.
 	//	[GlobalAppDelegate setFrame:NSMakeRect(0.f, 0.f, size3.x, size3.y)];
-//	[GlobalAppDelegate setFrameSize:NSMakeSize(size3.x, size3.y)];
-//	[[GlobalAppDelegate window] center];
+	//	[GlobalAppDelegate setFrameSize:NSMakeSize(size3.x, size3.y)];
+	//	[[GlobalAppDelegate window] center];
 	//	ax::Print("WINDOW DID RESIZE");
 }
 
 // Close application when clicking on the top left red "x" button.
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:
-	(NSApplication*)theApplication
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)theApplication
 {
-	return YES;
+	return TRUE;
 }
 
 - (void)windowDidMove:(NSNotification*)notification
@@ -182,24 +204,23 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	//		setFrameSize:NSMakeSize(newSize.width, newSize.height)];
 
 	// Resize openGL panel.
-	[GlobalAppDelegate
-		setFrame:NSMakeRect(0.f, 0.f, newSize.width, newSize.height)];
+	[GlobalAppDelegate setFrame:NSMakeRect(0.f, 0.f, newSize.width, newSize.height)];
 
-//	[[GlobalAppDelegate window] center];
+	//	[[GlobalAppDelegate window] center];
 	//	[GlobalAppDelegate
 	//		setBounds:NSMakeRect(0.f, 0.f, newSize.width, newSize.height)];
 }
 
 - (id)ChangeMouseCursor:(int)cursor_id
 {
-//	ax::Print("Mouse in cocoa.");
+	//	ax::Print("Mouse in cocoa.");
 	if (cursor_id == 0) {
 		[[NSCursor arrowCursor] set];
 	}
 	else if (cursor_id == 1) {
 		[[NSCursor resizeUpDownCursor] set];
 	}
-	else if( cursor_id == 2) {
+	else if (cursor_id == 2) {
 		[[NSCursor resizeLeftRightCursor] set];
 	}
 
@@ -208,8 +229,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (void)mouseDown:(NSEvent*)event
 {
-	NSPoint locationInView =
-		[self convertPoint:[event locationInWindow] fromView:nil];
+	NSPoint locationInView = [self convertPoint:[event locationInWindow] fromView:nil];
 
 	ax::Point pos(locationInView.x, locationInView.y);
 
@@ -233,8 +253,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (void)rightMouseDown:(NSEvent*)event
 {
-	NSPoint locationInView =
-		[self convertPoint:[event locationInWindow] fromView:nil];
+	NSPoint locationInView = [self convertPoint:[event locationInWindow] fromView:nil];
 
 	ax::Point pos(locationInView.x, locationInView.y);
 
@@ -260,8 +279,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 // Working.
 - (void)mouseUp:(NSEvent*)anEvent
 {
-	NSPoint locationInView =
-		[self convertPoint:[anEvent locationInWindow] fromView:nil];
+	NSPoint locationInView = [self convertPoint:[anEvent locationInWindow] fromView:nil];
 
 	ax::Point pos(locationInView.x, locationInView.y);
 
@@ -272,8 +290,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (void)mouseDragged:(NSEvent*)theEvent
 {
-	NSPoint locationInView =
-		[self convertPoint:[theEvent locationInWindow] fromView:nil];
+	NSPoint locationInView = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 
 	ax::Point pos(locationInView.x, locationInView.y);
 	_axApp->GetPopupManager()->OnMouseLeftDragging(pos);
@@ -285,8 +302,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 
 - (void)mouseMoved:(NSEvent*)evt
 {
-	NSPoint locationInView =
-		[self convertPoint:[evt locationInWindow] fromView:nil];
+	NSPoint locationInView = [self convertPoint:[evt locationInWindow] fromView:nil];
 
 	ax::Point pos(locationInView.x, locationInView.y);
 	_axApp->GetPopupManager()->OnMouseMotion(pos);
@@ -433,8 +449,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 }
 
 // static int test_value = 0;
-void MyRunLoopObserver(
-	CFRunLoopObserverRef observer, CFRunLoopActivity activity, void* info)
+void MyRunLoopObserver(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void* info)
 {
 	ax::App& app(ax::App::GetInstance());
 	std::shared_ptr<ax::Event::Manager> evt(app.GetEventManager());
@@ -454,12 +469,10 @@ void MyRunLoopObserver(
 	int myActivities = kCFRunLoopAllActivities; // kCFRunLoopBeforeWaiting;
 
 	// Create observer reference.
-	myObserver = CFRunLoopObserverCreate(
-		NULL, myActivities, YES, 0, &MyRunLoopObserver, NULL);
+	myObserver = CFRunLoopObserverCreate(NULL, myActivities, YES, 0, &MyRunLoopObserver, NULL);
 
 	if (myObserver) {
-		CFRunLoopAddObserver(
-			CFRunLoopGetCurrent(), myObserver, kCFRunLoopCommonModes);
+		CFRunLoopAddObserver(CFRunLoopGetCurrent(), myObserver, kCFRunLoopCommonModes);
 	}
 }
 
@@ -493,13 +506,12 @@ void MyRunLoopObserver(
 	//    ax::Size global_size = core->GetGlobalSize();
 	ax::Size global_size = _axApp->GetFrameSize();
 
-	if (global_size.x != backingBounds.size.width
-		|| global_size.y != backingBounds.size.height) {
+	if (global_size.x != backingBounds.size.width || global_size.y != backingBounds.size.height) {
 
 		//		ax::Print("RESIZE");
 
-		ax::Size size3([[self window] contentLayoutRect].size.width,
-			[[self window] contentLayoutRect].size.height);
+		ax::Size size3(
+			[[self window] contentLayoutRect].size.width, [[self window] contentLayoutRect].size.height);
 
 		ax::App::GetInstance().SetFrameSize(size3);
 
@@ -510,7 +522,7 @@ void MyRunLoopObserver(
 
 		//		_axApp->SetFrameSize(
 		//			ax::Size(backingBounds.size.width,
-		//backingBounds.size.height));
+		// backingBounds.size.height));
 
 		//        core->ResizeGLScene(ax::Size(backingBounds.size.width,
 		//                                   backingBounds.size.height));
@@ -534,7 +546,8 @@ void MyRunLoopObserver(
 			_axApp->Draw();
 			glFlush();
 		}
-	} else {
+	}
+	else {
 		glFlush();
 	}
 }

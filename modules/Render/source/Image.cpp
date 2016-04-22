@@ -75,8 +75,8 @@ void ImageGlobalMapLoader::RemoveImage(const std::string& path)
 		
 		if(it->second.ref_count == 0) {
 			glDeleteTextures(1, &it->second._texture);
+			_imageMap.erase(it);
 		}
-		_imageMap.erase(it);
 	}
 }
 

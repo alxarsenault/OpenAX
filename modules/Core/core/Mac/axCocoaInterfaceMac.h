@@ -26,6 +26,8 @@
 
 std::string axOpenFileDialog();
 
+std::string axSaveFileDialog();
+
 void TestFunctionInterface();
 
 std::string CocoaGetAppDirectory();

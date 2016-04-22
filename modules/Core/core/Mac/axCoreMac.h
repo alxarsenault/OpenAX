@@ -47,6 +47,8 @@ public:
 	virtual ax::Size GetScreenSize();
 
 	virtual std::string OpenFileDialog();
+	
+	virtual std::string SaveFileDialog();
 
 	virtual void PushEventOnSystemQueue();
 

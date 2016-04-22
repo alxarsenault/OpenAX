@@ -110,11 +110,24 @@ public:
 
 	ax::Window::Ptr GetTopLevel();
 	
+	void CloseApplication();
+	
+	inline std::string AppOpenFilePath() const
+	{
+		return _app_open_file_path;
+	}
+	
+	inline void SetAppOpenFilePath(const std::string& path)
+	{
+		_app_open_file_path = path;
+	}
+	
 protected:
 	static ax::Size _frameSize;
 	App();
 	std::function<void()> _mainEntryFunction; /// Main GUI callback.
 	std::function<void()> _afterGuiLoadFunction; /// After GUI callback.
+	std::string _app_open_file_path;
 	
 private:
 	/* Singleton */

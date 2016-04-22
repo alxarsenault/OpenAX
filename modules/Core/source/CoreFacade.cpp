@@ -113,6 +113,11 @@ namespace core {
 	{
 		return _core->OpenFileDialog();
 	}
+	
+	std::string Facade::SaveFileDialog()
+	{
+		return _core->SaveFileDialog();
+	}
 
 	ax::Rect Facade::GetScreenRect()
 	{

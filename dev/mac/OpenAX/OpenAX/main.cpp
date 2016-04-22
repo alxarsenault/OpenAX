@@ -365,7 +365,7 @@ int main()
 
 		win->node.Add(ax::shared<PreferencePanel>(ax::Rect(10, 10, 300, 194)));
 		
-		ax::Print(GetPasteboardContent());
+//		ax::Print(GetPasteboardContent());
 
 	});
 

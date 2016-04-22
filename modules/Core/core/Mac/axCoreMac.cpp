@@ -97,6 +97,11 @@ namespace core {
 	{
 		return axOpenFileDialog();
 	}
+	
+	std::string CoreMac::SaveFileDialog()
+	{
+		return axSaveFileDialog();
+	}
 
 	void CoreMac::PushEventOnSystemQueue()
 	{

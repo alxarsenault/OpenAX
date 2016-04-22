@@ -57,6 +57,11 @@ namespace core {
 		virtual ax::Size GetScreenSize() = 0;
 
 		virtual std::string OpenFileDialog() = 0;
+		
+		virtual std::string SaveFileDialog()
+		{
+			return "";
+		}
 
 		virtual void PushEventOnSystemQueue() = 0;
 
@@ -112,7 +117,7 @@ namespace core {
 		
 		virtual std::string GetPasteboardContent()
 		{
-			
+			return "";
 		}
 
 		virtual int DrawGLScene();

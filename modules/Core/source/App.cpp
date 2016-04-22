@@ -61,6 +61,14 @@ ax::App* ax::App::Create(core::Core* core)
 	return ax::App::_instance.get();
 }
 
+void ax::App::CloseApplication()
+{
+	_instance->GetPopupManager()->GetWindowTree()->GetNodeVector().clear();
+	_instance->GetWindowManager()->GetWindowTree()->GetNodeVector().clear();
+	
+	ax::App::_instance.reset();
+}
+
 void ax::App::CallMainEntryFunction()
 {
 	if (_mainEntryFunction) {

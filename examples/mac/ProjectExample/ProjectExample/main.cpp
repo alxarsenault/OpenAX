@@ -5,6 +5,8 @@
 
 #include "ColorPicker.h"
 
+#include "atSaveWorkDialog.h"
+
 int main()
 {
 	ax::App& app(ax::App::GetInstance());
@@ -21,10 +23,12 @@ int main()
 
 		app.AddTopLevel(ax::Window::Ptr(win));
 
-		win->node.Add(
-			ax::shared<ax::Button>(ax::Rect(0, 0, 50, 50), ax::Button::Events(), ax::Button::Info()));
+//		win->node.Add(
+//			ax::shared<ax::Button>(ax::Rect(0, 0, 50, 50), ax::Button::Events(), ax::Button::Info()));
 
-		win->node.Add(ax::shared<ax::ColorPicker>(ax::Rect(100, 100, 205, 272), ax::Color(255, 0, 0)));
+//		win->node.Add(ax::shared<ax::ColorPicker>(ax::Rect(100, 100, 205, 272), ax::Color(255, 0, 0)));
+		
+		win->node.Add(ax::shared<at::SaveWorkDialog>(ax::Rect(10, 10, 300, 170)));
 
 	});
 
