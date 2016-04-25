@@ -50,9 +50,9 @@ Panel::Info::Info(const StringPairVector& attributes)
 	SetAttributes(attributes);
 }
 
-StringVector Panel::Info::GetParamNameList() const
+std::vector<std::string> Panel::Info::GetParamNameList() const
 {
-	return StringVector{ "background", "contour", "round_corner_radius" };
+	return std::vector<std::string>{ "background", "contour", "round_corner_radius" };
 }
 
 std::string Panel::Info::GetAttributeValue(const std::string& name)
@@ -138,7 +138,7 @@ ax::Xml::Node Panel::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	widget_node.AddNode(xml.CreateNode("flags", std::to_string(flags)));
 
 	// Saving children.
-	std::vector<ax::Window::Ptr>& children = GetWindow()->node.GetChildren();
+	std::vector<std::shared_ptr<ax::Window>>& children = GetWindow()->node.GetChildren();
 
 	if (children.size()) {
 		ax::Xml::Node children_node = xml.CreateNode("Children");
@@ -236,7 +236,7 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(
 
 	std::string bg_img_path = control.GetChildNodeValue("bg_img");
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -265,7 +265,7 @@ std::shared_ptr<ax::Window::Backbone> Panel::Builder::Create(ax::Xml::Node& node
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
 	std::string bg_img_path = node.GetChildNodeValue("bg_img");
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -353,7 +353,7 @@ ax::Window::Backbone* Panel::GetCopy()
 	ax::Panel::Info* info = static_cast<ax::Panel::Info*>(widget->GetInfo());
 	ax::Panel* panel = new ax::Panel(win->dimension.GetRect(), *info, _bg_img_path, _name, _flags);
 	
-	std::vector<ax::Window::Ptr>& children = win->node.GetChildren();
+	std::vector<std::shared_ptr<ax::Window>>& children = win->node.GetChildren();
 	
 	if (children.size()) {
 		for (auto& n : children) {

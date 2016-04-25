@@ -59,9 +59,9 @@ Knob::Info::Info()
 {
 }
 
-StringVector Knob::Info::GetParamNameList() const
+std::vector<std::string> Knob::Info::GetParamNameList() const
 {
-	return StringVector{ "knob_size", "n_knob", "bgColorNormal", "bgColorHover", "bgColorClicked" };
+	return std::vector<std::string>{ "knob_size", "n_knob", "bgColorNormal", "bgColorHover", "bgColorClicked" };
 }
 
 std::string Knob::Info::GetAttributeValue(const std::string& name)

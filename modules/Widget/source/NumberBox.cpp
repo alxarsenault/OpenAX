@@ -76,9 +76,9 @@ ax::NumberBox::Info::Info(const ax::StringPairVector& attributes)
 	SetAttributes(attributes);
 }
 
-ax::StringVector ax::NumberBox::Info::GetParamNameList() const
+std::vector<std::string> ax::NumberBox::Info::GetParamNameList() const
 {
-	return ax::StringVector{ "normal", "hover", "clicking", "selected", "contour", "font_color", "img",
+	return std::vector<std::string>{ "normal", "hover", "clicking", "selected", "contour", "font_color", "img",
 		"single_img" };
 }
 

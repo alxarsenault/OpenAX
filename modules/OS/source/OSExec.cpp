@@ -15,7 +15,7 @@
 namespace ax {
 namespace Exec {
 	std::string ExecuteProgram(const std::string& folder,
-		const std::string& name, const ax::StringVector& args)
+		const std::string& name, const std::vector<std::string>& args)
 	{
 		int filedes[2]; // [0] Read, [1] Write.
 
@@ -69,7 +69,7 @@ namespace Exec {
 	}
 
 	std::vector<const char*> GetCharVectorFromArgs(
-		const std::string& prog_name, const ax::StringVector& args)
+		const std::string& prog_name, const std::vector<std::string>& args)
 	{
 		std::vector<const char*> char_ptr_args;
 		char_ptr_args.reserve(args.size() + 2);

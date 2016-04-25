@@ -12,7 +12,7 @@ namespace ax {
 
 ax::Size Xml::StringToSize(const std::string& size_str)
 {
-	ax::StringVector size_elem = ax::Utils::String::Split(size_str, ",");
+	std::vector<std::string> size_elem = ax::Utils::String::Split(size_str, ",");
 	ax::Size size(-1, -1);
 
 	if (size_elem.size() != 2) {
@@ -28,7 +28,7 @@ ax::Size Xml::StringToSize(const std::string& size_str)
 
 ax::Color Xml::StringToColor(const std::string& color_str)
 {
-	ax::StringVector color_elem = ax::Utils::String::Split(color_str, ",");
+	std::vector<std::string> color_elem = ax::Utils::String::Split(color_str, ",");
 	ax::Color color(0.0f, 0.0f, 0.0f, 1.0f);
 
 	if (color_elem.size() < 3) {

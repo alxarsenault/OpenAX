@@ -90,9 +90,9 @@ ax::Toggle::Info::Info()
 {
 }
 
-ax::StringVector ax::Toggle::Info::GetParamNameList() const
+std::vector<std::string> ax::Toggle::Info::GetParamNameList() const
 {
-	return StringVector{ "normal", "hover", "clicking", "selected", "selected_hover", "selected_clicking",
+	return std::vector<std::string>{ "normal", "hover", "clicking", "selected", "selected_hover", "selected_clicking",
 		"contour", "font_color", "img", "single_img" };
 }
 
@@ -237,7 +237,7 @@ ax::Xml::Node ax::Toggle::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	widget_node.AddNode(xml.CreateNode("label", tog->GetLabel()));
 
 	ax::Flag flags = tog->GetFlags();
-	ax::StringVector atts;
+	std::vector<std::string> atts;
 
 	if (ax::IsFlag(ax::Toggle::Flags::SINGLE_IMG, flags)) {
 		atts.push_back("SINGLE_IMG");
@@ -391,7 +391,7 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(
 	//	std::string img_path = control.GetChildNodeValue("img_path");
 	std::string label = control.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 	for (auto& n : flags_strs) {
@@ -443,7 +443,7 @@ std::shared_ptr<ax::Window::Backbone> ax::Toggle::Builder::Create(ax::Xml::Node&
 	ax::Size size = ax::Xml::StringToSize(node.GetChildNodeValue("size"));
 	std::string label = node.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 	for (auto& n : flags_strs) {

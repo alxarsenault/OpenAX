@@ -90,7 +90,7 @@ ax::DropMenu::Info::Info()
  * ax::DropMenu::DropMenu.
  */
 ax::DropMenu::DropMenu(const ax::Rect& rect, const ax::DropMenu::Events& events,
-	const ax::DropMenu::Info& info, const ax::StringVector& items,
+	const ax::DropMenu::Info& info, const std::vector<std::string>& items,
 	ax::Flag flags)
 	: _events(events)
 	, _flags(flags)
@@ -181,7 +181,7 @@ ax::DropMenu::DropMenu(const ax::Rect& rect, const ax::DropMenu::Events& events,
 	_right_img = ax::unique<ax::Image>("resources/drop_right.png");
 }
 
-const ax::StringVector& ax::DropMenu::GetItems() const
+const std::vector<std::string>& ax::DropMenu::GetItems() const
 {
 	return _items;
 }

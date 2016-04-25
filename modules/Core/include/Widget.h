@@ -60,7 +60,7 @@ namespace widget {
 
 		bool IsEditable() const;
 
-		virtual ax::StringVector GetParamNameList() const;
+		virtual std::vector<std::string> GetParamNameList() const;
 		
 		virtual std::vector<ParamInfo> GetParametersInfo() const
 		{

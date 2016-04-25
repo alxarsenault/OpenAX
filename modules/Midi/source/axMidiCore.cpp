@@ -39,9 +39,9 @@ namespace midi {
 		//    delete midiin;
 	}
 	
-	ax::StringVector Core::GetMidiInputList()
+	std::vector<std::string> Core::GetMidiInputList()
 	{
-		ax::StringVector list;
+		std::vector<std::string> list;
 		
 		unsigned int nPorts = _midiInHandle->getPortCount();
 		

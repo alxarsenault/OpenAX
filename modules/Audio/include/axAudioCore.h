@@ -27,8 +27,8 @@ namespace audio {
 		void StartAudio();
 		void StopAudio();
 		
-		ax::StringVector GetInputDevices();
-		ax::StringVector GetOutputDevices();
+		std::vector<std::string> GetInputDevices();
+		std::vector<std::string> GetOutputDevices();
 		
 		std::string GetCurrentOutputDevice();
 		std::string GetCurrentInputDevice();

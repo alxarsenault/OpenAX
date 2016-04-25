@@ -46,7 +46,7 @@ namespace core {
 class Window : public ax::Event::Object,
 			   public std::enable_shared_from_this<ax::Window> {
 public:
-	typedef std::shared_ptr<ax::Window> Ptr;
+//	typedef std::shared_ptr<ax::Window> Ptr;
 
 	/***************************************************************************
 	 * Window dimensions.
@@ -155,7 +155,7 @@ public:
 			_win = win;
 		}
 
-		ax::Window::Ptr GetWindow();
+		std::shared_ptr<ax::Window> GetWindow();
 
 		void GrabMouse();
 		void UnGrabMouse();
@@ -269,7 +269,7 @@ public:
 		{
 		}
 
-		inline void AssignWindow(Ptr window);
+		inline void AssignWindow(std::shared_ptr<ax::Window> window);
 		
 		inline ax::Window* GetWindow();
 		inline const ax::Window* GetWindow() const;
@@ -290,7 +290,7 @@ public:
 	public:
 		inline Node(ax::Window* win);
 
-		inline std::vector<ax::Window::Ptr>& GetChildren();
+		inline std::vector<std::shared_ptr<ax::Window>>& GetChildren();
 
 		inline void SetParent(ax::Window* parent);
 
@@ -303,7 +303,7 @@ public:
 		void Reparent(Window* parent, const ax::Point& position);
 
 //		Ptr Add(Ptr child);
-		void Add(Ptr win);
+		void Add(std::shared_ptr<ax::Window> win);
 
 		void Add(std::shared_ptr<Backbone> child);
 
@@ -314,7 +314,7 @@ public:
 		ax::Window* _parent = nullptr;
 
 		/// This is the owner of the window.
-		std::vector<ax::Window::Ptr> _children;
+		std::vector<std::shared_ptr<ax::Window>> _children;
 		
 		struct BlockDrawingInfo {
 			ax::Rect abs_rect;
@@ -343,7 +343,7 @@ public:
 	void Hide();
 	void Update();
 
-	ax::Window::Ptr GetWindowPtr();
+	std::shared_ptr<ax::Window> GetWindowPtr();
 
 	virtual void RenderWindow();
 
@@ -499,7 +499,7 @@ inline Window::Backbone::Backbone()
 {
 }
 
-inline void Window::Backbone::AssignWindow(Ptr window)
+inline void Window::Backbone::AssignWindow(std::shared_ptr<ax::Window> window)
 {
 	win = window.get();
 }
@@ -528,7 +528,7 @@ inline Window::Node::Node(ax::Window* win)
 {
 }
 
-inline std::vector<ax::Window::Ptr>& Window::Node::GetChildren()
+inline std::vector<std::shared_ptr<ax::Window>>& Window::Node::GetChildren()
 {
 	return _children;
 }

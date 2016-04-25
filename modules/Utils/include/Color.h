@@ -199,7 +199,7 @@ namespace Utils {
 				_a = 1.0;
 			}
 			else {
-				String::Vector strVec = String::Split(str, ",");
+				std::vector<std::string> strVec = String::Split(str, ",");
 				_r = stof(strVec[0]);
 				_g = stof(strVec[1]);
 				_b = stof(strVec[2]);

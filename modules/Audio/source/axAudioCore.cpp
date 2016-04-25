@@ -181,16 +181,16 @@ namespace audio {
 		}
 	}
 
-	ax::StringVector Core::GetInputDevices()
+	std::vector<std::string> Core::GetInputDevices()
 	{
 		int numDevices = Pa_GetDeviceCount();
 
 		if (numDevices <= 0) {
 			ax::Error("No available audio device.");
-			return ax::StringVector();
+			return std::vector<std::string>();
 		}
 
-		ax::StringVector devices;
+		std::vector<std::string> devices;
 
 		for (int i = 0; i < numDevices; i++) {
 			const PaDeviceInfo* device_info = Pa_GetDeviceInfo(i);
@@ -202,16 +202,16 @@ namespace audio {
 		return devices;
 	}
 
-	ax::StringVector Core::GetOutputDevices()
+	std::vector<std::string> Core::GetOutputDevices()
 	{
 		int numDevices = Pa_GetDeviceCount();
 
 		if (numDevices <= 0) {
 			ax::Error("No available audio device.");
-			return ax::StringVector();
+			return std::vector<std::string>();
 		}
 
-		ax::StringVector devices;
+		std::vector<std::string> devices;
 
 		for (int i = 0; i < numDevices; i++) {
 			const PaDeviceInfo* device_info = Pa_GetDeviceInfo(i);

@@ -37,9 +37,9 @@ namespace Utils {
 			return std::string(path.substr(last_dot + 1));
 		}
 
-		Vector Split(const std::string& str, const std::string& delimiter)
+		std::vector<std::string> Split(const std::string& str, const std::string& delimiter)
 		{
-			Vector vec;
+			std::vector<std::string> vec;
 
 			std::string r = str;
 			size_t pos = 0;

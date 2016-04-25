@@ -36,12 +36,12 @@ WindowTree::WindowTree()
 }
 
 //void WindowTree::AddTopLevel(ax::Window::Ptr win)
-void WindowTree::AddTopLevel(ax::Window::Ptr win)
+void WindowTree::AddTopLevel(std::shared_ptr<ax::Window> win)
 {
 	_nodes.push_back(win);
 }
 
-ax::Window::Ptr WindowTree::GetTopLevel()
+std::shared_ptr<ax::Window> WindowTree::GetTopLevel()
 {
 	if (_nodes.size()) {
 		return _nodes[0];
@@ -53,11 +53,11 @@ ax::Window::Ptr WindowTree::GetTopLevel()
 //    ax::Window::Ptr WindowTree::FindMousePosition(const ax::Point& pos)
 ax::Window* WindowTree::FindMousePosition(const ax::Point& pos)
 {
-	ax::Window::Ptr node = nullptr;
+	std::shared_ptr<ax::Window> node = nullptr;
 
 	// Find first level window in the vector of window with nullptr as
 	// parent. There should normally be only one window in this vector.
-	for (ax::Window::Ptr it : _nodes) {
+	for (std::shared_ptr<ax::Window> it : _nodes) {
 		ax::Point position = it->dimension.GetAbsoluteRect().position;
 		ax::Rect rect(position, it->dimension.GetShownRect().size);
 
@@ -74,18 +74,18 @@ ax::Window* WindowTree::FindMousePosition(const ax::Point& pos)
 
 	// This would normally start with the main window if there was only one
 	// window in the vector (_nodes).
-	ax::Window::Ptr n;
+	std::shared_ptr<ax::Window> n;
 
 	do { // Look for the deepest child window with mouse over it.
 		n = node;
 
-		std::vector<ax::Window::Ptr>& childs = n->node.GetChildren();
+		std::vector<std::shared_ptr<ax::Window>>& childs = n->node.GetChildren();
 
 		// Search for child window backward.
 		// This imply that if two windows are superpose, the last
 		// one added will have priority.
 		for (auto iter = childs.rbegin(); iter != childs.rend(); ++iter) {
-			ax::Window::Ptr it = *iter;
+			std::shared_ptr<ax::Window> it = *iter;
 
 			ax::Point position = it->dimension.GetAbsoluteRect().position;
 			ax::Rect rect(position, it->dimension.GetShownRect().size);
@@ -116,14 +116,14 @@ ax::Window* WindowTree::FindMousePosition(const ax::Point& pos)
 
 void WindowTree::Draw()
 {
-	for (ax::Window::Ptr it : _nodes) {
+	for (std::shared_ptr<ax::Window> it : _nodes) {
 		if (it != nullptr) {
 			it->node.Draw();
 		}
 	}
 }
 
-std::vector<ax::Window::Ptr>& WindowTree::GetNodeVector()
+std::vector<std::shared_ptr<ax::Window>>& WindowTree::GetNodeVector()
 {
 	return _nodes;
 }

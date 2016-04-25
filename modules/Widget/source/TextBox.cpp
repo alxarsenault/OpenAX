@@ -93,9 +93,9 @@ TextBox::Info::Info(const ax::StringPairVector& attributes)
 	SetAttributes(attributes);
 }
 
-ax::StringVector TextBox::Info::GetParamNameList() const
+std::vector<std::string> TextBox::Info::GetParamNameList() const
 {
-	return ax::StringVector{ "normal", "hover", "highlight", "selected", "selected_shadow", "cursor",
+	return std::vector<std::string>{ "normal", "hover", "highlight", "selected", "selected_shadow", "cursor",
 		"contour", "font_color" };
 }
 

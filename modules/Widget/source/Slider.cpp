@@ -61,9 +61,9 @@ Slider::Info::Info()
 {
 }
 /// Info needed for debug editor. Derived from axInfo.
-ax::StringVector Slider::Info::GetParamNameList() const
+std::vector<std::string> Slider::Info::GetParamNameList() const
 {
-	return StringVector{ "img_path", "btn_size", "bgColorNormal", "bgColorHover", "bgColorClicked",
+	return std::vector<std::string>{ "img_path", "btn_size", "bgColorNormal", "bgColorHover", "bgColorClicked",
 		"sliderColorNormal", "sliderColorHover", "sliderColorClicked", "sliderContourColor", "contourColor",
 		"backSliderColor", "backSliderContourColor", "slider_width", "contour_round_radius" };
 }
@@ -209,7 +209,7 @@ ax::Xml::Node Slider::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	widget_node.AddNode(xml.CreateNode("value", std::to_string(sld->GetValue())));
 
 	ax::Flag flags = sld->GetFlags();
-	ax::StringVector atts;
+	std::vector<std::string> atts;
 
 	if (ax::IsFlag(Slider::Flags::VERTICAL, flags)) {
 		atts.push_back("VERTICAL");
@@ -338,7 +338,7 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -389,7 +389,7 @@ std::shared_ptr<ax::Window::Backbone> Slider::Builder::Create(ax::Xml::Node& con
 	ax::Size pos = ax::Xml::StringToSize(control.GetChildNodeValue("position"));
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 

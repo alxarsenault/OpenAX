@@ -65,7 +65,7 @@ namespace core {
 
 	void WindowManager::OnSize(const ax::Size& size)
 	{
-		ax::Window::Ptr win = _windowTree.GetTopLevel();
+		std::shared_ptr<ax::Window> win = _windowTree.GetTopLevel();
 		
 		if(win) {
 			win->dimension.SetSize(size);

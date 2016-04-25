@@ -40,7 +40,7 @@ public:
 
 		Info(const ax::StringPairVector& attributes);
 
-		virtual ax::StringVector GetParamNameList() const;
+		virtual std::vector<std::string> GetParamNameList() const;
 		
 		virtual std::string GetAttributeValue(const std::string& name);
 		

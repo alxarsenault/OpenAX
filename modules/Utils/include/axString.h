@@ -36,11 +36,10 @@ namespace Utils {
 
 		typedef std::pair<std::string, std::string> Pair;
 		typedef std::vector<Pair> PairVector;
-		typedef std::vector<std::string> Vector;
 
 		std::string GetExtension(const std::string& path);
 
-		Vector Split(const std::string& str, const std::string& delimiter);
+		std::vector<std::string> Split(const std::string& str, const std::string& delimiter);
 
 		void ReplaceCharWithString(std::string& input_str, const char& c,
 			const std::string& replacement);

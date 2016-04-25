@@ -86,9 +86,9 @@ Button::Info::Info(const StringPairVector& attributes)
 	SetAttributes(attributes);
 }
 
-StringVector Button::Info::GetParamNameList() const
+std::vector<std::string> Button::Info::GetParamNameList() const
 {
-	return StringVector{ "normal", "hover", "clicking", "selected", "contour", "font_color",
+	return std::vector<std::string>{ "normal", "hover", "clicking", "selected", "contour", "font_color",
 		"corner_radius" };
 }
 
@@ -204,7 +204,7 @@ ax::Xml::Node Button::Component::Save(ax::Xml& xml, ax::Xml::Node& node)
 	widget_node.AddNode(xml.CreateNode("label", btn->GetLabel()));
 
 	ax::Flag flags = btn->GetFlags();
-	ax::StringVector atts;
+	std::vector<std::string> atts;
 
 	if (ax::IsFlag(ax::Button::Flags::SINGLE_IMG, flags)) {
 		atts.push_back("SINGLE_IMG");
@@ -348,7 +348,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	std::string img_path = control.GetChildNodeValue("img_path");
 	std::string label = control.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(control.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 
@@ -396,7 +396,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& nod
 	std::string img_path = node.GetChildNodeValue("img_path");
 	std::string label = node.GetChildNodeValue("label");
 
-	ax::StringVector flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
+	std::vector<std::string> flags_strs = ax::Utils::String::Split(node.GetChildNodeValue("flags"), ",");
 
 	ax::Flag flags = 0;
 

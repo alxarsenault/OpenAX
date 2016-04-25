@@ -130,9 +130,9 @@ public:
 
 	/// Rect.size.y is used as maximum height.
 	DropMenu(const ax::Rect& rect, const DropMenu::Events& events, const DropMenu::Info& info,
-		const ax::StringVector& items, ax::Flag flags = 0);
+		const std::vector<std::string>& items, ax::Flag flags = 0);
 
-	const ax::StringVector& GetItems() const;
+	const std::vector<std::string>& GetItems() const;
 
 	int GetSelectedItemIndex() const;
 
@@ -143,7 +143,7 @@ public:
 protected:
 	DropMenu::Events _events;
 	ax::Flag _flags;
-	ax::StringVector _items;
+	std::vector<std::string> _items;
 	std::unique_ptr<ax::Font> _font;
 	std::unique_ptr<ax::Image> _up_img;
 	std::unique_ptr<ax::Image> _down_img;

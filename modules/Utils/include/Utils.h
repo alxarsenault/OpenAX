@@ -75,7 +75,7 @@ typedef Utils::String::Pair StringPair;
 typedef Utils::String::PairVector StringPairVector;
 
 // ax::StringVector
-typedef Utils::String::Vector StringVector;
+//typedef Utils::String::Vector StringVector;
 
 // ax::Color
 /// @brief Template is used to define storage type.

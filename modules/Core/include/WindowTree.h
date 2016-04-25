@@ -40,25 +40,25 @@ class WindowTree {
 public:
 	WindowTree();
 
-	void AddTopLevel(ax::Window::Ptr win);
+	void AddTopLevel(std::shared_ptr<ax::Window> win);
 
-	ax::Window::Ptr GetTopLevel();
+	std::shared_ptr<ax::Window> GetTopLevel();
 
 	/// Get all window parent's from top to bottom.
 	/// Index [0] is the older parent of the window after
 	/// frame window. So if the window is a direct child from
 	/// frame window the size of the deque is null.
-	std::deque<ax::Window::Ptr> GetWindowParents(ax::Window::Ptr win);
+	std::deque<std::shared_ptr<ax::Window>> GetWindowParents(std::shared_ptr<ax::Window> win);
 
 	/// Find the window on wich the mouse position is over.
 	ax::Window* FindMousePosition(const ax::Point& pos);
 
 	void Draw();
 	
-	std::vector<ax::Window::Ptr>& GetNodeVector();
+	std::vector<std::shared_ptr<ax::Window>>& GetNodeVector();
 
 private:
-	std::vector<ax::Window::Ptr> _nodes;
+	std::vector<std::shared_ptr<ax::Window>> _nodes;
 };
 }
 }

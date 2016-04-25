@@ -35,9 +35,9 @@ Label::Info::Info(const ax::StringPairVector& attributes)
 	SetAttributes(attributes);
 }
 
-ax::StringVector Label::Info::GetParamNameList() const
+std::vector<std::string> Label::Info::GetParamNameList() const
 {
-	return ax::StringVector{ "normal", "contour", "font_color", "font_name", "font_size", "alignement" };
+	return std::vector<std::string>{ "normal", "contour", "font_color", "font_name", "font_size", "alignement" };
 }
 
 std::vector<widget::ParamInfo> Label::Info::GetParametersInfo() const

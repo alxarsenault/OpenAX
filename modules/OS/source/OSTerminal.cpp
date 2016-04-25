@@ -34,7 +34,7 @@ ax::os::Terminal::Terminal(std::shared_ptr<ax::Event::Manager> evt_manager)
 }
 
 bool ax::os::Terminal::Execute(const std::string& program_folder_path,
-	const std::string& program_name, const ax::StringVector& args)
+	const std::string& program_name, const std::vector<std::string>& args)
 {
 	int fd_master = posix_openpt(O_RDWR | O_NOCTTY);
 

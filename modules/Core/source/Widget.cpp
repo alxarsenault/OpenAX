@@ -53,9 +53,9 @@ namespace widget {
 		return _isEditable;
 	}
 
-	ax::StringVector Info::GetParamNameList() const
+	std::vector<std::string> Info::GetParamNameList() const
 	{
-		return ax::StringVector{};
+		return std::vector<std::string>();
 	}
 
 	void Info::SetAttribute(const ax::StringPair& attribute)

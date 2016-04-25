@@ -109,7 +109,7 @@ public:
 			const bool& singleImg = false);
 
 		// Info needed for debug editor. Derived from axInfo.
-		virtual ax::StringVector GetParamNameList() const;
+		virtual std::vector<std::string> GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
 		

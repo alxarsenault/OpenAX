@@ -83,7 +83,7 @@ void ax::App::CallAfterGUILoadFunction()
 	}
 }
 
-void ax::App::AddTopLevel(ax::Window::Ptr win)
+void ax::App::AddTopLevel(std::shared_ptr<ax::Window> win)
 {
 	GetWindowManager()->GetWindowTree()->AddTopLevel(win);
 
@@ -165,7 +165,7 @@ void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 {
 	ax::Window* win = bone->GetWindow();
 
-	GetWindowManager()->GetWindowTree()->AddTopLevel(ax::Window::Ptr(win));
+	GetWindowManager()->GetWindowTree()->AddTopLevel(std::shared_ptr<ax::Window>(win));
 
 	win->backbone = bone;
 
@@ -229,7 +229,7 @@ void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 //	return win;
 }
 
-ax::Window::Ptr ax::App::GetTopLevel()
+std::shared_ptr<ax::Window> ax::App::GetTopLevel()
 {
 	return GetWindowManager()->GetWindowTree()->GetTopLevel();
 }

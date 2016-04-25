@@ -27,7 +27,7 @@ namespace os {
 		Terminal(std::shared_ptr<ax::Event::Manager> evt_manager);
 
 		bool Execute(const std::string& program_folder_path,
-			const std::string& program_name, const ax::StringVector& args);
+			const std::string& program_name, const std::vector<std::string>& args);
 
 		bool Write(const std::string& command);
 

@@ -14,10 +14,10 @@
 namespace ax {
 namespace Exec {
 	std::string ExecuteProgram(const std::string& folder,
-		const std::string& path, const ax::StringVector& args);
+		const std::string& path, const std::vector<std::string>& args);
 
 	std::vector<const char*> GetCharVectorFromArgs(
-		const std::string& prog_name, const ax::StringVector& args);
+		const std::string& prog_name, const std::vector<std::string>& args);
 
 	std::string GetChildProgramOutput(const int& stdin_fd);
 }

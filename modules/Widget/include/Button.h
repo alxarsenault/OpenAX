@@ -113,7 +113,7 @@ public:
 			const int& corner_radius = 0);
 
 		/// Info needed for debug editor. Derived from axInfo.
-		virtual ax::StringVector GetParamNameList() const;
+		virtual std::vector<std::string> GetParamNameList() const;
 
 		virtual std::string GetAttributeValue(const std::string& name);
 

@@ -39,7 +39,7 @@ namespace midi {
 		Core();
 		~Core();
 		
-		ax::StringVector GetMidiInputList();
+		std::vector<std::string> GetMidiInputList();
 		
 		std::string GetCurrentPortName() const;
 

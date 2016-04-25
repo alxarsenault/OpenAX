@@ -104,11 +104,11 @@ public:
 	void CallAfterGUILoadFunction();
 
 	/// Add the main window.
-	void AddTopLevel(ax::Window::Ptr win);
+	void AddTopLevel(std::shared_ptr<ax::Window> win);
 
 	void AddTopLevel(std::shared_ptr<ax::Window::Backbone> win);
 
-	ax::Window::Ptr GetTopLevel();
+	std::shared_ptr<ax::Window> GetTopLevel();
 	
 	void CloseApplication();
 	

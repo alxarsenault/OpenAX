@@ -150,7 +150,7 @@ ax::Window::Event::~Event()
 //	std::cout << "Delete window event." << std::endl;
 }
 
-ax::Window::Ptr ax::Window::Event::GetWindow()
+std::shared_ptr<ax::Window> ax::Window::Event::GetWindow()
 {
 	return _win->GetWindowPtr();
 }
@@ -212,7 +212,7 @@ void Window::Event::GrabGlobalKey()
  
 std::vector<ax::Window::Node::BlockDrawingInfo> ax::Window::Node::_block_drawing_queue;
  
-void ax::Window::Node::Add(ax::Window::Ptr child)
+void ax::Window::Node::Add(std::shared_ptr<ax::Window> child)
 {
 #ifdef AX_EOS_CORE
 	child->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction([child](
@@ -289,7 +289,7 @@ void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
 	child->backbone = backbone;
 	child->node._parent = _win;
 	
-	_children.push_back(ax::Window::Ptr(child));
+	_children.push_back(std::shared_ptr<ax::Window>(child));
 
 #ifdef AX_EOS_CORE
 	child->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction([child](
@@ -470,7 +470,7 @@ void Window::Node::Draw()
 	}
 
 	// Draw all children.
-	for (Ptr it : _children) {
+	for (std::shared_ptr<ax::Window> it : _children) {
 		if (it == nullptr) {
 			continue;
 		}
@@ -544,10 +544,10 @@ void Window::DeleteWindow()
 	//        _windowManager->GetWindowTree()->DeleteWindow(this);
 }
 
-ax::Window::Ptr Window::GetWindowPtr()
+std::shared_ptr<ax::Window> Window::GetWindowPtr()
 {
 	if (node.GetParent() != nullptr) {
-		ax::Window::Ptr win;
+		std::shared_ptr<ax::Window> win;
 		for (auto& n : node.GetParent()->node.GetChildren()) {
 			if (n->GetId() == GetId()) {
 				win = n;

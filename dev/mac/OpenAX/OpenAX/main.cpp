@@ -38,7 +38,7 @@ private:
 
 	int FindSelectedIndex()
 	{
-		const ax::StringVector& items = _drop_menu->GetItems();
+		const std::vector<std::string>& items = _drop_menu->GetItems();
 
 		for (int i = 0; i < items.size(); i++) {
 			if (items[i] == _drop_btn->GetLabel()) {
@@ -61,14 +61,14 @@ private:
 			ax::Button* sender = msg.GetSender();
 			const ax::Point pos(sender->GetWindow()->dimension.GetAbsoluteRect().GetNextPosDown(0));
 
-			ax::StringVector drop_options = { "Banana", "Potato" };
+			std::vector<std::string> drop_options = { "Banana", "Potato" };
 
 			CreateMenu(ax::Rect(pos, ax::Size(175, 300)), drop_options);
 			_is_droped = true;
 		}
 	}
 
-	void CreateMenu(const ax::Rect& rect, const ax::StringVector& drop_options)
+	void CreateMenu(const ax::Rect& rect, const std::vector<std::string>& drop_options)
 	{
 		ax::DropMenu::Info menu_info;
 		menu_info.normal = ax::Color(240, 240, 240);
@@ -96,17 +96,17 @@ private:
 
 		auto pop_man = ax::App::GetInstance().GetPopupManager();
 		auto pop_win_tree = pop_man->GetWindowTree();
-		std::vector<ax::Window::Ptr>& pop_top_node_vector = pop_win_tree->GetNodeVector();
+		std::vector<std::shared_ptr<ax::Window>>& pop_top_node_vector = pop_win_tree->GetNodeVector();
 
 		if (pop_top_node_vector.size() == 0) {
 			// Add to top level.
 			menu->GetWindow()->backbone = menu;
-			pop_top_node_vector.push_back(ax::Window::Ptr(menu->GetWindow()));
+			pop_top_node_vector.push_back(std::shared_ptr<ax::Window>(menu->GetWindow()));
 		}
 		else {
 			// Add beside top level.
 			menu->GetWindow()->backbone = menu;
-			pop_top_node_vector.push_back(ax::Window::Ptr(menu->GetWindow()));
+			pop_top_node_vector.push_back(std::shared_ptr<ax::Window>(menu->GetWindow()));
 		}
 	}
 
@@ -115,7 +115,7 @@ private:
 		if (_drop_menu != nullptr) {
 			auto pop_man = ax::App::GetInstance().GetPopupManager();
 			auto pop_win_tree = pop_man->GetWindowTree();
-			std::vector<ax::Window::Ptr>& pop_top_node_vector = pop_win_tree->GetNodeVector();
+			std::vector<std::shared_ptr<ax::Window>>& pop_top_node_vector = pop_win_tree->GetNodeVector();
 
 			int index = -1;
 
@@ -127,7 +127,7 @@ private:
 			}
 
 			if (index != -1) {
-				ax::Window::Ptr tmp_menu = pop_top_node_vector[index];
+				std::shared_ptr<ax::Window> tmp_menu = pop_top_node_vector[index];
 				pop_man->SetPastWindow(nullptr);
 				pop_man->UnGrabKey();
 				pop_man->UnGrabMouse();
@@ -204,7 +204,7 @@ private:
 	axEVENT_ACCESSOR(ax::Button::Msg, OnButtonAudioInputDevice);
 	void OnButtonAudioInputDevice(const ax::Button::Msg& msg)
 	{
-		ax::StringVector drop_options = { "Banana", "Potato" };
+		std::vector<std::string> drop_options = { "Banana", "Potato" };
 
 		ax::DropMenu::Info menu_info;
 		menu_info.normal = ax::Color(240, 240, 240);
@@ -298,7 +298,7 @@ int main()
 			gc.DrawRectangle(rect);
 		});
 
-		app.AddTopLevel(ax::Window::Ptr(win));
+		app.AddTopLevel(std::shared_ptr<ax::Window>(win));
 
 		//		ax::Slider::Info sld_info;
 		//		sld_info.img_path = "";
