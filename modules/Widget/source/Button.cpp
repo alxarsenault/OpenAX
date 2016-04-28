@@ -342,7 +342,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	std::string builder_name = control.GetAttribute("builder");
 	std::string obj_name = control.GetAttribute("name");
 
-//	ax::Print(builder_name, obj_name);
+	//	ax::Print(builder_name, obj_name);
 
 	ax::Size size = ax::Xml::StringToSize(control.GetChildNodeValue("size"));
 	std::string img_path = control.GetChildNodeValue("img_path");
@@ -355,7 +355,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 	for (auto& n : flags_strs) {
 
 		if (n == "SINGLE_IMG") {
-//			ax::Print("OPT : ", n);
+			//			ax::Print("OPT : ", n);
 			flags |= ax::Button::Flags::SINGLE_IMG;
 		}
 		else if (n == "IMG_RESIZE") {
@@ -368,7 +368,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(
 
 	std::string msg = control.GetChildNodeValue("msg");
 
-//	ax::Print(size.x, size.y);
+	//	ax::Print(size.x, size.y);
 
 	ax::Xml::Node info_node = control.GetNode("info");
 
@@ -403,7 +403,7 @@ std::shared_ptr<ax::Window::Backbone> Button::Builder::Create(ax::Xml::Node& nod
 	for (auto& n : flags_strs) {
 
 		if (n == "SINGLE_IMG") {
-//			ax::Print("OPT : ", n);
+			//			ax::Print("OPT : ", n);
 			flags |= ax::Button::Flags::SINGLE_IMG;
 		}
 		else if (n == "IMG_RESIZE") {
@@ -472,7 +472,8 @@ ax::Window::Backbone* Button::GetCopy()
 {
 	widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
 	ax::Button::Info* info = static_cast<ax::Button::Info*>(widget->GetInfo());
-	ax::Button* btn = new ax::Button(win->dimension.GetRect(), _events, *info, _btnImg->GetImagePath(), _label, _flags, _msg);
+	ax::Button* btn = new ax::Button(
+		win->dimension.GetRect(), _events, *info, _btnImg->GetImagePath(), _label, _flags, _msg);
 	return btn;
 }
 
@@ -655,7 +656,15 @@ void Button::OnPaint(GC gc)
 			gc.DrawImageResize(_btnImg.get(), rect0.position, rect0.size - ax::Size(1, 1), 1.0);
 		}
 		else {
-			gc.DrawPartOfImage(_btnImg.get(), Point(0, _nCurrentImg * rect.size.y), rect.size, Point(0, 0));
+			//			gc.DrawPartOfImage(_btnImg.get(), Point(0, _nCurrentImg * rect.size.y), rect.size,
+			//Point(0, 0));
+			// rect0.size - ax::Size(1, 1)
+			
+			int in_img_h = _btnImg->GetSize().y / 3;
+			
+			gc.DrawPartOfImageResize(_btnImg.get(), Point(0, _nCurrentImg * in_img_h),
+				ax::Size(_btnImg->GetSize().x, in_img_h),
+				ax::Rect(ax::Point(0, 0), rect.size));
 		}
 	}
 

@@ -367,6 +367,17 @@ void Slider::Component::ReloadInfo()
 		sld->_btnImg.reset(new ax::Image(info->img_path));
 	}
 
+	ax::Rect rect(sld->GetWindow()->dimension.GetRect());
+
+	if (ax::IsFlag(Flags::VERTICAL, sld->_flags)) {
+		sld->_sliderYPos = (rect.size.x - info->slider_width) * 0.5;
+		sld->_btnYPos = (rect.size.x - info->btn_size.x) * 0.5;
+	}
+	else {
+		sld->_sliderYPos = (rect.size.y - info->slider_width) * 0.5;
+		sld->_btnYPos = (rect.size.y - info->btn_size.y) * 0.5;
+	}
+	
 	_win->Update();
 	//
 
