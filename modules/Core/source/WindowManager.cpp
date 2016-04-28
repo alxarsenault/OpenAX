@@ -69,28 +69,14 @@ namespace core {
 		
 		if(win) {
 			win->dimension.SetSize(size);
-//			win->event.OnResize(size);
 		}
-		//    for(auto& n : _windowTree.GetMainNode())
-		//    {
-		//        n->window->OnResize(size);
-		//    }
-		//    _windowTree.GetMainNode()[0]->window->OnResize(size);
-
-		//            for (axWindowNode* it : _windowTree.GetMainNode())
-		//            {
-		//                if(it != nullptr)
-		//                {
-		//                    it->ResizeNode(size);
-		//                }
-		//            }
-
-		//    for (auto& x :  _windowTree.GetMainNode())
-		//    {
-		//
-		////        axWindow* win = x->second;
-		////        win->OnResize(size);
-		//    }
+	}
+	
+	void WindowManager::Clear()
+	{
+		ClearMouseManager();
+		ClearKeyboardManager();
+		_windowTree.GetNodeVector().clear();
 	}
 }
 }

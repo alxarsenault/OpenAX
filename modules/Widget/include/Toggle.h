@@ -129,12 +129,7 @@ public:
 		virtual std::vector<std::string> GetParamNameList() const;
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
-		
-		std::string GetBuilderName() const
-		{
-			return "Toggle";
-		}
-		
+				
 		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
 		{
 			return {

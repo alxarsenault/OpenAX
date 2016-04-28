@@ -20,113 +20,179 @@
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
 
-#include "WindowTree.h"
-#include "Window.h"
 #include "App.h"
-#include "Core.h"
-#include "RenderMath.h"
-#include "GraphicInterface.h"
 #include "Config.h"
+#include "Core.h"
+#include "GraphicInterface.h"
+#include "RenderMath.h"
+#include "Window.h"
+#include "WindowTree.h"
 #include <algorithm>
 
 namespace ax {
 namespace core {
-WindowTree::WindowTree()
-{
-}
-
-//void WindowTree::AddTopLevel(ax::Window::Ptr win)
-void WindowTree::AddTopLevel(std::shared_ptr<ax::Window> win)
-{
-	_nodes.push_back(win);
-}
-
-std::shared_ptr<ax::Window> WindowTree::GetTopLevel()
-{
-	if (_nodes.size()) {
-		return _nodes[0];
+	WindowTree::WindowTree()
+	{
 	}
 
-	return nullptr;
-}
+	// void WindowTree::AddTopLevel(ax::Window::Ptr win)
+	void WindowTree::AddTopLevel(std::shared_ptr<ax::Window> win)
+	{
+		_nodes.push_back(win);
+	}
 
-//    ax::Window::Ptr WindowTree::FindMousePosition(const ax::Point& pos)
-ax::Window* WindowTree::FindMousePosition(const ax::Point& pos)
-{
-	std::shared_ptr<ax::Window> node = nullptr;
-
-	// Find first level window in the vector of window with nullptr as
-	// parent. There should normally be only one window in this vector.
-	for (std::shared_ptr<ax::Window> it : _nodes) {
-		ax::Point position = it->dimension.GetAbsoluteRect().position;
-		ax::Rect rect(position, it->dimension.GetShownRect().size);
-
-		if (rect.IsPointInside(pos)) {
-			node = it;
+	std::shared_ptr<ax::Window> WindowTree::GetTopLevel()
+	{
+		if (_nodes.size()) {
+			return _nodes[0];
 		}
-	}
-	
-	// There is either no window in the vector or the window(s) do not
-	// cover the entire frame superficy.
-	if (node == nullptr) {
+
 		return nullptr;
 	}
 
-	// This would normally start with the main window if there was only one
-	// window in the vector (_nodes).
-	std::shared_ptr<ax::Window> n;
+	//    ax::Window::Ptr WindowTree::FindMousePosition(const ax::Point& pos)
+	ax::Window* WindowTree::FindMousePosition(const ax::Point& pos)
+	{
+		std::shared_ptr<ax::Window> node = nullptr;
 
-	do { // Look for the deepest child window with mouse over it.
-		n = node;
-
-		std::vector<std::shared_ptr<ax::Window>>& childs = n->node.GetChildren();
-
-		// Search for child window backward.
-		// This imply that if two windows are superpose, the last
-		// one added will have priority.
-		for (auto iter = childs.rbegin(); iter != childs.rend(); ++iter) {
-			std::shared_ptr<ax::Window> it = *iter;
-
+		// Find first level window in the vector of window with nullptr as
+		// parent. There should normally be only one window in this vector.
+		for (std::shared_ptr<ax::Window> it : _nodes) {
 			ax::Point position = it->dimension.GetAbsoluteRect().position;
 			ax::Rect rect(position, it->dimension.GetShownRect().size);
-			rect.position += it->dimension.GetScrollDecay();
-			
-			// If child is shown and mouse is over child.
-			if (it->IsShown() && rect.IsPointInside(pos)) {
-				// If window is selectable then node is found.
-				if (it->property.HasProperty("Selectable")) {
-					// This will go out of the for loop and keep
-					// looking deeper in child nodes of the window.
-					node = it;
-					break;
-				}
+
+			if (rect.IsPointInside(pos)) {
+				node = it;
 			}
 		}
 
-	// When n == node then there's no more window deeper with mouse over it.
-	} while (n != node);
+		// There is either no window in the vector or the window(s) do not
+		// cover the entire frame superficy.
+		if (node == nullptr) {
+			return nullptr;
+		}
 
-	// These condition should normally never be false.
-	if (node != nullptr && node->IsShown()) {
-		return node.get();
+		// This would normally start with the main window if there was only one
+		// window in the vector (_nodes).
+		std::shared_ptr<ax::Window> n;
+
+		do { // Look for the deepest child window with mouse over it.
+			n = node;
+
+			std::vector<std::shared_ptr<ax::Window>>& childs = n->node.GetChildren();
+
+			// Search for child window backward.
+			// This imply that if two windows are superpose, the last
+			// one added will have priority.
+			for (auto iter = childs.rbegin(); iter != childs.rend(); ++iter) {
+				std::shared_ptr<ax::Window> it = *iter;
+
+				ax::Point position = it->dimension.GetAbsoluteRect().position;
+				ax::Rect rect(position, it->dimension.GetShownRect().size);
+				rect.position += it->dimension.GetScrollDecay();
+
+				// If child is shown and mouse is over child.
+				if (it->IsShown() && rect.IsPointInside(pos)) {
+					// If window is selectable then node is found.
+					if (it->property.HasProperty("Selectable")) {
+						// This will go out of the for loop and keep
+						// looking deeper in child nodes of the window.
+						node = it;
+						break;
+					}
+				}
+			}
+
+			// When n == node then there's no more window deeper with mouse over it.
+		} while (n != node);
+
+		// These condition should normally never be false.
+		if (node != nullptr && node->IsShown()) {
+			return node.get();
+		}
+
+		return nullptr;
 	}
 
-	return nullptr;
-}
-
-void WindowTree::Draw()
-{
-	for (std::shared_ptr<ax::Window> it : _nodes) {
-		if (it != nullptr) {
-			it->node.Draw();
+	void WindowTree::Draw()
+	{
+		for (std::shared_ptr<ax::Window> it : _nodes) {
+			if (it != nullptr) {
+				it->node.Draw();
+			}
 		}
 	}
-}
 
-std::vector<std::shared_ptr<ax::Window>>& WindowTree::GetNodeVector()
-{
-	return _nodes;
-}
+	std::vector<std::shared_ptr<ax::Window>>& WindowTree::GetNodeVector()
+	{
+		return _nodes;
+	}
 
+	void WindowTree::Operation(ax::Window* window, std::function<void(ax::Window*)> fct)
+	{
+		if (window == nullptr) {
+			return;
+		}
+
+		fct(window);
+
+		std::vector<std::shared_ptr<ax::Window>>& children = window->node.GetChildren();
+
+		for (auto& n : children) {
+			Operation(n.get(), fct);
+		}
+	}
+
+	void WindowTree::OperationOnChild(ax::Window* window, std::function<void(ax::Window*)> fct)
+	{
+		if (window == nullptr) {
+			return;
+		}
+
+		std::vector<std::shared_ptr<ax::Window>>& children = window->node.GetChildren();
+
+		for (auto& n : children) {
+			Operation(n.get(), fct);
+		}
+	}
+
+	ax::Window* WindowTree::FirstFind(ax::Window* window, std::function<bool(ax::Window*)> fct)
+	{
+		if (window == nullptr) {
+			return nullptr;
+		}
+
+		if (fct(window)) {
+			return window;
+		}
+
+		std::vector<std::shared_ptr<ax::Window>>& children = window->node.GetChildren();
+
+		for (auto& n : children) {
+
+			if (FirstFind(n.get(), fct) != nullptr) {
+				return n.get();
+			}
+		}
+
+		return nullptr;
+	}
+
+	ax::Window* WindowTree::FirstFindOnChild(ax::Window* window, std::function<bool(ax::Window*)> fct)
+	{
+		if (window == nullptr) {
+			return nullptr;
+		}
+
+		std::vector<std::shared_ptr<ax::Window>>& children = window->node.GetChildren();
+
+		for (auto& n : children) {
+			if (FirstFind(n.get(), fct)) {
+				return n.get();
+			}
+		}
+
+		return nullptr;
+	}
 }
 }

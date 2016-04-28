@@ -77,6 +77,15 @@ namespace core {
 
 		void AddGlobalClickListener(ax::Window* win);
 		void RemoveGlobalClickListener(ax::Window* win);
+		
+		void ClearMouseManager()
+		{
+			_global_click_listener.clear();
+			_mouseCaptureWindow = nullptr;
+			_pastWindow = nullptr;
+			_currentWindow = nullptr;
+			_scrollCaptureWindow = nullptr;
+		}
 
 	private:
 		WindowTree* _windowTree;

@@ -55,6 +55,8 @@ namespace core {
 
 		std::string _managerName;
 		WindowTree* GetWindowTree();
+		
+		void Clear();
 
 	private:
 		WindowTree _windowTree;

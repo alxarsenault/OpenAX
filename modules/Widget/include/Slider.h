@@ -117,27 +117,7 @@ public:
 		virtual std::string GetAttributeValue(const std::string& name);
 		virtual void SetAttribute(const ax::StringPair& attribute);
 		
-		virtual std::vector<widget::ParamInfo> GetParametersInfo() const
-		{
-			return {
-				widget::ParamInfo(widget::ParamType::COLOR, "bgColorNormal"),
-				widget::ParamInfo(widget::ParamType::COLOR, "bgColorHover"),
-				widget::ParamInfo(widget::ParamType::COLOR, "bgColorClicked"),
-				
-				widget::ParamInfo(widget::ParamType::COLOR, "sliderColorNormal"),
-				widget::ParamInfo(widget::ParamType::COLOR, "sliderColorHover"),
-				widget::ParamInfo(widget::ParamType::COLOR, "sliderColorClicked"),
-				widget::ParamInfo(widget::ParamType::COLOR, "sliderContourColor"),
-				
-				widget::ParamInfo(widget::ParamType::COLOR, "contourColor"),
-				widget::ParamInfo(widget::ParamType::COLOR, "backSliderColor"),
-				widget::ParamInfo(widget::ParamType::COLOR, "backSliderContourColor"),
-				
-				widget::ParamInfo(widget::ParamType::FILEPATH, "img_path"),
-				widget::ParamInfo(widget::ParamType::SIZE, "btn_size"),
-				widget::ParamInfo(widget::ParamType::INTEGER, "slider_width"),
-				widget::ParamInfo(widget::ParamType::INTEGER, "contour_round_radius")  };
-		}
+		virtual std::vector<widget::ParamInfo> GetParametersInfo() const;
 
 		ax::Color bgColorNormal;
 		ax::Color bgColorHover;
@@ -169,7 +149,7 @@ public:
 		virtual void SetInfo(const ax::StringPairVector& attributes);
 		virtual void ReloadInfo();
 		
-		std::string GetBuilderName() const
+		inline std::string GetBuilderName() const
 		{
 			return "Slider";
 		}
@@ -189,16 +169,19 @@ public:
 
 	ax::Window::Backbone* GetCopy();
 
-	void SetBackgroundAlpha(const float& alpha)
-	{
-		_bg_alpha = alpha;
-	}
+//	void SetBackgroundAlpha(const float& alpha)
+//	{
+//		_bg_alpha = alpha;
+//	}
 
 	void ResizeSlider(const ax::Size& size)
 	{
+		widget::Component* widget = static_cast<widget::Component*>(win->component.Get("Widget").get());
+		ax::Slider::Info* info = static_cast<ax::Slider::Info*>(widget->GetInfo());
+		
 		win->dimension.SetSize(size);
-		_sliderYPos = int((size.x - _info.slider_width) * 0.5);
-		_btnYPos = int((size.x - _info.btn_size.x) * 0.5);
+		_sliderYPos = int((size.x - info->slider_width) * 0.5);
+		_btnYPos = int((size.x - info->btn_size.x) * 0.5);
 	}
 
 	double GetValue() const
@@ -215,15 +198,15 @@ public:
 
 protected:
 	Events _events;
-	Info _info;
+//	Info _info;
 	//	ax::Flag _flag;
 	ax::Color _currentBgColor, _currentSliderColor;
 
-	ax::Image _btnImg;
+	std::shared_ptr<ax::Image> _btnImg;
 	ax::Flag _flags;
 
 	int _nCurrentImg, _sliderPosition, _btnYPos, _sliderYPos, _delta_click;
-	float _bg_alpha;
+//	float _bg_alpha;
 	double _sliderValue;
 
 	enum axButtonState { axBTN_NORMAL, axBTN_HOVER, axBTN_DOWN };

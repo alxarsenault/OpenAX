@@ -320,7 +320,7 @@ void Button::Component::SetBuilderAttributes(const ax::StringPairVector& attribu
 		}
 	}
 
-	GetWindow()->Update();
+	_win->Update();
 }
 
 Button::Builder::Builder()

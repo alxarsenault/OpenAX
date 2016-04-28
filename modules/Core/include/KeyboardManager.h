@@ -61,6 +61,12 @@ public:
 	void AddGlobalGrabedWindow(ax::Window* win);
 	
 	void SetPastKeyWindow(ax::Window* win);
+	
+	void ClearKeyboardManager()
+	{
+		_keyGrabbedWindow = nullptr;
+		_globalKeyGrabbed.clear();
+	}
 
 private:
 	WindowTree* _windowTree;

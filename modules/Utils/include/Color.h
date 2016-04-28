@@ -55,8 +55,7 @@ namespace Utils {
 		{
 		}
 
-		explicit Color(
-			const int& r, const int& g, const int& b, const int& a = 255)
+		explicit Color(const int& r, const int& g, const int& b, const int& a = 255)
 			: _r(r / 255.0f)
 			, _g(g / 255.0f)
 			, _b(b / 255.0f)
@@ -64,8 +63,7 @@ namespace Utils {
 		{
 		}
 
-		explicit Color(const uint8_t& r, const uint8_t& g, const uint8_t& b,
-			const uint8_t& a = 255)
+		explicit Color(const uint8_t& r, const uint8_t& g, const uint8_t& b, const uint8_t& a = 255)
 			: _r(r / 255.0f)
 			, _g(g / 255.0f)
 			, _b(b / 255.0f)
@@ -224,15 +222,14 @@ namespace Utils {
 
 		Color Interpolate(const Color& color, const float& mu) const
 		{
-			return Color(_r + (color._r - _r) * mu, _g + (color._g - _g) * mu,
-				_b + (color._b - _b) * mu, _a + (color._a - _a) * mu);
+			return Color(_r + (color._r - _r) * mu, _g + (color._g - _g) * mu, _b + (color._b - _b) * mu,
+				_a + (color._a - _a) * mu);
 		}
 
-		friend std::ostream& operator<<(
-			std::ostream& stream, const Color<float>& color)
+		friend std::ostream& operator<<(std::ostream& stream, const Color<float>& color)
 		{
-			stream << int(color._r * 255) << ", " << int(color._g * 255) << ", "
-				   << int(color._b * 255) << ", " << int(color._a * 255);
+			stream << int(color._r * 255) << ", " << int(color._g * 255) << ", " << int(color._b * 255)
+				   << ", " << int(color._a * 255);
 			return stream;
 		}
 
