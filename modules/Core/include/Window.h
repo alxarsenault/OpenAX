@@ -190,6 +190,7 @@ public:
 		Function<ax::GC> OnPaint3D;
 		Function<int> OnBeforeDrawing;
 		Function<ax::GC> OnPaintOverFrameBuffer;
+		Function<ax::GC> OnPaintOverChildren;
 
 		/// Size event.
 		Function<ax::Size> OnResize;

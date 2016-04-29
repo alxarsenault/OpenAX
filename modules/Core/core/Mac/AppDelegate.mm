@@ -268,6 +268,16 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 		[cursor set];
 	}
 	
+	else if (cursor_id == 5) {
+		NSString *cursorName = @"move";
+		NSString *cursorPath = [@"/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/Resources/cursors" stringByAppendingPathComponent:cursorName];
+		NSImage *image = [[NSImage alloc] initByReferencingFile:[cursorPath stringByAppendingPathComponent:@"cursor.pdf"]];
+		NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:[cursorPath stringByAppendingPathComponent:@"info.plist"]];
+		NSCursor *cursor = [[NSCursor alloc] initWithImage:image hotSpot:NSMakePoint([[info valueForKey:@"hotx"] doubleValue], [[info valueForKey:@"hoty"] doubleValue])];
+		
+		[cursor set];
+	}
+	
 
 	return self;
 }

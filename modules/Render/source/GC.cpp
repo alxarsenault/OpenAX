@@ -1399,8 +1399,8 @@ void ax::GC::DrawLineStripple(const ax::Point& pt1, const ax::Point& pt2)
 	glUniformMatrix4fv(
 		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
 
-	// glLineStipple(1, 0xAAAA);
-	// glEnable(GL_LINE_STIPPLE);
+	 glLineStipple(1, 0xAAAA);
+	 glEnable(GL_LINE_STIPPLE);
 
 	// Vertex coordinates.
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)&points);

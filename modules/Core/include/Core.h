@@ -71,7 +71,7 @@ namespace core {
 
 		int InitGL();
 
-		enum Cursor { NORMAL, RESIZE_UP_DOWN, RESIZE_LEFT_RIGHT, RESIZE_TOP_LEFT_DOWN_RIGHT, RESIZE_BOTTOM_LEFT_TOP_RIGHT };
+		enum Cursor { NORMAL, RESIZE_UP_DOWN, RESIZE_LEFT_RIGHT, RESIZE_TOP_LEFT_DOWN_RIGHT, RESIZE_BOTTOM_LEFT_TOP_RIGHT, MOVE };
 
 		virtual void SetCursor(const Cursor& cursor_id)
 		{
