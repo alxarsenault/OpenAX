@@ -20,48 +20,30 @@
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
 
-#ifndef __AX_WINDOW_TREE__
-#define __AX_WINDOW_TREE__
+#ifndef __AX_WINDOW_NODE_VISITOR_H__
+#define __AX_WINDOW_NODE_VISITOR_H__
 
 /// @defgroup Core
 /// @{
 
-#include "Utils.h"
 #include "Window.h"
-#include <deque>
-#include <map>
 
 namespace ax {
-namespace core {
-	/*
-	 * WindowTree
-	 */
-	class WindowTree {
-	public:
-		WindowTree();
-
-		void AddTopLevel(std::shared_ptr<ax::Window> win);
-
-		std::shared_ptr<ax::Window> GetTopLevel();
-
-		/// Get all window parent's from top to bottom.
-		/// Index [0] is the older parent of the window after
-		/// frame window. So if the window is a direct child from
-		/// frame window the size of the deque is null.
-		std::deque<std::shared_ptr<ax::Window>> GetWindowParents(std::shared_ptr<ax::Window> win);
-
-		/// Find the window on wich the mouse position is over.
-		ax::Window* FindMousePosition(const ax::Point& pos);
-
-		void Draw();
-
-		std::vector<std::shared_ptr<ax::Window>>& GetNodeVector();
-		
-	private:
-		std::vector<std::shared_ptr<ax::Window>> _nodes;
-	};
+namespace NodeVisitor {
+	
+	void VisitFromNode(ax::Window* window, std::function<void(ax::Window*)> fct);
+	
+	void VisitFromChild(ax::Window* window, std::function<void(ax::Window*)> fct);
+	
+	ax::Window* FirstFindFromNode(ax::Window* window, std::function<bool(ax::Window*)> fct);
+	
+	ax::Window* FirstFindFromChild(ax::Window* window, std::function<bool(ax::Window*)> fct);
+	
+	std::vector<ax::Window*> AccumulateFromNode(ax::Window* window, std::function<bool(ax::Window*)> fct);
+	
+	std::vector<ax::Window*> AccumulateFromChild(ax::Window* window, std::function<bool(ax::Window*)> fct);
 }
 }
 
 /// @}
-#endif //__AX_WINDOW_TREE__
+#endif // __AX_WINDOW_NODE_VISITOR_H__

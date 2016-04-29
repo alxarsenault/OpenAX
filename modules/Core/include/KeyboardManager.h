@@ -52,7 +52,10 @@ public:
 	void OnCmdDown();
 
 	void GrabKey(ax::Window* win);
+	
 	void UnGrabKey();
+	
+	void UnGrabKey(const ax::Window* win);
 
 	bool IsKeyGrab(const ax::Window* win) const;
 	
@@ -60,13 +63,19 @@ public:
 	
 	void AddGlobalGrabedWindow(ax::Window* win);
 	
-	void SetPastKeyWindow(ax::Window* win);
+	bool IsGlobalKeyGrabbed(const ax::Window* win);
 	
-	void ClearKeyboardManager()
-	{
-		_keyGrabbedWindow = nullptr;
-		_globalKeyGrabbed.clear();
-	}
+	void UnGrabGlobalKey(const ax::Window* win);
+	
+//	void SetPastKeyWindow(ax::Window* win);
+	
+	bool IsPastKeySelected(const ax::Window* win);
+	
+	void ClearKeyboardManager();
+	
+	void ClearGrabbedWindow();
+	
+	void ClearGlobalGrabbedWindows();
 
 private:
 	WindowTree* _windowTree;

@@ -20,8 +20,8 @@
  * licenses are available, email alx.arsenault@gmail.com for more information.
  */
 
-#ifndef __axUtils__axRect2D__
-#define __axUtils__axRect2D__
+#ifndef __AX_UTILS_RECT_2D_H__
+#define __AX_UTILS_RECT_2D_H__
 
 /// @defgroup Utils
 /// @{
@@ -65,7 +65,7 @@ namespace Utils {
 			, size(w, h)
 		{
 		}
-		
+
 		Rect2D(T x, T y, const CSize& size_)
 			: position(x, y)
 			, size(size_)
@@ -77,68 +77,63 @@ namespace Utils {
 
 		template <typename P> Rect2D<Point2D<P>, Point2D<P>, P> Cast() const
 		{
-			return Rect2D<Point2D<P>, Point2D<P>, P>(
-				position.template Cast<P>(), size.template Cast<P>());
+			return Rect2D<Point2D<P>, Point2D<P>, P>(position.template Cast<P>(), size.template Cast<P>());
 		}
 
 		Rect2D operator+(const Rect2D& rect) const
 		{
-			return Rect2D(position.x + rect.position.x,
-				position.y + rect.position.y, size.x + rect.size.x,
+			return Rect2D(position.x + rect.position.x, position.y + rect.position.y, size.x + rect.size.x,
 				size.y + rect.size.y);
 		}
 
 		Rect2D operator-(const Rect2D& rect) const
 		{
-			return Rect2D(position.x - rect.position.x,
-				position.y - rect.position.y, size.x - rect.size.x,
+			return Rect2D(position.x - rect.position.x, position.y - rect.position.y, size.x - rect.size.x,
 				size.y - rect.size.y);
 		}
 
-		bool operator==(const Rect2D& rect)
+		bool operator==(const Rect2D& rect) const
 		{
-			return (rect.position.x == position.x
-				&& rect.position.y == position.y && rect.size.x == size.x
+			return (rect.position.x == position.x && rect.position.y == position.y && rect.size.x == size.x
 				&& rect.size.y == size.y);
 		}
 
-		bool operator!=(const Rect2D& rect)
+		bool operator!=(const Rect2D& rect) const
 		{
-			return (
-				(rect.position.x != position.x || rect.position.y != position.y)
+			return ((rect.position.x != position.x || rect.position.y != position.y)
 				|| (rect.size.x != size.x || rect.size.y != size.y));
 		}
 
-		bool operator<(const Rect2D& rect)
+		bool operator<(const Rect2D& rect) const
 		{
 			return (size.x < rect.size.x && size.y < rect.size.y);
 		}
 
-		bool operator<=(const Rect2D& rect)
+		bool operator<=(const Rect2D& rect) const
 		{
 			return (size.x <= rect.size.x && size.y <= rect.size.y);
 		}
 
-		bool operator>(const Rect2D& rect)
+		bool operator>(const Rect2D& rect) const
 		{
 			return (size.x > rect.size.x && size.y > rect.size.y);
 		}
 
-		bool operator>=(const Rect2D& rect)
+		bool operator>=(const Rect2D& rect) const
 		{
 			return (size.x >= rect.size.x && size.y >= rect.size.y);
 		}
 
-		bool IsPointInside(const CPos& pos)
+		bool IsPointInside(const CPos& pos) const
 		{
-			return pos.x >= position.x && pos.x <= position.x + size.x
-				&& pos.y >= position.y && pos.y <= position.y + size.y;
+			return pos.x >= position.x && pos.x <= position.x + size.x && pos.y >= position.y
+				&& pos.y <= position.y + size.y;
 		}
 
 		Rect2D GetInteriorRect(const CPos& point) const
 		{
-			return Rect2D(position.x + point.x, position.y + point.y,
-				size.x - (T)(2.0 * point.x), size.y - (T)(2.0 * point.y));
+			return Rect2D(position.x + point.x, position.y + point.y, size.x - (T)(2.0 * point.x),
+				size.y - (T)(2.0 * point.y));
 		}
 
 		CPos GetTopLeft() const
@@ -188,14 +183,12 @@ namespace Utils {
 
 		RectPoints<CPos> GetPoints() const
 		{
-			return RectPoints<CPos>(CPos(position.x, position.y + size.y),
-				CPos(position.x, position.y),
-				CPos(position.x + size.x, position.y),
-				CPos(position.x + size.x, position.y + size.y));
+			return RectPoints<CPos>(CPos(position.x, position.y + size.y), CPos(position.x, position.y),
+				CPos(position.x + size.x, position.y), CPos(position.x + size.x, position.y + size.y));
 		}
 	};
 }
 }
 
 /// @}
-#endif /* defined(__axUtils__axRect2D__) */
+#endif // __AX_UTILS_RECT_2D_H__

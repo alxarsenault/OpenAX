@@ -162,23 +162,41 @@ void Window::Event::GrabMouse()
 
 void Window::Event::UnGrabMouse()
 {
-	_windowManager->UnGrabMouse();
+	_windowManager->UnGrabMouse(_win);
+}
+
+void Window::Event::GrabGlobalMouse()
+{
+	_windowManager->GrabGlobalMouse(_win);
+}
+bool Window::Event::IsGlobalMouseGrabbed() const
+{
+	return _windowManager->IsGlobalKeyGrabbed(_win);
+}
+
+void Window::Event::UnGrabGlobalMouse()
+{
+	_windowManager->UnGrabGlobalMouse(_win);
 }
 
 void Window::Event::GrabScroll()
 {
-	_windowManager->SetScrollCaptureWindow(_win);
+	_windowManager->GrabScroll(_win);
 }
 
 void Window::Event::UnGrabScroll()
 {
-	_windowManager->ReleaseScrollCaptureWindow();
+	_windowManager->UnGrabScroll(_win);
 }
 
 bool Window::Event::IsGrabbed() const
 {
-	// Need to change this with this pointer to current ax::Window.
-	return _windowManager->IsGrab();
+	return _windowManager->IsGrab(_win);
+}
+
+bool Window::Event::IsScrollGrabbed() const
+{
+	return _windowManager->IsScrollGrabbed(_win);
 }
 
 bool Window::Event::IsMouseHoverWindow() const
@@ -193,7 +211,7 @@ void Window::Event::GrabKey()
 
 void Window::Event::UnGrabKey()
 {
-	_windowManager->UnGrabKey();
+	_windowManager->UnGrabKey(_win);
 }
 
 bool Window::Event::IsKeyGrab() const
@@ -204,6 +222,16 @@ bool Window::Event::IsKeyGrab() const
 void Window::Event::GrabGlobalKey()
 {
 	_windowManager->AddGlobalGrabedWindow(_win);
+}
+
+bool Window::Event::IsGlobalKeyGrabbed() const
+{
+	return _windowManager->IsGlobalKeyGrabbed(_win);
+}
+
+void Window::Event::UnGrabGlobalKey()
+{
+	_windowManager->UnGrabGlobalKey(_win);
 }
 
 /*
@@ -387,7 +415,7 @@ void ax::Window::Node::BeforeDrawing(ax::Window* win)
 		//		while(tmp != nullptr) {
 		//			ax::Rect tmp_abs_rect(tmp->dimension.GetAbsoluteRect());
 		//			if(tmp_abs_rect.position.x + tmp->dimension.GetShownRect().size.x < abs_rect.position.x +
-		//shown_rect.size.x) {
+		// shown_rect.size.x) {
 		//				shown_rect.size.x = tmp->dimension.GetShownRect().size.x;
 		//				abs_rect.position.x = tmp_abs_rect.position.x;
 		//			}
@@ -498,36 +526,36 @@ void Window::Node::Draw()
 
 		// Unblock rectangle.
 		EndDrawing(it.get());
-		
+
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		it->dimension.GetFrameBuffer()->DrawingOnFrameBufferBlendFunction();
 		it->event.OnPaintOverChildren(ax::GC());
-		
+
 		/// @todo Change this.
-		
-//		// Draw on top of children.
-//		ax::Point win_abs_pos = it->dimension.GetAbsoluteRect().position;
-//		ax::Size global_size = ax::App::GetInstance().GetFrameSize();
-//		glm::mat4 projMat = glm::ortho((float)0.0, (float)global_size.x, (float)global_size.y, (float)0.0);
-//		
-//		// View matrix.
-//		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(win_abs_pos.x, win_abs_pos.y, 0.0f));
-//		glm::mat4 model_view_proj = projMat * view;
-//		ax::GC::mvp_matrix = model_view_proj;
-		
-		
+
+		//		// Draw on top of children.
+		//		ax::Point win_abs_pos = it->dimension.GetAbsoluteRect().position;
+		//		ax::Size global_size = ax::App::GetInstance().GetFrameSize();
+		//		glm::mat4 projMat = glm::ortho((float)0.0, (float)global_size.x, (float)global_size.y,
+		//(float)0.0);
+		//
+		//		// View matrix.
+		//		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(win_abs_pos.x, win_abs_pos.y,
+		//0.0f));
+		//		glm::mat4 model_view_proj = projMat * view;
+		//		ax::GC::mvp_matrix = model_view_proj;
 
 		// Reload original matrix.
 		mview_child_before.Load();
 	}
 
 	EndDrawing(_win);
-	
+
 	// Draw on top of children.
 	ax::Point win_abs_pos = _win->dimension.GetAbsoluteRect().position;
 	ax::Size global_size = ax::App::GetInstance().GetFrameSize();
 	glm::mat4 projMat = glm::ortho((float)0.0, (float)global_size.x, (float)global_size.y, (float)0.0);
-	
+
 	// View matrix.
 	glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(win_abs_pos.x, win_abs_pos.y, 0.0f));
 	glm::mat4 model_view_proj = projMat * view;
@@ -558,9 +586,60 @@ Window::~Window()
 	//	ax::Print("ax::Window destructor ", GetId());
 }
 
-void Window::DeleteWindow()
+void Window::RemoveWindow()
 {
-	//        _windowManager->GetWindowTree()->DeleteWindow(this);
+	ax::Window* parent = node.GetParent();
+
+	if (parent == nullptr) {
+		// This window is on top level or has no parent.
+		ax::Print("Delete top level not supported yet in ax::Window::RemoveWindow.");
+		return;
+	}
+
+	// Vector of children window shared pointer.
+	auto& children = parent->node.GetChildren();
+
+	int index = -1;
+
+	for (int i = 0; i < children.size(); i++) {
+		if (children[i]->GetId() == GetId()) {
+			index = i;
+			break;
+		}
+	}
+
+	if (index == -1) {
+		ax::Error("Window not found on remove : Should never happen.");
+		return;
+	}
+
+	event.UnGrabMouse();
+	event.UnGrabKey();
+	event.UnGrabScroll();
+	
+	event.UnGrabGlobalKey();
+	event.UnGrabGlobalMouse();
+	
+	_windowManager->RemoveIfPastWindow(this);
+	
+	// Remove from parent vector.
+	children.erase(children.begin() + index);
+
+	//	int index = -1;
+	//
+	//	for (int i = 0; i < children.size(); i++) {
+	//		if (children[i]->GetId() == _main_window->_selected_windows[0]->GetId()) {
+	//			current_win = children[i];
+	//			index = i;
+	//			break;
+	//		}
+	//	}
+	//
+	//	if (current_win && index != -1) {
+	//		win->event.UnGrabMouse();
+	//		ax::App::GetInstance().GetWindowManager()->ReleaseMouseHover();
+	//		children.erase(children.begin() + index);
+	//	}
 }
 
 std::shared_ptr<ax::Window> Window::GetWindowPtr()

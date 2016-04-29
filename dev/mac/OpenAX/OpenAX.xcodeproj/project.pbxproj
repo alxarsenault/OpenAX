@@ -100,6 +100,7 @@
 		7C7B74D01CC549DB006EF72E /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B74CE1CC549DB006EF72E /* RtMidi.cpp */; };
 		7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */; };
 		7CBD41671CB6AB01000A22C5 /* NumberScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */; };
+		7CC70A341CD3A300005EE49C /* NodeVisitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CC70A331CD3A300005EE49C /* NodeVisitor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -295,6 +296,8 @@
 		7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorPicker.cpp; path = ../../../../modules/Widget/source/ColorPicker.cpp; sourceTree = "<group>"; };
 		7CBD41651CB6AADA000A22C5 /* NumberScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberScroll.h; path = ../../../../modules/Widget/include/NumberScroll.h; sourceTree = "<group>"; };
 		7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NumberScroll.cpp; path = ../../../../modules/Widget/source/NumberScroll.cpp; sourceTree = "<group>"; };
+		7CC70A331CD3A300005EE49C /* NodeVisitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NodeVisitor.cpp; path = ../../../../modules/Core/source/NodeVisitor.cpp; sourceTree = "<group>"; };
+		7CC70A351CD3A309005EE49C /* NodeVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NodeVisitor.h; path = ../../../../modules/Core/include/NodeVisitor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -641,13 +644,14 @@
 		7C2139E01C9C98AC0050F676 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				7C213B0C1C9E4EC40050F676 /* OpenAX.h */,
 				7C213A1A1C9C9AE80050F676 /* App.h */,
 				7C213A1B1C9C9AE80050F676 /* Config.h */,
 				7C213A1C1C9C9AE80050F676 /* Core.h */,
 				7C213A1D1C9C9AE80050F676 /* CoreFacade.h */,
 				7C213A1E1C9C9AE80050F676 /* KeyboardManager.h */,
 				7C213A1F1C9C9AE80050F676 /* MouseManager.h */,
+				7CC70A351CD3A309005EE49C /* NodeVisitor.h */,
+				7C213B0C1C9E4EC40050F676 /* OpenAX.h */,
 				7C213A201C9C9AE80050F676 /* Panel3D.h */,
 				7C213A211C9C9AE80050F676 /* Widget.h */,
 				7C213A221C9C9AE80050F676 /* WidgetLoader.h */,
@@ -666,6 +670,7 @@
 				7C213A2A1C9C9AF10050F676 /* CoreFacade.cpp */,
 				7C213A2B1C9C9AF10050F676 /* KeyboardManager.cpp */,
 				7C213A2C1C9C9AF10050F676 /* MouseManager.cpp */,
+				7CC70A331CD3A300005EE49C /* NodeVisitor.cpp */,
 				7C213A2D1C9C9AF10050F676 /* Panel3D.cpp */,
 				7C213A2E1C9C9AF10050F676 /* Widget.cpp */,
 				7C213A2F1C9C9AF10050F676 /* WidgetLoader.cpp */,
@@ -851,6 +856,7 @@
 				7C213A961C9C9B460050F676 /* NumberBox.cpp in Sources */,
 				7C213A3D1C9C9AF10050F676 /* WindowTree.cpp in Sources */,
 				7C7476A31CA84101009CBE23 /* axAudioSignalBalance.cpp in Sources */,
+				7CC70A341CD3A300005EE49C /* NodeVisitor.cpp in Sources */,
 				7C213A3B1C9C9AF10050F676 /* Window.cpp in Sources */,
 				7C213A9B1C9C9B460050F676 /* StaticImage.cpp in Sources */,
 				7C7B74D01CC549DB006EF72E /* RtMidi.cpp in Sources */,

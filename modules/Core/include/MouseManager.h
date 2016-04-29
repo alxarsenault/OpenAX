@@ -48,35 +48,38 @@ namespace core {
 		void OnMouseLeftUp(const ax::Point& pos);
 		void OnMouseRightDown(const ax::Point& pos);
 		void OnMouseRightUp();
+		
 		void GrabMouse(ax::Window* win);
+		void UnGrabMouse(const ax::Window* win);
 		void UnGrabMouse();
 
-		void OnScrollWheel(const ax::Point& delta);
-
-		bool IsGrab() const;
-		bool IsMouseHoverWindow(const ax::Window* win) const;
-		bool IsEventReachWindow() const;
+		bool IsGrab(const ax::Window* win) const;
+		
 
 		bool IsMouseStillInChildWindow(const ax::Window* win) const;
-
+		bool IsMouseHoverWindow(const ax::Window* win) const;
+		bool IsEventReachWindow() const;
+		
 		void ReleaseMouseHover();
 
-		void SetScrollCaptureWindow(ax::Window* win)
-		{
-			_scrollCaptureWindow = win;
-		}
-
-		void ReleaseScrollCaptureWindow()
-		{
-			_scrollCaptureWindow = nullptr;
-		}
+		void GrabScroll(ax::Window* win);
+		void UnGrabScroll();
+		void UnGrabScroll(const ax::Window* win);
+		bool IsScrollGrabbed(const ax::Window* win);
+		void OnScrollWheel(const ax::Point& delta);
 
 		/// Set the last window for mouse enter and leave functions.
 		/// Be careful with this function, it might break the user app logic.
 		void SetPastWindow(ax::Window* win);
+		
+		void RemoveIfPastWindow(const ax::Window* win);
 
-		void AddGlobalClickListener(ax::Window* win);
-		void RemoveGlobalClickListener(ax::Window* win);
+		void GrabGlobalMouse(ax::Window* win);
+		void UnGrabGlobalMouse(ax::Window* win);
+		void ClearGlobalMouseGrab();
+		
+		bool IsGlobalMouseGrabbed() const;
+		bool IsGlobalMouseGrabbed(const ax::Window* win) const;
 		
 		void ClearMouseManager()
 		{

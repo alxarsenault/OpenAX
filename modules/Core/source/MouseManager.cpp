@@ -288,15 +288,44 @@ namespace core {
 	{
 		_mouseCaptureWindow = nullptr;
 	}
-
-	bool MouseManager::IsGrab() const
+	
+	void MouseManager::UnGrabMouse(const ax::Window* win)
 	{
-		return (_mouseCaptureWindow != nullptr);
+		if(_mouseCaptureWindow == win) {
+			_mouseCaptureWindow = nullptr;
+		}
+	}
+
+	bool MouseManager::IsGrab(const ax::Window* win) const
+	{
+		return _mouseCaptureWindow == win;
 	}
 
 	bool MouseManager::IsMouseHoverWindow(const ax::Window* win) const
 	{
 		return (win == _currentWindow);
+	}
+	
+	void MouseManager::GrabScroll(ax::Window* win)
+	{
+		_scrollCaptureWindow = win;
+	}
+	
+	void MouseManager::UnGrabScroll()
+	{
+		_scrollCaptureWindow = nullptr;
+	}
+	
+	void MouseManager::UnGrabScroll(const ax::Window* win)
+	{
+		if(_scrollCaptureWindow == win) {
+			_scrollCaptureWindow = nullptr;
+		}
+	}
+	
+	bool MouseManager::IsScrollGrabbed(const ax::Window* win)
+	{
+		return _scrollCaptureWindow == win;
 	}
 
 	bool MouseManager::IsMouseStillInChildWindow(const ax::Window* win) const
@@ -318,33 +347,57 @@ namespace core {
 	{
 		_pastWindow = win;
 	}
-
-	void MouseManager::AddGlobalClickListener(ax::Window* win)
+	
+	void MouseManager::RemoveIfPastWindow(const ax::Window* win)
 	{
-		// Check if window is already in global listener.
-		for (auto& n : _global_click_listener) {
-			if (n->GetId() == win->GetId()) {
-				return;
-			}
+		if(_pastWindow == win) {
+			_pastWindow = nullptr;
 		}
-
-		_global_click_listener.push_back(win);
 	}
 
-	void MouseManager::RemoveGlobalClickListener(ax::Window* win)
+	void MouseManager::GrabGlobalMouse(ax::Window* win)
+	{
+		// Prevent from adding twice.
+		if(IsGlobalMouseGrabbed(win) == false) {
+			_global_click_listener.push_back(win);
+		}
+	}
+
+	void MouseManager::UnGrabGlobalMouse(ax::Window* win)
 	{
 		int index = -1;
-		// Check for window index.
+		
 		for (int i = 0; i < _global_click_listener.size(); i++) {
-			if (_global_click_listener[i]->GetId() == win->GetId()) {
+			if (_global_click_listener[i] == win) {
 				index = i;
 				break;
 			}
 		}
-
+		
 		if (index != -1) {
 			_global_click_listener.erase(_global_click_listener.begin() + index);
 		}
+	}
+	
+	void MouseManager::ClearGlobalMouseGrab()
+	{
+		_global_click_listener.clear();
+	}
+	
+	bool MouseManager::IsGlobalMouseGrabbed() const
+	{
+		return (bool)_global_click_listener.size();
+	}
+	
+	bool MouseManager::IsGlobalMouseGrabbed(const ax::Window* win) const
+	{
+		for (auto& n : _global_click_listener) {
+			if (n == win) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
 }

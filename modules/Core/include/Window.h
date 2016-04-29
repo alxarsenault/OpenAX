@@ -162,13 +162,22 @@ public:
 		bool IsGrabbed() const;
 		bool IsMouseHoverWindow() const;
 
-		void GrabGlobalKey();
 		void GrabScroll();
 		void UnGrabScroll();
+		
+		bool IsScrollGrabbed() const;
 
 		void GrabKey();
 		void UnGrabKey();
 		bool IsKeyGrab() const;
+		
+		void GrabGlobalKey();
+		bool IsGlobalKeyGrabbed() const;
+		void UnGrabGlobalKey();
+		
+		void GrabGlobalMouse();
+		bool IsGlobalMouseGrabbed() const;
+		void UnGrabGlobalMouse();
 
 		/// Keyboard events.
 		Function<char> OnKeyDown;
@@ -337,7 +346,7 @@ public:
 
 	virtual ~Window();
 
-	void DeleteWindow();
+	void RemoveWindow();
 
 	bool IsShown();
 	void Show();
@@ -355,6 +364,11 @@ public:
 	// Drawing events.
 	virtual void OnPaintStatic()
 	{
+	}
+	
+	inline ax::core::WindowManager* GetWindowManager()
+	{
+		return _windowManager;
 	}
 
 protected:
