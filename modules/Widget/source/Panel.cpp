@@ -188,6 +188,12 @@ void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attribut
 		}
 		else if (n.first == "bg_img") {
 			ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
+			
+			Panel* panel = static_cast<Panel*>(_win->backbone.get());
+
+			if(panel->_bg_img && panel->_bg_img->GetImagePath() != n.second) {
+				panel->_bg_img.reset(new ax::Image(n.second));
+			}
 		}
 	}
 
@@ -204,6 +210,8 @@ std::vector<ax::widget::ParamInfo> Panel::Component::GetBuilderAttributesInfo() 
 void Panel::Component::ReloadInfo()
 {
 	_win->Update();
+	
+	
 }
 
 void Panel::Component::SetInfo(const ax::StringPairVector& attributes)

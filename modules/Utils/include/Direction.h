@@ -31,11 +31,11 @@ namespace Utils {
 	/*
 	 * ax::Utils::Direction.
 	 */
-	enum Direction {
-		axDIRECTION_LEFT,
-		axDIRECTION_UP,
-		axDIRECTION_RIGHT,
-		axDIRECTION_DOWN
+	enum class Direction {
+		LEFT,
+		UP,
+		RIGHT,
+		DOWN
 	};
 
 	/*
