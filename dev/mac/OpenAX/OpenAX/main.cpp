@@ -141,7 +141,7 @@ private:
 	axEVENT_ACCESSOR(ax::DropMenu::Msg, OnMenuChoice);
 	void OnMenuChoice(const ax::DropMenu::Msg& msg)
 	{
-//		ax::Print(msg.GetItem());
+		//		ax::Print(msg.GetItem());
 		_drop_btn->SetLabel(msg.GetItem());
 		RemoveMenu();
 		_is_droped = false;
@@ -272,7 +272,7 @@ private:
 
 		gc.SetColor(ax::Color(0.0));
 		gc.DrawStringAlignedCenter(_font, "Midi", _midi_label_rect);
-		
+
 		// Audio input device.
 		gc.SetColor(ax::Color(0.0));
 		const ax::Point midi_in_dev_pos(_midi_label_rect.position.x + 8, _midi_label_rect.position.y + 35);
@@ -298,7 +298,31 @@ int main()
 			gc.DrawRectangle(rect);
 		});
 
+		win->event.OnMouseLeftDown
+			= ax::WFunc<ax::Point>([win](const ax::Point& pos) { ax::Print("mouse left down."); });
+		
+		
+//		win->event.OnAssignToWindowManager =  ax::WFunc<int>([](const int& v) {
+//			ax::Print("Main window assign");
+//		});
+
+//		ax::Button::Info btn_info;
+//		btn_info.normal = ax::Color(0.95);
+//		btn_info.hover = ax::Color(0.97);
+//		btn_info.clicking = ax::Color(0.93);
+//		btn_info.selected = btn_info.normal;
+//		btn_info.contour = ax::Color(0.80);
+//		btn_info.font_color = ax::Color(0.0);
+//
+//		auto btn
+//			= ax::shared<ax::Button>(ax::Rect(20, 20, 60, 25), ax::Button::Events(), btn_info, "", "Banana");
+//		win->node.Add(btn);
+//
 		app.AddTopLevel(std::shared_ptr<ax::Window>(win));
+//
+//		auto btn2
+//		= ax::shared<ax::Button>(ax::Rect(100, 20, 60, 25), ax::Button::Events(), btn_info, "", "Banana");
+//		win->node.Add(btn2);
 
 		//		ax::Slider::Info sld_info;
 		//		sld_info.img_path = "";
@@ -363,9 +387,9 @@ int main()
 		//			scroll_info, 12, ax::Utils::Control::Type::INTEGER,
 		//			ax::Utils::Range<double>(1.0, 10000.0), 1.0));
 
-		win->node.Add(ax::shared<PreferencePanel>(ax::Rect(10, 10, 300, 194)));
-		
-//		ax::Print(GetPasteboardContent());
+				win->node.Add(ax::shared<PreferencePanel>(ax::Rect(10, 10, 300, 194)));
+
+		//		ax::Print(GetPasteboardContent());
 
 	});
 

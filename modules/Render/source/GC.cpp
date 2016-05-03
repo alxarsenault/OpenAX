@@ -1241,6 +1241,7 @@ void ax::GC::DrawLines(const std::vector<ax::Point>& pts, float width)
 	// Convert to float points.
 	std::vector<ax::FloatPoint> points;
 	points.reserve(pts.size());
+	
 	std::transform(pts.begin(), pts.end(), std::back_inserter(points),
 		[](const ax::Point& p) { return p.Cast<float>(); });
 
@@ -1266,6 +1267,34 @@ void ax::GC::DrawLines(const std::vector<ax::Point>& pts, float width)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(2);
 
+	glLineWidth(1.0f);
+}
+
+void ax::GC::DrawLines(const std::vector<ax::FloatPoint>& points, float width)
+{
+	/// @todo Need to remove this memory allocation.
+	std::vector<ax::Color> colors(points.size(), current_color);
+	
+	glLineWidth(width);
+	
+	shader_normal.Activate();
+	
+	glUniformMatrix4fv(
+		shader_normal.GetUniformLocation("mvp_matrix"), 1, GL_FALSE, (float*)&ax::GC::mvp_matrix[0][0]);
+	
+	// Vertex coordinates.
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)points.data());
+	glEnableVertexAttribArray(0);
+	
+	// Color array.
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, (void*)colors.data());
+	glEnableVertexAttribArray(2);
+	
+	glDrawArrays(GL_LINES, 0, (GLsizei)points.size());
+	
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(2);
+	
 	glLineWidth(1.0f);
 }
 

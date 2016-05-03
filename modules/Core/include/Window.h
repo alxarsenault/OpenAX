@@ -241,7 +241,19 @@ public:
 		};
 
 		Function<GlobalClick> OnGlobalClick;
-
+		
+		Function<int> OnAssignToWindowManager;
+		
+		inline void SetWindowManager(ax::core::WindowManager* wm)
+		{
+			_windowManager = wm;
+		}
+		
+		inline ax::core::WindowManager* GetWindowManager()
+		{
+			return _windowManager;
+		}
+		
 	protected:
 		ax::Window* _win = nullptr;
 		ax::core::WindowManager* _windowManager;
@@ -331,8 +343,8 @@ public:
 			ax::Rect shown_rect;
 		};
 		
-		void BeforeDrawing(ax::Window* win);
-		void EndDrawing(ax::Window* win);
+		void BlockDrawing(ax::Window* win);
+		void UnBlockDrawing(ax::Window* win);
 		static std::vector<BlockDrawingInfo> _block_drawing_queue;
 	};
 
@@ -346,8 +358,8 @@ public:
 
 	virtual ~Window();
 
-	void RemoveWindow();
-
+	std::shared_ptr<ax::Window> RemoveWindow();
+	
 	bool IsShown();
 	void Show();
 	void Hide();
@@ -360,15 +372,16 @@ public:
 	ax::Rect GetWindowPixelData(unsigned char*& data) const;
 
 	void GetWindowPixelData(unsigned char*& data, const ax::Rect& rect) const;
-
-	// Drawing events.
-	virtual void OnPaintStatic()
-	{
-	}
 	
 	inline ax::core::WindowManager* GetWindowManager()
 	{
 		return _windowManager;
+	}
+
+	inline void SetWindowManager(ax::core::WindowManager* wm)
+	{
+		_windowManager = wm;
+		event.SetWindowManager(wm);
 	}
 
 protected:

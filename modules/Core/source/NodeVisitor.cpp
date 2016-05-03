@@ -48,7 +48,7 @@ namespace NodeVisitor {
 		std::vector<std::shared_ptr<ax::Window>>& children = window->node.GetChildren();
 		
 		for (auto& n : children) {
-			VisitFromChild(n.get(), fct);
+			VisitFromNode(n.get(), fct);
 		}
 	}
 	

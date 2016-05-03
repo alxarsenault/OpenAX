@@ -337,6 +337,7 @@ axAppDelegate* GlobalAppDelegate = nullptr;
 	NSPoint locationInView = [self convertPoint:[anEvent locationInWindow] fromView:nil];
 
 	ax::Point pos(locationInView.x, locationInView.y);
+	_axApp->GetPopupManager()->OnMouseLeftUp(pos);
 
 	if (_axApp->GetPopupManager()->IsEventReachWindow() == false) {
 		_axApp->GetWindowManager()->OnMouseLeftUp(pos);

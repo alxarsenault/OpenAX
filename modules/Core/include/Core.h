@@ -57,7 +57,7 @@ namespace core {
 		virtual ax::Size GetScreenSize() = 0;
 
 		virtual std::string OpenFileDialog() = 0;
-		
+
 		virtual std::string SaveFileDialog()
 		{
 			return "";
@@ -71,11 +71,21 @@ namespace core {
 
 		int InitGL();
 
-		enum Cursor { NORMAL, RESIZE_UP_DOWN, RESIZE_LEFT_RIGHT, RESIZE_TOP_LEFT_DOWN_RIGHT, RESIZE_BOTTOM_LEFT_TOP_RIGHT, MOVE };
+		enum Cursor {
+			NORMAL,
+			RESIZE_UP_DOWN,
+			RESIZE_LEFT_RIGHT,
+			RESIZE_TOP_LEFT_DOWN_RIGHT,
+			RESIZE_BOTTOM_LEFT_TOP_RIGHT,
+			MOVE
+		};
 
-		virtual void SetCursor(const Cursor& cursor_id)
+		void SetCursor(const Cursor& cursor_id)
 		{
-			//		ax::Print("axCore set cursor");
+			if (_cursor_id != cursor_id) {
+				_cursor_id = cursor_id;
+				SetCoreCursor(_cursor_id);
+			}
 		}
 
 		virtual ax::core::WindowManager* GetWindowManager();
@@ -114,18 +124,13 @@ namespace core {
 		virtual void SetFocusAndCenter()
 		{
 		}
-		
+
 		virtual std::string GetPasteboardContent()
 		{
 			return "";
 		}
 
 		virtual int DrawGLScene();
-
-		//	virtual void SetMouseCursor(int cursor_id)
-		//	{
-		//
-		//	}
 
 	protected:
 		std::unique_ptr<ax::core::WindowManager> _windowManager;
@@ -136,9 +141,13 @@ namespace core {
 
 		bool _needToDraw, _popupNeedToDraw;
 		ax::Size _size, _popSize;
-		int _cursor_id;
+		Cursor _cursor_id = NORMAL;
 
 		virtual void InitManagers();
+
+		virtual void SetCoreCursor(const Cursor& cursor_id)
+		{
+		}
 	};
 }
 }

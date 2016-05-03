@@ -64,7 +64,7 @@ public:
 
 	virtual void ShowMouse();
 	
-	virtual void SetCursor(const Cursor& cursor_id);
+	virtual void SetCoreCursor(const Cursor& cursor_id);
 	
 	virtual void SetResizable(bool resizable);
 	

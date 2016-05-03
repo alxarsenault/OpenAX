@@ -29,6 +29,7 @@
 #include "GraphicInterface.h"
 #include "Render.h"
 #include "RenderMath.h"
+#include "NodeVisitor.h"
 
 #include <glm/gtc/constants.hpp> // glm::pi
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
@@ -237,11 +238,11 @@ void Window::Event::UnGrabGlobalKey()
 /*
  * Window node.
  */
-
 std::vector<ax::Window::Node::BlockDrawingInfo> ax::Window::Node::_block_drawing_queue;
 
 void ax::Window::Node::Add(std::shared_ptr<ax::Window> child)
 {
+// @todo Put this somewhere else.
 #ifdef AX_EOS_CORE
 	child->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction([child](ax::GL::FrameBuffer& fb) {
 
@@ -305,6 +306,19 @@ void ax::Window::Node::Add(std::shared_ptr<ax::Window> child)
 
 	child->node._parent = _win;
 	_children.push_back(child);
+	
+	// If parent is already connected to window manager.
+	if(_win->GetWindowManager() != nullptr) {
+		ax::core::WindowManager* wm = _win->GetWindowManager();
+		
+		// Connect all child to parent window manager.
+		ax::NodeVisitor::VisitFromChild(_win, [wm](ax::Window* win) {
+			if(win->GetWindowManager() != wm) {
+				win->SetWindowManager(wm);
+				win->event.OnAssignToWindowManager(0);
+			}
+		});
+	}
 }
 
 void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
@@ -314,6 +328,19 @@ void ax::Window::Node::Add(std::shared_ptr<Backbone> backbone)
 	child->node._parent = _win;
 
 	_children.push_back(std::shared_ptr<ax::Window>(child));
+	
+	// If parent is already connected to window manager.
+	if(_win->GetWindowManager() != nullptr) {		
+		ax::core::WindowManager* wm = _win->GetWindowManager();
+		
+		// Connect all child to parent window manager.
+		ax::NodeVisitor::VisitFromChild(_win, [wm](ax::Window* win) {
+			if(win->GetWindowManager() != wm) {
+				win->SetWindowManager(wm);
+				win->event.OnAssignToWindowManager(0);
+			}
+		});
+	}
 
 #ifdef AX_EOS_CORE
 	child->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction([child](ax::GL::FrameBuffer& fb) {
@@ -384,7 +411,7 @@ void ax::Window::Node::Reparent(Window* parent, const ax::Point& position)
 	ax::Error("ax::Window::Node::Reparent not implemented yet");
 }
 
-void ax::Window::Node::BeforeDrawing(ax::Window* win)
+void ax::Window::Node::BlockDrawing(ax::Window* win)
 {
 	if (win->property.HasProperty("BlockDrawing")) {
 		ax::Window::Dimension& dim = win->dimension;
@@ -431,7 +458,7 @@ void ax::Window::Node::BeforeDrawing(ax::Window* win)
 	}
 }
 
-void ax::Window::Node::EndDrawing(ax::Window* win)
+void ax::Window::Node::UnBlockDrawing(ax::Window* win)
 {
 	if (win->property.HasProperty("BlockDrawing")) {
 
@@ -447,130 +474,94 @@ void ax::Window::Node::EndDrawing(ax::Window* win)
 	}
 }
 
-void DrawWindow(ax::Window* win)
-{
-	//	ax::GL::Math::Matrix4 mview;
-	//	mview.Identity().Load();
-	//
-	//	ax::Window::Dimension& dim = win->dimension;
-	////	mview.Translate(dim.GetAbsoluteRect().position -
-	/// dim.GetScrollDecay()).Process();
-	//	mview.Translate(dim.GetAbsoluteRect().position).Process();
+//void DrawWindow(ax::Window* win)
+//{
+//	//	ax::GL::Math::Matrix4 mview;
+//	//	mview.Identity().Load();
+//	//
+//	//	ax::Window::Dimension& dim = win->dimension;
+//	////	mview.Translate(dim.GetAbsoluteRect().position -
+//	/// dim.GetScrollDecay()).Process();
+//	//	mview.Translate(dim.GetAbsoluteRect().position).Process();
+//
+//	win->RenderWindow();
+//}
 
-	win->RenderWindow();
+void DrawOverChildren(ax::Window* win)
+{
+	if(win->event.OnPaintOverChildren == true) {
+		ax::Point win_abs_pos = win->dimension.GetAbsoluteRect().position;
+		ax::Size global_size = ax::App::GetInstance().GetFrameSize();
+		glm::mat4 projMat = glm::ortho((float)0.0, (float)global_size.x, (float)global_size.y, (float)0.0);
+		
+		// View matrix.
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(win_abs_pos.x, win_abs_pos.y, 0.0f));
+		glm::mat4 model_view_proj = projMat * view;
+		ax::GC::mvp_matrix = model_view_proj;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		
+		win->dimension.GetFrameBuffer()->DrawingOnFrameBufferBlendFunction();
+		win->event.OnPaintOverChildren(ax::GC());
+	}
 }
 
 void Window::Node::Draw()
 {
-	bool edit_active = false;
-
 	// Don't draw if not shown.
 	if (!_win->IsShown()) {
 		return;
 	}
 
-	if (_win->property.HasProperty("EditingWidget") && edit_active == false) {
-		// Don't draw debug editor window and childs.
-		return;
-	}
+	// Prevent from drawing beside framebuffer.
+	BlockDrawing(_win);
+	
+	_win->RenderWindow();
 
-	ax::GL::Math::Matrix4 mview_before(ax::GL::Math::GetModelViewMatrixId());
-
-	BeforeDrawing(_win);
-	DrawWindow(_win);
-
-	GLenum err = GL_NO_ERROR;
-	while ((err = glGetError()) != GL_NO_ERROR) {
-		// Process/log the error.
-		ax::Error("GL ERROR :", err);
-	}
-
-	// Draw all children.
+	// Draw all children recursively.
 	for (std::shared_ptr<ax::Window> it : _children) {
+		
 		if (it == nullptr) {
 			continue;
 		}
 
-		bool is_edit_widget = it->property.HasProperty("EditingWidget");
-
+		// Don't draw if not shown.
 		if (!it->IsShown()) {
-			continue;
-		}
-
-		// if(is_edit_widget && (!debug_active ||
-		// !window->HasProperty("Editable")))
-		if (is_edit_widget && edit_active == false) {
 			continue;
 		}
 
 		it->event.OnBeforeDrawing(0);
 
-		// Save matrix.
-		ax::GL::Math::Matrix4 mview_child_before(ax::GL::Math::GetModelViewMatrixId());
-
 		// Block the drawging rectangle if window IsBlockDrawing activated.
-		BeforeDrawing(it.get());
+		BlockDrawing(it.get());
 
-		// Draw window before nodes.
-		DrawWindow(it.get());
+		// Render window.
+		it->RenderWindow();
 
-		// Draw all child nodes.
+		// Draw all child nodes (recursive call).
 		it->node.Draw();
 
-		ax::GL::Math::Matrix4 mview;
-		mview.Identity().Load();
-		mview.Translate(it->dimension.GetAbsoluteRect().position).Process();
-
-		// @todo This should be remove.
-		it->OnPaintStatic();
-
 		// Unblock rectangle.
-		EndDrawing(it.get());
-
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		it->dimension.GetFrameBuffer()->DrawingOnFrameBufferBlendFunction();
-		it->event.OnPaintOverChildren(ax::GC());
-
-		/// @todo Change this.
-
-		//		// Draw on top of children.
-		//		ax::Point win_abs_pos = it->dimension.GetAbsoluteRect().position;
-		//		ax::Size global_size = ax::App::GetInstance().GetFrameSize();
-		//		glm::mat4 projMat = glm::ortho((float)0.0, (float)global_size.x, (float)global_size.y,
-		//(float)0.0);
-		//
-		//		// View matrix.
-		//		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(win_abs_pos.x, win_abs_pos.y,
-		//0.0f));
-		//		glm::mat4 model_view_proj = projMat * view;
-		//		ax::GC::mvp_matrix = model_view_proj;
-
-		// Reload original matrix.
-		mview_child_before.Load();
+		UnBlockDrawing(it.get());
+		
+		// Draw over children and framebuffer.
+		DrawOverChildren(it.get());
 	}
 
-	EndDrawing(_win);
-
-	// Draw on top of children.
-	ax::Point win_abs_pos = _win->dimension.GetAbsoluteRect().position;
-	ax::Size global_size = ax::App::GetInstance().GetFrameSize();
-	glm::mat4 projMat = glm::ortho((float)0.0, (float)global_size.x, (float)global_size.y, (float)0.0);
-
-	// View matrix.
-	glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(win_abs_pos.x, win_abs_pos.y, 0.0f));
-	glm::mat4 model_view_proj = projMat * view;
-	ax::GC::mvp_matrix = model_view_proj;
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	_win->dimension.GetFrameBuffer()->DrawingOnFrameBufferBlendFunction();
-	_win->event.OnPaintOverChildren(ax::GC());
+	UnBlockDrawing(_win);
+	
+	// Draw over children and framebuffer.
+	DrawOverChildren(_win);
 }
 
+
+/// @todo Change window manager.
 Window::Window(const ax::Rect& rect)
 	: ax::Event::Object(ax::App::GetInstance().GetEventManager())
-	, _windowManager(ax::App::GetInstance().GetWindowManager())
+//	, _windowManager(ax::App::GetInstance().GetWindowManager())
+	, _windowManager(nullptr)
 	, dimension(this, rect) // Members
-	, event(this, ax::App::GetInstance().GetWindowManager())
+//	, event(this, ax::App::GetInstance().GetWindowManager())
+	, event(this, nullptr)
 	, state(this)
 	, node(this)
 {
@@ -586,31 +577,34 @@ Window::~Window()
 	//	ax::Print("ax::Window destructor ", GetId());
 }
 
-void Window::RemoveWindow()
+std::shared_ptr<ax::Window> Window::RemoveWindow()
 {
 	ax::Window* parent = node.GetParent();
 
+	// Vector of children window shared pointer.
+	std::vector<std::shared_ptr<ax::Window>>* children;
+
 	if (parent == nullptr) {
 		// This window is on top level or has no parent.
-		ax::Print("Delete top level not supported yet in ax::Window::RemoveWindow.");
-		return;
+		children = &_windowManager->GetWindowTree()->GetNodeVector();
 	}
-
-	// Vector of children window shared pointer.
-	auto& children = parent->node.GetChildren();
+	else {
+		children = &parent->node.GetChildren();;
+	}
 
 	int index = -1;
 
-	for (int i = 0; i < children.size(); i++) {
-		if (children[i]->GetId() == GetId()) {
+	for (int i = 0; i < children->size(); i++) {
+		if ((*children)[i]->GetId() == GetId()) {
 			index = i;
 			break;
 		}
 	}
 
+	// If window is not found in parent somehow.
 	if (index == -1) {
 		ax::Error("Window not found on remove : Should never happen.");
-		return;
+		return nullptr;
 	}
 
 	event.UnGrabMouse();
@@ -622,24 +616,14 @@ void Window::RemoveWindow()
 	
 	_windowManager->RemoveIfPastWindow(this);
 	
+	_windowManager = nullptr;
+	
+	std::shared_ptr<ax::Window> w = (*children)[index];
+	
 	// Remove from parent vector.
-	children.erase(children.begin() + index);
-
-	//	int index = -1;
-	//
-	//	for (int i = 0; i < children.size(); i++) {
-	//		if (children[i]->GetId() == _main_window->_selected_windows[0]->GetId()) {
-	//			current_win = children[i];
-	//			index = i;
-	//			break;
-	//		}
-	//	}
-	//
-	//	if (current_win && index != -1) {
-	//		win->event.UnGrabMouse();
-	//		ax::App::GetInstance().GetWindowManager()->ReleaseMouseHover();
-	//		children.erase(children.begin() + index);
-	//	}
+	children->erase(children->begin() + index);
+	
+	return w;
 }
 
 std::shared_ptr<ax::Window> Window::GetWindowPtr()

@@ -134,7 +134,11 @@ public:
 
 	void DrawSmouthLine(
 		const ax::Point& pt1, const ax::Point& pt2, float width = 2.0);
+	
+	
 	void DrawLines(const std::vector<ax::Point>& pts, float width = 1.0);
+	
+	void DrawLines(const std::vector<ax::FloatPoint>& pts, float width = 1.0);
 
 	void DrawPoint(const ax::Point& pt, const int& size);
 

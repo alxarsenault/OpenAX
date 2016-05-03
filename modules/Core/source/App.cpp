@@ -26,6 +26,7 @@
 #include "WindowManager.h"
 #include "WindowTree.h"
 #include "ResourceStorage.h"
+#include "NodeVisitor.h"
 
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
@@ -86,6 +87,17 @@ void ax::App::CallAfterGUILoadFunction()
 void ax::App::AddTopLevel(std::shared_ptr<ax::Window> win)
 {
 	GetWindowManager()->GetWindowTree()->AddTopLevel(win);
+	
+	ax::core::WindowManager* wm = GetWindowManager();
+	
+	// Connect all child to parent window manager.
+	ax::NodeVisitor::VisitFromNode(win.get(), [wm](ax::Window* window) {
+		if(window->GetWindowManager() == nullptr) {
+			window->SetWindowManager(wm);
+			window->event.OnAssignToWindowManager(0);
+		}
+	});
+	
 
 	win->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction(
 		[win](ax::GL::FrameBuffer& fb) {
@@ -161,13 +173,36 @@ void ax::App::AddTopLevel(std::shared_ptr<ax::Window> win)
 //	return win;
 }
 
+void ax::App::AddPopupTopLevel(std::shared_ptr<ax::Window> win)
+{
+	GetPopupManager()->GetWindowTree()->AddTopLevel(win);
+	ax::core::WindowManager* wm = GetPopupManager();
+	
+	// Connect all child to parent window manager.
+	ax::NodeVisitor::VisitFromNode(win.get(), [wm](ax::Window* window) {
+		if(window->GetWindowManager() != wm) {
+			window->SetWindowManager(wm);
+			window->event.OnAssignToWindowManager(0);
+		}
+	});
+}
+
 void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 {
 	ax::Window* win = bone->GetWindow();
-
 	GetWindowManager()->GetWindowTree()->AddTopLevel(std::shared_ptr<ax::Window>(win));
-
 	win->backbone = bone;
+	
+	ax::core::WindowManager* wm = GetWindowManager();
+	
+	// Connect all child to parent window manager.
+	ax::NodeVisitor::VisitFromNode(win, [wm](ax::Window* window) {
+		if(window->GetWindowManager() != wm) {
+			window->SetWindowManager(wm);
+			window->event.OnAssignToWindowManager(0);
+		}
+	});
+	
 
 	win->dimension.GetFrameBuffer()->AssignCustomFBDrawFunction(
 		[win](ax::GL::FrameBuffer& fb) {
@@ -227,6 +262,23 @@ void ax::App::AddTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
 		});
 
 //	return win;
+}
+
+void ax::App::AddPopupTopLevel(std::shared_ptr<ax::Window::Backbone> bone)
+{
+	ax::Window* win = bone->GetWindow();
+	GetPopupManager()->GetWindowTree()->AddTopLevel(std::shared_ptr<ax::Window>(win));
+	win->backbone = bone;
+	
+	ax::core::WindowManager* wm = GetPopupManager();
+	
+	// Connect all child to parent window manager.
+	ax::NodeVisitor::VisitFromNode(win, [wm](ax::Window* window) {
+		if(window->GetWindowManager() != wm) {
+			window->SetWindowManager(wm);
+			window->event.OnAssignToWindowManager(0);
+		}
+	});
 }
 
 std::shared_ptr<ax::Window> ax::App::GetTopLevel()

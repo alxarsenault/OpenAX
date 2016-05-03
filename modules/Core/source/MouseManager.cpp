@@ -235,26 +235,62 @@ namespace core {
 	void MouseManager::OnMouseLeftUp(const ax::Point& pos)
 	{
 		_mousePosition = pos;
-
-		if (_mouseCaptureWindow) {
-			_currentWindow = _windowTree->FindMousePosition(pos);
+		
+		if (_global_click_listener.size()) {
+			for (auto& n : _global_click_listener) {
+				ax::Window::Event::GlobalClick msg;
+				msg.type = ax::Window::Event::GlobalClick::LEFT_CLICK_UP;
+				msg.pos = pos;
+				n->event.OnGlobalClick(msg);
+			}
+		}
+		
+		// If mouse is already grabbed.
+		if (_mouseCaptureWindow != nullptr) {
 			_mouseCaptureWindow->event.OnMouseLeftUp(pos);
 			_evtHasReachWindow = true;
 		}
 		else {
+			
 			ax::Window* win = _windowTree->FindMousePosition(pos);
-			_currentWindow = win;
-
-			if (win != nullptr) {
-				win->event.OnMouseLeftUp(pos);
-				_evtHasReachWindow = true;
+			
+			if (win != nullptr && win->property.HasProperty("Selectable")) {
+				_currentWindow = win;
+				
+				if (win != nullptr) {
+					win->event.OnMouseLeftUp(pos);
+					_evtHasReachWindow = true;
+				}
+				else {
+					_evtHasReachWindow = false;
+				}
+				
+				VerifyAndProcessWindowChange();
 			}
 			else {
 				_evtHasReachWindow = false;
 			}
-
-			VerifyAndProcessWindowChange();
 		}
+
+//		if (_mouseCaptureWindow) {
+//			_currentWindow = _windowTree->FindMousePosition(pos);
+//			_mouseCaptureWindow->event.OnMouseLeftUp(pos);
+//			_evtHasReachWindow = true;
+//		}
+//		else {
+//			ax::Window* win = _windowTree->FindMousePosition(pos);
+//			_currentWindow = win;
+//
+//			if (win != nullptr) {
+//				win->event.OnMouseLeftUp(pos);
+//				_evtHasReachWindow = true;
+//			}
+//			else {
+//				_evtHasReachWindow = false;
+//			}
+//
+//			VerifyAndProcessWindowChange();
+//		}
 	}
 
 	void MouseManager::OnScrollWheel(const ax::Point& delta)

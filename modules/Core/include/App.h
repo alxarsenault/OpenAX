@@ -108,6 +108,10 @@ public:
 
 	void AddTopLevel(std::shared_ptr<ax::Window::Backbone> win);
 
+	void AddPopupTopLevel(std::shared_ptr<ax::Window> win);
+	
+	void AddPopupTopLevel(std::shared_ptr<ax::Window::Backbone> win);
+
 	std::shared_ptr<ax::Window> GetTopLevel();
 	
 	void CloseApplication();

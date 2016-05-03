@@ -133,7 +133,7 @@ namespace core {
 		axCocoaSetFocusAndCenter();
 	}
 
-	void CoreMac::SetCursor(const Cursor& cursor_id)
+	void CoreMac::SetCoreCursor(const Cursor& cursor_id)
 	{
 		axCocoaChangeMouseCursor(cursor_id);
 	}
