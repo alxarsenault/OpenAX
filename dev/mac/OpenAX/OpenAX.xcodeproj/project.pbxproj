@@ -101,6 +101,7 @@
 		7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD415A1CB60E7E000A22C5 /* ColorPicker.cpp */; };
 		7CBD41671CB6AB01000A22C5 /* NumberScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */; };
 		7CC70A341CD3A300005EE49C /* NodeVisitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CC70A331CD3A300005EE49C /* NodeVisitor.cpp */; };
+		7CF115D61CDABD160099475C /* PropertyTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CF115D51CDABD160099475C /* PropertyTree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -298,6 +299,8 @@
 		7CBD41661CB6AB01000A22C5 /* NumberScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NumberScroll.cpp; path = ../../../../modules/Widget/source/NumberScroll.cpp; sourceTree = "<group>"; };
 		7CC70A331CD3A300005EE49C /* NodeVisitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NodeVisitor.cpp; path = ../../../../modules/Core/source/NodeVisitor.cpp; sourceTree = "<group>"; };
 		7CC70A351CD3A309005EE49C /* NodeVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NodeVisitor.h; path = ../../../../modules/Core/include/NodeVisitor.h; sourceTree = "<group>"; };
+		7CF115D41CDABD0D0099475C /* PropertyTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PropertyTree.h; path = ../../../../modules/Core/include/PropertyTree.h; sourceTree = "<group>"; };
+		7CF115D51CDABD160099475C /* PropertyTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PropertyTree.cpp; path = ../../../../modules/Core/source/PropertyTree.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -658,6 +661,7 @@
 				7C213A231C9C9AE80050F676 /* Window.h */,
 				7C213A241C9C9AE80050F676 /* WindowManager.h */,
 				7C213A251C9C9AE80050F676 /* WindowTree.h */,
+				7CF115D41CDABD0D0099475C /* PropertyTree.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -665,6 +669,7 @@
 		7C2139E11C9C98B00050F676 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				7CF115D51CDABD160099475C /* PropertyTree.cpp */,
 				7C213A281C9C9AF10050F676 /* App.cpp */,
 				7C213A291C9C9AF10050F676 /* Core.cpp */,
 				7C213A2A1C9C9AF10050F676 /* CoreFacade.cpp */,
@@ -876,6 +881,7 @@
 				7C74769F1CA84101009CBE23 /* axAudioEnvelope.cpp in Sources */,
 				7C213A921C9C9B460050F676 /* Button.cpp in Sources */,
 				7C213ACD1C9C9B720050F676 /* OSExec.cpp in Sources */,
+				7CF115D61CDABD160099475C /* PropertyTree.cpp in Sources */,
 				7C213A171C9C99340050F676 /* main.cpp in Sources */,
 				7C213AC31C9C9B630050F676 /* Shader.cpp in Sources */,
 				7CBD415B1CB60E7E000A22C5 /* ColorPicker.cpp in Sources */,

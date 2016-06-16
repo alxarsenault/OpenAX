@@ -187,13 +187,22 @@ void Panel::Component::SetBuilderAttributes(const ax::StringPairVector& attribut
 			GetWindow()->dimension.SetSize(size);
 		}
 		else if (n.first == "bg_img") {
-			ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
+			//ax::Print("ax::Panel SetBuilderAttributes bg_img -> Not implemented yet.");
 			
 			Panel* panel = static_cast<Panel*>(_win->backbone.get());
 
-			if(panel->_bg_img && panel->_bg_img->GetImagePath() != n.second) {
+
+			if(panel->_bg_img) {
+				if(panel->_bg_img->GetImagePath() != n.second) {
+					panel->_bg_img.reset(new ax::Image(n.second));
+				}
+			}
+			else {
 				panel->_bg_img.reset(new ax::Image(n.second));
 			}
+			
+			
+			
 		}
 	}
 
